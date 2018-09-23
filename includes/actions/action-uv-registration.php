@@ -32,13 +32,6 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 				$link 		= $verification_page_url.'?activation_key='.$user_activation_key;
 			}
 
-
-			
-			// $message 	= "<h3>Please verify your account by clicking the link below</h3>";
-			// $message   .= "<a href='$link' style='padding:10px 25px; background:#16A05C; color:#fff;font-size:17px;text-decoration:none;'>Activate</a>";
-			
-			
-			
 			
 			uv_mail( 
 				$user_data->user_email,

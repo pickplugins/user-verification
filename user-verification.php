@@ -22,12 +22,13 @@ class UserVerification{
 	public function __construct(){
 	
 		$this->uv_define_constants();
-		
+
+        $this->uv_loading_functions();
 		$this->uv_declare_classes();
 		$this->uv_declare_actions();
 		$this->uv_loading_script();
 		
-		$this->uv_loading_functions();
+
 
 		add_action( 'init', array( $this, 'textdomain' ));
 	}
@@ -47,6 +48,7 @@ class UserVerification{
 		require_once( UV_PLUGIN_DIR . 'includes/functions.php');
 		require_once( UV_PLUGIN_DIR . 'includes/functions-woocommerce.php');
 		require_once( UV_PLUGIN_DIR . 'includes/functions-recaptcha.php');
+        require_once( UV_PLUGIN_DIR . 'includes/functions-paid-memberships-pro.php');
 
 	}
 	
@@ -65,9 +67,11 @@ class UserVerification{
 	}
 	
 	public function uv_declare_classes() {
-		
-		require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');	
-		require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings.php');	
+
+        require_once( UV_PLUGIN_DIR . 'includes/classes/class-wp-admin-menu.php');
+
+        require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
+		require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings.php');
 		require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');	
 	}
 	

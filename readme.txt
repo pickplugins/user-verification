@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 4.9
-	Stable tag: 2.0.4
+	Stable tag: 2.0.5
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,9 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+= 2.0.5 =
+* 30/08/2018 fix - Auto login after verification issue fixed
 
 = 2.0.4 =
 * 02/08/2018 add - Google reCAPTCHA(v-2) for default login form.

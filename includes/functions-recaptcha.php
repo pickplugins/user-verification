@@ -70,8 +70,9 @@ function uv_recaptcha_register_form(){
 
 }
 
-add_filter( 'registration_errors', 'crf_registration_errors', 10, 3 );
-function crf_registration_errors( $errors, $sanitized_user_login, $user_email ) {
+add_filter( 'registration_errors', 'uv_registration_errors', 10, 3 );
+
+function uv_registration_errors( $errors, $sanitized_user_login, $user_email ) {
 	$uv_recaptcha_register_page = get_option('uv_recaptcha_register_page', 'no');
 	$uv_message_captcha_error = get_option('uv_message_captcha_error', __('Captcha Error. Please try again.','user-verification'));
 

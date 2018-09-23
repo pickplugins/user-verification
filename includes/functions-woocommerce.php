@@ -4,6 +4,120 @@
 * Copyright: 	pickplugins.com
 */
 
+
+
+
+
+add_action('woocommerce_checkout_process', 'uv_woocommerce_on_checkout_protect_username');
+
+function uv_woocommerce_on_checkout_protect_username(){
+
+
+
+    $billing_email = isset( $_POST['billing_email'] ) ? $_POST['billing_email'] : "";
+    $username = isset( $_POST['account_username'] ) ? $_POST['account_username'] : "";
+    if( empty( $billing_email ) ) return;
+
+    if( 'yes' === get_option( 'woocommerce_registration_generate_username' ) ){
+        $username_arr = explode( "@", $billing_email );
+        $username = isset( $username_arr[0] ) ? $username_arr[0] : "";
+    }
+
+
+    $is_blocked = user_verification_is_username_blocked($username);
+    if($is_blocked){
+        wc_add_notice( __( "<strong>{$username}</strong> username is not allowed!", 'user-verification' ), 'error' );
+    }
+
+
+}
+
+
+
+
+
+
+add_action('woocommerce_checkout_process', 'uv_woocommerce_on_checkout_protect_blocked_domain');
+
+function uv_woocommerce_on_checkout_protect_blocked_domain(){
+
+
+
+    $billing_email = isset( $_POST['billing_email'] ) ? $_POST['billing_email'] : "";
+    $username = isset( $_POST['account_username'] ) ? $_POST['account_username'] : "";
+    if( empty( $billing_email ) ) return;
+
+    $is_blocked = user_verification_is_emaildomain_blocked($billing_email);
+    if($is_blocked){
+        wc_add_notice( __( "This email domain is not allowed!", 'user-verification' ), 'error' );
+
+    }
+
+
+}
+
+
+
+
+
+
+
+add_filter( 'woocommerce_process_registration_errors','uv_woocommerce_registration_protect_username', 10, 4 );
+
+function uv_woocommerce_registration_protect_username( $validation_error, $username, $password, $email ){
+
+
+    if( 'yes' === get_option( 'woocommerce_registration_generate_username' ) ){
+        $username_arr = explode( "@", $email );
+        $username = isset( $username_arr[0] ) ? $username_arr[0] : "";
+    }
+
+    $is_blocked = user_verification_is_username_blocked($username);
+    if($is_blocked){
+
+        $validation_error->add( 'blocked_username', __( "<strong>{$username}</strong> username is not allowed!", 'user-verification' ));
+    }
+
+    return $validation_error;
+}
+
+
+
+
+add_filter( 'woocommerce_process_registration_errors','uv_woocommerce_registration_protect_blocked_domain', 10, 4 );
+
+function uv_woocommerce_registration_protect_blocked_domain( $validation_error, $username, $password, $email ){
+
+
+    $is_blocked = user_verification_is_emaildomain_blocked($email);
+    if($is_blocked){
+        $validation_error->add( 'blocked_username',__( "This email domain is not allowed!", 'user-verification' ) );
+    }
+
+
+    return $validation_error;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+add_action( 'woocommerce_checkout_order_processed', 'user_verification_woocommerce_checkout_order_processed', 10, 3 );
+
 function user_verification_woocommerce_checkout_order_processed( $order_id, $posted_data, $order ){
 
 	$uv_wc_disable_auto_login = get_option('uv_wc_disable_auto_login','no');
@@ -13,7 +127,7 @@ function user_verification_woocommerce_checkout_order_processed( $order_id, $pos
 
 }
 
-add_action( 'woocommerce_checkout_order_processed', 'user_verification_woocommerce_checkout_order_processed', 10, 3 );
+
 
 
 
@@ -41,7 +155,13 @@ function user_verification_woocommerce_registration_redirect(){
 			wp_logout();
 			return get_permalink(wc_get_page_id('myaccount')) . "?approved=false";
 		}
-	}
+	}else{
+        return get_permalink(wc_get_page_id('myaccount'));
+    }
+
+
+
+
 }
 
 function user_verification_wc_registration_message(){

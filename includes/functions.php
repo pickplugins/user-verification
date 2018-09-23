@@ -8,6 +8,23 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
+function user_verification_is_verified($userid){
+
+    $status = get_user_meta($userid, 'user_activation_status', true);
+
+    if ( $status == 1 ){
+        return true;
+
+    }else{
+        return false;
+    }
+
+}
+
+
+
+
+
 
 add_filter('bulk_actions-users','user_verification_bulk_approve');
 function user_verification_bulk_approve($actions){
@@ -109,197 +126,105 @@ function uv_ajax_approve_user_manually(){
 add_action('wp_ajax_uv_ajax_approve_user_manually', 'uv_ajax_approve_user_manually');
 add_action('wp_ajax_nopriv_uv_ajax_approve_user_manually', 'uv_ajax_approve_user_manually');
 
-function uv_woocommerce_registration_control_on_myaccount( $validation_error, $username, $password, $email ){
-	
-	if( 'yes' === get_option( 'woocommerce_registration_generate_username' ) ){
-		$username_arr = explode( "@", $email );
-		$username = isset( $username_arr[0] ) ? $username_arr[0] : "";
-	}
-	
-	$ret = uv_check_security_permissions(  
-		array( 
-			'user_name' => $username,
-			'user_email' => $email,
-		)
-	);
-	
-	if( isset( $ret['response'] ) && $ret['response'] != 'passed' ) {
-		$validation_error->add( 'error', $ret['message'],'');
-	}
-		
-	return $validation_error;
-}
-add_filter( 'woocommerce_process_registration_errors','uv_woocommerce_registration_control_on_myaccount', 10, 4 );
-
-function uv_woocommerce_registration_control_on_checkout(){
-	
-	$billing_email = isset( $_POST['billing_email'] ) ? $_POST['billing_email'] : "";
-	$username = isset( $_POST['account_username'] ) ? $_POST['account_username'] : "";
-	if( empty( $billing_email ) ) return;
-	
-	if( 'yes' === get_option( 'woocommerce_registration_generate_username' ) ){
-		$username_arr = explode( "@", $billing_email );
-		$username = isset( $username_arr[0] ) ? $username_arr[0] : "";
-	}
-	
-	$username_arr = explode( "@", $billing_email );
-	
-	$ret = uv_check_security_permissions(  
-		array( 
-			'user_name' => $username,
-			'user_email' => $billing_email,
-		)
-	);
-	
-	if( isset( $ret['response'] ) && $ret['response'] != 'passed' ) {
-		wc_add_notice( $ret['message'], 'error' );
-	}
-}
-add_action('woocommerce_checkout_process', 'uv_woocommerce_registration_control_on_checkout');
 
 
-function uv_registration_errors_functions( $errors, $sanitized_user_login, $user_email ){
-	
-	$ret = uv_check_security_permissions(  
-		array( 
-			'user_name' => $sanitized_user_login,
-			'user_email' => $user_email,
-		)
-	);
-	
-	if( isset( $ret['response'] ) && $ret['response'] != 'passed' ) {
-		$errors->add( $ret['response'], $ret['message'] );
-	}
-	
-	return $errors;
-}
-add_filter( 'registration_errors', 'uv_registration_errors_functions', 10, 3 );
 
-function uv_check_security_permissions( $args = array() ){
-	
-	$ret = array();
-	
-	$user_id 	= isset( $args['user_id'] ) ? $args['user_id'] : "";
-	$user_name 	= isset( $args['user_name'] ) ? $args['user_name'] : "";
-	$user_email = isset( $args['user_email'] ) ? $args['user_email'] : "";
-	
-	$user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain');
-	$user_verification_enable_block_username 	= get_option('user_verification_enable_block_username');
-	$uv_settings_blocked_domain 				= get_option('uv_settings_blocked_domain');
-	$uv_settings_blocked_username 				= get_option('uv_settings_blocked_username');
-	
-	if( empty( $user_verification_enable_block_domain ) ) $user_verification_enable_block_domain = "no"; 
-	if( empty( $user_verification_enable_block_username ) ) $user_verification_enable_block_username = "no"; 
-	if( empty( $uv_settings_blocked_username ) ) $uv_settings_blocked_username = array();
-	if( empty( $uv_settings_blocked_domain ) ) $uv_settings_blocked_domain = array();
-	
-	// When domain blocking is enable
-	if( $user_verification_enable_block_domain == "yes" ):
-	
-		$email_domain_1	= !empty( $user_email ) ? explode( "@", $user_email ) : array();
-		$email_domain	= !empty( $email_domain_1 ) ? explode( ".", $email_domain_1[1] ) : "";
-		
-		
-		if( !empty( $email_domain ) && in_array( $email_domain[0], $uv_settings_blocked_domain ) ){
-			
-			$ret['response']	= 'blocked_domain';
-			$ret['message'] 	= __( "This email domain <strong>{$email_domain[0]}</strong> is not allowed!", 'user-verification' );
-		}
-		
-		if( empty( $ret ) )
-		foreach( $uv_settings_blocked_domain as $domain ){
-			
-			preg_match( '/%(.*?)%/', $domain, $match_domain );
 
-			if( isset( $match_domain[1] ) && isset( $email_domain[1] ) && strpos($email_domain[0], $match_domain[1] ) !== false ) {
 
-				$ret['response']	= 'blocked_domain';
-				$ret['message'] 	= __( "<strong>{$email_domain[0]}</strong> email domain contains <strong>{$match_domain[1]}</strong>, which is not allowed!", 'user-verification' );
-				break;
-			}
-		}
-	
-	endif;
-	
-	// When username blocking is enable
-	if( $user_verification_enable_block_username == "yes" ):
 
-		if( !empty( $user_name ) && in_array( $user_name, $uv_settings_blocked_username ) ){
-			
-			$ret['response']	= 'blocked_username';
-			$ret['message'] 	= __( "This username <strong>$user_name</strong> is not allowed!", 'user-verification' );
-		}
-		
-		if( empty( $ret ) )
-		foreach( $uv_settings_blocked_username as $username ){
-			
-			preg_match( '/%(.*?)%/', $username, $match_username );
 
-			if( isset( $match_username[1] ) && strpos($user_name, $match_username[1] ) !== false ) {
 
-				$ret['response']	= 'blocked_username';
-				$ret['message'] 	= __( "<strong>{$user_name}</strong> username contains <strong>{$match_username[1]}</strong>, which is not allowed!", 'user-verification' );
-				break;
-			}
-		}
 
-	endif;
-	
-	return $ret;
+
+
+
+
+
+
+
+
+
+
+
+function user_verification_is_username_blocked($username){
+
+    $response = false;
+    $user_verification_enable_block_username 	= get_option('user_verification_enable_block_username');
+    $uv_settings_blocked_username 				= get_option('uv_settings_blocked_username');
+
+    if( $user_verification_enable_block_username == "yes" ):
+        foreach( $uv_settings_blocked_username as $blocked ){
+            $status = preg_match("/$blocked/", $username);
+            if($status == 1):
+                $response = true;
+                break;
+            endif;
+        }
+    endif;
+
+    return $response;
 }
 
 
-function uv_filters_setting_box_uv_settings_security_function($html){
-	
-	$uv_settings_blocked_domain = get_option('uv_settings_blocked_domain');
-	$uv_settings_blocked_username = get_option('uv_settings_blocked_username');
-	
-	if( empty( $uv_settings_blocked_username ) ) $uv_settings_blocked_username = array();
-	if( empty( $uv_settings_blocked_domain ) ) $uv_settings_blocked_domain = array();
-	
-	$html .= "<div class='option-box'>";
-	$html .= "<p class='option-title'>".__('Blocked Domains', 'user-verification')."</p>";
-	$html .= "<p class='option-info'>".__('One domain per line. wihtout http:// or https://', 'user-verification')."</p>";
-	$html .= "<ul class='uv_domain_list'>";
-	$html .= "<li><div class='button uv_domain_add'><i class='fa fa-plus'></i></div></li>";
-	foreach( $uv_settings_blocked_domain as $domain ):
-	$html .= "<li class='uv_domain'>";
-	$html .= "<input type='text' placeholder='spamdomain.com' name='uv_settings_blocked_domain[]' value='$domain' />";
-	$html .= "<div class='button uv_domain_remove'><i class='fa fa-times'></i></div>";
-	$html .= "</li>";
-	endforeach;
-	$html .= "</ul>";
-	$html .= "</div>";
-	
-	$html .= "<div class='option-box'>";
-	$html .= "<p class='option-title'>".__('Blocked Usernames', 'user-verification')."</p>";
-	$html .= "<p class='option-info'>".__('Press Plus button to add new option', 'user-verification')."</p>";
-	$html .= "<ul class='uv_username_list'>";
-	$html .= "<li><div class='button uv_username_add'><i class='fa fa-plus'></i></div></li>";
-	foreach( $uv_settings_blocked_username as $username ):
-	$html .= "<li class='uv_username'>";
-	$html .= "<input type='text' placeholder='username' name='uv_settings_blocked_username[]' value='$username' />";
-	$html .= "<div class='button uv_username_remove'><i class='fa fa-times'></i></div>";
-	$html .= "</li>";
-	endforeach;
-	$html .= "</ul>";
-	$html .= "</div>";
-	
-	
-	
-	return $html;
-}
-add_filter('uv_filters_setting_box_uv_settings_security', 'uv_filters_setting_box_uv_settings_security_function' );
 
-function uv_settings_save_function(){
-	
-	$blocked_domain = isset( $_POST['uv_settings_blocked_domain'] ) ? stripslashes_deep($_POST['uv_settings_blocked_domain']) : "";
-	$blocked_username = isset( $_POST['uv_settings_blocked_username'] ) ? stripslashes_deep($_POST['uv_settings_blocked_username']) : "";
-	
-	update_option( 'uv_settings_blocked_domain', $blocked_domain );
-	update_option( 'uv_settings_blocked_username', $blocked_username );
+
+function user_verification_is_emaildomain_blocked($user_email){
+
+    $response = false;
+    $user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain', 'no');
+    $uv_settings_blocked_domain 				= get_option('uv_settings_blocked_domain', array());
+
+    if( $user_verification_enable_block_domain == "yes" ):
+
+        $email_domain = explode('@', $user_email);
+
+        if( !empty( $email_domain ) && in_array( $email_domain[1], $uv_settings_blocked_domain ) ){
+            $response = true;
+        }
+
+    endif;
+
+
+    return $response;
 }
-add_action( 'uv_settings_save', 'uv_settings_save_function' );
+
+
+
+
+
+
+
+
+add_filter( 'registration_errors', 'uv_registration_protect_username', 10, 3 );
+function uv_registration_protect_username( $errors, $sanitized_user_login, $user_email ){
+
+    $is_blocked = user_verification_is_username_blocked($sanitized_user_login);
+    if($is_blocked){
+        $errors->add( 'blocked_username', __( "<strong>{$sanitized_user_login}</strong> username is not allowed!", 'user-verification' ));
+    }
+    return $errors;
+
+}
+
+
+
+
+
+add_filter( 'registration_errors', 'uv_registration_protect_blocked_domain', 10, 3 );
+function uv_registration_protect_blocked_domain( $errors, $sanitized_user_login, $user_email ){
+
+    $is_blocked = user_verification_is_emaildomain_blocked($user_email);
+    if($is_blocked){
+        $errors->add( 'blocked_domain', __( "This email domain is not allowed!", 'user-verification' ) );
+    }
+    return $errors;
+
+}
+
+
+
+
+
 
 
 add_filter( 'wp_login_errors', 'user_verification_registered_message', 10, 2 );
@@ -327,23 +252,9 @@ function user_verification_registered_message( $errors, $redirect_to ) {
 	return $errors;
 }
 
-function user_verification_admin_notices(){
 
-    $html= '';
-    $uv_option_update = get_option('uv_option_update');
-    if($uv_option_update=='done'):
-    else:
-        if(isset($_GET['_wpnonce']) && wp_verify_nonce( sanitize_text_field($_GET['_wpnonce']), 'uv_option_update' ) ){
-            update_option('uv_option_update','done');
-        }
-        $html.= '<div class="update-nag">';
-        $html.= "We have update plugin, please review <a href='".wp_nonce_url(admin_url('admin.php?page=user-verification'), 'uv_option_update')."'>User Verification - Settings</a>";
-        $html.= '</div>';
-    endif;
 
-    echo $html;
-}
-add_action('admin_notices', 'user_verification_admin_notices');
+
 
 function user_verification_get_pages_list(){
 	$array_pages['none'] = __('None', 'user-verification');
@@ -401,7 +312,10 @@ function uv_filter_check_activation() {
 	$uv_message_activation_sent = get_option( 'uv_message_activation_sent' );
 	if( empty( $uv_message_activation_sent ) ) 
 	$uv_message_activation_sent = __( 'Activation email sent, Please check latest item on email inbox', 'user-verification' );
-	
+
+    $user_verification_login_automatically = get_option( 'user_verification_login_automatically', 'no' );
+
+
 	
     $html = '<div class="user-verification check">';
 
@@ -430,8 +344,14 @@ function uv_filter_check_activation() {
 				$html.= "<div class='verified'><i class='fa fa-check-square-o'></i> $uv_message_verification_success</div>";
                 update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
 				
-				if( "yes" == get_option( 'user_verification_login_automatically', 'yes' ) ){
+				if( $user_verification_login_automatically ==  "yes"  ){
+
+
 					$user = get_user_by( 'id', $meta_data->user_id );
+
+
+					//var_dump($user);
+
 
 					wp_set_current_user( $meta_data->user_id, $user->user_login );
 					//wp_set_auth_cookie( $meta_data->user_id );
@@ -440,7 +360,7 @@ function uv_filter_check_activation() {
 
 				}
 				
-				if(($user_verification_redirect_verified!='none')):
+				if(($user_verification_redirect_verified != 'none')):
 					$html.= "<script>jQuery(document).ready(function($){window.location.href = '$redirect_page_url';})</script>";
 				else:
 				endif;
@@ -598,7 +518,7 @@ function uv_resend_verification_form($attr){
 
 
 
-//add_action('init','user_verification_auto_login');
+add_action('init','user_verification_auto_login');
 function user_verification_auto_login(){
 
 
@@ -614,13 +534,12 @@ function user_verification_auto_login(){
 		$user_activation_status = get_user_meta( $meta_data->user_id, 'user_activation_status', true );
 
 		if($user_activation_status != 0){
+
 			wp_set_current_user( $meta_data->user_id, $user->user_login );
 			wp_set_auth_cookie( $meta_data->user_id );
-			do_action( 'wp_login', $user->user_login );
+			do_action( 'wp_login', $user->user_login, $user );
+
 		}
-
-
-
 
 	}
 
@@ -838,7 +757,9 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 
 function uv_all_user_roles() {
 
-	global $wp_roles;
+	$wp_roles = new WP_Roles();
+
+	//var_dump($wp_roles);
 	$roles = $wp_roles->get_names();
 
 	return  $roles;
@@ -846,3 +767,203 @@ function uv_all_user_roles() {
 	//echo '<pre>'.var_export($wp_roles, true).'</pre>';
 
 }
+
+
+
+add_action('pick_settings_action_custom_field_grid','pick_settings_action_custom_field_grid', 0,1);
+
+
+function pick_settings_action_custom_field_grid($option) {
+
+    $id 			= isset( $option['id'] ) ? $option['id'] : "";
+    $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
+    $args 			= isset( $option['args'] ) ? $option['args'] : "";
+
+    $values 	 		= get_option( $id );
+
+    ?>
+    <div class="grid">
+        <?php
+
+        foreach($args as $key=>$grid_item){
+
+            $title = isset($grid_item['title']) ? $grid_item['title'] : '';
+            $link = isset($grid_item['link']) ? $grid_item['link'] : '';
+            $thumb = isset($grid_item['thumb']) ? $grid_item['thumb'] : '';
+
+            ?>
+
+            <div class="item">
+                <div class="thumb"><a href="<?php echo $link; ?>"><img src="<?php echo $thumb; ?>"></img></a></div>
+                <div class="name"><a href="<?php echo $link; ?>"><?php echo $title; ?></a></div>
+            </div>
+            <?php
+
+        }
+        ?>
+    </div>
+
+    <style type="text/css">
+        .grid{}
+        .grid .item{
+            width: 300px;
+            display: inline-block;
+            vertical-align: top;
+            margin: 10px;
+            background: #ddd;
+            overflow: hidden;
+        }
+        .grid .name{
+
+        }
+
+        .grid .name a{
+            margin: 10px;
+            text-decoration: none;
+            display: block;
+            font-weight: 600;
+        }
+        }
+
+        .grid .thumb{ }
+        .grid .thumb img{
+            width: 100%;
+            height: auto;
+        }
+
+
+    </style>
+    <?php
+
+
+
+}
+
+
+add_action('pick_settings_action_custom_field_email_templates','pick_settings_action_custom_field_email_templates', 0,1);
+
+
+function pick_settings_action_custom_field_email_templates($option) {
+
+
+    $id 			= isset( $option['id'] ) ? $option['id'] : "";
+    $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
+    $values 	 		= get_option( $id );
+
+
+
+    if(empty($values)){
+
+        $class_uv_emails = new class_uv_emails();
+        $values = $class_uv_emails->uv_email_templates_data();
+
+    }
+
+    ?>
+    <div class="templates_editor uv-expandable">
+    <?php
+
+    foreach($values as $key=>$templates){
+
+        $email_to = isset($templates['email_to']) ? $templates['email_to'] : '';
+        $email_from = isset($templates['email_from']) ? $templates['email_from'] : '';
+        $email_from_name = isset($templates['email_from_name']) ? $templates['email_from_name'] : '';
+        $enable = isset($templates['enable']) ? $templates['enable'] : '';
+        $description = isset($templates['description']) ? $templates['description'] : '';
+
+        ?>
+        <div class="items template <?php echo $key; ?>">
+            <div class="header">
+                <span class="expand-collapse">
+                    <i class="fa fa-expand"></i><i class="fa fa-compress"></i>
+                </span><?php echo $templates['name']; ?>
+            </div>
+            <input type="hidden" name="uv_email_templates_data[<?php echo $key; ?>][name]" value="<?php echo $templates['name']; ?>" />
+            <div class="options">
+                <div class="description"><?php echo $description; ?></div>
+                <label><?php echo __('Enable ?', 'user-verification'); ?>
+                <select name="uv_email_templates_data[<?php echo $key; ?>][enable]" >
+                    <?php
+                    if($enable=='yes'){
+                        ?>
+                        <option selected  value="yes" ><?php echo __('Yes', 'user-verification'); ?></option>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <option value="yes" ><?php echo __('Yes', 'user-verification'); ?></option>
+                        <?php
+                    }
+                    if($enable=='no'){
+                        ?>
+                        <option selected value="no" ><?php echo __('No', 'user-verification'); ?></option>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <option value="no" ><?php echo __('No', 'user-verification'); ?></option>
+                        <?php
+                    }
+                    ?>
+
+                </select>
+
+                </label><br>
+                <label><?php echo __('Email To: (Copy)', 'user-verification'); ?>
+                    <input placeholder="hello_1@hello.com,hello_2@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_to]" value="<?php echo $email_to; ?>" />
+                </label><br>
+
+                <label><?php echo __('Email from name:', 'user-verification'); ?>
+                    <input placeholder="hello_1@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
+                </label><br>
+
+                <label><?php echo __('Email from:', 'user-verification'); ?>
+                    <input placeholder="hello_1@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from]" value="<?php echo $email_from; ?>" />
+                </label><br>
+
+                <label><?php echo __('Email Subject:','user-verification'); ?>
+                    <input type="text" name="uv_email_templates_data[<?php echo $key; ?>][subject]" value="<?php echo $templates['subject']; ?>" />
+                </label><br>
+
+
+
+
+                <?php
+
+                ob_start();
+                wp_editor( $templates['html'], $key, $settings = array('textarea_name'=>'uv_email_templates_data['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'400px', ) );
+                $editor_contents = ob_get_clean();
+
+                ?>
+                <label><?php echo __('Email Body:','user-verification'); ?><br/>
+                    <?php
+                    echo $editor_contents;
+
+                    ?>
+                </label>
+            </div>
+        </div>
+        <?php
+            }
+        ?>
+    </div>
+    <?php
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

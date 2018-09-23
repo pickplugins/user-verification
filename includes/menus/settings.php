@@ -21,17 +21,6 @@ class class_uv_settings_page {
 		
 		$section_options = array(
 
-			'user_verification_enable'=>array(
-				'css_class'=>'user_verification_enable',
-				'title'=>__('Enable user verification?','user-verification'),
-				'option_details'=>__('Please set yes to enable user verification','user-verification'),
-				'input_type'=>'select',
-				'input_args'=> array(
-					'yes'=>__('Yes', 'user-verification'),
-					'no'=>__('No', 'user-verification'),
-				)
-			),
-
              'user_verification_verification_page'=>array(
                     'css_class'=>'user_verification_verification_page',
                     'title'=>__('Verification page?','user-verification'),

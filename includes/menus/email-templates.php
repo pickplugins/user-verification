@@ -48,7 +48,11 @@ class class_uv_emails_templates  {
 			$html = '';
 			
 			//$templates_data = $this->uv_email_templates_data();
-		
+
+
+        //var_dump($templates_data);
+
+
 			$html.= '<div class="templates_editor uv-expandable">';		
 			foreach($templates_data as $key=>$templates){
 				
