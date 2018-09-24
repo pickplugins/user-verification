@@ -117,7 +117,7 @@ class class_uv_emails{
 												
 			$parameters['user_parameter'] = array(
 												'title'=>__('Users Parameters','user-verification'),
-												'parameters'=>array('{user_name}','{user_avatar}','{user_email}'),										
+												'parameters'=>array('{user_name}','{user_avatar}','{user_email}', '{ac_activaton_url}'),
 												);	
 												
 								

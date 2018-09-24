@@ -3,9 +3,9 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 2.0.4
+Version: 1.0.18
 WC requires at least: 3.0.0
-WC tested up to: 3.3
+WC tested up to: 3.4
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -24,13 +24,15 @@ class UserVerification{
 		$this->uv_define_constants();
 
         $this->uv_loading_functions();
-		$this->uv_declare_classes();
+		//$this->uv_declare_classes();
 		$this->uv_declare_actions();
 		$this->uv_loading_script();
-		
+        add_action( 'init', array( $this, 'uv_declare_classes' ));
 
 
 		add_action( 'init', array( $this, 'textdomain' ));
+
+
 	}
 
 
@@ -49,6 +51,8 @@ class UserVerification{
 		require_once( UV_PLUGIN_DIR . 'includes/functions-woocommerce.php');
 		require_once( UV_PLUGIN_DIR . 'includes/functions-recaptcha.php');
         require_once( UV_PLUGIN_DIR . 'includes/functions-paid-memberships-pro.php');
+        require_once( UV_PLUGIN_DIR . 'includes/functions-ultimate-member.php');
+
 
 	}
 	
@@ -94,22 +98,21 @@ class UserVerification{
 	public function uv_front_scripts(){
 		
 		wp_enqueue_script('jquery');
-		wp_enqueue_script('jquery-ui-sortable');
-		
+
 		wp_enqueue_script('uv_front_js', plugins_url( '/assets/front/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
 		wp_localize_script( 'uv_front_js', 'uv_ajax', array( 'uv_ajaxurl' => admin_url( 'admin-ajax.php')));
 		
 		wp_enqueue_style('uv_style', UV_PLUGIN_URL.'assets/front/css/style.css');	
 		
 		//global
-		wp_enqueue_style('font-awesome', UV_PLUGIN_URL.'assets/global/css/font-awesome.css');
+        wp_enqueue_style('fontawesome', UV_PLUGIN_URL.'assets/global/css/fontawesome.min.css');
 	}
 
 	public function uv_admin_scripts(){
 		
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('jquery-ui-core');
-		wp_enqueue_script('jquery-ui-sortable');
+        wp_enqueue_script('jquery-ui-accordion');
 		
 		wp_enqueue_script('uv_admin_js', plugins_url( '/assets/admin/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
 		wp_localize_script( 'uv_admin_js', 'uv_ajax', array( 'uv_ajaxurl' => admin_url( 'admin-ajax.php')));
@@ -122,19 +125,12 @@ class UserVerification{
 		));
 							
 		wp_enqueue_style('uv_admin_style', UV_PLUGIN_URL.'assets/admin/css/style.css');
-		wp_enqueue_style('uv-expandable', UV_PLUGIN_URL.'assets/admin/css/uv-expandable.css');	
-		
-		// ParaAdmin
-		wp_enqueue_script('uv_ParaAdmin', plugins_url( '/assets/global/ParaAdmin/ParaAdmin.js' , __FILE__ ) , array( 'jquery' ));		
-		wp_enqueue_style('uv_paraAdmin', UV_PLUGIN_URL.'assets/global/ParaAdmin/ParaAdmin.css');
+        wp_enqueue_style('jquery-ui', UV_PLUGIN_URL.'assets/global/css/jquery-ui.css');
+
 		
 		// Global
-		wp_enqueue_style('font-awesome', UV_PLUGIN_URL.'assets/global/css/font-awesome.css');
-		wp_enqueue_style('uv_global_style', UV_PLUGIN_URL.'assets/global/css/style.css');
-	
-		
-		//wp_enqueue_style( 'wp-color-picker' );
-		//wp_enqueue_script( 'uv_color_picker', plugins_url('/assets/admin/js/color-picker.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
+		wp_enqueue_style('fontawesome', UV_PLUGIN_URL.'assets/global/css/fontawesome.min.css');
+
 	}
 } 
 

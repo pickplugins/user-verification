@@ -8,6 +8,12 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
+
+
+
+
+
+
 function user_verification_is_verified($userid){
 
     $status = get_user_meta($userid, 'user_activation_status', true);
@@ -79,7 +85,7 @@ function user_verification_bulk_action_admin_notice() {
 		$user_count = intval( $_REQUEST['uv_bulk_approve'] );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
-		echo $user_count.' user account marked as approved.';
+		echo sprintf(__('%s user account marked as approved.'), $user_count);
 		echo '</div>';
 
 	}
@@ -88,7 +94,7 @@ function user_verification_bulk_action_admin_notice() {
 		$user_count = intval( $_REQUEST['uv_bulk_disapprove'] );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
-		echo $user_count.' user account marked as disapproved.';
+		echo sprintf(__('%s user account marked as disapproved.'), $user_count);
 		echo '</div>';
 
 
@@ -325,12 +331,12 @@ function uv_filter_check_activation() {
 		$table = $wpdb->prefix . "usermeta";
 		$meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s", $activation_key ) );
 		if( empty( $meta_data ) ) {
-			$html.= "<div class='wrong-key'><i class='fa fa-times'></i> $uv_message_invalid_key</div>";
+			$html.= "<div class='wrong-key'><i class='fas fa-times'></i> $uv_message_invalid_key</div>";
 		}
 		else{
 			$user_activation_status = get_user_meta( $meta_data->user_id, 'user_activation_status', true );
 			if( $user_activation_status != 0 ) {
-				$html.= "<div class='expired'><i class='fa fa-calendar-times-o'></i> $uv_message_key_expired</div>";
+				$html.= "<div class='expired'><i class='far fa-calendar-times'></i> $uv_message_key_expired</div>";
 			}
             else {
                 $user_verification_redirect_verified = get_option('user_verification_redirect_verified');
@@ -341,7 +347,7 @@ function uv_filter_check_activation() {
                 }
 
 
-				$html.= "<div class='verified'><i class='fa fa-check-square-o'></i> $uv_message_verification_success</div>";
+				$html.= "<div class='verified'><i class='fas fa-check-square'></i> $uv_message_verification_success</div>";
                 update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
 				
 				if( $user_verification_login_automatically ==  "yes"  ){
@@ -394,12 +400,12 @@ function uv_filter_check_activation() {
                     )
                 );
 
-                $html.= "<div class='resend'><i class='fa fa-paper-plane'></i> $uv_message_activation_sent</div>";
+                $html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $uv_message_activation_sent</div>";
 				
 				
             endif;
         }
-        else $html.= "<i class='fa fa-exclamation-triangle'></i> $uv_message_invalid_key";
+        else $html.= "<i class='fas fa-exclamation-triangle'></i> $uv_message_invalid_key";
     
 
 		$html.= '</div>';
@@ -460,11 +466,11 @@ function uv_resend_verification_form($attr){
 					)
 				);
 
-				$html.= "<div class='resend'><i class='fa fa-paper-plane'></i> $uv_message_activation_sent</div>";
+				$html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $uv_message_activation_sent</div>";
 
 
             else:
-	            $html.= "<div class='resend'><i class='fa fa-times'></i> ".__("Sorry user doesn't exist.","user-verification")."</div>";
+	            $html.= "<div class='resend'><i class='fas fa-times'></i> ".__("Sorry user doesn't exist.","user-verification")."</div>";
             endif;
 
 
@@ -714,7 +720,7 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		$uv_message_activation_sent = __( 'Activation Email Sent', 'user-verification' );
 		
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
-		<span class='uv_popup_box_close'><i class='fa fa-times-circle-o'></i></span><i class='fa fa-check-square'></i>
+		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span><i class='fas fa-check-square'></i>
 		<h3 class='uv_popup_box_data'>$uv_message_activation_sent</h3></div></div>";
 	}
 	
@@ -726,7 +732,7 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 	
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
 		<span class='uv_popup_box_close'><i class='fa fa-times-circle-o'></i></span>
-		<i class='fa fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$uv_message_invalid_key</h3></div></div>";
+		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$uv_message_invalid_key</h3></div></div>";
 	}
 	
 	function uv_show_box_finished() {
@@ -736,8 +742,8 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		$uv_message_verification_success = __( 'Your account is now verified', 'user-verification' );
 	
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
-		<span class='uv_popup_box_close'><i class='fa fa-times-circle-o'></i></span>
-		<i class='fa fa-check-square'></i><h3 class='uv_popup_box_data'>$uv_message_verification_success</h3></div></div>";
+		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span>
+		<i class='fas fa-check-square'></i><h3 class='uv_popup_box_data'>$uv_message_verification_success</h3></div></div>";
 	}
 	
 	function uv_show_box_key_expired() {
@@ -747,8 +753,8 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		$uv_message_key_expired = __( 'Your account is now verified', 'user-verification' );
 	
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
-		<span class='uv_popup_box_close'><i class='fa fa-times-circle-o'></i></span>
-		<i class='fa fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$uv_message_key_expired</h3></div></div>";
+		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span>
+		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$uv_message_key_expired</h3></div></div>";
 	}
 
 
@@ -872,16 +878,14 @@ function pick_settings_action_custom_field_email_templates($option) {
         $description = isset($templates['description']) ? $templates['description'] : '';
 
         ?>
-        <div class="items template <?php echo $key; ?>">
-            <div class="header">
-                <span class="expand-collapse">
-                    <i class="fa fa-expand"></i><i class="fa fa-compress"></i>
-                </span><?php echo $templates['name']; ?>
-            </div>
+
+        <h2 class="header"><?php echo $templates['name']; ?>
             <input type="hidden" name="uv_email_templates_data[<?php echo $key; ?>][name]" value="<?php echo $templates['name']; ?>" />
-            <div class="options">
-                <div class="description"><?php echo $description; ?></div>
-                <label><?php echo __('Enable ?', 'user-verification'); ?>
+        </h2>
+
+        <div class="options">
+            <div class="description"><?php echo $description; ?></div>
+            <label><?php echo __('Enable ?', 'user-verification'); ?>
                 <select name="uv_email_templates_data[<?php echo $key; ?>][enable]" >
                     <?php
                     if($enable=='yes'){
@@ -908,45 +912,55 @@ function pick_settings_action_custom_field_email_templates($option) {
 
                 </select>
 
-                </label><br>
-                <label><?php echo __('Email To: (Copy)', 'user-verification'); ?>
-                    <input placeholder="hello_1@hello.com,hello_2@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_to]" value="<?php echo $email_to; ?>" />
-                </label><br>
+            </label><br>
+            <label><?php echo __('Email To: (Copy)', 'user-verification'); ?>
+                <input placeholder="support@hello.com,hello_2@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_to]" value="<?php echo $email_to; ?>" />
+            </label><br>
 
-                <label><?php echo __('Email from name:', 'user-verification'); ?>
-                    <input placeholder="hello_1@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
-                </label><br>
+            <label><?php echo __('Email from name:', 'user-verification'); ?>
+                <input placeholder="My Site Name" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
+            </label><br>
 
-                <label><?php echo __('Email from:', 'user-verification'); ?>
-                    <input placeholder="hello_1@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from]" value="<?php echo $email_from; ?>" />
-                </label><br>
+            <label><?php echo __('Email from:', 'user-verification'); ?>
+                <input placeholder="support@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from]" value="<?php echo $email_from; ?>" />
+            </label><br>
 
-                <label><?php echo __('Email Subject:','user-verification'); ?>
-                    <input type="text" name="uv_email_templates_data[<?php echo $key; ?>][subject]" value="<?php echo $templates['subject']; ?>" />
-                </label><br>
-
-
+            <label><?php echo __('Email Subject:','user-verification'); ?>
+                <input type="text" name="uv_email_templates_data[<?php echo $key; ?>][subject]" value="<?php echo $templates['subject']; ?>" />
+            </label><br>
 
 
+
+
+            <?php
+
+            ob_start();
+            wp_editor( $templates['html'], $key, $settings = array('textarea_name'=>'uv_email_templates_data['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'200px', ) );
+            $editor_contents = ob_get_clean();
+
+            ?>
+            <label><?php echo __('Email Body:','user-verification'); ?><br/>
                 <?php
-
-                ob_start();
-                wp_editor( $templates['html'], $key, $settings = array('textarea_name'=>'uv_email_templates_data['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'400px', ) );
-                $editor_contents = ob_get_clean();
+                echo $editor_contents;
 
                 ?>
-                <label><?php echo __('Email Body:','user-verification'); ?><br/>
-                    <?php
-                    echo $editor_contents;
-
-                    ?>
-                </label>
-            </div>
+            </label>
         </div>
+
         <?php
             }
         ?>
     </div>
+
+
+    <script>
+        jQuery(document).ready(function($){
+
+            $('.templates_editor').accordion({collapsible: true, active:999});
+
+        })
+
+    </script>
     <?php
 
     }

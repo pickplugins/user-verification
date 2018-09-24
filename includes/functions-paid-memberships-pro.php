@@ -49,7 +49,20 @@ function uv_pmpro_confirmation_message($confirmation_message, $pmpro_invoice){
     $uv_action = isset($_GET['uv_action']) ? $_GET['uv_action'] : '';
     if($uv_action == 'logout'):
 
-        $confirmation_message .= '<div class="user-verification-message" style="color: #f00">We have sent a confirmation mail please follow to verify account first.</div>';
+        global $current_user;
+        //$current_user = wp_get_current_user();
+        $user_id = $current_user->ID;
+        $user_verification_verification_page = get_option('user_verification_verification_page');
+        $verification_page_url = get_permalink($user_verification_verification_page);
+
+        $uv_pmpro_message_checkout_page = get_option('uv_pmpro_message_checkout_page');
+
+        $resend_link = $verification_page_url.'?uv_action=resend&id='. $user_id;
+
+
+        $confirmation_message .= '<div class="user-verification-message" style="color: #f00">'.$uv_pmpro_message_checkout_page.'</div>';
+
+
 
     endif;
 
@@ -58,19 +71,40 @@ function uv_pmpro_confirmation_message($confirmation_message, $pmpro_invoice){
 
 
 
-add_action('init','uv_pm_pro_logout_not_verified');
+add_action('wp_footer','uv_pm_pro_logout_not_verified');
 
 function uv_pm_pro_logout_not_verified(){
 
     $active_plugins = get_option('active_plugins');
     if(in_array( 'paid-memberships-pro/paid-memberships-pro.php', (array) $active_plugins )){
 
-        $current_user = wp_get_current_user();
+        global $current_user;
+        //$current_user = wp_get_current_user();
         $user_id = $current_user->ID;
         $status = user_verification_is_verified($user_id);
 
-        if ( !$status){
+        $uv_action = isset($_GET['uv_action']) ? $_GET['uv_action'] : '';
+
+        if ( !$status && $uv_action == 'logout'){
             wp_logout();
+
+            $uv_pmpro_redirect_timout = get_option('uv_pmpro_redirect_timout');
+
+            $uv_pmpro_redirect_after_checkout_page_id = get_option('uv_pmpro_redirect_after_checkout_page_id');
+            $page_url = get_permalink($uv_pmpro_redirect_after_checkout_page_id);
+
+            if(empty($page_url)):
+                $page_url = wp_logout_url();
+            endif;
+
+
+            $resend_link = $page_url.'?user_id='. $user_id;
+
+            ?>
+            <script>
+                jQuery(document).ready(function($){window.setTimeout(function() {window.location.href = "<?php echo $resend_link; ?>";}, <?php echo $uv_pmpro_redirect_timout; ?>);})
+            </script>
+            <?php
         }
 
     }

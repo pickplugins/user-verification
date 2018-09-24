@@ -1,10 +1,10 @@
 === User Verification ===
-	Contributors: pickplugins
+	Contributors: PickPlugins
 	Donate link: http://pickplugins.com
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 4.9
-	Stable tag: 2.0.5
+	Stable tag: 1.0.18
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,8 +16,26 @@ Protect your website from spam user and stop instant access by using spam email 
 
 ### User Verification by [http://www.pickplugins.com](http://www.pickplugins.com)
 
-* [Support](https://www.pickplugins.com/support/)
-* [Documentation](https://pickplugins.com/docs/documentation/user-verification/)
+* [Donate](https://www.pickplugins.com/item/user-verification/?ref=wordpress.org)
+* [Support](https://www.pickplugins.com/support/?ref=wordpress.org)
+* [Documentation](https://pickplugins.com/documentation/user-verification/?ref=wordpress.org)
+
+
+### Plugin Features
+
+* Block username for registration.
+* Block email domain for registration.
+* Customizable email template for verify notification mails.
+* Automatically login after verification.
+* Custom message for various action.
+* Google reCAPTCHA(v-2) for default login form, default register form, default password reset form, default comment form.
+* Google reCAPTCHA(v-2) for WooCommerce login form, register form, lost password form.
+* WooCommerce compatible, Disable Auto login after registration on WooCommerce.
+* Paid Memberhip Support.
+* Resend verification key form via shortcode `[uv_resend_verification_form]`.
+* Translation Ready
+
+
 
 
 <strong>Protect spam email</strong>
@@ -60,31 +78,23 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
-= 2.0.5 =
-* 30/08/2018 fix - Auto login after verification issue fixed
 
-= 2.0.4 =
-* 02/08/2018 add - Google reCAPTCHA(v-2) for default login form.
-* 02/08/2018 add - Google reCAPTCHA(v-2) for default register form.
-* 02/08/2018 add - Google reCAPTCHA(v-2) for default password reset form.
-* 02/08/2018 add - Google reCAPTCHA(v-2) for default comment form.
-* 02/08/2018 add - Google reCAPTCHA(v-2) for WooCommerce login form.
-* 02/08/2018 add - Google reCAPTCHA(v-2) for WooCommerce register form.
-* 02/08/2018 add - Google reCAPTCHA(v-2) for WooCommerce lost password form.
+= 1.0.18 =
+* 23/09/2018 add - Support for WooCommerce.
+* 23/09/2018 add - Support for Paid Memberships Pro.
 
 
+= 1.0.17 =
+* 03/08/2018 add - Google reCAPTCHA(v-2) for default login form.
+* 03/08/2018 add - Google reCAPTCHA(v-2) for default register form.
+* 03/08/2018 add - Google reCAPTCHA(v-2) for default password reset form.
+* 03/08/2018 add - Google reCAPTCHA(v-2) for default comment form.
+* 03/08/2018 add - Google reCAPTCHA(v-2) for WooCommerce login form.
+* 03/08/2018 add - Google reCAPTCHA(v-2) for WooCommerce register form.
+* 03/08/2018 add - Google reCAPTCHA(v-2) for WooCommerce lost password form.
 
-= 2.0.3 =
-* 03/06/2018 fix - resend verification key  to non exist user issue fixed.
-
-= 2.0.2 =
-* 03/06/2018 add - resend verification key form via shortcode
-
-= 2.0.1 =
+= 1.0.16 =
 * 12/05/2018 add - Private pages included on "verification page?" settings".
-
-= 2.0.0 =
-* 05/05/2018 add - disable login on woocommerce registration and checkout page.
 
 = 1.0.15 =
 * 05/05/2018 fix - issue fixed Automatically login after verification.
@@ -135,5 +145,3 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 = 1.0.11 =
 * 20/12/2017 Email notification added
 * 20/12/2017 Bug Fixed
-
-

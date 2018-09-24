@@ -80,7 +80,7 @@ class WPAdminMenu {
 
 			if( isset($option['type']) && $option['type'] === 'select' ) 		    $this->pick_settings_generate_select( $option );
             elseif( isset($option['type']) && $option['type'] === 'select_multi')	$this->pick_settings_generate_select_multi( $option );
-            elseif( isset($option['type']) && $option['type'] === 'select2')	$this->pick_settings_generate_select2( $option );
+            elseif( isset($option['type']) && $option['type'] === 'select2')	    $this->pick_settings_generate_select2( $option );
 			elseif( isset($option['type']) && $option['type'] === 'checkbox')	    $this->pick_settings_generate_checkbox( $option );
 			elseif( isset($option['type']) && $option['type'] === 'radio')		    $this->pick_settings_generate_radio( $option );
 			elseif( isset($option['type']) && $option['type'] === 'textarea')	    $this->pick_settings_generate_textarea( $option );

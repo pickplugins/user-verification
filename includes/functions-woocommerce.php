@@ -106,16 +106,6 @@ function uv_woocommerce_registration_protect_blocked_domain( $validation_error, 
 
 
 
-
-
-
-
-
-
-
-
-
-
 add_action( 'woocommerce_checkout_order_processed', 'user_verification_woocommerce_checkout_order_processed', 10, 3 );
 
 function user_verification_woocommerce_checkout_order_processed( $order_id, $posted_data, $order ){
@@ -143,7 +133,9 @@ function user_verification_woocommerce_registration_redirect(){
 
 
 	if ( is_user_logged_in() && $uv_wc_disable_auto_login=='yes' ) {
-		$current_user = wp_get_current_user();
+
+	    global $current_user;
+		//$current_user = wp_get_current_user();
 		$user_id = $current_user->ID;
 		$approved_status = get_user_meta($user_id, 'user_activation_status', true);
 		//if the user hasn't been approved destroy the cookie to kill the session and log them out
@@ -166,13 +158,13 @@ function user_verification_woocommerce_registration_redirect(){
 
 function user_verification_wc_registration_message(){
 
-	$uv_wc_disable_auto_login = get_option('user_verification_registered_message',__('Registration success, please check mail for details.', 'user-verification'));
+	$message_after_registration = get_option('uv_wc_message_after_registration',__('Registration success, please check mail for details.', 'user-verification'));
 
 	$not_approved_message = '<p class="registration">'.__('Send in your registration application today!<br /> NOTE: Your account will be held for moderation and you will be unable to login until it is approved.','user-verification').'</p>';
 	if( isset($_REQUEST['approved']) ){
 
 		$approved = sanitize_text_field($_REQUEST['approved']);
-		if ($approved == 'false')  echo '<p class="registration successful">'.$uv_wc_disable_auto_login.'</p>';
+		if ($approved == 'false')  echo '<p class="registration successful">'.$message_after_registration.'</p>';
 		//else echo $not_approved_message;
 	}
 	//else echo $not_approved_message;
