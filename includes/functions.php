@@ -687,7 +687,7 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		$message_data = isset( $templates_data[$action] ) ? $templates_data[$action] : '';
 		if( empty( $message_data ) ) return false; 
 		
-		$message_data = array_map( $message_data, 'do_shortcode' );
+		$message_data = array_map( 'do_shortcode', $message_data );
 		$email_to 			= strtr( $message_data['email_to'], $parametar_vars );	
 		$email_subject 		= strtr( $message_data['subject'], $parametar_vars );
 		$email_body 		= strtr( $message_data['html'], $parametar_vars );
