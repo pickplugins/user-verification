@@ -15,14 +15,34 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 			$permalink_structure = get_option('permalink_structure');
 
             $user_verification_verification_page = get_option('user_verification_verification_page');
+            $uv_exclude_user_roles = get_option('uv_exclude_user_roles');
+
             $verification_page_url = get_permalink($user_verification_verification_page);
 
 			$user_activation_key =  md5(uniqid('', true) );
 			
-			update_user_meta( $user_id, 'user_activation_key', $user_activation_key ); 
+			update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
 			update_user_meta( $user_id, 'user_activation_status', 0 );
 			
 			$user_data 	= get_userdata( $user_id );
+
+
+
+
+			$user_roles = !empty($user_data->roles) ? $user_data->roles : array();
+
+
+			if(!empty($uv_exclude_user_roles))
+			foreach ($uv_exclude_user_roles as $role):
+
+                if(in_array($role, $user_roles)){
+                    //update_option('uv_custom_option', $role);
+                    update_user_meta( $user_id, 'user_activation_status', 1 );
+                    return;
+                }
+
+            endforeach;
+
 
 			if(empty($permalink_structure)){
 				$link 		= $verification_page_url.'&activation_key='.$user_activation_key;
@@ -38,7 +58,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 				array( 
 					'action' 	=> 'user_registered',
 					'user_id' 	=> $user_id,
-					'link'		=> $link
+					'link'		=> esc_url_raw($link)
 				)
 			);
 			

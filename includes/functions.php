@@ -1,18 +1,7 @@
 <?php
-/*
-* @Author 		pickplugins
-* Copyright: 	pickplugins.com
-*/
+
 
 if ( ! defined('ABSPATH')) exit;  // if direct access 
-
-
-
-
-
-
-
-
 
 function user_verification_is_verified($userid){
 
@@ -20,11 +9,9 @@ function user_verification_is_verified($userid){
 
     if ( $status == 1 ){
         return true;
-
     }else{
         return false;
     }
-
 }
 
 
@@ -105,8 +92,8 @@ function user_verification_bulk_action_admin_notice() {
 
 function uv_ajax_approve_user_manually(){
 	
-	$user_id 	= isset( $_POST['user_id'] ) ? $_POST['user_id'] : '';
-	$do 		= isset( $_POST['do'] ) ? $_POST['do'] : '';
+	$user_id 	= isset( $_POST['user_id'] ) ? sanitize_text_field($_POST['user_id']) : '';
+	$do 		= isset( $_POST['do'] ) ? sanitize_text_field($_POST['do']) : '';
 	
 	if( empty( $user_id ) || empty( $do ) ) die();
 	
@@ -131,23 +118,6 @@ function uv_ajax_approve_user_manually(){
 }
 add_action('wp_ajax_uv_ajax_approve_user_manually', 'uv_ajax_approve_user_manually');
 add_action('wp_ajax_nopriv_uv_ajax_approve_user_manually', 'uv_ajax_approve_user_manually');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -179,6 +149,7 @@ function user_verification_is_emaildomain_blocked($user_email){
     $response = false;
     $user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain', 'no');
     $uv_settings_blocked_domain 				= get_option('uv_settings_blocked_domain', array());
+    $uv_settings_allowed_domain 				= get_option('uv_settings_allowed_domain', array());
 
     if( $user_verification_enable_block_domain == "yes" ):
 
@@ -190,11 +161,29 @@ function user_verification_is_emaildomain_blocked($user_email){
 
     endif;
 
-
     return $response;
 }
 
+function user_verification_is_emaildomain_allowed($user_email){
 
+    $response = false;
+    $user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain', 'no');
+    $uv_settings_allowed_domain 				= get_option('uv_settings_allowed_domain', array());
+
+    if( $user_verification_enable_block_domain == "yes" ):
+
+        $email_parts = explode('@', $user_email);
+        $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
+
+
+        if( !empty( $email_domain ) && in_array( $email_domain, $uv_settings_allowed_domain ) ){
+            $response = true;
+        }
+
+    endif;
+
+    return $response;
+}
 
 
 
@@ -205,9 +194,14 @@ add_filter( 'registration_errors', 'uv_registration_protect_username', 10, 3 );
 function uv_registration_protect_username( $errors, $sanitized_user_login, $user_email ){
 
     $is_blocked = user_verification_is_username_blocked($sanitized_user_login);
+
+
     if($is_blocked){
         $errors->add( 'blocked_username', __( "<strong>{$sanitized_user_login}</strong> username is not allowed!", 'user-verification' ));
     }
+
+
+
     return $errors;
 
 }
@@ -220,9 +214,14 @@ add_filter( 'registration_errors', 'uv_registration_protect_blocked_domain', 10,
 function uv_registration_protect_blocked_domain( $errors, $sanitized_user_login, $user_email ){
 
     $is_blocked = user_verification_is_emaildomain_blocked($user_email);
-    if($is_blocked){
+    $is_allowed = user_verification_is_emaildomain_allowed($user_email);
+
+    if($is_blocked || !$is_allowed){
         $errors->add( 'blocked_domain', __( "This email domain is not allowed!", 'user-verification' ) );
     }
+
+
+
     return $errors;
 
 }
@@ -284,8 +283,12 @@ function user_verification_get_pages_list(){
 	);
 	$pages = get_pages($args);
 
-    foreach( $pages as $page )
-		if ( $page->post_title ) $array_pages[$page->ID] = $page->post_title;
+    //$array_pages[0] = 'None';
+
+    foreach( $pages as $page ){
+        if ( $page->post_title ) $array_pages[$page->ID] = $page->post_title;
+    }
+
 
     return $array_pages;
 }
@@ -349,8 +352,11 @@ function uv_filter_check_activation() {
 
 				$html.= "<div class='verified'><i class='fas fa-check-square'></i> $uv_message_verification_success</div>";
                 update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
-				
-				if( $user_verification_login_automatically ==  "yes"  ){
+
+                $user_data = get_userdata( $meta_data->user_id );
+                uv_mail( $user_data->user_email, array( 'action' => 'email_confirmed', 'user_id' => $meta_data->user_id, ) );
+
+                if( $user_verification_login_automatically ==  "yes"  ){
 
 
 					$user = get_user_by( 'id', $meta_data->user_id );
@@ -416,6 +422,30 @@ add_shortcode('user_verification_check', 'uv_filter_check_activation');
 
 
 
+add_shortcode('user_verification_message', 'uv_filter_check_status');
+
+function uv_filter_check_status($attr) {
+
+    $uv_check = isset($_GET['uv_check']) ? sanitize_text_field($_GET['uv_check']) : '';
+
+    $msg = isset($attr['message']) ? $attr['message'] : 'Please check email to get verify frist.';
+    if(is_user_logged_in() && $uv_check == 'true'){
+        $userid = get_current_user_id();
+        $status = user_verification_is_verified($userid);
+
+        if(!$status){
+            $html = $msg;
+            wp_logout();
+            return $html;
+        }
+
+
+    }
+
+
+}
+
+
 
 add_shortcode('uv_resend_verification_form', 'uv_resend_verification_form');
 
@@ -427,7 +457,7 @@ function uv_resend_verification_form($attr){
 
 	if(!empty($_POST['resend_verification_hidden'])){
 
-		$nonce = $_POST['_wpnonce'];
+		$nonce = sanitize_text_field($_POST['_wpnonce']);
 
 
 		if(wp_verify_nonce( $nonce, 'nonce_resend_verification' ) && $_POST['resend_verification_hidden'] == 'Y') {
@@ -498,8 +528,8 @@ function uv_resend_verification_form($attr){
 		<input type="hidden" name="resend_verification_hidden" value="Y">
 
 
-		<input type="email" name="email" placeholder="hello@hi.com" value="">
-		<input type="submit" value="Resend" name="submit">
+		<input type="email" name="email" placeholder="<?php echo __('Email address','user-verification'); ?>" value="">
+		<input type="submit" value="<?php echo __('Resend','user-verification'); ?>" name="submit">
 
 
 	</form>
@@ -515,15 +545,6 @@ function uv_resend_verification_form($attr){
 
 
 
-
-
-
-
-
-
-
-
-
 add_action('init','user_verification_auto_login');
 function user_verification_auto_login(){
 
@@ -532,20 +553,23 @@ function user_verification_auto_login(){
 
 		global $wpdb;
 		$table = $wpdb->prefix . "usermeta";
-		$activation_key = $_GET['key'];
-		$meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s", $activation_key ) );
+		$activation_key = sanitize_text_field($_GET['key']);
+		$meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s AND meta_key = 'user_activation_key'", $activation_key ) );
+
+        if(empty($meta_data)) return;
+
+		//echo '<pre>'.var_export($meta_data, true).'</pre>';
+
 
 		$user = get_user_by( 'id', $meta_data->user_id );
 
 		$user_activation_status = get_user_meta( $meta_data->user_id, 'user_activation_status', true );
 
-		if($user_activation_status != 0){
-
-			wp_set_current_user( $meta_data->user_id, $user->user_login );
-			wp_set_auth_cookie( $meta_data->user_id );
-			do_action( 'wp_login', $user->user_login, $user );
-
-		}
+        if($user_activation_status == 1){
+            wp_set_current_user( $meta_data->user_id, $user->user_login );
+            wp_set_auth_cookie( $meta_data->user_id );
+            do_action( 'wp_login', $user->user_login, $user );
+        }
 
 	}
 
@@ -567,10 +591,10 @@ function user_verification_auto_login(){
 	
 function uv_filter_resend_activation_link( ) {
 		
-		if( isset( $_GET['uv_action'] ) ) $uv_action = $_GET['uv_action'];
+		if( isset( $_GET['uv_action'] ) ) $uv_action = sanitize_text_field($_GET['uv_action']);
 		else return;
 		
-		if( isset( $_GET['id'] ) ) $user_id = $_GET['id'];
+		if( isset( $_GET['id'] ) ) $user_id = sanitize_text_field($_GET['id']);
 		else return;
 		
 		$user_activation_key = md5(uniqid('', true) );
@@ -648,7 +672,9 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 	function uv_mail( $email_to_add = '', $args = array() ) {
 		
 		if( empty( $email_to_add ) ) return false;
-		
+
+        require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
+
 		$action 	= isset( $args['action'] ) ? $args['action'] : '';
 		$user_id 	= isset( $args['user_id'] ) ? $args['user_id'] : 1;
 		$link 		= isset( $args['link'] ) ? $args['link'] : '';
@@ -662,8 +688,8 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 			'{site_name}'			=> get_bloginfo('name'),
 			'{site_description}' 	=> get_bloginfo('description'),
 			'{site_url}' 			=>  get_bloginfo('url'),						
-			// '{site_logo_url}'		=> $logo_url,
-			'{user_name}' 			=> $user_info->user_login,						  
+			'{user_name}' 			=> $user_info->user_login,
+            '{user_display_name}' 	=> $user_info->display_name,
 			'{user_avatar}' 		=> get_avatar( $user_id, 60 ),
 			'{ac_activaton_url}'	=> $link
 		);
@@ -851,6 +877,7 @@ add_action('pick_settings_action_custom_field_email_templates','pick_settings_ac
 
 function pick_settings_action_custom_field_email_templates($option) {
 
+    require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
 
     $id 			= isset( $option['id'] ) ? $option['id'] : "";
     $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
@@ -866,7 +893,8 @@ function pick_settings_action_custom_field_email_templates($option) {
     }
 
     ?>
-    <div class="templates_editor uv-expandable">
+    <div class="button reset-email-templates">Reset Templates</div>
+    <div class="templates_editor">
     <?php
 
     foreach($values as $key=>$templates){

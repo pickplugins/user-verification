@@ -1,10 +1,10 @@
-=== User Verification ===
+﻿=== User Verification ===
 	Contributors: PickPlugins
 	Donate link: http://pickplugins.com
 	Tags:  User Verification
 	Requires at least: 4.1
-	Tested up to: 4.9
-	Stable tag: 1.0.18
+	Tested up to: 5.3
+	Stable tag: 1.0.32
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,50 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
+= 1.0.32 =
+* 2020-02-18 fix - sanitize variables.
+* 2020-02-18 fix - fixed security issue
+
+
+= 1.0.31 =
+* 2020-02-15 add - added allowed domain
+
+= 1.0.30 =
+* 09/01/2020 add - added new email parameter {user_display_name}
+
+= 1.0.29 =
+* 17/10/2019 add - remove placeholder email address for uv_resend_verification_form
+
+= 1.0.28 =
+* 04/09/2019 fix - translation support for email templates.
+
+= 1.0.27 =
+* 20/08/2019 fix - user admin column issue fixed.
+
+= 1.0.26 =
+* 07/05/2019 fix - 'class_uv_emails' error issue fixed.
+
+= 1.0.24 =
+* 16/04/2019 fix - WooCommerce Redirect after payment.
+
+= 1.0.24 =
+* 29/03/2019 fix - user verification confirmed mail issue fixed.
+
+= 1.0.23 =
+* 23/03/2019 add - implement with Ultimate Member plugin.
+
+= 1.0.22 =
+* 21/03/2019 fix - WooCommerce checkout issue fixed.
+
+= 1.0.21 =
+* 05/03/2019 fix - Exclude user by role to verification.
+
+= 1.0.20 =
+* 27/09/2018 add - Email Templates reset button is back.
+
+= 1.0.19 =
+* 24/09/2018 fix - Minor PHP issue fixed
+* 24/09/2018 remove - Removed some CSS files.
 
 = 1.0.18 =
 * 23/09/2018 add - Support for WooCommerce.

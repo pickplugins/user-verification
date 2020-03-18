@@ -1,11 +1,5 @@
 <?php
-
-/*
-* @Author 		pickplugins
-* Copyright: 	2015 pickplugins
-*/
-
-if ( ! defined('ABSPATH')) exit;  // if direct access 
+if ( ! defined('ABSPATH')) exit;  // if direct access
 
 class class_uv_emails{
 	
@@ -19,10 +13,7 @@ class class_uv_emails{
 		
 		
 	public function uv_send_email($email_data){
-		
-		//$to_email='', $email_subject='', $email_body='', $attachments=''
-		
-		
+
 		$email_to = $email_data['email_to'];	
 		$email_from = $email_data['email_from'];			
 		$email_from_name = $email_data['email_from_name'];
@@ -30,12 +21,7 @@ class class_uv_emails{
 		$email_body = $email_data['html'];		
 		$email_subject = $email_data['subject'];			
 		$enable = $email_data['enable'];
-		$attachments = $email_data['attachments'];		
-					
-		
-		
-		//$uv_from_email = get_option('uv_from_email');
-		//$site_name = get_bloginfo('name');
+		$attachments = $email_data['attachments'];
 
 		$headers = "";
 		$headers .= "From: ".$email_from_name." <".$email_from."> \r\n";
@@ -57,10 +43,7 @@ class class_uv_emails{
 		include UV_PLUGIN_DIR . 'templates/emails/email_confirmed.php';
 		include UV_PLUGIN_DIR . 'templates/emails/email_resend_key.php';
 
-					
-		
 		$templates_data = array(
-							
 			'user_registered'=>array(
 				'name'=>__('New User Registered','user-verification'),
 				'description'=>__('Notification email for admin when a new user is registered.','user-verification'),
@@ -81,7 +64,6 @@ class class_uv_emails{
 				'email_from_name'=> get_bloginfo('name'),										
 				'enable'=> 'yes',
 			),
-
 			'email_resend_key'=>array(
 				'name'=>__('Resend Activation key','user-verification'),
                  'description'=>__('Notification email for resend activation key.','user-verification'),
@@ -92,11 +74,6 @@ class class_uv_emails{
                  'email_from_name'=> get_bloginfo('name'),
                  'enable'=> 'yes',
 			),
-
-
-						
-			
-
 		);
 		
 		$templates_data = apply_filters('uv_filters_email_templates_data', $templates_data);
@@ -108,34 +85,18 @@ class class_uv_emails{
 
 
 	public function uv_email_templates_parameters(){
-		
-		
-			$parameters['site_parameter'] = array(
-												'title'=>__('Site Parameters','user-verification'),
-												'parameters'=>array('{site_name}','{site_description}','{site_url}','{site_logo_url}'),										
-												);
-												
-			$parameters['user_parameter'] = array(
-												'title'=>__('Users Parameters','user-verification'),
-												'parameters'=>array('{user_name}','{user_avatar}','{user_email}', '{ac_activaton_url}'),
-												);	
-												
-								
-		
-												
-			$parameters = apply_filters('uv_emails_templates_parameters',$parameters);
-		
-		
-			return $parameters;
-		
-		}
-	
-		
-		
-		
-		
-		
 
+        $parameters['site_parameter'] = array(
+            'title'=>__('Site Parameters','user-verification'),
+            'parameters'=>array('{site_name}','{site_description}','{site_url}','{site_logo_url}'),
+            );
+        $parameters['user_parameter'] = array(
+            'title'=>__('Users Parameters','user-verification'),
+            'parameters'=>array('{user_name}', '{user_display_name}', '{user_avatar}','{user_email}', '{ac_activaton_url}'),
+            );
+        $parameters = apply_filters('uv_emails_templates_parameters',$parameters);
+        return $parameters;
 	}
+}
 	
-new class_uv_emails();
+//new class_uv_emails();

@@ -1,8 +1,5 @@
 <?php
-/*
-* @Author 		pickplugins
-* Copyright: 	pickplugins.com
-*/
+
 
 
 
@@ -14,8 +11,8 @@ function uv_woocommerce_on_checkout_protect_username(){
 
 
 
-    $billing_email = isset( $_POST['billing_email'] ) ? $_POST['billing_email'] : "";
-    $username = isset( $_POST['account_username'] ) ? $_POST['account_username'] : "";
+    $billing_email = isset( $_POST['billing_email'] ) ? sanitize_email($_POST['billing_email']) : "";
+    $username = isset( $_POST['account_username'] ) ? sanitize_text_field($_POST['account_username']) : "";
     if( empty( $billing_email ) ) return;
 
     if( 'yes' === get_option( 'woocommerce_registration_generate_username' ) ){
@@ -43,8 +40,8 @@ function uv_woocommerce_on_checkout_protect_blocked_domain(){
 
 
 
-    $billing_email = isset( $_POST['billing_email'] ) ? $_POST['billing_email'] : "";
-    $username = isset( $_POST['account_username'] ) ? $_POST['account_username'] : "";
+    $billing_email = isset( $_POST['billing_email'] ) ? sanitize_email($_POST['billing_email']) : "";
+    $username = isset( $_POST['account_username'] ) ? sanitize_text_field($_POST['account_username']) : "";
     if( empty( $billing_email ) ) return;
 
     $is_blocked = user_verification_is_emaildomain_blocked($billing_email);
@@ -106,19 +103,36 @@ function uv_woocommerce_registration_protect_blocked_domain( $validation_error, 
 
 
 
-add_action( 'woocommerce_checkout_order_processed', 'user_verification_woocommerce_checkout_order_processed', 10, 3 );
+//add_action( 'woocommerce_checkout_order_processed', 'user_verification_woocommerce_checkout_order_processed', 10, 3 );
 
 function user_verification_woocommerce_checkout_order_processed( $order_id, $posted_data, $order ){
 
 	$uv_wc_disable_auto_login = get_option('uv_wc_disable_auto_login','no');
 	if ( is_user_logged_in() && $uv_wc_disable_auto_login=='yes' ) {
-		wp_logout();
+		//wp_logout();
 	}
 
 }
 
 
+add_action( 'woocommerce_thankyou', 'user_verification_woocommerce_thankyou');
 
+function user_verification_woocommerce_thankyou( $order_id ){
+    $order = new WC_Order( $order_id );
+    $uv_wc_redirect_after_payment = get_option('uv_wc_redirect_after_payment', wc_get_page_id('myaccount'));
+
+    if($uv_wc_redirect_after_payment == 'none'){
+        return;
+    }
+
+
+    $url = get_permalink($uv_wc_redirect_after_payment).'?uv_check=true';
+
+    if ( $order->status != 'failed' ) {
+        wp_redirect($url);
+        exit;
+    }
+}
 
 
 

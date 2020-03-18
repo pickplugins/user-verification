@@ -3,9 +3,9 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 1.0.18
+Version: 1.0.32
 WC requires at least: 3.0.0
-WC tested up to: 3.4
+WC tested up to: 3.7
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -76,7 +76,7 @@ class UserVerification{
 
         require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
 		require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings.php');
-		require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');	
+		require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');
 	}
 	
 	public function uv_define_constants() {

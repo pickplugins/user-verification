@@ -21,23 +21,27 @@ class uv_class_column_users{
 		$new_columns 	= array();
 		$count 			= 0;
 		
-		foreach( $columns as $column_key => $column_title ){ $count++;
+		foreach( $columns as $column_key => $column_title ){
+		    $count++;
 			
 			if( $count == 3 ) $new_columns[ 'uv' ] = __('Verification Status', 'user-verification');
 			else $new_columns[ $column_key ] = $column_title;
 		}
+
+
 		
 		return $new_columns;
     }
 	
 	public function manage_users_custom_column_function( $val, $column_name, $user_id ) {
 		
-		ob_start();
+
 		
 		$this_user		= get_user_by( 'id', $user_id );
 	
 		if( $column_name == 'uv' ) {
-			
+
+            ob_start();
 			$user_activation_status = get_user_meta( $user_id, 'user_activation_status', true );
 			$user_activation_status = empty( $user_activation_status ) ? 0 : $user_activation_status;
 			$uv_status 				= $user_activation_status == 1 ? __('Approved', 'user-verification') : __('Pending approval', 'user-verification');
@@ -58,9 +62,13 @@ class uv_class_column_users{
 			
 			
 			echo "</div>";
-		}
+
+            return ob_get_clean();
+		}else{
+		    return $val;
+        }
 		
-		return ob_get_clean();
+
     }
 
 

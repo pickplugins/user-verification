@@ -43,53 +43,10 @@ jQuery(document).ready(function($){
 			});		
 	})
 		
-		
-	$(document).on('click', '.uv_domain_add', function() {
-	
-		html  = "<li class='uv_domain'>";
-		html += "<input type='text' placeholder='spamdomain.com' name='uv_settings_blocked_domain[]'/>";
-		html += "<div class='button uv_domain_remove'><i class='fa fa-times'></i></div>";
-		html += "</li>";
-		
-		$(this).parent().parent().append(html);
-	})
 
-	$(document).on('click', '.uv_domain_remove', function() {
-		$(this).parent().remove();
-	})
-	
-	$(document).on('click', '.uv_username_add', function() {
-	
-		html  = "<li class='uv_username'>";
-		html += "<input type='text' placeholder='username' name='uv_settings_blocked_username[]'/>";
-		html += "<div class='button uv_username_remove'><i class='fa fa-times'></i></div>";
-		html += "</li>";
-		
-		$(this).parent().parent().append(html);
-	})
-
-	$(document).on('click', '.uv_username_remove', function() {
-		$(this).parent().remove();
-	})
-	
-	
-
-	$(document).on('click', '.uv-expandable .header .expand-collapse', function()
-			{
-				if($(this).parent().parent().hasClass('active'))
-					{
-						$(this).parent().parent().removeClass('active');
-					}
-				else
-					{
-						$(this).parent().parent().addClass('active');	
-					}
-				
-			
-			})	
 
 		
-		$(document).on('click', '.uv-emails-templates .reset-email-templates', function()
+		$(document).on('click', '.reset-email-templates', function()
 			{
 
 				if(confirm( L10n_user_verification.reset_confirm_text )){
@@ -98,7 +55,7 @@ jQuery(document).ready(function($){
 						{
 					type: 'POST',
 					context: this,
-					url:qa_ajax.qa_ajaxurl,
+					url:uv_ajax.uv_ajaxurl,
 					data: {"action": "user_verification_reset_email_templates", },
 					success: function(data)
 							{	

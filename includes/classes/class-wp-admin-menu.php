@@ -151,12 +151,12 @@ class WPAdminMenu {
 
         <script>jQuery(document).ready(function($) {
 
-                html_<?php echo $id; ?> = '<div class=""><input type="text" class="regular-text" name="<?php echo $id?>[]"  placeholder="<?php echo $placeholder; ?>" value="" /><span class="button" onclick="$(this).parent().remove()">X</span></div>';
+                html_<?php echo $id; ?> = '<div class=""><input type="text" class="regular-text" name="<?php echo $id?>[]"  placeholder="<?php echo $placeholder; ?>" value="" /><span class="button" onclick="jQuery(this).parent().remove()">X</span></div>';
 
 
             });</script>
 
-        <span class="button" onclick="$('#<?php echo $id; ?>').append(html_<?php echo $id; ?>)">Add</span>
+        <span class="button" onclick="jQuery('#<?php echo $id; ?>').append(html_<?php echo $id; ?>)">Add</span>
         <div class="field-list" id="<?php echo $id; ?>">
 
             <?php
@@ -166,7 +166,7 @@ class WPAdminMenu {
 
                     ?>
                     <div class="">
-                        <input type='text' class='regular-text' name='<?php echo $id?>[]'  placeholder='<?php echo $placeholder; ?>' value='<?php echo $value; ?>' /><span class="button" onclick="$(this).parent().remove()">X</span>
+                        <input type='text' class='regular-text' name='<?php echo $id?>[]'  placeholder='<?php echo $placeholder; ?>' value='<?php echo $value; ?>' /><span class="button" onclick="jQuery(this).parent().remove()">X</span>
                     </div>
                     <?php
 
@@ -176,7 +176,7 @@ class WPAdminMenu {
 
                 ?>
                 <div class="">
-                    <input type='text' class='regular-text' name='<?php echo $id?>[]'  placeholder='<?php echo $placeholder; ?>' value='' /><span class="button" onclick="$(this).parent().remove()">X</span>
+                    <input type='text' class='regular-text' name='<?php echo $id?>[]'  placeholder='<?php echo $placeholder; ?>' value='' /><span class="button" onclick="jQuery(this).parent().remove()">X</span>
                 </div>
                 <?php
 

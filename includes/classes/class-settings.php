@@ -79,13 +79,46 @@ $settings_general = array(
                     'placeholder' => __('Thanks for your registration, please follow email we sent.','user-verification'),
                 ),
 
+                array(
+                    'id'		=> 'uv_wc_redirect_after_payment',
+                    'title'		=> __('Redirect after payment','user-verification'),
+                    'details'	=> __('You can set custom page to redirect after successfully payment, and this page should check verification status and take action to stay logged-in or logged-out the user automatically. 
+                    <br>please use following shortcode <code>[user_verification_message message="Please check email to verify account first"]</code> to check verification status, it will automatically logged-out the unverified user and display the custom message.
+                    ','user-verification'),
+                    'type'		=> 'select2',
+                    'args'		=> user_verification_get_pages_list(),
+                ),
+
 
 
 
             )
         ),
+        'ultimate_member' => array(
+            'title' 	=> 	__('Ultimate Member','user-verification'),
+            'description' 	=> __('Integration for Ultimate Member plugin','user-verification'),
+            'options' 	=> array(
+                array(
+                    'id'		=> 'uv_um_disable_auto_login',
+                    'title'		=> __('Disable auto login after registration on Ultimate Member?','user-verification'),
+                    'details'	=> __('You can disable auto login after registration via Ultimate Member register form.','user-verification'),
+                    'type'		=> 'select',
+                    'args'		=> array(
+                        'no'	=> __('No','user-verification'),
+                        'yes'	=> __('Yes','user-verification'),
+                    ),
+                ),
+                array(
+                    'id'		=> 'uv_um_message_before_header',
+                    'title'		=> __('Display Message after successfully registration','user-verification'),
+                    'details'	=> __('You can display custom message at profile header after redirect profile page via Ultimate Member.','user-verification'),
+                    'type'		=> 'textarea',
+                    'placeholder' => __('Thanks for your registration, please follow email we sent.','user-verification'),
+                ),
 
 
+            )
+        ),
         'paid-memberships-pro' => array(
             'title' 	=> 	__('Paid Memberships Pro','user-verification'),
             'description' 	=> __('Integration for Paid Memberships Pro plugin','user-verification'),
@@ -161,12 +194,18 @@ $settings_security = array(
                 array(
                     'id'		=> 'uv_settings_blocked_domain',
                     'title'		=> __('Blocked Domains','user-verification'),
-                    'details'	=> __('One domain per line. wihtout http:// or https:// or www','user-verification'),
+                    'details'	=> __('One domain per line. without http:// or https:// or www','user-verification'),
                     'type'		=> 'text_multi',
                     'placeholder' => __('domain.com','user-verification'),
                 ),
 
-
+                array(
+                    'id'		=> 'uv_settings_allowed_domain',
+                    'title'		=> __('Allowed Domains','user-verification'),
+                    'details'	=> __('One domain per line. without http:// or https:// or www','user-verification'),
+                    'type'		=> 'text_multi',
+                    'placeholder' => __('domain.com','user-verification'),
+                ),
 
                 array(
                     'id'		=> 'user_verification_enable_block_username',

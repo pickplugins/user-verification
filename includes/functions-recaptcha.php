@@ -1,8 +1,5 @@
 <?php
-/*
-* @Author 		pickplugins
-* Copyright: 	pickplugins.com
-*/
+
 
 if ( ! defined('ABSPATH')) exit;  // if direct access 
 
@@ -35,7 +32,7 @@ function wdm_validate_login_captcha($user, $password) {
 	$uv_message_captcha_error = get_option('uv_message_captcha_error', __('Captcha Error. Please try again.','user-verification'));
 
 	if($uv_recaptcha_login_page == 'yes' && isset($_POST['g-recaptcha-response'])):
-		$captcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+		$captcha = isset($_POST['g-recaptcha-response']) ? sanitize_text_field($_POST['g-recaptcha-response']) : '';
 
 		if(empty($captcha)){
 
@@ -119,7 +116,7 @@ function uv_lostpassword_post_errors( $errors ) {
 	$uv_message_captcha_error = get_option('uv_message_captcha_error', __('Captcha Error. Please try again.','user-verification'));
 
 	if($uv_recaptcha_lostpassword_page == 'yes' && isset($_POST['g-recaptcha-response'])):
-		$captcha = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+		$captcha = isset($_POST['g-recaptcha-response']) ? sanitize_text_field($_POST['g-recaptcha-response']) : '';
 		if ( empty( $_POST['g-recaptcha-response'] ) ) {
 			$errors->add( 'loginCaptchaError',  $uv_message_captcha_error  );
 		}

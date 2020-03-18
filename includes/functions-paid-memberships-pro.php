@@ -1,8 +1,5 @@
 <?php
-/*
-* @Author 		PickPlugins
-* Copyright: 	pickplugins.com
-*/
+
 
 
 
@@ -46,7 +43,7 @@ add_filter('pmpro_confirmation_message', 'uv_pmpro_confirmation_message', 10, 2)
 
 function uv_pmpro_confirmation_message($confirmation_message, $pmpro_invoice){
 
-    $uv_action = isset($_GET['uv_action']) ? $_GET['uv_action'] : '';
+    $uv_action = isset($_GET['uv_action']) ? sanitize_text_field($_GET['uv_action']) : '';
     if($uv_action == 'logout'):
 
         global $current_user;
@@ -83,7 +80,7 @@ function uv_pm_pro_logout_not_verified(){
         $user_id = $current_user->ID;
         $status = user_verification_is_verified($user_id);
 
-        $uv_action = isset($_GET['uv_action']) ? $_GET['uv_action'] : '';
+        $uv_action = isset($_GET['uv_action']) ? sanitize_text_field($_GET['uv_action']) : '';
 
         if ( !$status && $uv_action == 'logout'){
             wp_logout();
