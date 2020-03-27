@@ -80,7 +80,6 @@ class WPAdminMenu {
 
 			if( isset($option['type']) && $option['type'] === 'select' ) 		    $this->pick_settings_generate_select( $option );
             elseif( isset($option['type']) && $option['type'] === 'select_multi')	$this->pick_settings_generate_select_multi( $option );
-            elseif( isset($option['type']) && $option['type'] === 'select2')	    $this->pick_settings_generate_select2( $option );
 			elseif( isset($option['type']) && $option['type'] === 'checkbox')	    $this->pick_settings_generate_checkbox( $option );
 			elseif( isset($option['type']) && $option['type'] === 'radio')		    $this->pick_settings_generate_radio( $option );
 			elseif( isset($option['type']) && $option['type'] === 'textarea')	    $this->pick_settings_generate_textarea( $option );
@@ -110,9 +109,7 @@ class WPAdminMenu {
 		$placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
 		$value 	 		= get_option( $id );
 		
-		wp_register_style( 'jquery-ui', 'http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css' );
-		wp_enqueue_style( 'jquery-ui' );
-		
+
 		echo "<input type='text' class='regular-text' name='$id' id='$id' placeholder='$placeholder' value='$value' />";
 		
 	
@@ -250,31 +247,7 @@ class WPAdminMenu {
         echo "</select>";
     }
 
-    public function pick_settings_generate_select2( $option ){
-        $id 		= isset( $option['id'] ) ? $option['id'] : "";
-        $args 		= isset( $option['args'] ) ? $option['args'] : array();
-        $args		= is_array( $args ) ? $args : $this->generate_args_from_string( $args, $option );
-        $value		= get_option( $id );
-        $multiple 	= isset( $option['multiple'] ) ? $option['multiple'] : '';
 
-        wp_enqueue_style('select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css' );
-        wp_enqueue_script('select2', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js', array('jquery') );
-
-        echo $multiple ? "<select name='{$id}[]' id='$id' multiple>" : "<select name='{$id}' id='$id'>";
-        foreach( $args as $key => $name ):
-
-            if( $multiple ) $selected = in_array( $key, $value ) ? "selected" : "";
-            else $selected = $value == $key ? "selected" : "";
-            echo "<option $selected value='$key'>$name</option>";
-
-        endforeach;
-        echo "</select>";
-
-        echo "<script>jQuery(document).ready(function($) { $('#$id').select2({
-			width: '320px',
-			allowClear: true
-		});});</script>";
-    }
 
     public function pick_settings_generate_checkbox( $option ){
 		

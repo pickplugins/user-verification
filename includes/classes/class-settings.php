@@ -22,14 +22,14 @@ $settings_general = array(
                     'id'		=> 'user_verification_verification_page',
                     'title'		=> __('Choose verification page','user-verification'),
                     'details'	=> __('Verification checker page where you place the shortcode <code>[user_verification_check]</code>, please create a page and use this shortcode uder post content.','user-verification'),
-                    'type'		=> 'select2',
+                    'type'		=> 'select',
                     'args'		=> user_verification_get_pages_list(),
                 ),
                 array(
                     'id'		=> 'user_verification_redirect_verified',
                     'title'		=> __('Redirect after verification','user-verification'),
                     'details'	=> __('Redirect to any page after successfully verified account.','user-verification'),
-                    'type'		=> 'select2',
+                    'type'		=> 'select',
                     'args'		=> user_verification_get_pages_list(),
                 ),
 
@@ -85,7 +85,7 @@ $settings_general = array(
                     'details'	=> __('You can set custom page to redirect after successfully payment, and this page should check verification status and take action to stay logged-in or logged-out the user automatically. 
                     <br>please use following shortcode <code>[user_verification_message message="Please check email to verify account first"]</code> to check verification status, it will automatically logged-out the unverified user and display the custom message.
                     ','user-verification'),
-                    'type'		=> 'select2',
+                    'type'		=> 'select',
                     'args'		=> user_verification_get_pages_list(),
                 ),
 
@@ -155,7 +155,7 @@ $settings_general = array(
                     'id'		=> 'uv_pmpro_redirect_after_checkout_page_id',
                     'title'		=> __('Redirect to this page after checkout','user-verification'),
                     'details'	=> __('You can set custom page to redirect and logout after few second passed, where user can see instruction what to do next to get verified.','user-verification'),
-                    'type'		=> 'select2',
+                    'type'		=> 'select',
                     'args'		=> user_verification_get_pages_list(),
                 ),
             )

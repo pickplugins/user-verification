@@ -3,7 +3,7 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 1.0.32
+Version: 1.0.33
 WC requires at least: 3.0.0
 WC tested up to: 3.7
 Text Domain: user-verification

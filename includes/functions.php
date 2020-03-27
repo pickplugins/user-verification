@@ -69,7 +69,10 @@ add_action( 'admin_notices', 'user_verification_bulk_action_admin_notice' );
 function user_verification_bulk_action_admin_notice() {
 	if ( isset($_REQUEST['uv_bulk_approve']) ) {
 
-		$user_count = intval( $_REQUEST['uv_bulk_approve'] );
+
+        $user_count =  isset($_REQUEST['uv_bulk_approve']) ? sanitize_user_field($_REQUEST['uv_bulk_approve']) : '';
+
+        $user_count =  intval( $user_count );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
 		echo sprintf(__('%s user account marked as approved.'), $user_count);
@@ -78,7 +81,8 @@ function user_verification_bulk_action_admin_notice() {
 	}
 	elseif (isset($_REQUEST['uv_bulk_disapprove'])){
 
-		$user_count = intval( $_REQUEST['uv_bulk_disapprove'] );
+        $user_count = sanitize_text_field( $_REQUEST['uv_bulk_disapprove'] );
+		$user_count = intval( $user_count );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
 		echo sprintf(__('%s user account marked as disapproved.'), $user_count);

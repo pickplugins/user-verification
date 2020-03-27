@@ -1,29 +1,6 @@
 <?php
 
 
-
-
-
-
-
-
-
-
-
-//add_filter("pmpro_after_checkout", "uv_pmpro_after_checkout");
-//
-//function uv_pmpro_after_checkout($userid){
-//
-//    wp_logout();
-//
-//    $rurl = apply_filters( "pmpro_confirmation_url", $rurl, $user_id, $pmpro_level );
-//
-//    wp_redirect( $rurl );
-//    exit;
-//
-//}
-
-
 add_filter('pmpro_confirmation_url', 'uv_pmpro_confirmation_url', 10, 3);
 
 
@@ -122,7 +99,7 @@ add_filter("pmpro_registration_checks", "my_pmpro_registration_protect_username"
 function my_pmpro_registration_protect_username(){
     global $pmpro_msg, $pmpro_msgt, $current_user;
 
-    $username = $_REQUEST['username'];
+    $username = isset($_REQUEST['username']) ? sanitize_user($_REQUEST['username']) : '';
     $is_blocked = user_verification_is_username_blocked($username);
 
     if($is_blocked) {
@@ -147,7 +124,7 @@ function my_pmpro_registration_protect_blocked_domain(){
 
     $user_id = $current_user->ID;
 
-    $bemail = $_REQUEST['bemail'];
+    $bemail = isset($_REQUEST['bemail']) ? sanitize_email($_REQUEST['bemail']) : '';
 
     $is_blocked = user_verification_is_emaildomain_blocked($bemail);
 
