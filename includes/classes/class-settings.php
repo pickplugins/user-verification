@@ -591,60 +591,6 @@ $help = array(
 
 
 
-$our_plugins = array(
-    'page_nav' 	=> __( 'Our Plugins', 'user-verification' ),
-    'page_settings' => array(
-        'section_2' => array(
-            'title' 	=> 	__('Our plugins you may looking for','user-verification'),
-            'description' 	=> __('Please take a look on our plugin list may help on your projects..','user-verification'),
-            'options' 	=> array(
-
-                array(
-                    'id'		=> 'uv_faq',
-                    'title'		=> __('Popular Plugins','user-verification'),
-                    'details'	=> __('See our all plugins here <a href="https://www.pickplugins.com/plugins/">https://www.pickplugins.com/plugins/</a>','user-verification'),
-                    'type'		=> 'grid',
-                    'args'		=> array(
-                        array('title'=>'Post Grid','link'=>'https://www.pickplugins.com/item/post-grid-create-awesome-grid-from-any-post-type-for-wordpress/', 'content'=>'', 'thumb'=>'https://www.pickplugins.com/wp-content/uploads/2015/12/3814-post-grid-thumb-500x262.jpg'),
-                        array('title'=>'Accordion','link'=>'https://www.pickplugins.com/item/accordions-html-css3-responsive-accordion-grid-for-wordpress/', 'content'=>'','thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/01/3932-product-thumb-500x250.png' ),
-                        array('title'=>'Woocommerce Product Slider','link'=>'https://www.pickplugins.com/item/woocommerce-products-slider-for-wordpress/', 'content'=>'','thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/03/4357-woocommerce-products-slider-thumb-500x250.jpg'),
-                        array('title'=>'Team Showcase','link'=>'https://www.pickplugins.com/item/team-responsive-meet-the-team-grid-for-wordpress/', 'content'=>'','thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/06/5145-team-thumb-500x250.jpg'),
-
-                        array('title'=>'Breadcrumb','link'=>'https://www.pickplugins.com/item/breadcrumb-awesome-breadcrumbs-style-navigation-for-wordpress/', 'content'=>'','thumb'=>'https://www.pickplugins.com/wp-content/uploads/2016/03/4242-breadcrumb-500x252.png'),
-
-                        array('title'=>'Wishlist for WooCommerce','link'=>'https://www.pickplugins.com/item/woocommerce-wishlist/', 'content'=>'','thumb'=>'https://www.pickplugins.com/wp-content/uploads/2017/10/12047-woocommerce-wishlist-500x250.png'),
-
-                        array('title'=>'Job Board Manager','link'=>'https://www.pickplugins.com/item/job-board-manager-create-job-site-for-wordpress/', 'content'=>'','thumb'=>'https://www.pickplugins.com/wp-content/uploads/2015/08/3466-job-board-manager-thumb-500x250.png'),
-
-                    ),
-                ),
-
-
-
-            )
-        ),
-
-
-
-
-
-
-
-    ),
-);
-
-
-
-
-
-
-
-
-
-
-
-
-
 $help_menu_args = array(
     'add_in_menu' => true,
     'menu_type' => 'submenu',
@@ -656,7 +602,6 @@ $help_menu_args = array(
     'parent_slug' => "user-verification",
     'pages' 	  => array(
         'help' => $help,
-        'our-plugins' => $our_plugins,
     ),
 );
 

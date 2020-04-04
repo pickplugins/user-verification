@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 5.3
-	Stable tag: 1.0.33
+	Stable tag: 1.0.34
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -77,6 +77,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+
+= 1.0.34 =
+* 2020-03-27 remove - remove our plugins menu.
 
 = 1.0.33 =
 * 2020-03-27 fix - sanitize variables.
