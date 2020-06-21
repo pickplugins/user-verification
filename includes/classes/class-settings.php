@@ -442,10 +442,10 @@ $args = array(
     'menu_slug'       => "user-verification",
     'menu_icon'       => "dashicons-shield-alt",
     'pages' 	  => array(
-        'uv-general' => $settings_general,
-        'uv-security' => $settings_security,
-        'uv-messages' => $settings_messages,
-        'uv-recaptcha' => $settings_recaptcha,
+        'user_verification_general' => $settings_general,
+        'user_verification_security' => $settings_security,
+        'user_verification_messages' => $settings_messages,
+        'user_verification_recaptcha' => $settings_recaptcha,
     ),
 );
 
@@ -540,7 +540,7 @@ $email_templates_args = array(
     'menu_slug' => "user-verification-email-template",
     'parent_slug' => "user-verification",
     'pages' 	  => array(
-        'templates' => $settings_email_templates,
+        'user_verification_templates' => $settings_email_templates,
 
 
     ),
@@ -601,7 +601,7 @@ $help_menu_args = array(
     'menu_slug' => "user-verification-help",
     'parent_slug' => "user-verification",
     'pages' 	  => array(
-        'help' => $help,
+        'user_verification_help' => $help,
     ),
 );
 

@@ -3,8 +3,8 @@
 	Donate link: http://pickplugins.com
 	Tags:  User Verification
 	Requires at least: 4.1
-	Tested up to: 5.3
-	Stable tag: 1.0.34
+	Tested up to: 5.4
+	Stable tag: 1.0.38
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,20 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
+= 1.0.38 =
+* 2020-06-21 add - Verification at pending page (BuddyPress)
+
+
+= 1.0.37 =
+* 2020-06-08 add - added email parameter user_first_name, user_last_name
+
+
+= 1.0.36 =
+* 2020-05-18 fix - allowed email domain issue fixed.
+
+
+= 1.0.35 =
+* 2020-04-21 fix - sanitize settings url issue fixed.
 
 = 1.0.34 =
 * 2020-03-27 remove - remove our plugins menu.

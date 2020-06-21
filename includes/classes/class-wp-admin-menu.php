@@ -23,19 +23,19 @@ class WPAdminMenu {
 			add_action( 'admin_menu', array( $this, 'add_menu_in_admin_menu' ), 12 );
 		}
 		
-		add_action( 'admin_init', array( $this, 'pick_settings_display_fields' ), 12 );
-		add_filter( 'whitelist_options', array( $this, 'pick_settings_whitelist_options' ), 99, 1 );
+		add_action( 'admin_init', array( $this, '_display_fields' ), 12 );
+		add_filter( 'whitelist_options', array( $this, '_whitelist_options' ), 99, 1 );
 		add_action( 'admin_enqueue_scripts', array( $this, 'pick_enqueue_color_picker' ) );
 	}
 	
 	public function add_menu_in_admin_menu() {
 		
 		if( "main" == $this->get_menu_type() ) {
-			add_menu_page( $this->get_menu_name(), $this->get_menu_title(), $this->get_capability(), $this->get_menu_slug(), array( $this, 'pick_settings_display_function' ), $this->get_menu_icon() );
+			add_menu_page( $this->get_menu_name(), $this->get_menu_title(), $this->get_capability(), $this->get_menu_slug(), array( $this, 'pick_settings_display' ), $this->get_menu_icon() );
 		}
 		
 		if( "submenu" == $this->get_menu_type() ) {
-			add_submenu_page( $this->get_parent_slug(), $this->get_page_title(), $this->get_menu_title(), $this->get_capability(), $this->get_menu_slug(), array( $this, 'pick_settings_display_function' ) );
+			add_submenu_page( $this->get_parent_slug(), $this->get_page_title(), $this->get_menu_title(), $this->get_capability(), $this->get_menu_slug(), array( $this, 'pick_settings_display' ) );
 		}
 	}
 	
@@ -45,27 +45,27 @@ class WPAdminMenu {
 		wp_enqueue_script( 'jquery-ui-datepicker' );
 	}
 	
-	public function pick_settings_display_fields() { 
+	public function _display_fields() {
 
  		foreach( $this->get_settings_fields() as $key => $setting ):
 		
 			add_settings_section(
 				$key,
 				isset( $setting['title'] ) ? $setting['title'] : "",
-				array( $this, 'pick_settings_section_callback' ), 
+				array( $this, 'pick_settings_section' ),
 				$this->get_current_page()
 			);
 			
 			foreach( $setting['options'] as $option ) :
 				
-			add_settings_field( $option['id'], $option['title'], array($this,'pick_settings_field_generator'), $this->get_current_page(), $key, $option );
+			add_settings_field( $option['id'], $option['title'], array($this,'_field_generator'), $this->get_current_page(), $key, $option );
 
 			endforeach;
 		
 		endforeach;
 	}
 	
-	public function pick_settings_field_generator( $option ) {
+	public function _field_generator( $option ) {
 			
 		$id 		= isset( $option['id'] ) ? $option['id'] : "";
 		$type 		= isset( $option['type'] ) ? $option['type'] : "";
@@ -78,18 +78,18 @@ class WPAdminMenu {
 		    //var_dump($type);
 
 
-			if( isset($option['type']) && $option['type'] === 'select' ) 		    $this->pick_settings_generate_select( $option );
-            elseif( isset($option['type']) && $option['type'] === 'select_multi')	$this->pick_settings_generate_select_multi( $option );
-			elseif( isset($option['type']) && $option['type'] === 'checkbox')	    $this->pick_settings_generate_checkbox( $option );
-			elseif( isset($option['type']) && $option['type'] === 'radio')		    $this->pick_settings_generate_radio( $option );
-			elseif( isset($option['type']) && $option['type'] === 'textarea')	    $this->pick_settings_generate_textarea( $option );
-			elseif( isset($option['type']) && $option['type'] === 'number' ) 	    $this->pick_settings_generate_number( $option );
-			elseif( isset($option['type']) && $option['type'] === 'text' ) 		    $this->pick_settings_generate_text( $option );
-            elseif( isset($option['type']) && $option['type'] === 'text_multi' ) 	$this->pick_settings_generate_text_multi( $option );
-			elseif( isset($option['type']) && $option['type'] === 'colorpicker')    $this->pick_settings_generate_colorpicker( $option );
-			elseif( isset($option['type']) && $option['type'] === 'datepicker')	    $this->pick_settings_generate_datepicker( $option );
-            elseif( isset($option['type']) && $option['type'] === 'repeater')	    $this->pick_settings_generate_repeater( $option );
-            elseif( isset($option['type']) && $option['type'] === 'faq')	        $this->pick_settings_generate_faq( $option );
+			if( isset($option['type']) && $option['type'] === 'select' ) 		    $this->_field_select( $option );
+            elseif( isset($option['type']) && $option['type'] === 'select_multi')	$this->_field_select_multi( $option );
+			elseif( isset($option['type']) && $option['type'] === 'checkbox')	    $this->_field_checkbox( $option );
+			elseif( isset($option['type']) && $option['type'] === 'radio')		    $this->_field_radio( $option );
+			elseif( isset($option['type']) && $option['type'] === 'textarea')	    $this->_field_textarea( $option );
+			elseif( isset($option['type']) && $option['type'] === 'number' ) 	    $this->_field_number( $option );
+			elseif( isset($option['type']) && $option['type'] === 'text' ) 		    $this->_field_text( $option );
+            elseif( isset($option['type']) && $option['type'] === 'text_multi' ) 	$this->_field_text_multi( $option );
+			elseif( isset($option['type']) && $option['type'] === 'colorpicker')    $this->_field_colorpicker( $option );
+			elseif( isset($option['type']) && $option['type'] === 'datepicker')	    $this->_field_datepicker( $option );
+            elseif( isset($option['type']) && $option['type'] === 'repeater')	    $this->_field_repeater( $option );
+            elseif( isset($option['type']) && $option['type'] === 'faq')	        $this->_field_faq( $option );
 
 
 
@@ -103,7 +103,7 @@ class WPAdminMenu {
 		}
 	}
 
-	public function pick_settings_generate_datepicker( $option ){
+	public function _field_datepicker( $option ){
 		
 		$id 			= isset( $option['id'] ) ? $option['id'] : "";
 		$placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
@@ -116,7 +116,7 @@ class WPAdminMenu {
 		echo "<script>jQuery(document).ready(function($) { $('#$id').datepicker();});</script>";
 	}
 	
-	public function pick_settings_generate_colorpicker( $option ){
+	public function _field_colorpicker( $option ){
 		
 		$id 			= isset( $option['id'] ) ? $option['id'] : "";
 		$placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
@@ -127,7 +127,7 @@ class WPAdminMenu {
 		echo "<script>jQuery(document).ready(function($) { $('#$id').wpColorPicker();});</script>";
 	}
 	
-	public function pick_settings_generate_text( $option ){
+	public function _field_text( $option ){
 		
 		$id 			= isset( $option['id'] ) ? $option['id'] : "";
 		$placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
@@ -136,7 +136,7 @@ class WPAdminMenu {
 		echo "<input type='text' class='regular-text' name='$id' id='$id' placeholder='$placeholder' value='$value' />";
 	}
 
-    public function pick_settings_generate_text_multi( $option ){
+    public function _field_text_multi( $option ){
 
         $id 			= isset( $option['id'] ) ? $option['id'] : "";
         $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
@@ -195,7 +195,7 @@ class WPAdminMenu {
 
 
 
-    public function pick_settings_generate_number( $option ){
+    public function _field_number( $option ){
 		
 		$id 			= isset( $option['id'] ) ? $option['id'] : "";
 		$placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
@@ -204,7 +204,7 @@ class WPAdminMenu {
 		echo "<input type='number' class='regular-text' name='$id' id='$id' placeholder='$placeholder' value='$value' />";
 	}
 	
-	public function pick_settings_generate_textarea( $option ){
+	public function _field_textarea( $option ){
 		
 		$id = isset( $option['id'] ) ? $option['id'] : "";
 		$placeholder = isset( $option['placeholder'] ) ? $option['placeholder'] : "";
@@ -214,7 +214,7 @@ class WPAdminMenu {
 		echo "<textarea name='$id' id='$id' cols='40' rows='5' placeholder='$placeholder'>$value</textarea>";
 	}
 	
-	public function pick_settings_generate_select( $option ){
+	public function _field_select( $option ){
 		
 		$id 	= isset( $option['id'] ) ? $option['id'] : "";
 		$args 	= isset( $option['args'] ) ? $option['args'] : array();	
@@ -232,7 +232,7 @@ class WPAdminMenu {
 
 
 
-    public function pick_settings_generate_select_multi( $option ){
+    public function _field_select_multi( $option ){
 
         $id				= isset( $option['id'] ) ? $option['id'] : "";
         $args			= isset( $option['args'] ) ? $option['args'] : array();
@@ -249,7 +249,7 @@ class WPAdminMenu {
 
 
 
-    public function pick_settings_generate_checkbox( $option ){
+    public function _field_checkbox( $option ){
 		
 		$id				= isset( $option['id'] ) ? $option['id'] : "";
 		$args			= isset( $option['args'] ) ? $option['args'] : array();
@@ -271,7 +271,7 @@ class WPAdminMenu {
 
 
 
-    public function pick_settings_generate_faq( $option ){
+    public function _field_faq( $option ){
 
         $id				= isset( $option['id'] ) ? $option['id'] : "";
         $args			= isset( $option['args'] ) ? $option['args'] : array();
@@ -324,7 +324,7 @@ class WPAdminMenu {
 
 
 
-    public function pick_settings_generate_repeater( $option ){
+    public function _field_repeater( $option ){
 
         $id				= isset( $option['id'] ) ? $option['id'] : "";
         $fields			= isset( $option['fields'] ) ? $option['fields'] : array();
@@ -378,7 +378,7 @@ class WPAdminMenu {
 
 
 
-	public function pick_settings_generate_radio( $option ){
+	public function _field_radio( $option ){
 
 		$id				= isset( $option['id'] ) ? $option['id'] : "";
 		$args			= isset( $option['args'] ) ? $option['args'] : array();
@@ -395,7 +395,7 @@ class WPAdminMenu {
 		echo "</fieldset>";
 	}
 	
-	public function pick_settings_section_callback( $section ) { 
+	public function pick_settings_section( $section ) {
 		
 		$data = isset( $section['callback'][0]->data ) ? $section['callback'][0]->data : array();
 		$description = isset( $data['pages'][$this->get_current_page()]['page_settings'][$section['id']]['description'] ) ? $data['pages'][$this->get_current_page()]['page_settings'][$section['id']]['description'] : "";
@@ -403,7 +403,9 @@ class WPAdminMenu {
 		echo $description;
 	}
 	
-	public function pick_settings_whitelist_options( $whitelist_options ){
+	public function _whitelist_options( $whitelist_options ){
+
+
 		
 		foreach( $this->get_pages() as $page_id => $page ): foreach( $page['page_settings'] as $section ):
 			foreach( $section['options'] as $option ):
@@ -414,14 +416,19 @@ class WPAdminMenu {
 		return $whitelist_options;
 	}
 	
-	public function pick_settings_display_function(){
+	public function pick_settings_display(){
 
 		echo "<div class='wrap'>";
 		echo "<h2>{$this->get_menu_page_title()}</h2><br>";
 		
 		parse_str( $_SERVER['QUERY_STRING'], $nav_menu_url_args );
 		global $pagenow;
-		
+
+        $nav_menu_url_args_new = array();
+
+		foreach ($nav_menu_url_args as $nav_Id => $nav){
+            $nav_menu_url_args_new[$nav_Id] = sanitize_text_field($nav);
+        }
 		
 		settings_errors();
 		
@@ -430,10 +437,14 @@ class WPAdminMenu {
 		foreach( $this->get_pages() as $page_id => $page ): $tab_count++;
 			
 			$active = $this->get_current_page() == $page_id ? 'nav-tab-active' : '';
-			$nav_menu_url_args['tab'] = $page_id;
-			$nav_menu_url = http_build_query( $nav_menu_url_args );
-			
-			echo "<a href='$pagenow?$nav_menu_url' class='nav-tab $active'>{$page['page_nav']}</a>";
+            $nav_menu_url_args_new['tab'] = $page_id;
+			$nav_menu_url = http_build_query( $nav_menu_url_args_new );
+
+			$nav_url = $pagenow.'?'.$nav_menu_url;
+
+			?>
+            <a href='<?php echo esc_url_raw($nav_url); ?>' class='nav-tab <?php echo esc_attr($active); ?>'><?php echo esc_html($page['page_nav']); ?></a>
+            <?php
 
 		endforeach;
         echo "</nav>";
@@ -441,6 +452,7 @@ class WPAdminMenu {
 		echo "<form action='options.php' method='post'>";
 		settings_fields( $this->get_current_page() );
 		do_settings_sections( $this->get_current_page() );
+
 		submit_button();
 		echo "</form>";	
 	
@@ -518,10 +530,16 @@ class WPAdminMenu {
 		else return "main";
 	}
 	private function get_pages(){
+
+        //var_dump($this->data['pages']);
+
 		if( isset( $this->data['pages'] ) ) return $this->data['pages'];
 		else return array();
 	}
 	private function get_settings_fields(){
+
+        //var_dump($this->get_pages()[$this->get_current_page()]['page_settings']);
+
 		if( isset( $this->get_pages()[$this->get_current_page()]['page_settings'] ) ) return $this->get_pages()[$this->get_current_page()]['page_settings'];
 		else return array();
 	}

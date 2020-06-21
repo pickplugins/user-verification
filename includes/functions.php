@@ -146,45 +146,92 @@ function user_verification_is_username_blocked($username){
 }
 
 
+add_filter( 'registration_errors', 'uv_registration_protect_username', 10, 3 );
+function uv_registration_protect_username( $errors, $sanitized_user_login, $user_email ){
 
+    $username_blocked = user_verification_is_username_blocked($sanitized_user_login);
+
+
+    if($username_blocked){
+        $errors->add( 'blocked_username', __( "<strong>{$sanitized_user_login}</strong> username is not allowed!", 'user-verification' ));
+    }
+
+    return $errors;
+
+}
+
+
+
+add_shortcode('user_verification_is_emaildomain_blocked','user_verification_is_emaildomain_blocked');
 
 function user_verification_is_emaildomain_blocked($user_email){
+
+
 
     $response = false;
     $user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain', 'no');
     $uv_settings_blocked_domain 				= get_option('uv_settings_blocked_domain', array());
-    $uv_settings_allowed_domain 				= get_option('uv_settings_allowed_domain', array());
+    $uv_settings_blocked_domain = !empty($uv_settings_blocked_domain) ? $uv_settings_blocked_domain : array();
 
-    if( $user_verification_enable_block_domain == "yes" ):
+    $uv_settings_blocked_domain                 = array_filter($uv_settings_blocked_domain);
 
-        $email_domain = explode('@', $user_email);
 
-        if( !empty( $email_domain ) && in_array( $email_domain[1], $uv_settings_blocked_domain ) ){
-            $response = true;
+    if($user_verification_enable_block_domain == "yes"){
+
+        $email_parts = explode('@', $user_email);
+        $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
+
+        if (!empty($uv_settings_blocked_domain)  ){
+
+            if(in_array( $email_domain, $uv_settings_blocked_domain )){
+                $response = true;
+            }else{
+                $response = false;
+            }
+        }else{
+            $response = false;
         }
 
-    endif;
+    }
+
 
     return $response;
 }
 
+
+
+add_shortcode('user_verification_is_emaildomain_allowed','user_verification_is_emaildomain_allowed');
+
 function user_verification_is_emaildomain_allowed($user_email){
 
-    $response = false;
+
+    $response = true;
     $user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain', 'no');
     $uv_settings_allowed_domain 				= get_option('uv_settings_allowed_domain', array());
+    $uv_settings_allowed_domain = !empty($uv_settings_allowed_domain) ? $uv_settings_allowed_domain : array();
 
-    if( $user_verification_enable_block_domain == "yes" ):
+    $uv_settings_allowed_domain                 = array_filter($uv_settings_allowed_domain);
+
+
+    if($user_verification_enable_block_domain == "yes"){
 
         $email_parts = explode('@', $user_email);
         $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
 
 
-        if( !empty( $email_domain ) && in_array( $email_domain, $uv_settings_allowed_domain ) ){
+        if(!empty($uv_settings_allowed_domain)){
+
+            if(in_array( $email_domain, $uv_settings_allowed_domain )){
+                $response = true;
+            }else{
+                $response = false;
+            }
+        }else{
             $response = true;
         }
 
-    endif;
+    }
+
 
     return $response;
 }
@@ -194,21 +241,6 @@ function user_verification_is_emaildomain_allowed($user_email){
 
 
 
-add_filter( 'registration_errors', 'uv_registration_protect_username', 10, 3 );
-function uv_registration_protect_username( $errors, $sanitized_user_login, $user_email ){
-
-    $is_blocked = user_verification_is_username_blocked($sanitized_user_login);
-
-
-    if($is_blocked){
-        $errors->add( 'blocked_username', __( "<strong>{$sanitized_user_login}</strong> username is not allowed!", 'user-verification' ));
-    }
-
-
-
-    return $errors;
-
-}
 
 
 
@@ -218,20 +250,44 @@ add_filter( 'registration_errors', 'uv_registration_protect_blocked_domain', 10,
 function uv_registration_protect_blocked_domain( $errors, $sanitized_user_login, $user_email ){
 
     $is_blocked = user_verification_is_emaildomain_blocked($user_email);
-    $is_allowed = user_verification_is_emaildomain_allowed($user_email);
 
-    if($is_blocked || !$is_allowed){
-        $errors->add( 'blocked_domain', __( "This email domain is not allowed!", 'user-verification' ) );
+
+    $email_parts = explode('@', $user_email);
+    $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
+
+//    error_log('$is_blocked:'. $is_blocked);
+//    error_log('$is_blocked:'. $email_domain);
+
+
+    if($is_blocked){
+        $errors->add( 'blocked_domain', sprintf(__( "This %s domain is not blocked!", 'user-verification' ), '<strong>'.$email_domain.'</strong>') );
     }
-
-
 
     return $errors;
 
 }
 
 
+add_filter( 'registration_errors', 'uv_registration_protect_allowed_domain', 10, 3 );
+function uv_registration_protect_allowed_domain( $errors, $sanitized_user_login, $user_email ){
 
+    $is_allowed = user_verification_is_emaildomain_allowed($user_email);
+
+
+
+    $email_parts = explode('@', $user_email);
+    $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
+
+//    error_log('$is_allowed:'. $is_allowed);
+//    error_log('$is_allowed:'. $email_domain);
+
+    if(!$is_allowed){
+        $errors->add( 'allowed_domain', sprintf(__( "This %s domain is not allowed!", 'user-verification' ), '<strong>'.$email_domain.'</strong>') );
+    }
+
+    return $errors;
+
+}
 
 
 
@@ -694,6 +750,8 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 			'{site_url}' 			=>  get_bloginfo('url'),						
 			'{user_name}' 			=> $user_info->user_login,
             '{user_display_name}' 	=> $user_info->display_name,
+            '{user_first_name}' 	=> $user_info->first_name,
+            '{user_last_name}' 	    => $user_info->last_name,
 			'{user_avatar}' 		=> get_avatar( $user_id, 60 ),
 			'{ac_activaton_url}'	=> $link
 		);

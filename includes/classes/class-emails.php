@@ -92,7 +92,7 @@ class class_uv_emails{
             );
         $parameters['user_parameter'] = array(
             'title'=>__('Users Parameters','user-verification'),
-            'parameters'=>array('{user_name}', '{user_display_name}', '{user_avatar}','{user_email}', '{ac_activaton_url}'),
+            'parameters'=>array('{user_name}', '{user_display_name}','{user_first_name}','{user_last_name}', '{user_avatar}','{user_email}', '{ac_activaton_url}'),
             );
         $parameters = apply_filters('uv_emails_templates_parameters',$parameters);
         return $parameters;
