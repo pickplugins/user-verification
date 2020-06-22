@@ -78,6 +78,12 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
+= 1.0.39 =
+* 2020-06-22 add - MemberPress plugin integration added
+* 2020-06-22 add - BuddyPress plugin integration added
+
+
+
 = 1.0.38 =
 * 2020-06-21 add - Verification at pending page (BuddyPress)
 

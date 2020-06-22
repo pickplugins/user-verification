@@ -6,6 +6,82 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
+function validate_email_edu(){
+
+    global $bp;
+
+    $email = $bp->signup->email;
+
+    if ($email){
+
+
+        $is_blocked = user_verification_is_emaildomain_blocked($email);
+
+
+        $email_parts = explode('@', $email);
+        $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
+
+//    error_log('$is_blocked:'. $is_blocked);
+//    error_log('$is_blocked:'. $email_domain);
+
+
+        if($is_blocked){
+            //$errors[] = sprintf(__( 'This %s domain is blocked!', 'user-verification' ), '<strong>'.$email_domain.'</strong>');
+            $bp->signup->errors['signup_email'] = sprintf(__( 'This %s domain is blocked!', 'user-verification' ), $email_domain);
+        }
+
+
+
+        $is_allowed = user_verification_is_emaildomain_allowed($email);
+
+
+
+        if(!$is_allowed){
+            //$errors[] = sprintf(__( 'This %s domain is not allowed!', 'user-verification' ), '<strong>'.$email_domain.'</strong>');
+            $bp->signup->errors['signup_email'] = sprintf(__( 'This %s domain is not allowed!', 'user-verification' ), $email_domain);
+        }
+
+
+
+
+    }
+
+
+    $username = $bp->signup->username;
+
+    if ($username){
+
+        $username_blocked = user_verification_is_username_blocked($username);
+
+        if($username_blocked){
+            $bp->signup->errors['signup_username'] = sprintf(__( 'This %s username is not allowed!', 'user-verification' ), $username);
+
+        }
+
+    }
+
+
+
+
+
+
+}
+
+add_action('bp_signup_validate','validate_email_edu');
+
+
+
+
+function bp_core_signup_user( $user_id, $user_login, $user_password, $user_email, $usermeta) {
+
+    uv_action_user_register_function( $user_id );
+
+}
+add_action( "bp_core_signup_user", "bp_core_signup_user_uv", 10, 5 );
+
+
+
+
 // add the column data for each row
 function bp_members_signup_columns_uv( $arr ) {
 
@@ -28,6 +104,7 @@ function bp_members_signup_custom_column_uv_bp( $val, $column_name, $signup_obje
         $user_activation_status = get_user_meta( $user_id, 'user_activation_status', true );
         $user_activation_status = empty( $user_activation_status ) ? 0 : $user_activation_status;
         $uv_status 				= $user_activation_status == 1 ? __('Approved', 'user-verification') : __('Pending approval', 'user-verification');
+        $activation_key = get_user_meta( $user_id, 'user_activation_key', true );
 
         echo "<div class='uv_status'>$uv_status</div>";
         echo "<div class='row-actions'>";
@@ -43,6 +120,7 @@ function bp_members_signup_custom_column_uv_bp( $val, $column_name, $signup_obje
             echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Remove Approval', 'user-verification')."</span>";
         }
 
+        echo "<span class='activation_key' > ".$activation_key."</span>";
 
         echo "</div>";
 

@@ -45,8 +45,9 @@ class uv_class_column_users{
 			$user_activation_status = get_user_meta( $user_id, 'user_activation_status', true );
 			$user_activation_status = empty( $user_activation_status ) ? 0 : $user_activation_status;
 			$uv_status 				= $user_activation_status == 1 ? __('Approved', 'user-verification') : __('Pending approval', 'user-verification');
-							
-			echo "<div class='uv_status'>$uv_status</div>";
+            $activation_key = get_user_meta( $user_id, 'user_activation_key', true );
+
+            echo "<div class='uv_status'>$uv_status</div>";
 			echo "<div class='row-actions'>";
 			
 			
@@ -59,9 +60,10 @@ class uv_class_column_users{
 				
 				echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Remove Approval', 'user-verification')."</span>";
 			}
-			
-			
-			echo "</div>";
+
+            echo "<span class='activation_key' > ".$activation_key."</span>";
+
+            echo "</div>";
 
             return ob_get_clean();
 		}else{

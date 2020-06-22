@@ -2,10 +2,8 @@
 /* CSS Document */
 
 
-.user-verification{}
 .user-verification {
-    background: #eeeeee none repeat scroll 0 0;
-    padding: 20px;
+
 }
 
 .user-verification .wrong-key {

@@ -369,7 +369,7 @@ function uv_filter_check_activation() {
 	
 	$uv_message_invalid_key = get_option( 'uv_message_invalid_key' );
 	if( empty( $uv_message_invalid_key ) ) 
-	$uv_message_invalid_key = __( 'Invalid activation Key', 'user-verification' );
+	$uv_message_invalid_key = __( 'Invalid activation key', 'user-verification' );
 	
 	$uv_message_key_expired = get_option( 'uv_message_key_expired' );
 	if( empty( $uv_message_key_expired ) ) 
@@ -472,7 +472,7 @@ function uv_filter_check_activation() {
 				
             endif;
         }
-        else $html.= "<i class='fas fa-exclamation-triangle'></i> $uv_message_invalid_key";
+        //else $html.= "<i class='fas fa-exclamation-triangle'></i> $uv_message_invalid_key";
     
 
 		$html.= '</div>';
