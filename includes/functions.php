@@ -132,7 +132,8 @@ function user_verification_is_username_blocked($username){
     $user_verification_enable_block_username 	= get_option('user_verification_enable_block_username');
     $uv_settings_blocked_username 				= get_option('uv_settings_blocked_username');
 
-    if( $user_verification_enable_block_username == "yes" ):
+    if( $user_verification_enable_block_username == "yes" && !empty($uv_settings_blocked_username) ):
+
         foreach( $uv_settings_blocked_username as $blocked ){
             $status = preg_match("/$blocked/", $username);
             if($status == 1):

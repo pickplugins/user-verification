@@ -54,6 +54,7 @@ function mepr_validate_signup_uv( $errors ) {
 
     return $errors;
 }
+
 add_filter( 'mepr-validate-signup', 'mepr_validate_signup_uv' );
 
 

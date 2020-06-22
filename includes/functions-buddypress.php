@@ -6,30 +6,6 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-function lelandf_stop_signup_spam_mepr( $errors ) {
-    $email = is_email( $_POST['user_email'] ) ? $_POST['user_email'] : false;
-
-    $errors[] = __( 'Sorry, but something went wrong. Please contact us for further assistance.', 'stop-signup-spam' );
-
-    return $errors;
-}
-add_filter( 'mepr-validate-signup', 'lelandf_stop_signup_spam_mepr' );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // add the column data for each row
 function bp_members_signup_columns_uv( $arr ) {
 
