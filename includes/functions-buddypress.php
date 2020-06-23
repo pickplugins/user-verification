@@ -85,7 +85,10 @@ add_action( "bp_core_signup_user", "bp_core_signup_user_uv", 10, 5 );
 // add the column data for each row
 function bp_members_signup_columns_uv( $arr ) {
 
-    $arr['uv_bp'] = __('Verification Status', 'user-verification');
+    if(!is_multisite()){
+        $arr['uv_bp'] = __('Verification Status', 'user-verification');
+
+    }
 
     return $arr;
 
@@ -94,7 +97,30 @@ add_filter( "bp_members_signup_columns", "bp_members_signup_columns_uv", 10 );
 
 function bp_members_signup_custom_column_uv_bp( $val, $column_name, $signup_object ) {
 
-    $user_id = $signup_object->id;
+    error_log(serialize($signup_object));
+
+    $id = $signup_object->id;
+
+    global $wpdb;
+
+    if(is_multisite()){
+        $table = $wpdb->base_prefix . "signups";
+        $meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE signup_id = %s", $id ) );
+
+    }else{
+        $table = $wpdb->prefix . "bp_xprofile_data";
+        $meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE id = %s", $id ) );
+
+    }
+
+
+
+    //var_dump($table);
+    //var_dump($id);
+
+    $user_id = isset($meta_data->user_id) ? $meta_data->user_id : '';
+
+    //var_dump($user_id);
 
     $this_user		= get_user_by( 'id', $user_id );
 
