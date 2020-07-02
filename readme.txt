@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 5.4
-	Stable tag: 1.0.39
+	Stable tag: 1.0.40
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,8 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
+= 1.0.40 =
+* 2020-07-02 fix - email enable issue fixed.
 
 = 1.0.39 =
 * 2020-06-22 add - MemberPress plugin integration added

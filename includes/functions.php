@@ -782,14 +782,11 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		$email_body 		= strtr( $message_data['html'], $parametar_vars );
 		$email_from 		= strtr( $message_data['email_from'], $parametar_vars );	
 		$email_from_name 	= strtr( $message_data['email_from_name'], $parametar_vars );				
-		$enable 			= strtr( $message_data['enable'], $parametar_vars );	
-			
-		// wp_update_post( array(
-			// 'ID'	=> 1,
-			// 'post_content' => $email_body,
-		// ) );
-		
-		$headers = "";
+		$enable 			=  isset($message_data['enable']) ? $message_data['enable'] : '';
+
+        if( $enable == 'no' ) return false;
+
+        $headers = "";
 		$headers .= "From: ".$email_from_name." <".$email_from."> \r\n";
 		$headers .= "Bcc: ".$email_to." \r\n";		
 		$headers .= "MIME-Version: 1.0\r\n";
