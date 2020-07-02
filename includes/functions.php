@@ -389,7 +389,7 @@ function uv_filter_check_activation() {
 	
     $html = '<div class="user-verification check">';
 
-	if( isset( $_GET['activation_key'] ) && !empty($_GET['activation_key']) ){
+	if( isset( $_GET['activation_key'] ) ){
 		$activation_key = sanitize_text_field($_GET['activation_key']);
 		global $wpdb;
 		$table = $wpdb->prefix . "usermeta";

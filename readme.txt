@@ -20,6 +20,14 @@ Protect your website from spam user and stop instant access by using spam email 
 * [Support](https://www.pickplugins.com/support/?ref=wordpress.org)
 * [Documentation](https://pickplugins.com/documentation/user-verification/?ref=wordpress.org)
 
+### 3rd Party Plugins
+
+* WooCommerce
+* Ultimate Member
+* Paid Memberships Pro
+* MemberPress
+
+
 
 ### Plugin Features
 
