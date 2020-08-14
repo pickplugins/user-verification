@@ -14,7 +14,7 @@
 
 Protect your website from spam user and stop instant access by using spam email address, by this plugin user will need to verify their email before login to your website.
 
-### User Verification by [http://www.pickplugins.com](http://www.pickplugins.com)
+### User Verification by [https://www.pickplugins.com](https://www.pickplugins.com)
 
 * [Donate](https://www.pickplugins.com/item/user-verification/?ref=wordpress.org)
 * [Support](https://www.pickplugins.com/support/?ref=wordpress.org)
@@ -58,7 +58,7 @@ Your site user will automatically logged to account just after verified account 
 
 <strong>Translation</strong>
 
-Plugin is translation ready , please find the 'en.po' for default translation file under 'languages' folder and add your own translation. you can also contribute in translation, please contact us http://www.pickplugins.com/contact/
+Plugin is translation ready , please find the 'en.po' for default translation file under 'languages' folder and add your own translation. you can also contribute in translation, please contact us https://www.pickplugins.com/contact/
 
 
 
