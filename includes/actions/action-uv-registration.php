@@ -4,6 +4,7 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access 
 
 
+
 	add_action( 'user_register', 'uv_action_user_register_function', 30 );
 
 	if ( ! function_exists( 'uv_action_user_register_function' ) ) {
