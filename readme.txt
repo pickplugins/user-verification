@@ -86,6 +86,11 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
+
+= 1.0.41 =
+* 2020-07-02 update - User Verification menu moved under default Users menu
+
+
 = 1.0.40 =
 * 2020-07-02 fix - email enable issue fixed.
 

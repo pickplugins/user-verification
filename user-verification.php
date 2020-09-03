@@ -76,8 +76,12 @@ class UserVerification{
 
         require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
 		require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings.php');
-		require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');
-	}
+        require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');
+        require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings-tabs.php');
+        require_once( UV_PLUGIN_DIR . 'includes/settings-hook.php');
+
+
+    }
 	
 	public function uv_define_constants() {
 
@@ -86,7 +90,13 @@ class UserVerification{
 		$this->_define('UV_PLUGIN_NAME', __('User Verification','user-verification') );
 		$this->_define('UV_CONTACT_URL', 'http://pickplugins.com/contact' );
 
-	}
+        $this->_define('user_verification_plugin_name', __('User Verification','user-verification') );
+        $this->_define('user_verification_plugin_url', plugins_url('/', __FILE__)  );
+        $this->_define('user_verification_plugin_dir', plugin_dir_path( __FILE__ ) );
+
+
+
+    }
 	
 	private function _define( $name, $value ) {
 		if( $name && $value )
@@ -109,8 +119,10 @@ class UserVerification{
 	}
 
 	public function uv_admin_scripts(){
-		
-		wp_enqueue_script('jquery');
+
+        $screen = get_current_screen();
+
+        wp_enqueue_script('jquery');
 		wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-accordion');
 		
@@ -124,12 +136,31 @@ class UserVerification{
 			'text_updateing' => __( 'Updating user', 'user-verification' ),
 		));
 							
-		wp_enqueue_style('uv_admin_style', UV_PLUGIN_URL.'assets/admin/css/style.css');
-        wp_enqueue_style('jquery-ui', UV_PLUGIN_URL.'assets/global/css/jquery-ui.css');
+		wp_enqueue_style('uv_admin_style', user_verification_plugin_url.'assets/admin/css/style.css');
+        wp_enqueue_style('jquery-ui', user_verification_plugin_url.'assets/global/css/jquery-ui.css');
 
-		
-		// Global
-		wp_enqueue_style('fontawesome', UV_PLUGIN_URL.'assets/global/css/fontawesome.min.css');
+        wp_register_style('font-awesome-4', user_verification_plugin_url.'assets/global/css/font-awesome-4.css');
+        wp_register_style('font-awesome-5', user_verification_plugin_url.'assets/global/css/font-awesome-5.css');
+
+        wp_register_style('settings-tabs', user_verification_plugin_url.'assets/settings-tabs/settings-tabs.css');
+        wp_register_script('settings-tabs', user_verification_plugin_url.'assets/settings-tabs/settings-tabs.js'  , array( 'jquery' ));
+
+        // Global
+
+        //var_dump($screen);
+
+        if ($screen->id == 'users_page_user_verification'){
+
+
+            wp_enqueue_style('select2');
+            wp_enqueue_script('select2');
+
+            wp_enqueue_style('font-awesome-5');
+
+
+            $settings_tabs_field = new settings_tabs_field();
+            $settings_tabs_field->admin_scripts();
+        }
 
 	}
 } 
