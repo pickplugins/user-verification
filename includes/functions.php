@@ -435,7 +435,6 @@ function uv_filter_check_activation() {
 				
 				if(($user_verification_redirect_verified != 'none')):
 					$html.= "<script>jQuery(document).ready(function($){window.location.href = '$redirect_page_url';})</script>";
-				else:
 				endif;
 			}
 		}

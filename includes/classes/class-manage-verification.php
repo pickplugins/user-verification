@@ -4,9 +4,8 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 class class_user_verification_manage_verification{
 	
 	public function __construct(){
-        add_action('init', array( $this, 'check_subscriber' ));
+        //add_action('init', array( $this, 'check_subscriber' ));
 
-        add_action('init', array($this, 'email_verification_status'));
 
         add_action('wp_footer', array($this, 'check_email_verification'));
 
@@ -15,40 +14,79 @@ class class_user_verification_manage_verification{
 
 
 
-    public function check_subscriber(){
-
-        if (isset($_REQUEST['mail_picker_action']) && trim($_REQUEST['mail_picker_action']) == 'check_subscriber') {
-
-            $response = array();
-
-
-            echo json_encode($response);
-            exit(0);
-        }
-
-    }
-
-    public function email_verification_status(){
-
-        if (isset($_REQUEST['user_verification_action']) && trim($_REQUEST['user_verification_action']) == 'verification_status') {
-
-        }
-
-        var_dump('Hello');
-        var_dump('Hello');
-        var_dump('Hello');
-        var_dump('Hello');
-
-
-    }
-
 	public function check_email_verification(){
 
         if (isset($_REQUEST['user_verification_action']) && trim($_REQUEST['user_verification_action']) == 'email_verification') {
 
             $activation_key = isset($_REQUEST['activation_key']) ? sanitize_text_field($_REQUEST['activation_key']) : '';
+            $user_verification_settings = get_option('user_verification_settings');
+
+            $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
+            $redirect_after_verification = isset($user_verification_settings['email_verification']['redirect_after_verification']) ? $user_verification_settings['email_verification']['redirect_after_verification'] : '';
+            $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+
+            $redirect_page_url = get_permalink($redirect_after_verification);
+
 
             //var_dump($verification_key);
+
+            $jsData = array();
+
+            global $wpdb;
+            $table = $wpdb->prefix . "usermeta";
+            $meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s", $activation_key ) );
+
+            if(!empty($meta_data)){
+                $jsData['is_valid_key'] = 'yes';
+
+                $user_activation_status = get_user_meta( $meta_data->user_id, 'user_activation_status', true );
+
+
+                if($user_activation_status != 0){
+                    $jsData['activation_status'] = 0;
+                    $jsData['status_icon'] = '<i class="fas fa-user-times"></i>';
+                    $jsData['status_text'] = __('Sorry! Verification failed.','');
+
+                }else{
+                    update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
+                    $jsData['activation_status'] = 1;
+                    $jsData['status_icon'] = '<i class="far fa-check-circle"></i>';
+                    $jsData['status_text'] = __('Thanks for verified','');
+
+
+                    $user_data = get_userdata( $meta_data->user_id );
+                    uv_mail( $user_data->user_email, array( 'action' => 'email_confirmed', 'user_id' => $meta_data->user_id, ) );
+
+                    if( $login_after_verification ==  "yes"  ){
+
+                        $jsData['login_after_verify'] = 'yes';
+
+
+                        $user = get_user_by( 'id', $meta_data->user_id );
+
+                        wp_set_current_user( $meta_data->user_id, $user->user_login );
+                        $redirect_page_url = $redirect_page_url.'?uv_autologin=yes&key='.$activation_key;
+
+                    }
+
+                    if(($redirect_after_verification != 'none')):
+
+                        $jsData['is_redirect'] = 'yes';
+                        $jsData['redirect_url'] = $redirect_page_url;
+
+
+                    endif;
+
+
+                }
+
+            }else{
+                $jsData['is_valid_key'] = 'no';
+                $jsData['is_valid_text'] = __('Sorry, activation key is not valied');
+                $jsData['is_valid_icon'] = '<i class="far fa-times-circle"></i>';
+
+            }
+
 
             ?>
             <div class="check-email-verification">
@@ -62,16 +100,57 @@ class class_user_verification_manage_verification{
 
                     </div>
 
-                    <div class="redirect">
-                        <p>You will redirect after verification</p>
-                        <a href="#">Click if not redirect automatically</a>
-                    </div>
+                    <?php if(!empty($redirect_after_verification) && $redirect_after_verification != 'none'): ?>
+                        <div class="redirect">
+                            <p>You will redirect after verification</p>
+                            <a href="<?php echo $redirect_page_url; ?>">Click if not redirect automatically</a>
+                        </div>
+                    <?php endif; ?>
 
                 </div>
             </div>
 
             <script>
                 jQuery(document).ready(function($) {
+
+                    jsData = <?php echo json_encode($jsData); ?>
+
+                    console.log(jsData);
+                    activation_status = jsData['activation_status'];
+                    status_icon = jsData['status_icon'];
+                    status_text = jsData['status_text'];
+                    redirect_url = jsData['redirect_url'];
+                    is_redirect = jsData['is_redirect'];
+                    is_valid_key = jsData['is_valid_key'];
+
+                    setTimeout(function(){
+
+                        if(is_valid_key == 'yes'){
+                            $('.status-icon').html(status_icon);
+                            $('.status-text').html(status_text);
+
+                            if(is_redirect == 'yes'){
+                                //window.location.href = redirect_url;
+                            }
+                        }else{
+                            is_valid_icon = jsData['is_valid_icon'];
+                            is_valid_text = jsData['is_valid_text'];
+
+                            $('.status-icon').html(is_valid_icon);
+                            $('.status-text').html(is_valid_text);
+
+                            $('.redirect').fadeOut();
+
+                        }
+
+
+
+
+
+
+                }, 2000);
+
+
 
                 })
             </script>
