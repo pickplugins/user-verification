@@ -243,6 +243,232 @@ function user_verification_settings_content_email_verification(){
 
 
 
+add_action('user_verification_settings_content_email_templates', 'user_verification_settings_content_email_templates');
+
+if(!function_exists('user_verification_settings_content_email_templates')) {
+    function user_verification_settings_content_email_templates(){
+
+        $settings_tabs_field = new settings_tabs_field();
+        $class_license_manager_emails = new class_uv_emails();
+        $templates_data_default = $class_license_manager_emails->email_templates_data();
+        $email_templates_parameters = $class_license_manager_emails->email_templates_parameters();
+        $user_verification_settings = get_option('user_verification_settings');
+
+
+        $logo_url = isset($user_verification_settings['email_templates']['logo_url']) ? $user_verification_settings['email_templates']['logo_url'] : '';
+        $templates_data_saved = isset($user_verification_settings['email_templates']['email_templates_data']) ? $user_verification_settings['email_templates']['email_templates_data'] : $templates_data_default;
+
+
+//
+        //var_dump($templates_data_saved);
+
+
+        ?>
+        <div class="section">
+            <div class="section-title"><?php echo __('Email settings', 'job-board-manager'); ?></div>
+            <p class="description section-description"><?php echo __('Customize email settings.', 'job-board-manager'); ?></p>
+
+            <?php
+
+            $args = array(
+                'id'		=> 'logo_url',
+                'parent'		=> 'user_verification_settings[email_templates]',
+                'title'		=> __('Email logo','job-board-manager'),
+                'details'	=> __('Email logo URL to display on mail.','job-board-manager'),
+                'type'		=> 'media',
+                'value'		=> $logo_url,
+                'default'		=> '',
+                'placeholder'		=> '',
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+
+
+            ob_start();
+
+
+            ?>
+            <div class="templates_editor expandable">
+                <?php
+
+
+
+
+                if(!empty($templates_data_default))
+                    foreach($templates_data_default as $key=> $templates){
+
+                        $templates_data_display = isset($templates_data_saved[$key]) ? $templates_data_saved[$key] : $templates;
+
+
+                        $email_to = isset($templates_data_display['email_to']) ? $templates_data_display['email_to'] : '';
+                        $email_from = isset($templates_data_display['email_from']) ? $templates_data_display['email_from'] : '';
+                        $email_from_name = isset($templates_data_display['email_from_name']) ? $templates_data_display['email_from_name'] : '';
+                        $enable = isset($templates_data_display['enable']) ? $templates_data_display['enable'] : '';
+                        $description = isset($templates_data_display['description']) ? $templates_data_display['description'] : '';
+
+                        $parameters = isset($email_templates_parameters[$key]['parameters']) ? $email_templates_parameters[$key]['parameters'] : array();
+
+
+                        //echo '<pre>'.var_export($enable).'</pre>';
+
+                        ?>
+                        <div class="item template <?php echo $key; ?>">
+                            <div class="header">
+                                <span title="<?php echo __('Click to expand', 'job-board-manager'); ?>" class="expand ">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-compress"></i>
+                                </span>
+
+                                <?php
+                                if($enable =='yes'):
+                                    ?>
+                                    <span title="<?php echo __('Enable', 'job-board-manager'); ?>" class="is-enable ">
+                                        <i class="fa fa-check-square"></i>
+                                    </span>
+                                <?php
+                                else:
+                                    ?>
+                                    <span title="<?php echo __('Disabled', 'job-board-manager'); ?>" class="is-enable ">
+                                        <i class="fa fa-times-circle"></i>
+                                    </span>
+                                <?php
+                                endif;
+                                ?>
+                                <span class="expand"><?php echo $templates['name']; ?></span>
+
+                            </div>
+                            <input type="hidden" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][name]" value="<?php echo $templates['name']; ?>" />
+                            <div class="options">
+                                <div class="description"><?php echo $description; ?></div><br/><br/>
+
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Enable?', 'job-board-manager'); ?></div>
+                                    <div class="field-input">
+                                        <select name="user_verification_settings[email_templates_data][<?php echo $key; ?>][enable]" >
+                                            <option <?php echo selected($enable,'yes'); ?> value="yes" ><?php echo __('Yes', 'job-board-manager'); ?></option>
+                                            <option <?php echo selected($enable,'no'); ?>  value="no" ><?php echo __('No', 'job-board-manager'); ?></option>
+                                        </select>
+                                        <p class="description"><?php echo __('Enable or disable this email notification.', 'job-board-manager'); ?></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Email To(Bcc)', 'job-board-manager'); ?></div>
+                                    <div class="field-input">
+                                        <input placeholder="hello_1@hello.com,hello_2@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_to]" value="<?php echo $email_to; ?>" />
+                                        <p class="description"><?php echo __('Email send to(copy)', 'job-board-manager'); ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Email from name', 'job-board-manager'); ?></div>
+                                    <div class="field-input">
+                                        <input placeholder="hello_1@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
+                                        <p class="description"><?php echo __('Email send from name', 'job-board-manager'); ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Email from', 'job-board-manager'); ?></div>
+                                    <div class="field-input">
+                                        <input placeholder="hello_1@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_from]" value="<?php echo $email_from; ?>" />
+                                        <p class="description"><?php echo __('Email send from', 'job-board-manager'); ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Email Subject', 'job-board-manager'); ?></div>
+                                    <div class="field-input">
+                                        <input type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][subject]" value="<?php echo $templates_data_display['subject']; ?>" />
+                                        <p class="description"><?php echo __('Write email subject', 'job-board-manager'); ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Email Body', 'job-board-manager'); ?></div>
+                                    <div class="field-input">
+                                        <?php
+
+                                        wp_editor( $templates_data_display['html'], $key, $settings = array('textarea_name'=>'user_verification_settings[email_templates_data]['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'400px', ) );
+
+                                        ?>
+                                        <p class="description"><?php echo __('Write email body', 'job-board-manager'); ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Parameter', 'job-board-manager'); ?></div>
+                                    <div class="field-input">
+
+                                        <ul>
+
+
+                                            <?php
+
+                                            if(!empty($parameters)):
+                                                foreach ($parameters as $parameterId=>$parameter):
+                                                    ?>
+                                                    <li><code><?php echo $parameterId; ?></code> => <?php echo $parameter; ?></li>
+                                                <?php
+                                                endforeach;
+                                            endif;
+                                            ?>
+                                        </ul>
+
+                                        <p class="description"><?php echo __('Available parameter for this email template', 'job-board-manager'); ?></p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <?php
+
+                    }
+
+
+                ?>
+
+
+            </div>
+            <?php
+
+
+            $html = ob_get_clean();
+
+
+
+
+            $args = array(
+                'id'		=> 'license_manager_email_templates',
+                //'parent'		=> '',
+                'title'		=> __('Email templates','job-board-manager'),
+                'details'	=> __('Customize email templates.','job-board-manager'),
+                'type'		=> 'custom_html',
+                //'multiple'		=> true,
+                'html'		=> $html,
+            );
+
+            $settings_tabs_field->generate_field($args);
+
+
+
+
+            ?>
+
+
+        </div>
+        <?php
+
+
+    }
+}
+
+
 
 
 add_action('user_verification_settings_content_woocommerce', 'user_verification_settings_content_woocommerce');

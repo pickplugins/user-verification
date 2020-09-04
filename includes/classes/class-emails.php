@@ -9,10 +9,41 @@ class class_uv_emails{
 		//add_action('save_post', array($this, 'meta_boxes_job_save'));
 
 		}
-		
-		
-		
-	public function uv_send_email($email_data){
+
+    public function send_email($email_data){
+
+
+
+        $email_to = isset($email_data['email_to']) ? $email_data['email_to'] : '';
+        $email_bcc = isset($email_data['email_bcc']) ? $email_data['email_bcc'] : '';
+
+        $email_from = isset($email_data['email_from']) ? $email_data['email_from'] : get_option('admin_email');
+        $email_from_name = isset($email_data['email_from_name']) ? $email_data['email_from_name'] : get_bloginfo('name');
+        $subject = isset($email_data['subject']) ? $email_data['subject'] : '';
+        $email_body = isset($email_data['html']) ? $email_data['html'] : '';
+        $attachments = isset($email_data['attachments']) ? $email_data['attachments'] : '';
+
+
+        $headers = array();
+        $headers[] = "From: ".$email_from_name." <".$email_from.">";
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-Type: text/html; charset=UTF-8";
+        if(!empty($email_bcc)){
+            $headers[] = "Bcc: ".$email_bcc;
+        }
+        $headers = apply_filters('job_bm_mail_headers', $headers);
+
+        $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
+
+        return $status;
+
+    }
+
+
+
+
+
+    public function uv_send_email($email_data){
 
 		$email_to = $email_data['email_to'];	
 		$email_from = $email_data['email_from'];			
@@ -35,7 +66,7 @@ class class_uv_emails{
 		
 		
 		
-	public function uv_email_templates_data(){
+	public function email_templates_data(){
 		
 		$templates_data_html = array();
 		
@@ -84,7 +115,7 @@ class class_uv_emails{
 		
 
 
-	public function uv_email_templates_parameters(){
+	public function email_templates_parameters(){
 
         $parameters['site_parameter'] = array(
             'title'=>__('Site Parameters','user-verification'),

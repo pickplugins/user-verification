@@ -70,7 +70,7 @@ function user_verification_upgrade_settings(){
 
     $user_verification_redirect_verified =  get_option('user_verification_redirect_verified');
     $user_verification_settings['email_verification']['redirect_after_verification'] = $user_verification_redirect_verified;
-    
+
     $user_verification_login_automatically =  get_option('user_verification_login_automatically');
     $user_verification_settings['email_verification']['login_after_verification'] = $user_verification_login_automatically;
 
@@ -163,6 +163,8 @@ function user_verification_upgrade_settings(){
 
     $uv_recaptcha_wc_lostpassword_form =  get_option('uv_recaptcha_wc_lostpassword_form');
     $user_verification_settings['recaptcha']['wc_lostpassword_form'] = $uv_recaptcha_wc_lostpassword_form;
+
+    update_option('user_verification_settings', $user_verification_settings);
 
 
 }
