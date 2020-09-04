@@ -88,7 +88,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 = 1.0.41 =
+* 2020-07-04 update - re-designed settings page.
+* 2020-07-04 update - all options saved under single array
 * 2020-07-02 update - User Verification menu moved under default Users menu
+* 2020-07-04 add - daily clean activation key from user meta table
 
 
 = 1.0.40 =

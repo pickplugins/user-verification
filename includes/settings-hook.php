@@ -15,6 +15,7 @@ function user_verification_settings_content_email_verification(){
     $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
     $redirect_after_verification = isset($user_verification_settings['email_verification']['redirect_after_verification']) ? $user_verification_settings['email_verification']['redirect_after_verification'] : '';
     $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
+    $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
 
 
 
@@ -97,7 +98,7 @@ function user_verification_settings_content_email_verification(){
             'details'	=> __('You can exclude verification for these user roles to login on your site.','post-grid'),
             'type'		=> 'select',
             'multiple'		=> true,
-            'value'		=> $login_after_verification,
+            'value'		=> $exclude_user_roles,
             'default'		=> array(),
             'args'		=> uv_all_user_roles(),
 

@@ -51,6 +51,8 @@ class uv_class_column_users{
 			if( $user_activation_status == 0 ) {
 				
 				echo "<span class='uv_action uv_approve' user_id='$user_id' do='approve'>".__('Approve now', 'user-verification')."</span>";
+                echo " | <span class='uv_action uv_resend_verification' user_id='$user_id' do='resend'>".__('Resend verification', 'user-verification')."</span>";
+
 			}
 			
 			if( $user_activation_status == 1 ) {

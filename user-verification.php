@@ -28,19 +28,69 @@ class UserVerification{
         add_action( 'init', array( $this, 'uv_declare_classes' ));
 
 
-		add_action( 'init', array( $this, 'textdomain' ));
-
+		add_action( 'init', array( $this, '_textdomain' ));
+        register_activation_hook( __FILE__, array( $this, '_activation' ) );
+        register_deactivation_hook(__FILE__, array($this, '_deactivation'));
+        //add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) );
 
 	}
 
 
-	public function textdomain() {
+	public function _textdomain() {
 
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'user-verification' );
 		load_textdomain('user-verification', WP_LANG_DIR .'/user-verification/user-verification-'. $locale .'.mo' );
 
 		load_plugin_textdomain( 'user-verification', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
+
+    function cron_schedules( $schedules ){
+
+        $schedules['1minute'] = array(
+            'interval'  => 60,
+            'display'   => __( '1 Minute', 'textdomain' )
+        );
+
+        $schedules['5minute'] = array(
+            'interval'  => 300,
+            'display'   => __( '5 Minute', 'textdomain' )
+        );
+
+        $schedules['10minute'] = array(
+            'interval'  => 600,
+            'display'   => __( '10 Minute', 'textdomain' )
+        );
+
+
+
+        return $schedules;
+    }
+
+
+    public function _activation(){
+
+
+        if (!wp_next_scheduled('user_verification_clean_user_meta')) {
+            wp_schedule_event(time(), 'daily', 'user_verification_clean_user_meta');
+        }
+
+
+        do_action('user_verification_activation');
+
+    }
+
+
+    public function _deactivation(){
+
+        wp_clear_scheduled_hook('user_verification_clean_user_meta');
+
+
+        /*
+         * Custom action hook for plugin deactivation.
+         * Action hook: license_manager_deactivation
+         * */
+        do_action('user_verification_deactivation');
+    }
 
 
 	public function uv_loading_functions() {
@@ -53,6 +103,7 @@ class UserVerification{
 
         require_once( UV_PLUGIN_DIR . 'includes/functions-buddypress.php');
         require_once( UV_PLUGIN_DIR . 'includes/3rd-party/functions-memberpress.php');
+        require_once( UV_PLUGIN_DIR . 'includes/functions-cron-hook.php');
 
 	}
 	

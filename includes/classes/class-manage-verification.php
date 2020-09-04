@@ -132,6 +132,7 @@ class class_user_verification_manage_verification{
                             if(is_redirect == 'yes'){
                                 //window.location.href = redirect_url;
                             }
+
                         }else{
                             is_valid_icon = jsData['is_valid_icon'];
                             is_valid_text = jsData['is_valid_text'];
@@ -147,8 +148,13 @@ class class_user_verification_manage_verification{
 
 
 
-
                 }, 2000);
+
+
+                    setTimeout(function(){
+                        $('.check-email-verification').fadeOut('slow');
+
+                    }, 4000);
 
 
 
