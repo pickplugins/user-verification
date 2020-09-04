@@ -164,6 +164,15 @@ function user_verification_upgrade_settings(){
     $uv_recaptcha_wc_lostpassword_form =  get_option('uv_recaptcha_wc_lostpassword_form');
     $user_verification_settings['recaptcha']['wc_lostpassword_form'] = $uv_recaptcha_wc_lostpassword_form;
 
+
+
+    $uv_email_templates_data =  get_option('uv_email_templates_data');
+    $user_verification_settings['email_templates_data'] = $uv_email_templates_data;
+
+
+
+
+
     update_option('user_verification_settings', $user_verification_settings);
 
 
