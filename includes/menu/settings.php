@@ -8,7 +8,7 @@ $user_verification_settings_tab = array();
 
 $user_verification_settings_tab[] = array(
     'id' => 'email_verification',
-    'title' => sprintf(__('%s Email verification','user-verification'),'<i class="far fa-envelope"></i>'),
+    'title' => sprintf(__('%s Email Verification','user-verification'),'<i class="far fa-envelope"></i>'),
     'priority' => 1,
     'active' => ($current_tab == 'email_verification') ? true : false,
 );
@@ -26,6 +26,14 @@ $user_verification_settings_tab[] = array(
     'title' => sprintf(__('%s reCAPTCHA','user-verification'),'<i class="fas fa-robot"></i>'),
     'priority' => 10,
     'active' => ($current_tab == 'recaptcha') ? true : false,
+);
+
+
+$user_verification_settings_tab[] = array(
+    'id' => 'email_templates',
+    'title' => sprintf(__('%s Email Templates','user-verification'),'<i class="fas fa-envelope-open-text"></i>'),
+    'priority' => 10,
+    'active' => ($current_tab == 'email_templates') ? true : false,
 );
 
 

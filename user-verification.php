@@ -71,6 +71,8 @@ class UserVerification{
 	}
 	
 	public function uv_declare_classes() {
+        require_once( UV_PLUGIN_DIR . 'includes/classes/class-manage-verification.php');
+
 
         require_once( UV_PLUGIN_DIR . 'includes/classes/class-wp-admin-menu.php');
 
