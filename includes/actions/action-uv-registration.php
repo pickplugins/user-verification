@@ -9,12 +9,12 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 	if ( ! function_exists( 'uv_action_user_register_function' ) ) {
 		function uv_action_user_register_function( $user_id ) {
 
-			$permalink_structure = get_option('permalink_structure');
+            $permalink_structure = get_option('permalink_structure');
+            $user_verification_settings = get_option('user_verification_settings');
+            $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+            $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
 
-            $user_verification_verification_page = get_option('user_verification_verification_page');
-            $uv_exclude_user_roles = get_option('uv_exclude_user_roles');
-
-            $verification_page_url = get_permalink($user_verification_verification_page);
+            $verification_page_url = get_permalink($verification_page_id);
 
 			$user_activation_key =  md5(uniqid('', true) );
 			
@@ -29,8 +29,8 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 			$user_roles = !empty($user_data->roles) ? $user_data->roles : array();
 
 
-			if(!empty($uv_exclude_user_roles))
-			foreach ($uv_exclude_user_roles as $role):
+			if(!empty($exclude_user_roles))
+			foreach ($exclude_user_roles as $role):
 
                 if(in_array($role, $user_roles)){
                     //update_option('uv_custom_option', $role);

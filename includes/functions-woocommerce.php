@@ -107,8 +107,11 @@ function uv_woocommerce_registration_protect_blocked_domain( $validation_error, 
 
 function user_verification_woocommerce_checkout_order_processed( $order_id, $posted_data, $order ){
 
-	$uv_wc_disable_auto_login = get_option('uv_wc_disable_auto_login','no');
-	if ( is_user_logged_in() && $uv_wc_disable_auto_login=='yes' ) {
+    $user_verification_settings = get_option('user_verification_settings');
+    $disable_auto_login = isset($user_verification_settings['woocommerce']['disable_auto_login']) ? $user_verification_settings['woocommerce']['disable_auto_login'] : 'yes';
+
+
+	if ( is_user_logged_in() && $disable_auto_login=='yes' ) {
 		//wp_logout();
 	}
 
@@ -118,15 +121,20 @@ function user_verification_woocommerce_checkout_order_processed( $order_id, $pos
 add_action( 'woocommerce_thankyou', 'user_verification_woocommerce_thankyou');
 
 function user_verification_woocommerce_thankyou( $order_id ){
-    $order = new WC_Order( $order_id );
-    $uv_wc_redirect_after_payment = get_option('uv_wc_redirect_after_payment', wc_get_page_id('myaccount'));
 
-    if($uv_wc_redirect_after_payment == 'none'){
+    $user_verification_settings = get_option('user_verification_settings');
+    $disable_auto_login = isset($user_verification_settings['woocommerce']['disable_auto_login']) ? $user_verification_settings['woocommerce']['disable_auto_login'] : 'yes';
+    $redirect_after_payment = isset($user_verification_settings['woocommerce']['redirect_after_payment']) ? $user_verification_settings['woocommerce']['redirect_after_payment'] : wc_get_page_id('myaccount');
+
+
+    $order = new WC_Order( $order_id );
+
+    if($redirect_after_payment == 'none'){
         return;
     }
 
 
-    $url = get_permalink($uv_wc_redirect_after_payment).'?uv_check=true';
+    $url = get_permalink($redirect_after_payment).'?uv_check=true';
 
     if ( $order->status != 'failed' ) {
         wp_redirect($url);
@@ -143,10 +151,12 @@ add_filter( 'woocommerce_registration_redirect', 'user_verification_woocommerce_
 
 function user_verification_woocommerce_registration_redirect(){
 
-	$uv_wc_disable_auto_login = get_option('uv_wc_disable_auto_login','no');
+    $user_verification_settings = get_option('user_verification_settings');
+    $disable_auto_login = isset($user_verification_settings['woocommerce']['disable_auto_login']) ? $user_verification_settings['woocommerce']['disable_auto_login'] : 'yes';
 
 
-	if ( is_user_logged_in() && $uv_wc_disable_auto_login=='yes' ) {
+
+	if ( is_user_logged_in() && $disable_auto_login=='yes' ) {
 
 	    global $current_user;
 		//$current_user = wp_get_current_user();
@@ -172,7 +182,10 @@ function user_verification_woocommerce_registration_redirect(){
 
 function user_verification_wc_registration_message(){
 
-	$message_after_registration = get_option('uv_wc_message_after_registration',__('Registration success, please check mail for details.', 'user-verification'));
+    $user_verification_settings = get_option('user_verification_settings');
+    $message_after_registration = isset($user_verification_settings['woocommerce']['message_after_registration']) ? $user_verification_settings['woocommerce']['message_after_registration'] : __('Registration success, please check mail for details.', 'user-verification');
+
+
 
 	$not_approved_message = '<p class="registration">'.__('Send in your registration application today!<br /> NOTE: Your account will be held for moderation and you will be unable to login until it is approved.','user-verification').'</p>';
 	if( isset($_REQUEST['approved']) ){

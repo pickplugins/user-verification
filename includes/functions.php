@@ -129,12 +129,16 @@ add_action('wp_ajax_nopriv_uv_ajax_approve_user_manually', 'uv_ajax_approve_user
 function user_verification_is_username_blocked($username){
 
     $response = false;
-    $user_verification_enable_block_username 	= get_option('user_verification_enable_block_username');
-    $uv_settings_blocked_username 				= get_option('uv_settings_blocked_username');
+    $user_verification_settings = get_option('user_verification_settings');
+    $enable_username_block = isset($user_verification_settings['spam_protection']['enable_username_block']) ? $user_verification_settings['spam_protection']['enable_username_block'] : 'yes';
+    $blocked_username = isset($user_verification_settings['spam_protection']['blocked_username']) ? $user_verification_settings['spam_protection']['blocked_username'] : array();
 
-    if( $user_verification_enable_block_username == "yes" && !empty($uv_settings_blocked_username) ):
 
-        foreach( $uv_settings_blocked_username as $blocked ){
+
+
+    if( $enable_username_block == "yes" && !empty($blocked_username) ):
+
+        foreach( $blocked_username as $blocked ){
             $status = preg_match("/$blocked/", $username);
             if($status == 1):
                 $response = true;
@@ -167,24 +171,24 @@ add_shortcode('user_verification_is_emaildomain_blocked','user_verification_is_e
 
 function user_verification_is_emaildomain_blocked($user_email){
 
+    $user_verification_settings = get_option('user_verification_settings');
+    $enable_domain_block = isset($user_verification_settings['spam_protection']['enable_domain_block']) ? $user_verification_settings['spam_protection']['enable_domain_block'] : 'yes';
+    $blocked_domain = isset($user_verification_settings['spam_protection']['blocked_domain']) ? $user_verification_settings['spam_protection']['blocked_domain'] : array();
 
 
     $response = false;
-    $user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain', 'no');
-    $uv_settings_blocked_domain 				= get_option('uv_settings_blocked_domain', array());
-    $uv_settings_blocked_domain = !empty($uv_settings_blocked_domain) ? $uv_settings_blocked_domain : array();
 
-    $uv_settings_blocked_domain                 = array_filter($uv_settings_blocked_domain);
+    $blocked_domain                 = array_filter($blocked_domain);
 
 
-    if($user_verification_enable_block_domain == "yes"){
+    if($enable_domain_block == "yes"){
 
         $email_parts = explode('@', $user_email);
         $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
 
-        if (!empty($uv_settings_blocked_domain)  ){
+        if (!empty($blocked_domain)  ){
 
-            if(in_array( $email_domain, $uv_settings_blocked_domain )){
+            if(in_array( $email_domain, $blocked_domain )){
                 $response = true;
             }else{
                 $response = false;
@@ -207,22 +211,25 @@ function user_verification_is_emaildomain_allowed($user_email){
 
 
     $response = true;
-    $user_verification_enable_block_domain 		= get_option('user_verification_enable_block_domain', 'no');
-    $uv_settings_allowed_domain 				= get_option('uv_settings_allowed_domain', array());
-    $uv_settings_allowed_domain = !empty($uv_settings_allowed_domain) ? $uv_settings_allowed_domain : array();
-
-    $uv_settings_allowed_domain                 = array_filter($uv_settings_allowed_domain);
+    $user_verification_settings = get_option('user_verification_settings');
+    $enable_domain_block = isset($user_verification_settings['spam_protection']['enable_domain_block']) ? $user_verification_settings['spam_protection']['enable_domain_block'] : 'yes';
+    $allowed_domain = isset($user_verification_settings['spam_protection']['allowed_domain']) ? $user_verification_settings['spam_protection']['allowed_domain'] : array();
 
 
-    if($user_verification_enable_block_domain == "yes"){
+
+
+    $allowed_domain                 = array_filter($allowed_domain);
+
+
+    if($enable_domain_block == "yes"){
 
         $email_parts = explode('@', $user_email);
         $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
 
 
-        if(!empty($uv_settings_allowed_domain)){
+        if(!empty($allowed_domain)){
 
-            if(in_array( $email_domain, $uv_settings_allowed_domain )){
+            if(in_array( $email_domain, $allowed_domain )){
                 $response = true;
             }else{
                 $response = false;
@@ -297,14 +304,17 @@ add_filter( 'wp_login_errors', 'user_verification_registered_message', 10, 2 );
 
 function user_verification_registered_message( $errors, $redirect_to ) {
 
-	$user_verification_registered_message = get_option('user_verification_registered_message');
+
+    $user_verification_settings = get_option('user_verification_settings');
+    $registration_success = isset($user_verification_settings['messages']['registration_success']) ? $user_verification_settings['messages']['registration_success'] : '';
+
 
 	if( isset( $errors->errors['registered'] ) ) {
 		
 		$tmp = $errors->errors;
 
 		$old = 'Registration complete. Please check your email.';
-		$new = $user_verification_registered_message;
+		$new = $registration_success;
 
 		foreach( $tmp['registered'] as $index => $msg ){
 			if( $msg === $old )
@@ -365,28 +375,19 @@ add_action('wp_ajax_user_verification_reset_email_templates', 'user_verification
 add_action('wp_ajax_nopriv_user_verification_reset_email_templates', 'user_verification_reset_email_templates');
 	
 function uv_filter_check_activation() {
-	
-	
-	$uv_message_invalid_key = get_option( 'uv_message_invalid_key' );
-	if( empty( $uv_message_invalid_key ) ) 
-	$uv_message_invalid_key = __( 'Invalid activation key', 'user-verification' );
-	
-	$uv_message_key_expired = get_option( 'uv_message_key_expired' );
-	if( empty( $uv_message_key_expired ) ) 
-	$uv_message_key_expired = __( 'Your key is expired', 'user-verification' );
-	
-	$uv_message_verification_success = get_option( 'uv_message_verification_success' );
-	if( empty( $uv_message_verification_success ) ) 
-	$uv_message_verification_success = __( 'Your account is now verified', 'user-verification' );
-	
-	$uv_message_activation_sent = get_option( 'uv_message_activation_sent' );
-	if( empty( $uv_message_activation_sent ) ) 
-	$uv_message_activation_sent = __( 'Activation email sent, Please check latest item on email inbox', 'user-verification' );
-
-    $user_verification_login_automatically = get_option( 'user_verification_login_automatically', 'no' );
 
 
-	
+    $user_verification_settings = get_option('user_verification_settings');
+    $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+    $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
+    $redirect_after_verification = isset($user_verification_settings['email_verification']['redirect_after_verification']) ? $user_verification_settings['email_verification']['redirect_after_verification'] : '';
+
+    $invalid_key = isset($user_verification_settings['messages']['invalid_key']) ? $user_verification_settings['messages']['invalid_key'] : __( 'Invalid activation key', 'user-verification' );
+    $key_expired = isset($user_verification_settings['messages']['key_expired']) ? $user_verification_settings['messages']['key_expired'] : __( 'Your key is expired', 'user-verification' );
+    $verification_success = isset($user_verification_settings['messages']['verification_success']) ? $user_verification_settings['messages']['verification_success'] : '';
+    $activation_sent = isset($user_verification_settings['messages']['activation_sent']) ? $user_verification_settings['messages']['activation_sent'] : '';
+
+
     $html = '<div class="user-verification check">';
 
 	if( isset( $_GET['activation_key'] ) ){
@@ -395,29 +396,28 @@ function uv_filter_check_activation() {
 		$table = $wpdb->prefix . "usermeta";
 		$meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s", $activation_key ) );
 		if( empty( $meta_data ) ) {
-			$html.= "<div class='wrong-key'><i class='fas fa-times'></i> $uv_message_invalid_key</div>";
+			$html.= "<div class='wrong-key'><i class='fas fa-times'></i> $invalid_key</div>";
 		}
 		else{
 			$user_activation_status = get_user_meta( $meta_data->user_id, 'user_activation_status', true );
 			if( $user_activation_status != 0 ) {
-				$html.= "<div class='expired'><i class='far fa-calendar-times'></i> $uv_message_key_expired</div>";
+				$html.= "<div class='expired'><i class='far fa-calendar-times'></i> $key_expired</div>";
 			}
             else {
-                $user_verification_redirect_verified = get_option('user_verification_redirect_verified');
-                if($user_verification_redirect_verified=='none'){
+                if($redirect_after_verification=='none'){
 	                $redirect_page_url = '';
                 }else{
-	                $redirect_page_url = get_permalink($user_verification_redirect_verified);
+	                $redirect_page_url = get_permalink($redirect_after_verification);
                 }
 
 
-				$html.= "<div class='verified'><i class='fas fa-check-square'></i> $uv_message_verification_success</div>";
+				$html.= "<div class='verified'><i class='fas fa-check-square'></i> $verification_success</div>";
                 update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
 
                 $user_data = get_userdata( $meta_data->user_id );
                 uv_mail( $user_data->user_email, array( 'action' => 'email_confirmed', 'user_id' => $meta_data->user_id, ) );
 
-                if( $user_verification_login_automatically ==  "yes"  ){
+                if( $login_after_verification ==  "yes"  ){
 
 
 					$user = get_user_by( 'id', $meta_data->user_id );
@@ -433,7 +433,7 @@ function uv_filter_check_activation() {
 
 				}
 				
-				if(($user_verification_redirect_verified != 'none')):
+				if(($redirect_after_verification != 'none')):
 					$html.= "<script>jQuery(document).ready(function($){window.location.href = '$redirect_page_url';})</script>";
 				endif;
 			}
@@ -451,8 +451,7 @@ function uv_filter_check_activation() {
 
                 update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
 
-                $user_verification_verification_page = get_option('user_verification_verification_page');
-                $verification_page_url = get_permalink($user_verification_verification_page);
+                $verification_page_url = get_permalink($verification_page_id);
 
                 $user_data 	= get_userdata( $user_id );
                 $link 		= $verification_page_url.'?activation_key='.$user_activation_key;
@@ -466,13 +465,12 @@ function uv_filter_check_activation() {
                     )
                 );
 
-                $html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $uv_message_activation_sent</div>";
+                $html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $activation_sent</div>";
 				
 				
             endif;
         }
-        //else $html.= "<i class='fas fa-exclamation-triangle'></i> $uv_message_invalid_key";
-    
+
 
 		$html.= '</div>';
 		return $html;
@@ -519,6 +517,11 @@ function uv_resend_verification_form($attr){
 
 		$nonce = sanitize_text_field($_POST['_wpnonce']);
 
+        $user_verification_settings = get_option('user_verification_settings');
+        $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+        $activation_sent = isset($user_verification_settings['messages']['activation_sent']) ? $user_verification_settings['messages']['activation_sent'] : __( 'Activation mail has sent', 'user-verification' );
+
+
 
 		if(wp_verify_nonce( $nonce, 'nonce_resend_verification' ) && $_POST['resend_verification_hidden'] == 'Y') {
 
@@ -537,12 +540,7 @@ function uv_resend_verification_form($attr){
 				update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
 
 
-				$uv_message_activation_sent = get_option( 'uv_message_activation_sent' );
-				if( empty( $uv_message_activation_sent ) )
-					$uv_message_activation_sent = __( 'Activation email sent, Please check latest item on email inbox', 'user-verification' );
-
-				$user_verification_verification_page = get_option('user_verification_verification_page');
-				$verification_page_url = get_permalink($user_verification_verification_page);
+				$verification_page_url = get_permalink($verification_page_id);
 
 				$user_data 	= get_userdata( $user_id );
 				$link 		= $verification_page_url.'?activation_key='.$user_activation_key;
@@ -556,7 +554,7 @@ function uv_resend_verification_form($attr){
 					)
 				);
 
-				$html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $uv_message_activation_sent</div>";
+				$html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $activation_sent</div>";
 
 
             else:
@@ -651,18 +649,21 @@ function user_verification_auto_login(){
 	
 function uv_filter_resend_activation_link( ) {
 		
-		if( isset( $_GET['uv_action'] ) ) $uv_action = sanitize_text_field($_GET['uv_action']);
-		else return;
-		
-		if( isset( $_GET['id'] ) ) $user_id = sanitize_text_field($_GET['id']);
-		else return;
-		
-		$user_activation_key = md5(uniqid('', true) );
-		
+    if( isset( $_GET['uv_action'] ) ) $uv_action = sanitize_text_field($_GET['uv_action']);
+    else return;
+
+    if( isset( $_GET['id'] ) ) $user_id = sanitize_text_field($_GET['id']);
+    else return;
+
+    $user_activation_key = md5(uniqid('', true) );
+    $user_verification_settings = get_option('user_verification_settings');
+    $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+
+
+
 		update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
 
-        $user_verification_verification_page = get_option('user_verification_verification_page');
-        $verification_page_url = get_permalink($user_verification_verification_page);
+        $verification_page_url = get_permalink($verification_page_id);
 
 		$user_data 	= get_userdata( $user_id );
 		$link 		= $verification_page_url.'?activation_key='.$user_activation_key;
@@ -702,22 +703,23 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		
 		if( $user_activation_status == 0 && $user->ID != 1 ) {
 
-            $user_verification_verification_page = get_option('user_verification_verification_page');
-            $verification_page_url = get_permalink($user_verification_verification_page);
+            $user_verification_settings = get_option('user_verification_settings');
+            $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+            $verify_email = isset($user_verification_settings['messages']['verify_email']) ? $user_verification_settings['messages']['verify_email'] : __( 'Verify your email first!', 'user-verification' );
+
+
+            $verification_page_url = get_permalink($verification_page_id);
 
 
 			$resend_link = $verification_page_url.'?uv_action=resend&id='. $user->ID;
 			
-			$uv_message_verify_email = get_option( 'uv_message_verify_email' );
-			if( empty( $uv_message_verify_email ) ) 
-			$uv_message_verify_email = __( 'Verify your email first!', 'user-verification' );
-		
+
 			$message = apply_Filters(
 				'account_lock_message', 
 				sprintf(
 					'<strong>%s</strong> %s <a href="%s">%s</a>', 
 					__('Error:', 'user-verification'),
-					$uv_message_verify_email,
+                    $verify_email,
 					$resend_link,
 					__('Resend verification email','user-verification' )
 				), 
@@ -799,47 +801,49 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 	}
 		
 	function uv_show_box_resend_email() {
-		
-		$uv_message_activation_sent = get_option( 'uv_message_activation_sent' );
-		if( empty( $uv_message_activation_sent ) ) 
-		$uv_message_activation_sent = __( 'Activation Email Sent', 'user-verification' );
+
+        $user_verification_settings = get_option('user_verification_settings');
+        $activation_sent = isset($user_verification_settings['messages']['activation_sent']) ? $user_verification_settings['messages']['activation_sent'] : __( 'Activation mail has sent', 'user-verification' );
+
 		
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
 		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span><i class='fas fa-check-square'></i>
-		<h3 class='uv_popup_box_data'>$uv_message_activation_sent</h3></div></div>";
+		<h3 class='uv_popup_box_data'>$activation_sent</h3></div></div>";
 	}
 	
 	function uv_show_box_key_error() {
-		
-		$uv_message_invalid_key = get_option( 'uv_message_invalid_key' );
-		if( empty( $uv_message_invalid_key ) ) 
-		$uv_message_invalid_key = __( 'Invalid activation Key', 'user-verification' );
-	
+
+        $user_verification_settings = get_option('user_verification_settings');
+        $invalid_key = isset($user_verification_settings['messages']['invalid_key']) ? $user_verification_settings['messages']['invalid_key'] : __( 'Invalid activation Key', 'user-verification' );
+
+
+
+
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
 		<span class='uv_popup_box_close'><i class='fa fa-times-circle-o'></i></span>
-		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$uv_message_invalid_key</h3></div></div>";
+		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$invalid_key</h3></div></div>";
 	}
 	
 	function uv_show_box_finished() {
-		
-		$uv_message_verification_success = get_option( 'uv_message_verification_success' );
-		if( empty( $uv_message_verification_success ) )
-		$uv_message_verification_success = __( 'Your account is now verified', 'user-verification' );
-	
+
+        $user_verification_settings = get_option('user_verification_settings');
+        $verification_success = isset($user_verification_settings['messages']['verification_success']) ? $user_verification_settings['messages']['verification_success'] : __( 'Your account is now verified', 'user-verification' );
+
+
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
 		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span>
-		<i class='fas fa-check-square'></i><h3 class='uv_popup_box_data'>$uv_message_verification_success</h3></div></div>";
+		<i class='fas fa-check-square'></i><h3 class='uv_popup_box_data'>$verification_success</h3></div></div>";
 	}
 	
 	function uv_show_box_key_expired() {
-		
-		$uv_message_key_expired = get_option( 'uv_message_key_expired' );
-		if( empty( $uv_message_key_expired ) )
-		$uv_message_key_expired = __( 'Your account is now verified', 'user-verification' );
-	
+
+        $user_verification_settings = get_option('user_verification_settings');
+        $key_expired = isset($user_verification_settings['messages']['key_expired']) ? $user_verification_settings['messages']['key_expired'] : __( 'Your account is now verified', 'user-verification' );
+
+
 		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
 		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span>
-		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$uv_message_key_expired</h3></div></div>";
+		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$key_expired</h3></div></div>";
 	}
 
 

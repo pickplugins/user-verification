@@ -23,18 +23,21 @@ function uv_pmpro_confirmation_message($confirmation_message, $pmpro_invoice){
     $uv_action = isset($_GET['uv_action']) ? sanitize_text_field($_GET['uv_action']) : '';
     if($uv_action == 'logout'):
 
+        $user_verification_settings = get_option('user_verification_settings');
+        $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+        $message_checkout_page = isset($user_verification_settings['paid_memberships_pro']['message_checkout_page']) ? $user_verification_settings['paid_memberships_pro']['message_checkout_page'] : '';
+
+
+
         global $current_user;
         //$current_user = wp_get_current_user();
         $user_id = $current_user->ID;
-        $user_verification_verification_page = get_option('user_verification_verification_page');
-        $verification_page_url = get_permalink($user_verification_verification_page);
-
-        $uv_pmpro_message_checkout_page = get_option('uv_pmpro_message_checkout_page');
+        $verification_page_url = get_permalink($verification_page_id);
 
         $resend_link = $verification_page_url.'?uv_action=resend&id='. $user_id;
 
 
-        $confirmation_message .= '<div class="user-verification-message" style="color: #f00">'.$uv_pmpro_message_checkout_page.'</div>';
+        $confirmation_message .= '<div class="user-verification-message" style="color: #f00">'.$message_checkout_page.'</div>';
 
 
 
@@ -62,10 +65,13 @@ function uv_pm_pro_logout_not_verified(){
         if ( !$status && $uv_action == 'logout'){
             wp_logout();
 
-            $uv_pmpro_redirect_timout = get_option('uv_pmpro_redirect_timout');
+            $user_verification_settings = get_option('user_verification_settings');
+            $redirect_timout = isset($user_verification_settings['paid_memberships_pro']['redirect_timout']) ? $user_verification_settings['paid_memberships_pro']['redirect_timout'] : '';
+            $redirect_after_checkout = isset($user_verification_settings['paid_memberships_pro']['redirect_after_checkout']) ? $user_verification_settings['paid_memberships_pro']['redirect_after_checkout'] : '';
 
-            $uv_pmpro_redirect_after_checkout_page_id = get_option('uv_pmpro_redirect_after_checkout_page_id');
-            $page_url = get_permalink($uv_pmpro_redirect_after_checkout_page_id);
+
+
+            $page_url = get_permalink($redirect_after_checkout);
 
             if(empty($page_url)):
                 $page_url = wp_logout_url();
@@ -76,7 +82,7 @@ function uv_pm_pro_logout_not_verified(){
 
             ?>
             <script>
-                jQuery(document).ready(function($){window.setTimeout(function() {window.location.href = "<?php echo $resend_link; ?>";}, <?php echo $uv_pmpro_redirect_timout; ?>);})
+                jQuery(document).ready(function($){window.setTimeout(function() {window.location.href = "<?php echo $resend_link; ?>";}, <?php echo $redirect_timout; ?>);})
             </script>
             <?php
         }
@@ -152,17 +158,23 @@ add_filter("pmpro_registration_checks", "my_pmpro_registration_success_send_acti
 function my_pmpro_registration_success_send_activation_mail(){
     global $pmpro_msg, $pmpro_msgt, $current_user;
 
+
+
+
+
+
     $user_id = $current_user->ID;
     $user_email = $current_user->user_email;
 
 
     if($pmpro_msgt) {
 
+        $user_verification_settings = get_option('user_verification_settings');
+        $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
 
         $permalink_structure = get_option('permalink_structure');
 
-        $user_verification_verification_page = get_option('user_verification_verification_page');
-        $verification_page_url = get_permalink($user_verification_verification_page);
+        $verification_page_url = get_permalink($verification_page_id);
 
         $user_activation_key =  md5(uniqid('', true) );
 

@@ -170,9 +170,6 @@ function user_verification_upgrade_settings(){
     $user_verification_settings['email_templates_data'] = $uv_email_templates_data;
 
 
-
-
-
     update_option('user_verification_settings', $user_verification_settings);
 
 
