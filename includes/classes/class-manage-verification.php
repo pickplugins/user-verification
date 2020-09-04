@@ -82,7 +82,7 @@ class class_user_verification_manage_verification{
 
             }else{
                 $jsData['is_valid_key'] = 'no';
-                $jsData['is_valid_text'] = __('Sorry, activation key is not valied');
+                $jsData['is_valid_text'] = __('Sorry, activation key is not valid.','user-verification');
                 $jsData['is_valid_icon'] = '<i class="far fa-times-circle"></i>';
 
             }
@@ -96,7 +96,7 @@ class class_user_verification_manage_verification{
 
                     <div class="status">
                         <span class="status-icon"><i class="fas fa-spin fa-spinner"></i></span>
-                        <span class="status-text">please wait...</span>
+                        <span class="status-text">Please wait...</span>
 
                     </div>
 
