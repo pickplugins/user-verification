@@ -67,7 +67,7 @@ class UserVerification{
     }
 
 
-    public function _activation(){
+    public function _activation(){ 
 
 
         if (!wp_next_scheduled('user_verification_clean_user_meta')) {
