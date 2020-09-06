@@ -306,6 +306,10 @@ function user_verification_registered_message( $errors, $redirect_to ) {
 
 
     $user_verification_settings = get_option('user_verification_settings');
+    $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
+
+    if($email_verification_enable != 'yes') return $errors;
+
     $registration_success = isset($user_verification_settings['messages']['registration_success']) ? $user_verification_settings['messages']['registration_success'] : '';
 
 
@@ -636,58 +640,6 @@ function user_verification_auto_login(){
 
 
 
-
-
-
-
-
-
-
-
-//add_action( 'wp_footer', 'uv_filter_check_activation', 100 );
-
-	
-function uv_filter_resend_activation_link( ) {
-		
-    if( isset( $_GET['uv_action'] ) ) $uv_action = sanitize_text_field($_GET['uv_action']);
-    else return;
-
-    if( isset( $_GET['id'] ) ) $user_id = sanitize_text_field($_GET['id']);
-    else return;
-
-    $user_activation_key = md5(uniqid('', true) );
-    $user_verification_settings = get_option('user_verification_settings');
-    $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
-
-
-
-		update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
-
-        $verification_page_url = get_permalink($verification_page_id);
-
-		$user_data 	= get_userdata( $user_id );
-		$link 		= $verification_page_url.'?activation_key='.$user_activation_key;
-		// $message 	= "<h3>Please verify your account by clicking the link below</h3>";
-		// $message   .= "<a href='$link' style='padding:10px 25px; background:#16A05C; color:#fff;font-size:17px;text-decoration:none;'>Activate</a>";
-		// $headers 	= array('Content-Type: text/html; charset=UTF-8');
-	  
-		uv_mail( 
-			$user_data->user_email,
-			array( 
-				'action' 	=> 'email_confirmed',
-				'user_id' 	=> $user_id,
-				'link'		=> $link
-			)
-		);
-			
-			
-		// uv_mail( $user_data->user_email, 'Verify Your Account', $message );
-		
-		uv_show_box_resend_email();
-	}
-//add_action( 'wp_footer', 'uv_filter_resend_activation_link', 101 );
-
-
 // Login Check
 add_action( 'authenticate', 'uv_user_authentication', 9999, 3 );
 function uv_user_authentication( $errors, $username, $passwords ) { 
@@ -704,6 +656,11 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		if( $user_activation_status == 0 && $user->ID != 1 ) {
 
             $user_verification_settings = get_option('user_verification_settings');
+
+            $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
+
+            if($email_verification_enable != 'yes') return $errors;
+
             $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
             $verify_email = isset($user_verification_settings['messages']['verify_email']) ? $user_verification_settings['messages']['verify_email'] : __( 'Verify your email first!', 'user-verification' );
 
@@ -800,51 +757,7 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		return $status;
 	}
 		
-	function uv_show_box_resend_email() {
 
-        $user_verification_settings = get_option('user_verification_settings');
-        $activation_sent = isset($user_verification_settings['messages']['activation_sent']) ? $user_verification_settings['messages']['activation_sent'] : __( 'Activation mail has sent', 'user-verification' );
-
-		
-		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
-		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span><i class='fas fa-check-square'></i>
-		<h3 class='uv_popup_box_data'>$activation_sent</h3></div></div>";
-	}
-	
-	function uv_show_box_key_error() {
-
-        $user_verification_settings = get_option('user_verification_settings');
-        $invalid_key = isset($user_verification_settings['messages']['invalid_key']) ? $user_verification_settings['messages']['invalid_key'] : __( 'Invalid activation Key', 'user-verification' );
-
-
-
-
-		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
-		<span class='uv_popup_box_close'><i class='fa fa-times-circle-o'></i></span>
-		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$invalid_key</h3></div></div>";
-	}
-	
-	function uv_show_box_finished() {
-
-        $user_verification_settings = get_option('user_verification_settings');
-        $verification_success = isset($user_verification_settings['messages']['verification_success']) ? $user_verification_settings['messages']['verification_success'] : __( 'Your account is now verified', 'user-verification' );
-
-
-		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
-		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span>
-		<i class='fas fa-check-square'></i><h3 class='uv_popup_box_data'>$verification_success</h3></div></div>";
-	}
-	
-	function uv_show_box_key_expired() {
-
-        $user_verification_settings = get_option('user_verification_settings');
-        $key_expired = isset($user_verification_settings['messages']['key_expired']) ? $user_verification_settings['messages']['key_expired'] : __( 'Your account is now verified', 'user-verification' );
-
-
-		echo "<div class='uv_popup_box_container'><div class='uv_popup_box_content'>
-		<span class='uv_popup_box_close'><i class='fas fa-times-circle'></i></span>
-		<i class='fas fa-exclamation-triangle'></i><h3 class='uv_popup_box_data'>$key_expired</h3></div></div>";
-	}
 
 
 
@@ -862,213 +775,6 @@ function uv_all_user_roles() {
 	//echo '<pre>'.var_export($wp_roles, true).'</pre>';
 
 }
-
-
-
-add_action('pick_settings_action_custom_field_grid','pick_settings_action_custom_field_grid', 0,1);
-
-
-function pick_settings_action_custom_field_grid($option) {
-
-    $id 			= isset( $option['id'] ) ? $option['id'] : "";
-    $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
-    $args 			= isset( $option['args'] ) ? $option['args'] : "";
-
-    $values 	 		= get_option( $id );
-
-    ?>
-    <div class="grid">
-        <?php
-
-        foreach($args as $key=>$grid_item){
-
-            $title = isset($grid_item['title']) ? $grid_item['title'] : '';
-            $link = isset($grid_item['link']) ? $grid_item['link'] : '';
-            $thumb = isset($grid_item['thumb']) ? $grid_item['thumb'] : '';
-
-            ?>
-
-            <div class="item">
-                <div class="thumb"><a href="<?php echo $link; ?>"><img src="<?php echo $thumb; ?>"></img></a></div>
-                <div class="name"><a href="<?php echo $link; ?>"><?php echo $title; ?></a></div>
-            </div>
-            <?php
-
-        }
-        ?>
-    </div>
-
-    <style type="text/css">
-        .grid{}
-        .grid .item{
-            width: 300px;
-            display: inline-block;
-            vertical-align: top;
-            margin: 10px;
-            background: #ddd;
-            overflow: hidden;
-        }
-        .grid .name{
-
-        }
-
-        .grid .name a{
-            margin: 10px;
-            text-decoration: none;
-            display: block;
-            font-weight: 600;
-        }
-        }
-
-        .grid .thumb{ }
-        .grid .thumb img{
-            width: 100%;
-            height: auto;
-        }
-
-
-    </style>
-    <?php
-
-
-
-}
-
-
-add_action('pick_settings_action_custom_field_email_templates','pick_settings_action_custom_field_email_templates', 0,1);
-
-
-function pick_settings_action_custom_field_email_templates($option) {
-
-    require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
-
-    $id 			= isset( $option['id'] ) ? $option['id'] : "";
-    $placeholder 	= isset( $option['placeholder'] ) ? $option['placeholder'] : "";
-    $values 	 		= get_option( $id );
-
-
-
-    if(empty($values)){
-
-        $class_uv_emails = new class_uv_emails();
-        $values = $class_uv_emails->uv_email_templates_data();
-
-    }
-
-    ?>
-    <div class="button reset-email-templates">Reset Templates</div>
-    <div class="templates_editor">
-    <?php
-
-    foreach($values as $key=>$templates){
-
-        $email_to = isset($templates['email_to']) ? $templates['email_to'] : '';
-        $email_from = isset($templates['email_from']) ? $templates['email_from'] : '';
-        $email_from_name = isset($templates['email_from_name']) ? $templates['email_from_name'] : '';
-        $enable = isset($templates['enable']) ? $templates['enable'] : '';
-        $description = isset($templates['description']) ? $templates['description'] : '';
-
-        ?>
-
-        <h2 class="header"><?php echo $templates['name']; ?>
-            <input type="hidden" name="uv_email_templates_data[<?php echo $key; ?>][name]" value="<?php echo $templates['name']; ?>" />
-        </h2>
-
-        <div class="options">
-            <div class="description"><?php echo $description; ?></div>
-            <label><?php echo __('Enable ?', 'user-verification'); ?>
-                <select name="uv_email_templates_data[<?php echo $key; ?>][enable]" >
-                    <?php
-                    if($enable=='yes'){
-                        ?>
-                        <option selected  value="yes" ><?php echo __('Yes', 'user-verification'); ?></option>
-                        <?php
-                    }
-                    else{
-                        ?>
-                        <option value="yes" ><?php echo __('Yes', 'user-verification'); ?></option>
-                        <?php
-                    }
-                    if($enable=='no'){
-                        ?>
-                        <option selected value="no" ><?php echo __('No', 'user-verification'); ?></option>
-                        <?php
-                    }
-                    else{
-                        ?>
-                        <option value="no" ><?php echo __('No', 'user-verification'); ?></option>
-                        <?php
-                    }
-                    ?>
-
-                </select>
-
-            </label><br>
-            <label><?php echo __('Email To: (Copy)', 'user-verification'); ?>
-                <input placeholder="support@hello.com,hello_2@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_to]" value="<?php echo $email_to; ?>" />
-            </label><br>
-
-            <label><?php echo __('Email from name:', 'user-verification'); ?>
-                <input placeholder="My Site Name" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
-            </label><br>
-
-            <label><?php echo __('Email from:', 'user-verification'); ?>
-                <input placeholder="support@hello.com" type="text" name="uv_email_templates_data[<?php echo $key; ?>][email_from]" value="<?php echo $email_from; ?>" />
-            </label><br>
-
-            <label><?php echo __('Email Subject:','user-verification'); ?>
-                <input type="text" name="uv_email_templates_data[<?php echo $key; ?>][subject]" value="<?php echo $templates['subject']; ?>" />
-            </label><br>
-
-
-
-
-            <?php
-
-            ob_start();
-            wp_editor( $templates['html'], $key, $settings = array('textarea_name'=>'uv_email_templates_data['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'200px', ) );
-            $editor_contents = ob_get_clean();
-
-            ?>
-            <label><?php echo __('Email Body:','user-verification'); ?><br/>
-                <?php
-                echo $editor_contents;
-
-                ?>
-            </label>
-        </div>
-
-        <?php
-            }
-        ?>
-    </div>
-
-
-    <script>
-        jQuery(document).ready(function($){
-
-            $('.templates_editor').accordion({collapsible: true, active:999});
-
-        })
-
-    </script>
-    <?php
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

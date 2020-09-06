@@ -125,8 +125,6 @@ class UserVerification{
         require_once( UV_PLUGIN_DIR . 'includes/classes/class-manage-verification.php');
 
 
-        require_once( UV_PLUGIN_DIR . 'includes/classes/class-wp-admin-menu.php');
-
         require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
 		require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings.php');
         require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');

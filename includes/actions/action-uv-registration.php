@@ -9,12 +9,17 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 	if ( ! function_exists( 'uv_action_user_register_function' ) ) {
 		function uv_action_user_register_function( $user_id ) {
 
-            $permalink_structure = get_option('permalink_structure');
             $user_verification_settings = get_option('user_verification_settings');
+            $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
+
+            if($email_verification_enable != 'yes') return;
+
+
             $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
             $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
 
             $verification_page_url = get_permalink($verification_page_id);
+            $permalink_structure = get_option('permalink_structure');
 
 			$user_activation_key =  md5(uniqid('', true) );
 			
