@@ -1,6 +1,4 @@
 <?php
-
-
 if ( ! defined('ABSPATH')) exit;  // if direct access 
 
 function user_verification_is_verified($userid){
@@ -484,9 +482,9 @@ add_shortcode('user_verification_check', 'uv_filter_check_activation');
 
 
 
-add_shortcode('user_verification_message', 'uv_filter_check_status');
+add_shortcode('user_verification_message', 'user_verification_check_status');
 
-function uv_filter_check_status($attr) {
+function user_verification_check_status($attr) {
 
     $uv_check = isset($_GET['uv_check']) ? sanitize_text_field($_GET['uv_check']) : '';
 
@@ -763,7 +761,7 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 
 
 
-function uv_all_user_roles() {
+function user_verification_user_roles() {
 
 	$wp_roles = new WP_Roles();
 

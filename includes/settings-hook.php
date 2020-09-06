@@ -100,7 +100,7 @@ function user_verification_settings_content_email_verification(){
             'multiple'		=> true,
             'value'		=> $exclude_user_roles,
             'default'		=> array(),
-            'args'		=> uv_all_user_roles(),
+            'args'		=> user_verification_user_roles(),
 
         );
 
