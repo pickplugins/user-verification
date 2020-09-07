@@ -43,7 +43,7 @@ function my_add_error_on_form_submit_validation( $field, $key, $args ) {
 
         $is_blocked = user_verification_is_username_blocked($args[$key]);
         if($is_blocked){
-            UM()->form()->add_error('user_login', __('Username is blocked','ultimate-member') );
+            UM()->form()->add_error('user_login', __('Username is blocked','user-verification') );
         }
     }
 
@@ -52,7 +52,7 @@ function my_add_error_on_form_submit_validation( $field, $key, $args ) {
 
         $is_blocked = user_verification_is_emaildomain_blocked($args[$key]);
         if($is_blocked){
-            UM()->form()->add_error('user_email', __('This email domain is not allowed!','ultimate-member') );
+            UM()->form()->add_error('user_email', __('This email domain is not allowed!','user-verification') );
         }
     }
 

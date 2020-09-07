@@ -48,17 +48,17 @@ class UserVerification{
 
         $schedules['1minute'] = array(
             'interval'  => 60,
-            'display'   => __( '1 Minute', 'textdomain' )
+            'display'   => __( '1 Minute', 'user-verification' )
         );
 
         $schedules['5minute'] = array(
             'interval'  => 300,
-            'display'   => __( '5 Minute', 'textdomain' )
+            'display'   => __( '5 Minute', 'user-verification' )
         );
 
         $schedules['10minute'] = array(
             'interval'  => 600,
-            'display'   => __( '10 Minute', 'textdomain' )
+            'display'   => __( '10 Minute', 'user-verification' )
         );
 
 

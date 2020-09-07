@@ -45,13 +45,13 @@ class class_user_verification_manage_verification{
                 if($user_activation_status != 0){
                     $jsData['activation_status'] = 0;
                     $jsData['status_icon'] = '<i class="fas fa-user-times"></i>';
-                    $jsData['status_text'] = __('Sorry! Verification failed.','');
+                    $jsData['status_text'] = __('Sorry! Verification failed.','user-verification');
 
                 }else{
                     update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
                     $jsData['activation_status'] = 1;
                     $jsData['status_icon'] = '<i class="far fa-check-circle"></i>';
-                    $jsData['status_text'] = __('Thanks for verified','');
+                    $jsData['status_text'] = __('Thanks for verified','user-verification');
 
 
                     $user_data = get_userdata( $meta_data->user_id );

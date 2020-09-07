@@ -73,7 +73,7 @@ function user_verification_bulk_action_admin_notice() {
         $user_count =  intval( $user_count );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
-		echo sprintf(__('%s user account marked as verified.'), $user_count);
+		echo sprintf(__('%s user account marked as verified.', 'user-verification'), $user_count);
 		echo '</div>';
 
 	}
@@ -83,7 +83,7 @@ function user_verification_bulk_action_admin_notice() {
 		$user_count = intval( $user_count );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
-		echo sprintf(__('%s user account marked as unverified.'), $user_count);
+		echo sprintf(__('%s user account marked as unverified.', 'user-verification'), $user_count);
 		echo '</div>';
 
 
