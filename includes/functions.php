@@ -21,8 +21,8 @@ add_filter('bulk_actions-users','user_verification_bulk_approve');
 function user_verification_bulk_approve($actions){
 	//unset( $actions['delete'] );
 
-	$actions['uv_bulk_approve'] = __('Approve', 'user-verification');
-	$actions['uv_bulk_disapprove'] = __('Disapprove', 'user-verification');
+	$actions['uv_bulk_approve'] = __('Mark as verified', 'user-verification');
+	$actions['uv_bulk_disapprove'] = __('Mark as unverified', 'user-verification');
 
 	return $actions;
 }
@@ -73,7 +73,7 @@ function user_verification_bulk_action_admin_notice() {
         $user_count =  intval( $user_count );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
-		echo sprintf(__('%s user account marked as approved.'), $user_count);
+		echo sprintf(__('%s user account marked as verified.'), $user_count);
 		echo '</div>';
 
 	}
@@ -83,7 +83,7 @@ function user_verification_bulk_action_admin_notice() {
 		$user_count = intval( $user_count );
 
 		echo '<div id="message" class="notice notice-success is-dismissible">';
-		echo sprintf(__('%s user account marked as disapproved.'), $user_count);
+		echo sprintf(__('%s user account marked as unverified.'), $user_count);
 		echo '</div>';
 
 
@@ -104,7 +104,7 @@ function uv_ajax_approve_user_manually(){
 	
 	$user_activation_status = get_user_meta( $user_id, 'user_activation_status', true );
 	$user_activation_status = empty( $user_activation_status ) ? 0 : $user_activation_status;
-	$uv_status 				= $user_activation_status == 1 ? __('Approved', 'user-verification') : __('Pending approval', 'user-verification');
+	$uv_status 				= $user_activation_status == 1 ? __('Verified', 'user-verification') : __('Unverified', 'user-verification');
 	
 	if( $user_activation_status == 1 ){
 		
@@ -718,12 +718,12 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		if(empty($uv_email_templates_data)){
 				
 			$class_uv_emails = new class_uv_emails();
-			$templates_data = $class_uv_emails->uv_email_templates_data();
+			$templates_data = $class_uv_emails->email_templates_data();
 		
 		} else {
 
 			$class_uv_emails = new class_uv_emails();
-			$templates_data = $class_uv_emails->uv_email_templates_data();
+			$templates_data = $class_uv_emails->email_templates_data();
 				
 			$templates_data = array_merge($templates_data, $uv_email_templates_data);
 		}

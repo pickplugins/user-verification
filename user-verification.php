@@ -130,6 +130,7 @@ class UserVerification{
         require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');
         require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings-tabs.php');
         require_once( UV_PLUGIN_DIR . 'includes/settings-hook.php');
+        require_once( UV_PLUGIN_DIR . 'includes/classes/class-admin-notices.php');
 
 
     }
@@ -182,9 +183,9 @@ class UserVerification{
 		wp_localize_script( 'uv_admin_js', 'L10n_user_verification', array(
 			'confirm_text' => __( 'Are you sure?', 'user-verification' ),
 			'reset_confirm_text' => __( 'Do you really want to reset?', 'user-verification' ),
-			'text_approve_now' => __( 'Approve now', 'user-verification' ),
-			'text_remove_approve' => __( 'Remove Approval', 'user-verification' ),
-			'text_updateing' => __( 'Updating user', 'user-verification' ),
+			'mark_as_verified' => __( 'Mark as verified', 'user-verification' ),
+			'mark_as_unverified' => __( 'Mark as unverified', 'user-verification' ),
+			'updating' => __( 'Updating user', 'user-verification' ),
 		));
 							
 		wp_enqueue_style('uv_admin_style', user_verification_plugin_url.'assets/admin/css/style.css');

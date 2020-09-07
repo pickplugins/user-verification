@@ -129,7 +129,7 @@ function bp_members_signup_custom_column_uv_bp( $val, $column_name, $signup_obje
         ob_start();
         $user_activation_status = get_user_meta( $user_id, 'user_activation_status', true );
         $user_activation_status = empty( $user_activation_status ) ? 0 : $user_activation_status;
-        $uv_status 				= $user_activation_status == 1 ? __('Approved', 'user-verification') : __('Pending approval', 'user-verification');
+        $uv_status 				= $user_activation_status == 1 ? __('Verified', 'user-verification') : __('Unverified', 'user-verification');
         $activation_key = get_user_meta( $user_id, 'user_activation_key', true );
 
         echo "<div class='uv_status'>$uv_status</div>";
@@ -138,12 +138,12 @@ function bp_members_signup_custom_column_uv_bp( $val, $column_name, $signup_obje
 
         if( $user_activation_status == 0 ) {
 
-            echo "<span class='uv_action uv_approve' user_id='$user_id' do='approve'>".__('Approve now', 'user-verification')."</span>";
+            echo "<span class='uv_action uv_approve' user_id='$user_id' do='approve'>".__('Mark as verified', 'user-verification')."</span>";
         }
 
         if( $user_activation_status == 1 ) {
 
-            echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Remove Approval', 'user-verification')."</span>";
+            echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Mark as Unverified', 'user-verification')."</span>";
         }
 
         echo "<span class='activation_key' > ".$activation_key."</span>";

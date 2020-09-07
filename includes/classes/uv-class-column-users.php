@@ -41,23 +41,82 @@ class uv_class_column_users{
             ob_start();
 			$user_activation_status = get_user_meta( $user_id, 'user_activation_status', true );
 			$user_activation_status = empty( $user_activation_status ) ? 0 : $user_activation_status;
-			$uv_status 				= $user_activation_status == 1 ? __('Approved', 'user-verification') : __('Pending approval', 'user-verification');
+			$uv_status 				= $user_activation_status == 1 ? __('Verified', 'user-verification') : __('Unverified', 'user-verification');
             $activation_key = get_user_meta( $user_id, 'user_activation_key', true );
 
             echo "<div class='uv_status'>$uv_status</div>";
 			echo "<div class='row-actions'>";
-			
-			
+
+
+
+
+
+
+            $actionurl = admin_url().'users.php';
+
 			if( $user_activation_status == 0 ) {
+
+                $mark_as_verified_url = add_query_arg(
+                    array(
+                        'user_id' => $user_id,
+                        'mark_as_verified' => 'yes',
+                    ),
+                    $actionurl);
+
+                $mark_as_verified_url = wp_nonce_url( $mark_as_verified_url,  'mark_as_verified' );
+
+
+                $resend_verification_url = add_query_arg(
+                    array(
+                        'user_id' => $user_id,
+                        'resend_verification' => 'yes',
+                    ),
+                    $actionurl);
+
+                $resend_verification_url = wp_nonce_url( $resend_verification_url,  'resend_verification' );
+
+
+			    ?>
+
+                <span class="mark_as_verified">
+                    <a target="_blank" href="<?php echo $mark_as_verified_url; ?>"><?php echo __('Mark as Verified', 'user-verification'); ?></a>
+                </span> |
+                <span class="resend_verification">
+                    <a target="_blank" href="<?php echo $resend_verification_url; ?>"><?php echo __('Resend verification', 'user-verification'); ?></a>
+                </span> |
+
+
+                <?php
 				
-				echo "<span class='uv_action uv_approve' user_id='$user_id' do='approve'>".__('Approve now', 'user-verification')."</span>";
-                echo " | <span class='uv_action uv_resend_verification' user_id='$user_id' do='resend'>".__('Resend verification', 'user-verification')."</span>";
+				//echo "<span class='uv_action uv_approve' user_id='$user_id' do='approve'>".__('Mark as Verified', 'user-verification')."</span>";
+                //echo " | <span class='uv_action uv_resend_verification' user_id='$user_id' do='resend'>".__('Resend verification', 'user-verification')."</span>";
 
 			}
 			
 			if( $user_activation_status == 1 ) {
+
+                $mark_as_unverified_url = add_query_arg(
+                    array(
+                        'user_id' => $user_id,
+                        'mark_as_unverified' => 'yes',
+                    ),
+                    $actionurl);
+
+                $mark_as_unverified_url = wp_nonce_url( $mark_as_unverified_url,  'mark_as_unverified' );
+
+
+                ?>
+
+                <span class="mark_as_unverified">
+                    <a target="_blank" href="<?php echo $mark_as_unverified_url; ?>"><?php echo __('Mark as Unverified', 'user-verification'); ?></a>
+                </span>
+
+
+
+                <?php
+
 				
-				echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Remove Approval', 'user-verification')."</span>";
+				//echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Mark as Unverified', 'user-verification')."</span>";
 			}
 
             echo "<span class='activation_key' > ".$activation_key."</span>";

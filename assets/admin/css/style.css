@@ -41,3 +41,7 @@ Admin css
 	cursor: pointer;
 }
 
+.row-actions .uv_resend_verification{
+	color: #138E77;
+	cursor: pointer;
+}

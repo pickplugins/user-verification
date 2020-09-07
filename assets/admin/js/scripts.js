@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
 		_user_id 	= $(this).attr( 'user_id' );
 		_do 		= $(this).attr( 'do' );
 		
-		$(this).parent().prev().html( L10n_user_verification.text_updateing + ' <i class="fa fa-spin fa-cog"></i>' );
+		$(this).parent().prev().html( L10n_user_verification.updating + ' <i class="fa fa-spin fa-cog"></i>' );
 		
 		$.ajax(
 			{
@@ -24,7 +24,7 @@ jQuery(document).ready(function($){
 			
 			if( _do == 'approve' ) {
 				
-				$(this).text( L10n_user_verification.text_remove_approve );
+				$(this).text( L10n_user_verification.mark_as_unverified );
 				$(this).attr( 'do', 'remove_approval' );
 				$(this).removeClass( 'uv_approve' );
 				$(this).addClass( 'uv_remove_approval' );
@@ -32,7 +32,7 @@ jQuery(document).ready(function($){
 			
 			if( _do == 'remove_approval' ) {
 				
-				$(this).text( L10n_user_verification.text_approve_now );
+				$(this).text( L10n_user_verification.mark_as_verified );
 				$(this).attr( 'do', 'approve' );
 				$(this).removeClass( 'uv_remove_approval' );
 				$(this).addClass( 'uv_approve' );
