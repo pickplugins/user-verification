@@ -19,7 +19,7 @@ class class_user_verification_settings{
     }
 
 	public function settings(){
-		include(UV_PLUGIN_DIR.'includes/menu/settings.php');
+		include(user_verification_plugin_dir.'includes/menu/settings.php');
 	}
 
 

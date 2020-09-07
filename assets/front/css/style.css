@@ -2,21 +2,6 @@
 /* CSS Document */
 
 
-.user-verification {
-
-}
-
-.user-verification .wrong-key {
-    color: #ff6060;
-}
-.user-verification .expired {
-    color: #238bf9;
-}
-
-.user-verification .verified {
-    color: #19ad0c;
-}
-
 
 
 

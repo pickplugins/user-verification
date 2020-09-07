@@ -44,7 +44,9 @@ class uv_class_column_users{
 			$uv_status 				= $user_activation_status == 1 ? __('Verified', 'user-verification') : __('Unverified', 'user-verification');
             $activation_key = get_user_meta( $user_id, 'user_activation_key', true );
 
-            echo "<div class='uv_status'>$uv_status</div>";
+            ?>
+            <div class='uv_status status-<?php echo $user_activation_status; ?>'><?php echo $uv_status; ?></div>
+            <?php
 			echo "<div class='row-actions'>";
 
 
@@ -79,10 +81,10 @@ class uv_class_column_users{
 			    ?>
 
                 <span class="mark_as_verified">
-                    <a target="_blank" href="<?php echo $mark_as_verified_url; ?>"><?php echo __('Mark as Verified', 'user-verification'); ?></a>
+                    <a href="<?php echo $mark_as_verified_url; ?>"><?php echo __('Mark as Verified', 'user-verification'); ?></a>
                 </span> |
                 <span class="resend_verification">
-                    <a target="_blank" href="<?php echo $resend_verification_url; ?>"><?php echo __('Resend verification', 'user-verification'); ?></a>
+                    <a  href="<?php echo $resend_verification_url; ?>"><?php echo __('Resend verification', 'user-verification'); ?></a>
                 </span> |
 
 
@@ -108,7 +110,7 @@ class uv_class_column_users{
                 ?>
 
                 <span class="mark_as_unverified">
-                    <a target="_blank" href="<?php echo $mark_as_unverified_url; ?>"><?php echo __('Mark as Unverified', 'user-verification'); ?></a>
+                    <a href="<?php echo $mark_as_unverified_url; ?>"><?php echo __('Mark as Unverified', 'user-verification'); ?></a>
                 </span>
 
 

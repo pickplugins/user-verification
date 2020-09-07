@@ -41,6 +41,17 @@ Admin css
 	cursor: pointer;
 }
 
+.uv_status.status-0{
+	color: #DC4840;
+	cursor: pointer;
+}
+.uv_status.status-1{
+	color: #138E77;
+	cursor: pointer;
+}
+
+
+
 .row-actions .uv_resend_verification{
 	color: #138E77;
 	cursor: pointer;

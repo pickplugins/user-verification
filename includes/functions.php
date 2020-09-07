@@ -690,7 +690,7 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 		
 		if( empty( $email_to_add ) ) return false;
 
-        require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
+        require_once( user_verification_plugin_dir . 'includes/classes/class-emails.php');
 
 		$action 	= isset( $args['action'] ) ? $args['action'] : '';
 		$user_id 	= isset( $args['user_id'] ) ? $args['user_id'] : 1;

@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 5.5
-	Stable tag: 1.0.40
+	Stable tag: 1.0.41
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,7 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 * 2020-07-04 update - all options saved under single array
 * 2020-07-02 update - User Verification menu moved under default Users menu
 * 2020-07-04 add - daily clean activation key from user meta table
+* 2020-07-04 add - Resend verification mail option added to users list page.
 
 
 = 1.0.40 =

@@ -70,9 +70,9 @@ class class_uv_emails{
 		
 		$templates_data_html = array();
 		
-		include UV_PLUGIN_DIR . 'templates/emails/user_registered.php';	
-		include UV_PLUGIN_DIR . 'templates/emails/email_confirmed.php';
-		include UV_PLUGIN_DIR . 'templates/emails/email_resend_key.php';
+		include user_verification_plugin_dir . 'templates/emails/user_registered.php';
+		include user_verification_plugin_dir . 'templates/emails/email_confirmed.php';
+		include user_verification_plugin_dir . 'templates/emails/email_resend_key.php';
 
 		$templates_data = array(
 			'user_registered'=>array(

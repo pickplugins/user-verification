@@ -3,7 +3,7 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 1.0.40
+Version: 1.0.41
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -95,15 +95,15 @@ class UserVerification{
 
 	public function uv_loading_functions() {
 		
-		require_once( UV_PLUGIN_DIR . 'includes/functions.php');
-		require_once( UV_PLUGIN_DIR . 'includes/functions-woocommerce.php');
-		require_once( UV_PLUGIN_DIR . 'includes/functions-recaptcha.php');
-        require_once( UV_PLUGIN_DIR . 'includes/functions-paid-memberships-pro.php');
-        require_once( UV_PLUGIN_DIR . 'includes/functions-ultimate-member.php');
+		require_once( user_verification_plugin_dir . 'includes/functions.php');
+		require_once( user_verification_plugin_dir . 'includes/functions-woocommerce.php');
+		require_once( user_verification_plugin_dir . 'includes/functions-recaptcha.php');
+        require_once( user_verification_plugin_dir . 'includes/functions-paid-memberships-pro.php');
+        require_once( user_verification_plugin_dir . 'includes/functions-ultimate-member.php');
 
-        require_once( UV_PLUGIN_DIR . 'includes/functions-buddypress.php');
-        require_once( UV_PLUGIN_DIR . 'includes/3rd-party/functions-memberpress.php');
-        require_once( UV_PLUGIN_DIR . 'includes/functions-cron-hook.php');
+        require_once( user_verification_plugin_dir . 'includes/functions-buddypress.php');
+        require_once( user_verification_plugin_dir . 'includes/3rd-party/functions-memberpress.php');
+        require_once( user_verification_plugin_dir . 'includes/functions-cron-hook.php');
 
 	}
 	
@@ -118,29 +118,24 @@ class UserVerification{
 	
 	public function uv_declare_actions() {
 
-		require_once( UV_PLUGIN_DIR . 'includes/actions/action-uv-registration.php');
+		require_once( user_verification_plugin_dir . 'includes/actions/action-uv-registration.php');
 	}
 	
 	public function uv_declare_classes() {
-        require_once( UV_PLUGIN_DIR . 'includes/classes/class-manage-verification.php');
+        require_once( user_verification_plugin_dir . 'includes/classes/class-manage-verification.php');
 
 
-        require_once( UV_PLUGIN_DIR . 'includes/classes/class-emails.php');
-		require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings.php');
-        require_once( UV_PLUGIN_DIR . 'includes/classes/uv-class-column-users.php');
-        require_once( UV_PLUGIN_DIR . 'includes/classes/class-settings-tabs.php');
-        require_once( UV_PLUGIN_DIR . 'includes/settings-hook.php');
-        require_once( UV_PLUGIN_DIR . 'includes/classes/class-admin-notices.php');
+        require_once( user_verification_plugin_dir . 'includes/classes/class-emails.php');
+		require_once( user_verification_plugin_dir . 'includes/classes/class-settings.php');
+        require_once( user_verification_plugin_dir . 'includes/classes/uv-class-column-users.php');
+        require_once( user_verification_plugin_dir . 'includes/classes/class-settings-tabs.php');
+        require_once( user_verification_plugin_dir . 'includes/settings-hook.php');
+        require_once( user_verification_plugin_dir . 'includes/classes/class-admin-notices.php');
 
 
     }
 	
 	public function uv_define_constants() {
-
-		$this->_define('UV_PLUGIN_URL', plugins_url('/', __FILE__)  );
-		$this->_define('UV_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-		$this->_define('UV_PLUGIN_NAME', __('User Verification','user-verification') );
-		$this->_define('UV_CONTACT_URL', 'http://pickplugins.com/contact' );
 
         $this->_define('user_verification_plugin_name', __('User Verification','user-verification') );
         $this->_define('user_verification_plugin_url', plugins_url('/', __FILE__)  );
@@ -161,13 +156,14 @@ class UserVerification{
 		
 		wp_enqueue_script('jquery');
 
-		wp_enqueue_script('uv_front_js', plugins_url( '/assets/front/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
-		wp_localize_script( 'uv_front_js', 'uv_ajax', array( 'uv_ajaxurl' => admin_url( 'admin-ajax.php')));
-		
-		wp_enqueue_style('uv_style', UV_PLUGIN_URL.'assets/front/css/style.css');	
-		
-		//global
-        wp_enqueue_style('fontawesome', UV_PLUGIN_URL.'assets/global/css/fontawesome.min.css');
+		//wp_enqueue_script('uv_front_js', plugins_url( '/assets/front/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
+		//wp_localize_script( 'uv_front_js', 'uv_ajax', array( 'uv_ajaxurl' => admin_url( 'admin-ajax.php')));
+
+        wp_register_style('user_verification', user_verification_plugin_url.'assets/front/css/style.css');
+
+        //global
+        wp_register_style('font-awesome-4', user_verification_plugin_url.'assets/global/css/font-awesome-4.css');
+        wp_register_style('font-awesome-5', user_verification_plugin_url.'assets/global/css/font-awesome-5.css');
 	}
 
 	public function uv_admin_scripts(){
