@@ -710,7 +710,7 @@ function user_verification_settings_content_recaptcha(){
             'id'		=> 'sitekey',
             'parent'		=> 'user_verification_settings[recaptcha]',
             'title'		=> __('reCAPTCHA sitekey','user-verification'),
-            'details'	=> __('Google reCAPTCHA sitekey, please register here <a href="https://www.google.com/recaptcha/">https://www.google.com/recaptcha/</a>','user-verification'),
+            'details'	=> __('Google reCAPTCHA sitekey, please register here <a href="https://www.google.com/recaptcha/admin/">https://www.google.com/recaptcha/admin/</a>','user-verification'),
             'type'		=> 'text',
             'value'		=> $sitekey,
             'default'		=> '',
