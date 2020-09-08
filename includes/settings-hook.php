@@ -259,9 +259,6 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
         $templates_data_saved = isset($user_verification_settings['email_templates']['email_templates_data']) ? $user_verification_settings['email_templates']['email_templates_data'] : $templates_data_default;
 
 
-//
-        //var_dump($templates_data_saved);
-
 
         ?>
         <div class="section">

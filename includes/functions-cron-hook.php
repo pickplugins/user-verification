@@ -61,6 +61,11 @@ add_action('user_verification_activation', 'user_verification_upgrade_settings')
 
 function user_verification_upgrade_settings(){
 
+    $user_verification_settings = get_option('user_verification_settings');
+    $settings_upgrade_1_0_42 = isset($user_verification_settings['settings_upgrade_1_0_42']) ? $user_verification_settings['settings_upgrade_1_0_42'] : '';
+
+    if($settings_upgrade_1_0_42 == 'done') return;
+
     $user_verification_settings = array();
 
     $user_verification_settings['email_verification']['enable'] = 'yes';
@@ -167,8 +172,9 @@ function user_verification_upgrade_settings(){
 
 
     $uv_email_templates_data =  get_option('uv_email_templates_data');
-    $user_verification_settings['email_templates_data'] = $uv_email_templates_data;
+    $user_verification_settings['email_templates']['email_templates_data'] = $uv_email_templates_data;
 
+    $user_verification_settings['settings_upgrade_1_0_42'] = 'done';
 
     update_option('user_verification_settings', $user_verification_settings);
 
