@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 5.5
-	Stable tag: 1.0.43
+	Stable tag: 1.0.44
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+= 1.0.44 =
+* 2020-09-09 fix - email templates save issue fixed.
+
 
 = 1.0.43 =
 * 2020-09-08 fix - email templates import issue fixed.

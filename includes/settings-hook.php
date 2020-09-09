@@ -602,11 +602,11 @@ function user_verification_settings_content_spam_protection(){
     //delete_option('user_verification_settings');
 
 
-    $enable_domain_block = isset($user_verification_settings['spam_protection']['enable_domain_block']) ? $user_verification_settings['spam_protection']['enable_domain_block'] : 'yes';
+    $enable_domain_block = isset($user_verification_settings['spam_protection']['enable_domain_block']) ? $user_verification_settings['spam_protection']['enable_domain_block'] : 'no';
     $blocked_domain = isset($user_verification_settings['spam_protection']['blocked_domain']) ? $user_verification_settings['spam_protection']['blocked_domain'] : array();
     $allowed_domain = isset($user_verification_settings['spam_protection']['allowed_domain']) ? $user_verification_settings['spam_protection']['allowed_domain'] : array();
 
-    $enable_username_block = isset($user_verification_settings['spam_protection']['enable_username_block']) ? $user_verification_settings['spam_protection']['enable_username_block'] : 'yes';
+    $enable_username_block = isset($user_verification_settings['spam_protection']['enable_username_block']) ? $user_verification_settings['spam_protection']['enable_username_block'] : 'no';
     $blocked_username = isset($user_verification_settings['spam_protection']['blocked_username']) ? $user_verification_settings['spam_protection']['blocked_username'] : array();
 
     //echo '<pre>'.var_export($user_verification_settings, true).'</pre>';
@@ -719,10 +719,10 @@ function user_verification_settings_content_recaptcha(){
 
 
     $sitekey = isset($user_verification_settings['recaptcha']['sitekey']) ? $user_verification_settings['recaptcha']['sitekey'] : '';
-    $default_login_page = isset($user_verification_settings['recaptcha']['default_login_page']) ? $user_verification_settings['recaptcha']['default_login_page'] : '';
-    $default_registration_page = isset($user_verification_settings['recaptcha']['default_registration_page']) ? $user_verification_settings['recaptcha']['default_registration_page'] : '';
-    $default_lostpassword_page = isset($user_verification_settings['recaptcha']['default_lostpassword_page']) ? $user_verification_settings['recaptcha']['default_lostpassword_page'] : '';
-    $comment_form = isset($user_verification_settings['recaptcha']['comment_form']) ? $user_verification_settings['recaptcha']['comment_form'] : '';
+    $default_login_page = isset($user_verification_settings['recaptcha']['default_login_page']) ? $user_verification_settings['recaptcha']['default_login_page'] : 'no';
+    $default_registration_page = isset($user_verification_settings['recaptcha']['default_registration_page']) ? $user_verification_settings['recaptcha']['default_registration_page'] : 'no';
+    $default_lostpassword_page = isset($user_verification_settings['recaptcha']['default_lostpassword_page']) ? $user_verification_settings['recaptcha']['default_lostpassword_page'] : 'no';
+    $comment_form = isset($user_verification_settings['recaptcha']['comment_form']) ? $user_verification_settings['recaptcha']['comment_form'] : 'no';
 
 
 
@@ -828,9 +828,9 @@ function user_verification_settings_content_recaptcha_woo(){
     //delete_option('user_verification_settings');
 
 
-    $wc_login_form = isset($user_verification_settings['recaptcha']['wc_login_form']) ? $user_verification_settings['recaptcha']['wc_login_form'] : '';
-    $wc_register_form = isset($user_verification_settings['recaptcha']['wc_register_form']) ? $user_verification_settings['recaptcha']['wc_register_form'] : '';
-    $wc_lostpassword_form = isset($user_verification_settings['recaptcha']['wc_lostpassword_form']) ? $user_verification_settings['recaptcha']['wc_lostpassword_form'] : '';
+    $wc_login_form = isset($user_verification_settings['recaptcha']['wc_login_form']) ? $user_verification_settings['recaptcha']['wc_login_form'] : 'no';
+    $wc_register_form = isset($user_verification_settings['recaptcha']['wc_register_form']) ? $user_verification_settings['recaptcha']['wc_register_form'] : 'no';
+    $wc_lostpassword_form = isset($user_verification_settings['recaptcha']['wc_lostpassword_form']) ? $user_verification_settings['recaptcha']['wc_lostpassword_form'] : 'no';
 
 
 
@@ -915,7 +915,7 @@ function user_verification_settings_content_ultimate_member(){
     //delete_option('user_verification_settings');
 
 
-    $disable_auto_login = isset($user_verification_settings['ultimate_member']['disable_auto_login']) ? $user_verification_settings['ultimate_member']['disable_auto_login'] : 'yes';
+    $disable_auto_login = isset($user_verification_settings['ultimate_member']['disable_auto_login']) ? $user_verification_settings['ultimate_member']['disable_auto_login'] : 'no';
     $message_before_header = isset($user_verification_settings['ultimate_member']['message_before_header']) ? $user_verification_settings['ultimate_member']['message_before_header'] : '';
 
 
@@ -982,7 +982,7 @@ function user_verification_settings_content_paid_memberships_pro(){
     //delete_option('user_verification_settings');
 
 
-    $disable_auto_login = isset($user_verification_settings['paid_memberships_pro']['disable_auto_login']) ? $user_verification_settings['paid_memberships_pro']['disable_auto_login'] : 'yes';
+    $disable_auto_login = isset($user_verification_settings['paid_memberships_pro']['disable_auto_login']) ? $user_verification_settings['paid_memberships_pro']['disable_auto_login'] : 'no';
     $message_checkout_page = isset($user_verification_settings['paid_memberships_pro']['message_checkout_page']) ? $user_verification_settings['paid_memberships_pro']['message_checkout_page'] : '';
     $redirect_timout = isset($user_verification_settings['paid_memberships_pro']['redirect_timout']) ? $user_verification_settings['paid_memberships_pro']['redirect_timout'] : '';
     $redirect_after_checkout = isset($user_verification_settings['paid_memberships_pro']['redirect_after_checkout']) ? $user_verification_settings['paid_memberships_pro']['redirect_after_checkout'] : '';
@@ -1072,53 +1072,6 @@ function user_verification_settings_content_paid_memberships_pro(){
 
     <?php
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
