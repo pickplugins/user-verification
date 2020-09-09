@@ -92,34 +92,6 @@ function user_verification_bulk_action_admin_notice() {
 
 
 
-function uv_ajax_approve_user_manually(){
-	
-	$user_id 	= isset( $_POST['user_id'] ) ? sanitize_text_field($_POST['user_id']) : '';
-	$do 		= isset( $_POST['do'] ) ? sanitize_text_field($_POST['do']) : '';
-	
-	if( empty( $user_id ) || empty( $do ) ) die();
-	
-	if( $do == 'approve' ) update_user_meta( $user_id, 'user_activation_status', 1 );
-	if( $do == 'remove_approval' ) update_user_meta( $user_id, 'user_activation_status', 0 );
-	
-	$user_activation_status = get_user_meta( $user_id, 'user_activation_status', true );
-	$user_activation_status = empty( $user_activation_status ) ? 0 : $user_activation_status;
-	$uv_status 				= $user_activation_status == 1 ? __('Verified', 'user-verification') : __('Unverified', 'user-verification');
-	
-	if( $user_activation_status == 1 ){
-		
-		$user_data 	= get_userdata( $user_id );
-		uv_mail( $user_data->user_email, array(
-			'action' => 'email_confirmed',
-			'user_id' => $user_id,
-		) );
-	}
-	
-	echo $uv_status;
-	die();
-}
-add_action('wp_ajax_uv_ajax_approve_user_manually', 'uv_ajax_approve_user_manually');
-add_action('wp_ajax_nopriv_uv_ajax_approve_user_manually', 'uv_ajax_approve_user_manually');
 
 
 
@@ -412,12 +384,116 @@ function uv_filter_check_activation() {
 	                $redirect_page_url = get_permalink($redirect_after_verification);
                 }
 
+                $user_id = $meta_data->user_id;
 
-				$html.= "<div class='verified'><i class='fas fa-check-square'></i> $verification_success</div>";
+
+                $html.= "<div class='verified'><i class='fas fa-check-square'></i> $verification_success</div>";
                 update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
 
-                $user_data = get_userdata( $meta_data->user_id );
-                uv_mail( $user_data->user_email, array( 'action' => 'email_confirmed', 'user_id' => $meta_data->user_id, ) );
+
+
+                $class_user_verification_emails = new class_user_verification_emails();
+                $email_templates_data = $class_user_verification_emails->email_templates_data();
+
+                $logo_id = isset($user_verification_settings['logo_id']) ? $user_verification_settings['logo_id'] : '';
+
+                $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+                $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
+                $email_templates_data = isset($user_verification_settings['email_templates_data']['email_confirmed']) ? $user_verification_settings['email_templates_data']['email_confirmed'] : $email_templates_data['email_confirmed'];
+
+
+                $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
+                $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
+                $email_from_name = isset($email_templates_data['email_from_name']) ? $email_templates_data['email_from_name'] : '';
+                $reply_to = isset($email_templates_data['reply_to']) ? $email_templates_data['reply_to'] : '';
+                $reply_to_name = isset($email_templates_data['reply_to_name']) ? $email_templates_data['reply_to_name'] : '';
+                $email_subject = isset($email_templates_data['subject']) ? $email_templates_data['subject'] : '';
+                $email_body = isset($email_templates_data['html']) ? $email_templates_data['html'] : '';
+
+                $email_body = do_shortcode($email_body);
+                $email_body = wpautop($email_body);
+
+                $verification_page_url = get_permalink($verification_page_id);
+                $permalink_structure = get_option('permalink_structure');
+
+                $user_activation_key =  md5(uniqid('', true) );
+
+                update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
+                update_user_meta( $user_id, 'user_activation_status', 1 );
+
+                $user_data 	= get_userdata( $user_id );
+
+
+
+
+                $user_roles = !empty($user_data->roles) ? $user_data->roles : array();
+
+
+                if(!empty($exclude_user_roles))
+                    foreach ($exclude_user_roles as $role):
+
+                        if(in_array($role, $user_roles)){
+                            //update_option('uv_custom_option', $role);
+                            update_user_meta( $user_id, 'user_activation_status', 1 );
+                            return;
+                        }
+
+                    endforeach;
+
+
+                if(empty($permalink_structure)){
+                    $link 		= $verification_page_url.'&activation_key='.$user_activation_key;
+
+                }else{
+
+                    $link 		= $verification_page_url.'?activation_key='.$user_activation_key;
+                }
+
+
+
+                $site_name = get_bloginfo('name');
+                $site_description = get_bloginfo('description');
+                $site_url = get_bloginfo('url');
+                $site_logo_url = wp_get_attachment_url($logo_id);
+
+                $vars = array(
+                    '{site_name}'=> esc_html($site_name),
+                    '{site_description}' => esc_html($site_description),
+                    '{site_url}' => esc_url_raw($site_url),
+                    '{site_logo_url}' => esc_url_raw($site_logo_url),
+
+                    '{first_name}' => esc_html($user_data->last_name),
+                    '{last_name}' => esc_html($user_data->last_name),
+                    '{user_display_name}' => esc_html($user_data->display_name),
+                    '{user_email}' => esc_html($user_data->user_email),
+                    '{user_name}' => esc_html($user_data->user_nicename),
+                    '{user_avatar}' => get_avatar( $user_data->user_email, 60 ),
+
+                    '{ac_activaton_url}' => esc_url_raw($link),
+
+                );
+
+
+
+                $vars = apply_filters('user_verification_mail_vars', $vars);
+
+
+
+                $email_data['mail_to'] =  $user_data->user_email;
+                $email_data['mail_bcc'] =  $email_bcc;
+                $email_data['mail_from'] = $email_from ;
+                $email_data['mail_from_name'] = $email_from_name;
+                $email_data['reply_to'] = $reply_to;
+                $email_data['reply_to_name'] = $reply_to_name;
+
+                $email_data['mail_subject'] = strtr($email_subject, $vars);
+                $email_data['mail_body'] = strtr($email_body, $vars);
+                $email_data['attachments'] = array();
+
+
+                $mail_status = $class_user_verification_emails->send_email($email_data);
+
+
 
                 if( $login_after_verification ==  "yes"  ){
 
@@ -449,23 +525,115 @@ function uv_filter_check_activation() {
 
             if($uv_action=='resend'):
 
-                $user_activation_key = md5(uniqid('', true) );
 
-                update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
+                $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
+
+                if($email_verification_enable != 'yes') return;
+
+                $class_user_verification_emails = new class_user_verification_emails();
+                $email_templates_data = $class_user_verification_emails->email_templates_data();
+
+                $logo_id = isset($user_verification_settings['logo_id']) ? $user_verification_settings['logo_id'] : '';
+
+                $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+                $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
+                $email_templates_data = isset($user_verification_settings['email_templates_data']['email_resend_key']) ? $user_verification_settings['email_templates_data']['email_resend_key'] : $email_templates_data['email_resend_key'];
+
+
+                $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
+                $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
+                $email_from_name = isset($email_templates_data['email_from_name']) ? $email_templates_data['email_from_name'] : '';
+                $reply_to = isset($email_templates_data['reply_to']) ? $email_templates_data['reply_to'] : '';
+                $reply_to_name = isset($email_templates_data['reply_to_name']) ? $email_templates_data['reply_to_name'] : '';
+                $email_subject = isset($email_templates_data['subject']) ? $email_templates_data['subject'] : '';
+                $email_body = isset($email_templates_data['html']) ? $email_templates_data['html'] : '';
+
+                $email_body = do_shortcode($email_body);
+                $email_body = wpautop($email_body);
 
                 $verification_page_url = get_permalink($verification_page_id);
+                $permalink_structure = get_option('permalink_structure');
+
+                $user_activation_key =  md5(uniqid('', true) );
+
+                update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
+                update_user_meta( $user_id, 'user_activation_status', 0 );
 
                 $user_data 	= get_userdata( $user_id );
-                $link 		= $verification_page_url.'?activation_key='.$user_activation_key;
-				
-                uv_mail(
-                    $user_data->user_email,
-                    array(
-                        'action' 	=> 'email_resend_key',
-                        'user_id' 	=> $user_id,
-                        'link'		=> $link
-                    )
+
+
+
+
+                $user_roles = !empty($user_data->roles) ? $user_data->roles : array();
+
+
+                if(!empty($exclude_user_roles)){
+                    foreach ($exclude_user_roles as $role):
+
+                        if(in_array($role, $user_roles)){
+                            //update_option('uv_custom_option', $role);
+                            update_user_meta( $user_id, 'user_activation_status', 1 );
+                            return;
+                        }
+
+                    endforeach;
+                }
+
+
+
+                if(empty($permalink_structure)){
+                    $link 		= $verification_page_url.'&activation_key='.$user_activation_key;
+
+                }else{
+
+                    $link 		= $verification_page_url.'?activation_key='.$user_activation_key;
+                }
+
+
+
+                $site_name = get_bloginfo('name');
+                $site_description = get_bloginfo('description');
+                $site_url = get_bloginfo('url');
+                $site_logo_url = wp_get_attachment_url($logo_id);
+
+                $vars = array(
+                    '{site_name}'=> esc_html($site_name),
+                    '{site_description}' => esc_html($site_description),
+                    '{site_url}' => esc_url_raw($site_url),
+                    '{site_logo_url}' => esc_url_raw($site_logo_url),
+
+                    '{first_name}' => esc_html($user_data->last_name),
+                    '{last_name}' => esc_html($user_data->last_name),
+                    '{user_display_name}' => esc_html($user_data->display_name),
+                    '{user_email}' => esc_html($user_data->user_email),
+                    '{user_name}' => esc_html($user_data->user_nicename),
+                    '{user_avatar}' => get_avatar( $user_data->user_email, 60 ),
+
+                    '{ac_activaton_url}' => esc_url_raw($link),
+
                 );
+
+
+
+                $vars = apply_filters('user_verification_mail_vars', $vars);
+
+
+
+                $email_data['mail_to'] =  $user_data->user_email;
+                $email_data['mail_bcc'] =  $email_bcc;
+                $email_data['mail_from'] = $email_from ;
+                $email_data['mail_from_name'] = $email_from_name;
+                $email_data['reply_to'] = $reply_to;
+                $email_data['reply_to_name'] = $reply_to_name;
+
+                $email_data['mail_subject'] = strtr($email_subject, $vars);
+                $email_data['mail_body'] = strtr($email_body, $vars);
+                $email_data['attachments'] = array();
+
+
+                $mail_status = $class_user_verification_emails->send_email($email_data);
+
+
 
                 $html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $activation_sent</div>";
 				
@@ -537,24 +705,116 @@ function uv_resend_verification_form($attr){
 
 				$user_id = $user_data->ID;
 
-				$user_activation_key = md5(uniqid('', true) );
 
-				update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
+                $user_verification_settings = get_option('user_verification_settings');
+                $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
+
+                if($email_verification_enable != 'yes') return;
+
+                $class_user_verification_emails = new class_user_verification_emails();
+                $email_templates_data = $class_user_verification_emails->email_templates_data();
+
+                $logo_id = isset($user_verification_settings['logo_id']) ? $user_verification_settings['logo_id'] : '';
+
+                $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
+                $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
+                $email_templates_data = isset($user_verification_settings['email_templates_data']['email_resend_key']) ? $user_verification_settings['email_templates_data']['email_resend_key'] : $email_templates_data['email_resend_key'];
 
 
-				$verification_page_url = get_permalink($verification_page_id);
+                $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
+                $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
+                $email_from_name = isset($email_templates_data['email_from_name']) ? $email_templates_data['email_from_name'] : '';
+                $reply_to = isset($email_templates_data['reply_to']) ? $email_templates_data['reply_to'] : '';
+                $reply_to_name = isset($email_templates_data['reply_to_name']) ? $email_templates_data['reply_to_name'] : '';
+                $email_subject = isset($email_templates_data['subject']) ? $email_templates_data['subject'] : '';
+                $email_body = isset($email_templates_data['html']) ? $email_templates_data['html'] : '';
 
-				$user_data 	= get_userdata( $user_id );
-				$link 		= $verification_page_url.'?activation_key='.$user_activation_key;
+                $email_body = do_shortcode($email_body);
+                $email_body = wpautop($email_body);
 
-				uv_mail(
-					$user_data->user_email,
-					array(
-						'action' 	=> 'email_resend_key',
-						'user_id' 	=> $user_id,
-						'link'		=> $link
-					)
-				);
+                $verification_page_url = get_permalink($verification_page_id);
+                $permalink_structure = get_option('permalink_structure');
+
+                $user_activation_key =  md5(uniqid('', true) );
+
+                update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
+                update_user_meta( $user_id, 'user_activation_status', 0 );
+
+                $user_data 	= get_userdata( $user_id );
+
+
+
+
+                $user_roles = !empty($user_data->roles) ? $user_data->roles : array();
+
+
+                if(!empty($exclude_user_roles)){
+                    foreach ($exclude_user_roles as $role):
+
+                        if(in_array($role, $user_roles)){
+                            //update_option('uv_custom_option', $role);
+                            update_user_meta( $user_id, 'user_activation_status', 1 );
+                            return;
+                        }
+
+                    endforeach;
+                }
+
+
+
+                if(empty($permalink_structure)){
+                    $link 		= $verification_page_url.'&activation_key='.$user_activation_key;
+
+                }else{
+
+                    $link 		= $verification_page_url.'?activation_key='.$user_activation_key;
+                }
+
+
+
+                $site_name = get_bloginfo('name');
+                $site_description = get_bloginfo('description');
+                $site_url = get_bloginfo('url');
+                $site_logo_url = wp_get_attachment_url($logo_id);
+
+                $vars = array(
+                    '{site_name}'=> esc_html($site_name),
+                    '{site_description}' => esc_html($site_description),
+                    '{site_url}' => esc_url_raw($site_url),
+                    '{site_logo_url}' => esc_url_raw($site_logo_url),
+
+                    '{first_name}' => esc_html($user_data->last_name),
+                    '{last_name}' => esc_html($user_data->last_name),
+                    '{user_display_name}' => esc_html($user_data->display_name),
+                    '{user_email}' => esc_html($user_data->user_email),
+                    '{user_name}' => esc_html($user_data->user_nicename),
+                    '{user_avatar}' => get_avatar( $user_data->user_email, 60 ),
+
+                    '{ac_activaton_url}' => esc_url_raw($link),
+
+                );
+
+
+
+                $vars = apply_filters('user_verification_mail_vars', $vars);
+
+
+
+                $email_data['mail_to'] =  $user_data->user_email;
+                $email_data['mail_bcc'] =  $email_bcc;
+                $email_data['mail_from'] = $email_from ;
+                $email_data['mail_from_name'] = $email_from_name;
+                $email_data['reply_to'] = $reply_to;
+                $email_data['reply_to_name'] = $reply_to_name;
+
+                $email_data['mail_subject'] = strtr($email_subject, $vars);
+                $email_data['mail_body'] = strtr($email_body, $vars);
+                $email_data['attachments'] = array();
+
+
+                $mail_status = $class_user_verification_emails->send_email($email_data);
+
+
 
 				$html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $activation_sent</div>";
 
@@ -713,6 +973,7 @@ add_action( 'user_register', 'user_verification_user_registered', 30 );
 if ( ! function_exists( 'user_verification_user_registered' ) ) {
     function user_verification_user_registered( $user_id ) {
 
+
         $user_verification_settings = get_option('user_verification_settings');
         $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
 
@@ -733,7 +994,7 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
         $email_from_name = isset($email_templates_data['email_from_name']) ? $email_templates_data['email_from_name'] : '';
         $reply_to = isset($email_templates_data['reply_to']) ? $email_templates_data['reply_to'] : '';
         $reply_to_name = isset($email_templates_data['reply_to_name']) ? $email_templates_data['reply_to_name'] : '';
-        $email_subject = isset($templates_data_display['subject']) ? $templates_data_display['subject'] : '';
+        $email_subject = isset($email_templates_data['subject']) ? $email_templates_data['subject'] : '';
         $email_body = isset($email_templates_data['html']) ? $email_templates_data['html'] : '';
 
         $email_body = do_shortcode($email_body);
@@ -777,7 +1038,6 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
 
-        $admin_email = get_option('admin_email');
         $site_name = get_bloginfo('name');
         $site_description = get_bloginfo('description');
         $site_url = get_bloginfo('url');
@@ -828,71 +1088,3 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
 
-function uv_mail( $email_to_add = '', $args = array() ) {
-
-    if( empty( $email_to_add ) ) return false;
-
-    require_once( user_verification_plugin_dir . 'includes/classes/class-emails.php');
-
-    $action 	= isset( $args['action'] ) ? $args['action'] : '';
-    $user_id 	= isset( $args['user_id'] ) ? $args['user_id'] : 1;
-    $link 		= isset( $args['link'] ) ? $args['link'] : '';
-    $user_info 	= get_userdata( $user_id );
-
-    //update_option( 'uv_check_data', $action );
-
-    if( empty( $action ) ) return false;
-
-    $parametar_vars = array(
-        '{site_name}'			=> get_bloginfo('name'),
-        '{site_description}' 	=> get_bloginfo('description'),
-        '{site_url}' 			=>  get_bloginfo('url'),
-        '{user_name}' 			=> $user_info->user_login,
-        '{user_display_name}' 	=> $user_info->display_name,
-        '{user_first_name}' 	=> $user_info->first_name,
-        '{user_last_name}' 	    => $user_info->last_name,
-        '{user_avatar}' 		=> get_avatar( $user_id, 60 ),
-        '{ac_activaton_url}'	=> $link
-    );
-
-
-    $uv_email_templates_data = get_option( 'uv_email_templates_data' );
-    if(empty($uv_email_templates_data)){
-
-        $class_user_verification_emails = new class_user_verification_emails();
-        $templates_data = $class_user_verification_emails->email_templates_data();
-
-    } else {
-
-        $class_user_verification_emails = new class_user_verification_emails();
-        $templates_data = $class_user_verification_emails->email_templates_data();
-
-        $templates_data = array_merge($templates_data, $uv_email_templates_data);
-    }
-
-
-    $message_data = isset( $templates_data[$action] ) ? $templates_data[$action] : '';
-    if( empty( $message_data ) ) return false;
-
-
-    $email_to 			= strtr( $message_data['email_to'], $parametar_vars );
-    $email_subject 		= strtr( $message_data['subject'], $parametar_vars );
-    $email_body 		= strtr( $message_data['html'], $parametar_vars );
-    $email_from 		= strtr( $message_data['email_from'], $parametar_vars );
-    $email_from_name 	= strtr( $message_data['email_from_name'], $parametar_vars );
-    $enable 			=  isset($message_data['enable']) ? $message_data['enable'] : '';
-
-    if( $enable == 'no' ) return false;
-
-    $headers = "";
-    $headers .= "From: ".$email_from_name." <".$email_from."> \r\n";
-    $headers .= "Bcc: ".$email_to." \r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-    $attachments = '';
-
-    $status = wp_mail( $email_to_add, $email_subject, $email_body, $headers, $attachments );
-
-    return $status;
-}
