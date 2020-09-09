@@ -115,7 +115,7 @@ class UserVerification{
 	
 
 	public function uv_declare_classes() {
-        require_once( user_verification_plugin_dir . 'includes/classes/class-manage-verification.php');
+//        require_once( user_verification_plugin_dir . 'includes/classes/class-manage-verification.php');
 
 
         require_once( user_verification_plugin_dir . 'includes/classes/class-emails.php');
