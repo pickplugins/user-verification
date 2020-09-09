@@ -143,7 +143,7 @@ function bp_members_signup_custom_column_uv_bp( $val, $column_name, $signup_obje
 
         if( $user_activation_status == 1 ) {
 
-            echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Mark as Unverified', 'user-verification')."</span>";
+            echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Mark as unverified', 'user-verification')."</span>";
         }
 
         echo "<span class='activation_key' > ".$activation_key."</span>";

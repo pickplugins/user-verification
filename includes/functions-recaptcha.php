@@ -281,7 +281,7 @@ function uv_verify_recaptcha_comment_form( $commentdata ) {
 
 	if($comment_form == 'yes'):
 		if ( empty( $_POST['g-recaptcha-response'] ) ) {
-			wp_die( __('Captcha Error. Please try again.','user-verification') );
+			wp_die( __('Captcha error, please try again.','user-verification') );
 		}
     endif;
 
