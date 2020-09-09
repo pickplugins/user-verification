@@ -85,7 +85,7 @@ class uv_class_column_users{
                 </span> |
                 <span class="resend_verification">
                     <a  href="<?php echo $resend_verification_url; ?>"><?php echo __('Resend verification', 'user-verification'); ?></a>
-                </span> |
+                </span>
 
 
                 <?php
