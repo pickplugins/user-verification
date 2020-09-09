@@ -153,7 +153,7 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 * 20/08/2019 fix - user admin column issue fixed.
 
 = 1.0.26 =
-* 07/05/2019 fix - 'class_uv_emails' error issue fixed.
+* 07/05/2019 fix - 'class_user_verification_emails' error issue fixed.
 
 = 1.0.24 =
 * 16/04/2019 fix - WooCommerce Redirect after payment.

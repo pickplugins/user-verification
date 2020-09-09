@@ -22,10 +22,8 @@ class UserVerification{
 		$this->uv_define_constants();
 
         $this->uv_loading_functions();
-		//$this->uv_declare_classes();
-		$this->uv_declare_actions();
+		$this->uv_declare_classes();
 		$this->uv_loading_script();
-        add_action( 'init', array( $this, 'uv_declare_classes' ));
 
 
 		add_action( 'init', array( $this, '_textdomain' ));
@@ -115,12 +113,7 @@ class UserVerification{
 		add_action( 'admin_enqueue_scripts', array( $this, 'uv_admin_scripts' ) );
 	}
 	
-	
-	public function uv_declare_actions() {
 
-		require_once( user_verification_plugin_dir . 'includes/actions/action-uv-registration.php');
-	}
-	
 	public function uv_declare_classes() {
         require_once( user_verification_plugin_dir . 'includes/classes/class-manage-verification.php');
 

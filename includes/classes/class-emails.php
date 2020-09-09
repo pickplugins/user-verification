@@ -1,7 +1,7 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
-class class_uv_emails{
+class class_user_verification_emails{
 	
 	public function __construct(){
 
@@ -144,4 +144,4 @@ class class_uv_emails{
 	}
 }
 	
-//new class_uv_emails();
+//new class_user_verification_emails();

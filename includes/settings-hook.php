@@ -249,7 +249,7 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
     function user_verification_settings_content_email_templates(){
 
         $settings_tabs_field = new settings_tabs_field();
-        $class_license_manager_emails = new class_uv_emails();
+        $class_license_manager_emails = new class_user_verification_emails();
         $templates_data_default = $class_license_manager_emails->email_templates_data();
         $email_templates_parameters = $class_license_manager_emails->email_templates_parameters();
 
@@ -257,7 +257,7 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
         $user_verification_settings = get_option('user_verification_settings');
 
 
-        $logo_url = isset($user_verification_settings['logo_url']) ? $user_verification_settings['logo_url'] : '';
+        $logo_id = isset($user_verification_settings['logo_id']) ? $user_verification_settings['logo_id'] : '';
         $templates_data_saved = isset($user_verification_settings['email_templates_data']) ? $user_verification_settings['email_templates_data'] : $templates_data_default;
 
 
@@ -270,12 +270,12 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
             <?php
 
             $args = array(
-                'id'		=> 'logo_url',
+                'id'		=> 'logo_id',
                 'parent'		=> 'user_verification_settings',
                 'title'		=> __('Email logo','user-verification'),
                 'details'	=> __('Email logo URL to display on mail.','user-verification'),
                 'type'		=> 'media',
-                'value'		=> $logo_url,
+                'value'		=> $logo_id,
                 'default'		=> '',
                 'placeholder'		=> '',
             );
@@ -301,9 +301,16 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
                         $templates_data_display = isset($templates_data_saved[$key]) ? $templates_data_saved[$key] : $templates;
 
 
-                        $email_to = isset($templates_data_display['email_to']) ? $templates_data_display['email_to'] : '';
+                        $email_bcc = isset($templates_data_display['email_bcc']) ? $templates_data_display['email_bcc'] : '';
                         $email_from = isset($templates_data_display['email_from']) ? $templates_data_display['email_from'] : '';
                         $email_from_name = isset($templates_data_display['email_from_name']) ? $templates_data_display['email_from_name'] : '';
+                        $reply_to = isset($templates_data_display['reply_to']) ? $templates_data_display['reply_to'] : '';
+                        $reply_to_name = isset($templates_data_display['reply_to_name']) ? $templates_data_display['reply_to_name'] : '';
+                        $email_subject = isset($templates_data_display['subject']) ? $templates_data_display['subject'] : '';
+
+                        $email_body = isset($templates_data_display['html']) ? $templates_data_display['html'] : '';
+
+
                         $enable = isset($templates_data_display['enable']) ? $templates_data_display['enable'] : '';
                         $description = isset($templates_data_display['description']) ? $templates_data_display['description'] : '';
 
@@ -356,17 +363,17 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
 
 
                                 <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Email To(Bcc)', 'user-verification'); ?></div>
+                                    <div class="field-lable"><?php echo __('Email Bcc', 'user-verification'); ?></div>
                                     <div class="field-input">
-                                        <input placeholder="hello_1@hello.com,hello_2@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_to]" value="<?php echo $email_to; ?>" />
-                                        <p class="description"><?php echo __('Email send to(copy)', 'user-verification'); ?></p>
+                                        <input placeholder="hello_1@hello.com,hello_2@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_bcc]" value="<?php echo $email_bcc; ?>" />
+                                        <p class="description"><?php echo __('Send a copy to these email(Bcc)', 'user-verification'); ?></p>
                                     </div>
                                 </div>
 
                                 <div class="setting-field">
                                     <div class="field-lable"><?php echo __('Email from name', 'user-verification'); ?></div>
                                     <div class="field-input">
-                                        <input placeholder="hello_1@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
+                                        <input placeholder="<?php echo __('Your name', 'user-verification'); ?>" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
                                         <p class="description"><?php echo __('Email send from name', 'user-verification'); ?></p>
                                     </div>
                                 </div>
@@ -379,10 +386,30 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
                                     </div>
                                 </div>
 
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Reply to name', 'user-verification'); ?></div>
+                                    <div class="field-input">
+                                        <input placeholder="<?php echo __('Your name', 'user-verification'); ?>" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][reply_to_name]" value="<?php echo $reply_to_name; ?>" />
+                                        <p class="description"><?php echo __('Email reply to name', 'user-verification'); ?></p>
+                                    </div>
+                                </div>
+
+                                <div class="setting-field">
+                                    <div class="field-lable"><?php echo __('Reply to', 'user-verification'); ?></div>
+                                    <div class="field-input">
+                                        <input placeholder="hello_1@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][reply_to]" value="<?php echo $reply_to; ?>" />
+                                        <p class="description"><?php echo __('Reply to email address', 'user-verification'); ?></p>
+                                    </div>
+                                </div>
+
+
+
+
                                 <div class="setting-field">
                                     <div class="field-lable"><?php echo __('Email Subject', 'user-verification'); ?></div>
                                     <div class="field-input">
-                                        <input type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][subject]" value="<?php echo $templates_data_display['subject']; ?>" />
+                                        <input type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][subject]" value="<?php echo $email_subject; ?>" />
                                         <p class="description"><?php echo __('Write email subject', 'user-verification'); ?></p>
                                     </div>
                                 </div>
@@ -392,7 +419,7 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
                                     <div class="field-input">
                                         <?php
 
-                                        wp_editor( $templates_data_display['html'], $key, $settings = array('textarea_name'=>'user_verification_settings[email_templates_data]['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'400px', ) );
+                                        wp_editor( $email_body, $key, $settings = array('textarea_name'=>'user_verification_settings[email_templates_data]['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'400px', ) );
 
                                         ?>
                                         <p class="description"><?php echo __('Write email body', 'user-verification'); ?></p>

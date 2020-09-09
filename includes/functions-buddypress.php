@@ -74,7 +74,7 @@ add_action('bp_signup_validate','validate_email_edu');
 
 function bp_core_signup_user_uv( $user_id, $user_login, $user_password, $user_email, $usermeta) {
 
-    uv_action_user_register_function( $user_id );
+    user_verification_user_registered( $user_id );
 
 }
 add_action( "bp_core_signup_user", "bp_core_signup_user_uv", 10, 5 );
