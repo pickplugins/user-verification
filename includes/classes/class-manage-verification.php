@@ -143,15 +143,15 @@ class class_user_verification_manage_verification{
 
 
 
-                    $email_data['mail_to'] =  $user_data->user_email;
-                    $email_data['mail_bcc'] =  $email_bcc;
-                    $email_data['mail_from'] = $email_from ;
-                    $email_data['mail_from_name'] = $email_from_name;
+                    $email_data['email_to'] =  $user_data->user_email;
+                    $email_data['email_bcc'] =  $email_bcc;
+                    $email_data['email_from'] = $email_from ;
+                    $email_data['email_from_name'] = $email_from_name;
                     $email_data['reply_to'] = $reply_to;
                     $email_data['reply_to_name'] = $reply_to_name;
 
-                    $email_data['mail_subject'] = strtr($email_subject, $vars);
-                    $email_data['mail_body'] = strtr($email_body, $vars);
+                    $email_data['subject'] = strtr($email_subject, $vars);
+                    $email_data['html'] = strtr($email_body, $vars);
                     $email_data['attachments'] = array();
 
 

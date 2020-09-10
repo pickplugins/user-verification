@@ -13,12 +13,19 @@ class class_user_verification_emails{
     public function send_email($email_data){
 
 
+        //error_log($email_data['email_to']);
+
+
 
         $email_to = isset($email_data['email_to']) ? $email_data['email_to'] : '';
         $email_bcc = isset($email_data['email_bcc']) ? $email_data['email_bcc'] : '';
 
         $email_from = isset($email_data['email_from']) ? $email_data['email_from'] : get_option('admin_email');
         $email_from_name = isset($email_data['email_from_name']) ? $email_data['email_from_name'] : get_bloginfo('name');
+
+        $reply_to = isset($email_data['reply_to']) ? $email_data['reply_to'] : get_option('admin_email');
+        $reply_to_name = isset($email_data['reply_to_name']) ? $email_data['reply_to_name'] : get_bloginfo('name');
+
         $subject = isset($email_data['subject']) ? $email_data['subject'] : '';
         $email_body = isset($email_data['html']) ? $email_data['html'] : '';
         $attachments = isset($email_data['attachments']) ? $email_data['attachments'] : '';
@@ -26,6 +33,11 @@ class class_user_verification_emails{
 
         $headers = array();
         $headers[] = "From: ".$email_from_name." <".$email_from.">";
+
+        if(!empty($reply_to)){
+            $headers[] = "Reply-To: ".$reply_to_name." <".$reply_to.">";
+        }
+
         $headers[] = "MIME-Version: 1.0";
         $headers[] = "Content-Type: text/html; charset=UTF-8";
         if(!empty($email_bcc)){
@@ -34,7 +46,27 @@ class class_user_verification_emails{
 
         $headers = apply_filters('user_verification_mail_headers', $headers);
 
+
+
+
+
         $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
+
+
+        //error_log($email_to);
+        //error_log($subject);
+        //error_log($email_body);
+
+        //error_log(serialize($email_data));
+
+
+//        if($status){
+//            error_log('mail sent');
+//
+//        }else{
+//            error_log('mail not sent');
+//
+//        }
 
         return $status;
 

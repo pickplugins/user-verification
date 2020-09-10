@@ -479,15 +479,15 @@ function uv_filter_check_activation() {
 
 
 
-                $email_data['mail_to'] =  $user_data->user_email;
-                $email_data['mail_bcc'] =  $email_bcc;
-                $email_data['mail_from'] = $email_from ;
-                $email_data['mail_from_name'] = $email_from_name;
+                $email_data['email_to'] =  $user_data->user_email;
+                $email_data['email_bcc'] =  $email_bcc;
+                $email_data['email_from'] = $email_from ;
+                $email_data['email_from_name'] = $email_from_name;
                 $email_data['reply_to'] = $reply_to;
                 $email_data['reply_to_name'] = $reply_to_name;
 
-                $email_data['mail_subject'] = strtr($email_subject, $vars);
-                $email_data['mail_body'] = strtr($email_body, $vars);
+                $email_data['subject'] = strtr($email_subject, $vars);
+                $email_data['html'] = strtr($email_body, $vars);
                 $email_data['attachments'] = array();
 
 
@@ -619,15 +619,15 @@ function uv_filter_check_activation() {
 
 
 
-                $email_data['mail_to'] =  $user_data->user_email;
-                $email_data['mail_bcc'] =  $email_bcc;
-                $email_data['mail_from'] = $email_from ;
-                $email_data['mail_from_name'] = $email_from_name;
+                $email_data['email_to'] =  $user_data->user_email;
+                $email_data['email_bcc'] =  $email_bcc;
+                $email_data['email_from'] = $email_from ;
+                $email_data['email_from_name'] = $email_from_name;
                 $email_data['reply_to'] = $reply_to;
                 $email_data['reply_to_name'] = $reply_to_name;
 
-                $email_data['mail_subject'] = strtr($email_subject, $vars);
-                $email_data['mail_body'] = strtr($email_body, $vars);
+                $email_data['subject'] = strtr($email_subject, $vars);
+                $email_data['html'] = strtr($email_body, $vars);
                 $email_data['attachments'] = array();
 
 
@@ -800,15 +800,15 @@ function uv_resend_verification_form($attr){
 
 
 
-                $email_data['mail_to'] =  $user_data->user_email;
-                $email_data['mail_bcc'] =  $email_bcc;
-                $email_data['mail_from'] = $email_from ;
-                $email_data['mail_from_name'] = $email_from_name;
+                $email_data['email_to'] =  $user_data->user_email;
+                $email_data['email_bcc'] =  $email_bcc;
+                $email_data['email_from'] = $email_from ;
+                $email_data['email_from_name'] = $email_from_name;
                 $email_data['reply_to'] = $reply_to;
                 $email_data['reply_to_name'] = $reply_to_name;
 
-                $email_data['mail_subject'] = strtr($email_subject, $vars);
-                $email_data['mail_body'] = strtr($email_body, $vars);
+                $email_data['subject'] = strtr($email_subject, $vars);
+                $email_data['html'] = strtr($email_body, $vars);
                 $email_data['attachments'] = array();
 
 
@@ -989,6 +989,8 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
         $email_templates_data = isset($user_verification_settings['email_templates_data']['user_registered']) ? $user_verification_settings['email_templates_data']['user_registered'] : $email_templates_data['user_registered'];
 
 
+        //error_log(serialize($email_templates_data));
+
         $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
         $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
         $email_from_name = isset($email_templates_data['email_from_name']) ? $email_templates_data['email_from_name'] : '';
@@ -1066,19 +1068,23 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
 
-        $email_data['mail_to'] =  $user_data->user_email;
-        $email_data['mail_bcc'] =  $email_bcc;
-        $email_data['mail_from'] = $email_from ;
-        $email_data['mail_from_name'] = $email_from_name;
+        $email_data['email_to'] =  $user_data->user_email;
+        $email_data['email_bcc'] =  $email_bcc;
+        $email_data['email_from'] = $email_from ;
+        $email_data['email_from_name'] = $email_from_name;
         $email_data['reply_to'] = $reply_to;
         $email_data['reply_to_name'] = $reply_to_name;
 
-        $email_data['mail_subject'] = strtr($email_subject, $vars);
-        $email_data['mail_body'] = strtr($email_body, $vars);
+        $email_data['subject'] = strtr($email_subject, $vars);
+        $email_data['html'] = strtr($email_body, $vars);
         $email_data['attachments'] = array();
 
 
+
         $mail_status = $class_user_verification_emails->send_email($email_data);
+
+
+
 
 
 

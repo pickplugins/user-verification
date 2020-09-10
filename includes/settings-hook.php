@@ -150,7 +150,7 @@ function user_verification_settings_content_email_verification(){
         $args = array(
             'id'		=> 'activation_sent',
             'parent'		=> 'user_verification_settings[messages]',
-            'title'		=> __('Activation key haa sent','user-verification'),
+            'title'		=> __('Activation key has sent','user-verification'),
             'details'	=> __('Show custom message when activation key is sent to user email','user-verification'),
             'type'		=> 'textarea',
             'value'		=> $activation_sent,
