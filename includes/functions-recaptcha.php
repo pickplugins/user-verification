@@ -1,7 +1,5 @@
 <?php
-
-
-if ( ! defined('ABSPATH')) exit;  // if direct access 
+if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 // Google recaptcha for Default WordPress Login form.

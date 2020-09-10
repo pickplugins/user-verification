@@ -37,30 +37,13 @@ $user_verification_settings_tab[] = array(
 );
 
 
-$user_verification_settings_tab[] = array(
-    'id' => 'woocommerce',
-    'title' => sprintf(__('%s WooCommerce','user-verification'),'<i class="fas fa-cart-arrow-down"></i>'),
-    'priority' => 15,
-    'active' => ($current_tab == 'woocommerce') ? true : false,
-);
 
 
 
-$user_verification_settings_tab[] = array(
-    'id' => 'ultimate_member',
-    'title' => sprintf(__('%s Ultimate Member','user-verification'),'<i class="fas fa-users"></i>'),
-    'priority' => 20,
-    'active' => ($current_tab == 'ultimate_member') ? true : false,
-);
 
 
 
-$user_verification_settings_tab[] = array(
-    'id' => 'paid_memberships_pro',
-    'title' => sprintf(__('%s Paid Memberships Pro','user-verification'),'<i class="fas fa-user-tag"></i>'),
-    'priority' => 25,
-    'active' => ($current_tab == 'paid_memberships_pro') ? true : false,
-);
+
 
 
 

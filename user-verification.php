@@ -3,7 +3,7 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 1.0.44
+Version: 1.0.45
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -94,16 +94,15 @@ class UserVerification{
 	public function uv_loading_functions() {
 		
 		require_once( user_verification_plugin_dir . 'includes/functions.php');
-		require_once( user_verification_plugin_dir . 'includes/functions-woocommerce.php');
 		require_once( user_verification_plugin_dir . 'includes/functions-recaptcha.php');
-        require_once( user_verification_plugin_dir . 'includes/functions-paid-memberships-pro.php');
-        require_once( user_verification_plugin_dir . 'includes/functions-ultimate-member.php');
 
-        require_once( user_verification_plugin_dir . 'includes/functions-buddypress.php');
-        require_once( user_verification_plugin_dir . 'includes/3rd-party/functions-memberpress.php');
         require_once( user_verification_plugin_dir . 'includes/functions-cron-hook.php');
 
-	}
+        require_once( user_verification_plugin_dir . 'includes/3rd-party/3rd-party.php');
+
+
+
+    }
 	
 
 	public function uv_loading_script() {

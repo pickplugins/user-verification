@@ -1,6 +1,4 @@
 <?php
-
-
 if ( ! defined('ABSPATH')) exit;  // if direct access 
 
 add_shortcode('user_verification_clean_user_meta', 'user_verification_clean_user_meta');
