@@ -1,9 +1,9 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
-add_filter('user_verification_settings_tabs', 'user_verification_settings_tabs_woocommerce');
+add_filter('user_verification_settings_tabs', 'user_verification_settings_tabs_pmp');
 
-function user_verification_settings_tabs_woocommerce($tabs){
+function user_verification_settings_tabs_pmp($tabs){
 
     $current_tab = isset($_REQUEST['tab']) ? $_REQUEST['tab'] : 'email_verification';
 
