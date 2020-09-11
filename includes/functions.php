@@ -68,11 +68,13 @@ function user_verification_bulk_action_admin_notice() {
 	if ( isset($_REQUEST['uv_bulk_approve']) ) {
 
 
-        $user_count =  isset($_REQUEST['uv_bulk_approve']) ? sanitize_user_field($_REQUEST['uv_bulk_approve']) : '';
+        $user_count =  isset($_REQUEST['uv_bulk_approve']) ? sanitize_text_field($_REQUEST['uv_bulk_approve']) : '';
+
+
 
         $user_count =  intval( $user_count );
 
-		echo '<div id="message" class="notice notice-success is-dismissible">';
+		echo '<div id="message" class="updated notice is-dismissible">';
 		echo sprintf(__('%s user account marked as verified.', 'user-verification'), $user_count);
 		echo '</div>';
 
@@ -82,7 +84,7 @@ function user_verification_bulk_action_admin_notice() {
         $user_count = sanitize_text_field( $_REQUEST['uv_bulk_disapprove'] );
 		$user_count = intval( $user_count );
 
-		echo '<div id="message" class="notice notice-success is-dismissible">';
+		echo '<div id="message" class="updated notice is-dismissible">';
 		echo sprintf(__('%s user account marked as unverified.', 'user-verification'), $user_count);
 		echo '</div>';
 
