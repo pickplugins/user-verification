@@ -106,6 +106,7 @@ class class_user_verification_notices{
         wp_parse_str($_SERVER['QUERY_STRING'], $output);
         $resend_verification = isset($output['resend_verification']) ? sanitize_text_field($output['resend_verification']) : '';
 
+
         if(empty($resend_verification)) return;
         if($resend_verification != 'yes') return;
 
@@ -113,6 +114,9 @@ class class_user_verification_notices{
 
         $user_id = isset($output['user_id']) ? sanitize_text_field($output['user_id']) : '';
         $_wpnonce = isset($output['_wpnonce']) ? sanitize_text_field($output['_wpnonce']) : '';
+
+
+
 
 
         if ( wp_verify_nonce( $_wpnonce, 'resend_verification' )  ){
@@ -150,8 +154,13 @@ class class_user_verification_notices{
 
             $user_activation_key =  md5(uniqid('', true) );
 
+
+
+
             update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
             update_user_meta( $user_id, 'user_activation_status', 0 );
+
+
 
             $user_data 	= get_userdata( $user_id );
 
