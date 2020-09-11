@@ -26,20 +26,42 @@ Protect your website from spam user and stop instant access by using spam email 
 * Ultimate Member
 * Paid Memberships Pro
 * MemberPress
-
+* Buddypress
 
 
 ### Plugin Features
 
-* Block username for registration.
-* Block email domain for registration.
-* Customizable email template for verify notification mails.
-* Automatically login after verification.
+**Block user name**
+Default WordPress registration will create user name from email, in most case some user name will look like admin1 or admin2 or some critical username may confused other users. sometime bad people may take advantages from this case, you can protect user name to register. you can use pattern to block user name that start by specific string or contain or end with.
+
+**Block email domain**
+You can block any email domain for registration, so kicked out spammy or temporary email provider domains and enjoy the spam free user. you can also set allowed domain so user will not able to register account without using allowed domain.
+
+**Customizable email template**
+You can customize email templates as you want, there is some tags provide for making dynamic email templates.
+
+**Automatically login**
+You can set to user login their account automatically after completed email verification.
+
+**Google reCAPTCHA**
+Protect various form by using Google recaptcha default login form, default register form, default password reset form, default comment form and WooCommerce login form, register form, lost password form.
+
+**WooCommerce Support**
+User verification has full support to work with WooCommerce, you can disable autologin after registration via WooCommerce register form and checkout form. user will not able to login via WooCommerce login form until get verified their account.
+
+**Paid Membership Pro Support**
+user verification provide support for Paid Membership Pro plugin
+
+**MemberPress Support**
+User verification plugin also work with MemberPress plugin and added required support for MemberPress plugin, there is no settings is required.
+
+**Buddypress Support**
+We provide support for buddypress plugin, and it works like a charm.
+
+**Ultimate Member**
+Ultimate Member is one of the best plugin for making profile and membership site, and we added support for this plugin.
+
 * Custom message for various action.
-* Google reCAPTCHA(v-2) for default login form, default register form, default password reset form, default comment form.
-* Google reCAPTCHA(v-2) for WooCommerce login form, register form, lost password form.
-* WooCommerce compatible, Disable Auto login after registration on WooCommerce.
-* Paid Memberhip Support.
 * Resend verification key form via shortcode `[uv_resend_verification_form]`.
 * Translation Ready
 
@@ -49,8 +71,7 @@ Protect your website from spam user and stop instant access by using spam email 
 <strong>Protect spam email</strong>
 Some user are try temporary email service for registration, by this plugin you can list of spammy domain so user will not able to use these domain email for registration.
 
-<strong>Protect user name</strong>
-Default WordPress registration will create user name from email, in most case some user name will look like admin1 or admin2 or some critical username may confused other users. sometime bad people may take advantages from this case, you can protect user name to register.
+
 
 <strong>Automatically login after verification</strong>
 Your site user will automatically logged to account just after verified account and you can also set custom page link where to redirect.
@@ -88,6 +109,7 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 = 1.0.46 =
 * 2020-09-11 add - hide 3rd party plugins options menu if plugin is not insatlled
+* 2020-09-11 fix - login automatically after verification issue fixed.
 
 
 = 1.0.45 =
