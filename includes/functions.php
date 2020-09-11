@@ -344,7 +344,8 @@ function user_verification_reset_email_templates( ) {
 	if(current_user_can('manage_options')){
 		delete_option('uv_email_templates_data');
 	}
-}	
+}
+
 add_action('wp_ajax_user_verification_reset_email_templates', 'user_verification_reset_email_templates');
 add_action('wp_ajax_nopriv_user_verification_reset_email_templates', 'user_verification_reset_email_templates');
 	
@@ -358,8 +359,8 @@ function uv_filter_check_activation() {
 
     $invalid_key = isset($user_verification_settings['messages']['invalid_key']) ? $user_verification_settings['messages']['invalid_key'] : __( 'Invalid activation key', 'user-verification' );
     $key_expired = isset($user_verification_settings['messages']['key_expired']) ? $user_verification_settings['messages']['key_expired'] : __( 'Your key is expired', 'user-verification' );
-    $verification_success = isset($user_verification_settings['messages']['verification_success']) ? $user_verification_settings['messages']['verification_success'] : '';
-    $activation_sent = isset($user_verification_settings['messages']['activation_sent']) ? $user_verification_settings['messages']['activation_sent'] : '';
+    $verification_success = isset($user_verification_settings['messages']['verification_success']) ? $user_verification_settings['messages']['verification_success'] : __( 'Your account is verified', 'user-verification' );
+    $activation_sent = isset($user_verification_settings['messages']['activation_sent']) ? $user_verification_settings['messages']['activation_sent'] : __( 'Activation mail has sent', 'user-verification' );
 
 
     $html = '<div class="user-verification check">';
@@ -371,13 +372,14 @@ function uv_filter_check_activation() {
 		$meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s", $activation_key ) );
 		if( empty( $meta_data ) ) {
 			$html.= "<div class='wrong-key'><i class='fas fa-times'></i> $invalid_key</div>";
-		}
-		else{
+		}else{
 			$user_activation_status = get_user_meta( $meta_data->user_id, 'user_activation_status', true );
 			if( $user_activation_status != 0 ) {
 				$html.= "<div class='expired'><i class='far fa-calendar-times'></i> $key_expired</div>";
-			}
-            else {
+			}else{
+
+
+
                 if($redirect_after_verification=='none'){
 	                $redirect_page_url = '';
                 }else{
@@ -385,6 +387,8 @@ function uv_filter_check_activation() {
                 }
 
                 $user_id = $meta_data->user_id;
+
+                //var_dump($user_id);
 
 
                 $html.= "<div class='verified'><i class='fas fa-check-square'></i> $verification_success</div>";
@@ -397,7 +401,6 @@ function uv_filter_check_activation() {
 
                 $logo_id = isset($user_verification_settings['logo_id']) ? $user_verification_settings['logo_id'] : '';
 
-                $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
                 $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
                 $email_templates_data = isset($user_verification_settings['email_templates_data']['email_confirmed']) ? $user_verification_settings['email_templates_data']['email_confirmed'] : $email_templates_data['email_confirmed'];
 

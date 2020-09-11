@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 5.5
-	Stable tag: 1.0.45
+	Stable tag: 1.0.46
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+= 1.0.46 =
+* 2020-09-11 add - hide 3rd party plugins options menu if plugin is not insatlled
+
 
 = 1.0.45 =
 * 2020-09-10 fix - email not sending issue fixed.
