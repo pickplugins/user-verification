@@ -932,15 +932,26 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 
 
 			$resend_link = $verification_page_url.'?uv_action=resend&id='. $user->ID;
-			
 
-			$message = apply_Filters(
+
+            $resend_verification_url = add_query_arg(
+                array(
+                    'user_id' => $user->ID,
+                    'user_verification_action' => 'resend_verification',
+                ),
+                $verification_page_url
+            );
+
+            $resend_verification_url = wp_nonce_url( $resend_verification_url,  'resend_verification' );
+
+
+            $message = apply_Filters(
 				'account_lock_message', 
 				sprintf(
 					'<strong>%s</strong> %s <a href="%s">%s</a>', 
 					__('Error:', 'user-verification'),
                     $verify_email,
-					$resend_link,
+                    $resend_verification_url,
 					__('Resend verification email','user-verification' )
 				), 
 				$username

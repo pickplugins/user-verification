@@ -14,6 +14,8 @@ class class_user_verification_notices{
 
     public function mark_as_verified(){
 
+        $output = array();
+
         wp_parse_str($_SERVER['QUERY_STRING'], $output);
         $mark_as_verified = isset($output['mark_as_verified']) ? sanitize_text_field($output['mark_as_verified']) : '';
 
