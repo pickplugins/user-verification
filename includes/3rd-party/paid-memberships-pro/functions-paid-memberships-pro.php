@@ -219,13 +219,16 @@ function my_pmpro_registration_success_send_activation_mail(){
             endforeach;
 
 
-        if(empty($permalink_structure)){
-            $link 		= $verification_page_url.'&activation_key='.$user_activation_key;
 
-        }else{
+        $verification_url = add_query_arg(
+            array(
+                'activation_key' => $user_activation_key,
+                'user_verification_action' => 'email_verification',
+            ),
+            $verification_page_url
+        );
 
-            $link 		= $verification_page_url.'?activation_key='.$user_activation_key;
-        }
+        $verification_url = wp_nonce_url( $verification_url,  'email_verification' );
 
 
 
@@ -247,7 +250,7 @@ function my_pmpro_registration_success_send_activation_mail(){
             '{user_name}' => esc_html($user_data->user_nicename),
             '{user_avatar}' => get_avatar( $user_data->user_email, 60 ),
 
-            '{ac_activaton_url}' => esc_url_raw($link),
+            '{ac_activaton_url}' => esc_url_raw($verification_url),
 
         );
 
