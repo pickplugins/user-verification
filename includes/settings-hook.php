@@ -311,7 +311,7 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
                         $email_body = isset($templates_data_display['html']) ? $templates_data_display['html'] : '';
 
 
-                        $enable = isset($templates_data_display['enable']) ? $templates_data_display['enable'] : '';
+                        $enable = isset($templates_data_display['enable']) ? $templates_data_display['enable'] : 'yes';
                         $description = isset($templates_data_display['description']) ? $templates_data_display['description'] : '';
 
                         $parameters = isset($email_templates_parameters[$key]) ? $email_templates_parameters[$key] : array();
