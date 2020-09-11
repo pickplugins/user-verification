@@ -139,6 +139,7 @@ class class_user_verification_notices{
             $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
             $email_templates_data = isset($user_verification_settings['email_templates_data']['email_resend_key']) ? $user_verification_settings['email_templates_data']['email_resend_key'] : $email_templates_data['email_resend_key'];
 
+            $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
 
             $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
             $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
@@ -239,8 +240,10 @@ class class_user_verification_notices{
             $email_data['attachments'] = array();
 
 
-            $mail_status = $class_user_verification_emails->send_email($email_data);
+            if($enable == 'yes'){
+                $mail_status = $class_user_verification_emails->send_email($email_data);
 
+            }
 
 
             $display_name = $user_data->display_name;

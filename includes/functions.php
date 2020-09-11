@@ -444,6 +444,7 @@ function uv_resend_verification_form($attr){
                 $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
                 $email_templates_data = isset($user_verification_settings['email_templates_data']['email_resend_key']) ? $user_verification_settings['email_templates_data']['email_resend_key'] : $email_templates_data['email_resend_key'];
 
+                $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
 
                 $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
                 $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
@@ -538,8 +539,9 @@ function uv_resend_verification_form($attr){
                 $email_data['attachments'] = array();
 
 
-                $mail_status = $class_user_verification_emails->send_email($email_data);
-
+                if($enable == 'yes'){
+                    $mail_status = $class_user_verification_emails->send_email($email_data);
+                }
 
 
 				$html.= "<div class='resend'><i class='fas fa-paper-plane'></i> $activation_sent</div>";
@@ -740,6 +742,7 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
         //error_log(serialize($email_templates_data));
+        $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
 
         $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
         $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
@@ -835,8 +838,10 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
 
-        $mail_status = $class_user_verification_emails->send_email($email_data);
+        if($enable == 'yes'){
+            $mail_status = $class_user_verification_emails->send_email($email_data);
 
+        }
 
 
 

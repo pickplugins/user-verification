@@ -44,6 +44,7 @@ class class_user_verification_manage_verification{
                 $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
                 $email_templates_data = isset($user_verification_settings['email_templates_data']['email_resend_key']) ? $user_verification_settings['email_templates_data']['email_resend_key'] : $email_templates_data['email_resend_key'];
 
+                $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
 
                 $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
                 $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
@@ -143,8 +144,10 @@ class class_user_verification_manage_verification{
                 $email_data['attachments'] = array();
 
 
-                $mail_status = $class_user_verification_emails->send_email($email_data);
+                if($enable == 'yes'){
+                    $mail_status = $class_user_verification_emails->send_email($email_data);
 
+                }
 
 
             }
@@ -343,6 +346,11 @@ class class_user_verification_manage_verification{
 
                     $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
                     $email_templates_data = isset($user_verification_settings['email_templates_data']['email_confirmed']) ? $user_verification_settings['email_templates_data']['email_confirmed'] : $email_templates_data['email_confirmed'];
+                    $email_templates_data = isset($user_verification_settings['email_templates_data']['email_confirmed']) ? $user_verification_settings['email_templates_data']['email_confirmed'] : $email_templates_data['email_confirmed'];
+
+
+                    $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
+
 
 
                     $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
@@ -421,7 +429,11 @@ class class_user_verification_manage_verification{
                     $email_data['attachments'] = array();
 
 
-                    $mail_status = $class_user_verification_emails->send_email($email_data);
+                    if($enable == 'yes'){
+                        $mail_status = $class_user_verification_emails->send_email($email_data);
+
+                    }
+
 
 
 

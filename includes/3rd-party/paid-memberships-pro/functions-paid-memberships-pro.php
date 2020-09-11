@@ -179,6 +179,8 @@ function my_pmpro_registration_success_send_activation_mail(){
         $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
         $email_templates_data = isset($user_verification_settings['email_templates_data']['user_registered']) ? $user_verification_settings['email_templates_data']['user_registered'] : $email_templates_data['user_registered'];
 
+        $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
+
 
         $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
         $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
@@ -272,8 +274,10 @@ function my_pmpro_registration_success_send_activation_mail(){
         $email_data['attachments'] = array();
 
 
-        $mail_status = $class_user_verification_emails->send_email($email_data);
+        if($enable == 'yes'){
+            $mail_status = $class_user_verification_emails->send_email($email_data);
 
+        }
 
 
         //all good
