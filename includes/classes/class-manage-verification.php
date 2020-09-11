@@ -18,6 +18,9 @@ class class_user_verification_manage_verification{
 
         if (isset($_REQUEST['user_verification_action']) && trim($_REQUEST['user_verification_action']) == 'email_verification') {
 
+            wp_enqueue_style('font-awesome-5');
+
+
             $activation_key = isset($_REQUEST['activation_key']) ? sanitize_text_field($_REQUEST['activation_key']) : '';
             $user_verification_settings = get_option('user_verification_settings');
 
@@ -194,18 +197,23 @@ class class_user_verification_manage_verification{
             <div class="check-email-verification">
                 <div class="inner">
 
-                    <h2 class="status-title">Checking Verification</h2>
+                    <h2 class="status-title"><?php echo __('Checking Verification','user-verification'); ?></h2>
 
                     <div class="status">
                         <span class="status-icon"><i class="fas fa-spin fa-spinner"></i></span>
-                        <span class="status-text">Please wait...</span>
+                        <span class="status-text"><?php echo __('Please wait...','user-verification'); ?></span>
 
                     </div>
 
+                    <div class="resend">
+                        <a href="<?php echo $redirect_page_url; ?>"><?php echo __('Resend verification mail','user-verification'); ?></a>
+                    </div>
+
+
                     <?php if(!empty($redirect_after_verification) && $redirect_after_verification != 'none'): ?>
                         <div class="redirect">
-                            <p>You will redirect after verification</p>
-                            <a href="<?php echo $redirect_page_url; ?>">Click if not redirect automatically</a>
+                            <p><?php echo __('You will redirect after verification','user-verification'); ?></p>
+                            <a href="<?php echo $redirect_page_url; ?>"><?php echo __('Click if not redirect automatically','user-verification'); ?></a>
                         </div>
                     <?php endif; ?>
 
@@ -242,6 +250,7 @@ class class_user_verification_manage_verification{
                             $('.status-icon').html(is_valid_icon);
                             $('.status-text').html(is_valid_text);
 
+                            $('.resend').fadeIn();
                             $('.redirect').fadeOut();
 
                         }
@@ -254,7 +263,7 @@ class class_user_verification_manage_verification{
 
 
                     setTimeout(function(){
-                        $('.check-email-verification').fadeOut('slow');
+                        //$('.check-email-verification').fadeOut('slow');
 
                     }, 4000);
 
@@ -294,6 +303,9 @@ class class_user_verification_manage_verification{
                     margin: 20px 0;
                 }
 
+                .resend{
+                    display: none;
+                }
 
                 .status .status-icon{
                     font-size: 30px;
@@ -321,10 +333,7 @@ new class_user_verification_manage_verification();
 
 
 
-add_action('init', 'user_logged_in');
-function user_logged_in(){
-    wp_redirect(home_url());
-}
+
 
 
 
