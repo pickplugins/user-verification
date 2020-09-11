@@ -597,10 +597,21 @@ function user_verification_auto_login(){
 
 	if( isset( $_GET['uv_autologin'] ) && $_GET['uv_autologin']=='yes' && isset( $_GET['key'] ) ){
 
+
+
+
 		global $wpdb;
 		$table = $wpdb->prefix . "usermeta";
 		$activation_key = sanitize_text_field($_GET['key']);
-		$meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s AND meta_key = 'user_activation_key'", $activation_key ) );
+
+        //var_dump($activation_key);
+
+
+
+        $meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s AND meta_key = 'user_activation_key'", $activation_key ) );
+
+        //var_dump($meta_data);
+
 
         if(empty($meta_data)) return;
 
@@ -610,6 +621,8 @@ function user_verification_auto_login(){
 		$user = get_user_by( 'id', $meta_data->user_id );
 
 		$user_activation_status = get_user_meta( $meta_data->user_id, 'user_activation_status', true );
+
+
 
         if($user_activation_status == 1){
             wp_set_current_user( $meta_data->user_id, $user->user_login );

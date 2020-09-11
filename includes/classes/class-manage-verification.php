@@ -357,9 +357,9 @@ class class_user_verification_manage_verification{
                     $email_body = wpautop($email_body);
 
 
-                    $user_activation_key =  md5(uniqid('', true) );
+                    //$user_activation_key =  md5(uniqid('', true) );
 
-                    update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
+                    //update_user_meta( $user_id, 'user_activation_key', $user_activation_key );
                     update_user_meta( $user_id, 'user_activation_status', 1 );
 
                     $user_data 	= get_userdata( $user_id );
@@ -500,9 +500,7 @@ class class_user_verification_manage_verification{
                             $('.status-icon').html(status_icon);
                             $('.status-text').html(status_text);
 
-                            if(is_redirect == 'yes'){
-                                //window.location.href = redirect_url;
-                            }
+
 
                         }else{
                             is_valid_icon = jsData['is_valid_icon'];
@@ -523,6 +521,9 @@ class class_user_verification_manage_verification{
 
 
                     setTimeout(function(){
+                        if(is_redirect == 'yes'){
+                            window.location.href = redirect_url;
+                        }
                         //$('.check-email-verification').fadeOut('slow');
 
                     }, 4000);
