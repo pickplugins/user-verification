@@ -74,9 +74,20 @@ function user_verification_bulk_action_admin_notice() {
 
         $user_count =  intval( $user_count );
 
-		echo '<div id="message" class="updated notice is-dismissible">';
-		echo sprintf(__('%s user account marked as verified.', 'user-verification'), $user_count);
-		echo '</div>';
+        ?>
+        <div id="message" class="updated notice is-dismissible">
+            <p>
+                <?php
+
+                echo sprintf(__('%s user account marked as verified.', 'user-verification'), $user_count);
+
+                ?>
+            </p>
+
+        </div>
+        <?php
+
+
 
 	}
 	elseif (isset($_REQUEST['uv_bulk_disapprove'])){
@@ -84,9 +95,21 @@ function user_verification_bulk_action_admin_notice() {
         $user_count = sanitize_text_field( $_REQUEST['uv_bulk_disapprove'] );
 		$user_count = intval( $user_count );
 
-		echo '<div id="message" class="updated notice is-dismissible">';
-		echo sprintf(__('%s user account marked as unverified.', 'user-verification'), $user_count);
-		echo '</div>';
+
+
+        ?>
+        <div id="message" class="updated notice is-dismissible">
+            <p>
+                <?php
+
+                echo sprintf(__('%s user account marked as unverified.', 'user-verification'), $user_count);
+
+                ?>
+            </p>
+
+        </div>
+        <?php
+
 
 
 	}
@@ -104,8 +127,6 @@ function user_verification_is_username_blocked($username){
     $user_verification_settings = get_option('user_verification_settings');
     $enable_username_block = isset($user_verification_settings['spam_protection']['enable_username_block']) ? $user_verification_settings['spam_protection']['enable_username_block'] : 'yes';
     $blocked_username = isset($user_verification_settings['spam_protection']['blocked_username']) ? $user_verification_settings['spam_protection']['blocked_username'] : array();
-
-
 
 
     if( $enable_username_block == "yes" && !empty($blocked_username) ):
@@ -240,7 +261,7 @@ function uv_registration_protect_blocked_domain( $errors, $sanitized_user_login,
 
 
     if($is_blocked){
-        $errors->add( 'blocked_domain', sprintf(__( "This %s domain is not blocked!", 'user-verification' ), '<strong>'.$email_domain.'</strong>') );
+        $errors->add( 'blocked_domain', sprintf(__( "This %s domain is blocked!", 'user-verification' ), '<strong>'.$email_domain.'</strong>') );
     }
 
     return $errors;

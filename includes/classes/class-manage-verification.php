@@ -448,7 +448,7 @@ class class_user_verification_manage_verification{
 
 
 
-                        $verification_url = add_query_arg(
+                        $redirect_page_url = add_query_arg(
                             array(
                                 'activation_key' => $activation_key,
                                 'user_verification_action' => 'autologin',
@@ -456,14 +456,14 @@ class class_user_verification_manage_verification{
                             $redirect_page_url
                         );
 
-                        $redirect_page_url = wp_nonce_url( $verification_url,  'user_verification_autologin' );
+                        //$redirect_page_url = wp_nonce_url( $redirect_page_url,  'user_verification_autologin' );
 
                     }
 
                     if(($redirect_after_verification != 'none')):
 
                         $jsData['is_redirect'] = 'yes';
-                        $jsData['redirect_url'] = $redirect_page_url;
+                        $jsData['redirect_url'] = esc_url_raw($redirect_page_url);
 
 
                     endif;
@@ -497,7 +497,8 @@ class class_user_verification_manage_verification{
                     <?php if(!empty($redirect_after_verification) && $redirect_after_verification != 'none'): ?>
                         <div class="redirect">
                             <p><?php echo __('You will redirect after verification','user-verification'); ?></p>
-                            <a href="<?php echo $redirect_page_url; ?>"><?php echo __('Click if not redirect automatically','user-verification'); ?></a>
+                            <a href="<?php echo esc_url_raw($redirect_page_url); ?>"><?php echo __('Click if not redirect 
+                            automatically','user-verification'); ?></a>
                         </div>
                     <?php endif; ?>
 
