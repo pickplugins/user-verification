@@ -597,22 +597,20 @@ add_action('init','user_verification_auto_login');
 function user_verification_auto_login(){
 
 
-	if( isset( $_GET['uv_autologin'] ) && $_GET['uv_autologin']=='yes' && isset( $_GET['key'] ) ){
+    if (isset($_REQUEST['user_verification_action']) && trim($_REQUEST['user_verification_action']) == 'autologin' &&
+    isset($_REQUEST['activation_key'])) {
 
-
+        $activation_key = isset($_REQUEST['activation_key']) ? sanitize_text_field($_REQUEST['activation_key']) : '';
 
 
 		global $wpdb;
 		$table = $wpdb->prefix . "usermeta";
-		$activation_key = sanitize_text_field($_GET['key']);
 
         //var_dump($activation_key);
 
 
 
         $meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s AND meta_key = 'user_activation_key'", $activation_key ) );
-
-        //var_dump($meta_data);
 
 
         if(empty($meta_data)) return;

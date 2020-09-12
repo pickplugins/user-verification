@@ -445,7 +445,18 @@ class class_user_verification_manage_verification{
                         $user = get_user_by( 'id', $meta_data->user_id );
 
                         wp_set_current_user( $meta_data->user_id, $user->user_login );
-                        $redirect_page_url = $redirect_page_url.'?uv_autologin=yes&key='.$activation_key;
+
+
+
+                        $verification_url = add_query_arg(
+                            array(
+                                'activation_key' => $activation_key,
+                                'user_verification_action' => 'autologin',
+                            ),
+                            $redirect_page_url
+                        );
+
+                        $redirect_page_url = wp_nonce_url( $verification_url,  'user_verification_autologin' );
 
                     }
 
