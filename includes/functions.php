@@ -310,13 +310,14 @@ function user_verification_registered_message( $errors, $redirect_to ) {
 		
 		$tmp = $errors->errors;
 
-		$old = 'Registration complete. Please check your email.';
+		$old = __('Registration complete. Please check your email 1.', 'user-verification');
 		$new = $registration_success;
 
 		foreach( $tmp['registered'] as $index => $msg ){
 			if( $msg === $old )
 			$tmp['registered'][$index] = $new;
 		}
+
 		$errors->errors = $tmp;
 
 		unset( $tmp );
@@ -401,7 +402,7 @@ function user_verification_check_status($attr) {
 
     $uv_check = isset($_GET['uv_check']) ? sanitize_text_field($_GET['uv_check']) : '';
 
-    $msg = isset($attr['message']) ? $attr['message'] : 'Please check email to get verify frist.';
+    $msg = isset($attr['message']) ? $attr['message'] :__( 'Please check email to get verify first.','user-verification');
     if(is_user_logged_in() && $uv_check == 'true'){
         $userid = get_current_user_id();
         $status = user_verification_is_verified($userid);
@@ -684,9 +685,6 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 
 
             $verification_page_url = get_permalink($verification_page_id);
-
-
-			$resend_link = $verification_page_url.'?uv_action=resend&id='. $user->ID;
 
 
             $resend_verification_url = add_query_arg(

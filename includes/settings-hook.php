@@ -594,7 +594,7 @@ function user_verification_settings_content_spam_protection(){
     $allowed_browsers = isset($user_verification_settings['spam_protection']['allowed_browsers']) ? $user_verification_settings['spam_protection']['allowed_browsers'] : array();
 
 
-    //echo '<pre>'.var_export($user_verification_settings, true).'</pre>';
+    //echo '<pre>'.var_export($_SERVER['HTTP_USER_AGENT'], true).'</pre>';
 
     ?>
     <div class="section">
@@ -688,7 +688,7 @@ function user_verification_settings_content_spam_protection(){
             'args'		=> array('yes'=>__('Yes','user-verification'), 'no'=>__('No','user-verification')  ),
         );
 
-        $settings_tabs_field->generate_field($args);
+        //$settings_tabs_field->generate_field($args);
 
 
 
@@ -708,7 +708,7 @@ function user_verification_settings_content_spam_protection(){
 
         );
 
-        $settings_tabs_field->generate_field($args);
+        //$settings_tabs_field->generate_field($args);
 
 
 
