@@ -18,9 +18,6 @@ function user_verification_settings_content_email_verification(){
     $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
 
 
-
-    //echo '<pre>'.var_export($user_verification_settings, true).'</pre>';
-
     ?>
     <div class="section">
         <div class="section-title"><?php echo __('Email verification', 'user-verification'); ?></div>
@@ -350,104 +347,179 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
                                 <div class="description"><?php echo $description; ?></div><br/><br/>
 
 
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Enable?', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <select name="user_verification_settings[email_templates_data][<?php echo $key; ?>][enable]" >
-                                            <option <?php echo selected($enable,'yes'); ?> value="yes" ><?php echo __('Yes', 'user-verification'); ?></option>
-                                            <option <?php echo selected($enable,'no'); ?>  value="no" ><?php echo __('No', 'user-verification'); ?></option>
-                                        </select>
-                                        <p class="description"><?php echo __('Enable or disable this email notification.', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
+
+                                <?php
 
 
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Email Bcc', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <input placeholder="hello_1@hello.com,hello_2@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_bcc]" value="<?php echo $email_bcc; ?>" />
-                                        <p class="description"><?php echo __('Send a copy to these email(Bcc)', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
+                                $args = array(
+                                    'id'		=> 'enable',
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Enable?','user-verification'),
+                                    'details'	=> __('Enable or disable this email notification.','user-verification'),
+                                    'type'		=> 'select',
+                                    'value'		=> $enable,
+                                    'default'		=> 'yes',
+                                    'args'		=> array('yes'=>__('Yes','user-verification'), 'no'=>__('No','user-verification')  ),
 
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Email from name', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <input placeholder="<?php echo __('Your name', 'user-verification'); ?>" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_from_name]" value="<?php echo $email_from_name; ?>" />
-                                        <p class="description"><?php echo __('Email send from name', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
+                                );
 
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Email from', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <input placeholder="hello_1@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][email_from]" value="<?php echo $email_from; ?>" />
-                                        <p class="description"><?php echo __('Email send from', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
-
-
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Reply to name', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <input placeholder="<?php echo __('Your name', 'user-verification'); ?>" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][reply_to_name]" value="<?php echo $reply_to_name; ?>" />
-                                        <p class="description"><?php echo __('Email reply to name', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
-
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Reply to', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <input placeholder="hello_1@hello.com" type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][reply_to]" value="<?php echo $reply_to; ?>" />
-                                        <p class="description"><?php echo __('Reply to email address', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
+                                $settings_tabs_field->generate_field($args);
 
 
 
 
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Email Subject', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <input type="text" name="user_verification_settings[email_templates_data][<?php echo $key; ?>][subject]" value="<?php echo $email_subject; ?>" />
-                                        <p class="description"><?php echo __('Write email subject', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
-
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Email Body', 'user-verification'); ?></div>
-                                    <div class="field-input">
-                                        <?php
-
-                                        wp_editor( $email_body, $key, $settings = array('textarea_name'=>'user_verification_settings[email_templates_data]['.$key.'][html]','media_buttons'=>false,'wpautop'=>true,'teeny'=>true,'editor_height'=>'400px', ) );
-
-                                        ?>
-                                        <p class="description"><?php echo __('Write email body', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
-
-                                <div class="setting-field">
-                                    <div class="field-lable"><?php echo __('Parameter', 'user-verification'); ?></div>
-                                    <div class="field-input">
-
-                                        <ul>
 
 
-                                            <?php
+                                $args = array(
+                                    'id'		=> 'email_bcc',
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Email Bcc','user-verification'),
+                                    'details'	=> __('Send a copy to these email(Bcc)','user-verification'),
+                                    'type'		=> 'text',
+                                    'value'		=> $email_bcc,
+                                    'default'		=> '',
+                                    'placeholder'		=> get_bloginfo('admin_email'),
 
-                                            if(!empty($parameters)):
-                                                foreach ($parameters as $parameterId=>$parameter):
-                                                    ?>
-                                                    <li><code><?php echo $parameterId; ?></code> => <?php echo $parameter; ?></li>
-                                                <?php
-                                                endforeach;
-                                            endif;
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+
+                                $args = array(
+                                    'id'		=> 'email_from_name',
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Email from name','user-verification'),
+                                    'details'	=> __('Write email displaying from name','user-verification'),
+                                    'type'		=> 'text',
+                                    'value'		=> $email_from_name,
+                                    'default'		=> '',
+                                    'placeholder'		=> get_bloginfo('title'),
+
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+
+
+                                $args = array(
+                                    'id'		=> 'email_from',
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Email from','user-verification'),
+                                    'details'	=> __('Email from email address','user-verification'),
+                                    'type'		=> 'text',
+                                    'value'		=> $email_from,
+                                    'default'		=> '',
+                                    'placeholder'		=> get_bloginfo('admin_email'),
+
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+                                $args = array(
+                                    'id'		=> 'reply_to_name',
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Reply to name','user-verification'),
+                                    'details'	=> __('Email reply to name','user-verification'),
+                                    'type'		=> 'text',
+                                    'value'		=> $reply_to_name,
+                                    'default'		=> '',
+                                    'placeholder'		=> get_bloginfo('title'),
+
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+
+                                $args = array(
+                                    'id'		=> 'reply_to',
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Reply to','user-verification'),
+                                    'details'	=> __('Reply to email address','user-verification'),
+                                    'type'		=> 'text',
+                                    'value'		=> $reply_to,
+                                    'default'		=> '',
+                                    'placeholder'		=> get_bloginfo('admin_email'),
+
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+
+
+                                $args = array(
+                                    'id'		=> 'subject',
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Email subject','user-verification'),
+                                    'details'	=> __('Write email subjects','user-verification'),
+                                    'type'		=> 'text',
+                                    'value'		=> $email_subject,
+                                    'default'		=> '',
+                                    'placeholder'		=> '',
+
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+                                $args = array(
+                                    'id'		=> 'html',
+                                    'css_id'		=> $key,
+                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Email body','user-verification'),
+                                    'details'	=> __('Write email body','user-verification'),
+                                    'type'		=> 'wp_editor',
+
+                                    'value'		=> $email_body,
+                                    'default'		=> '',
+                                    'placeholder'		=> '',
+
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+                                ob_start();
+                                ?>
+                                <ul>
+
+
+                                    <?php
+
+                                    if(!empty($parameters)):
+                                        foreach ($parameters as $parameterId=>$parameter):
                                             ?>
-                                        </ul>
+                                            <li><code><?php echo $parameterId; ?></code> => <?php echo $parameter; ?></li>
+                                        <?php
+                                        endforeach;
+                                    endif;
+                                    ?>
+                                </ul>
+                                <?php
 
-                                        <p class="description"><?php echo __('Available parameter for this email template', 'user-verification'); ?></p>
-                                    </div>
-                                </div>
+
+                                $custom_html = ob_get_clean();
+
+                                $args = array(
+                                    'id'		=> 'html',
+//                                    'parent'		=> 'user_verification_settings[email_templates_data]['.$key.']',
+                                    'title'		=> __('Parameter','user-verification'),
+                                    'details'	=> __('Available parameter for this email template','user-verification'),
+                                    'type'		=> 'custom_html',
+                                    'html'		=> $custom_html,
+                                    'default'		=> '',
+
+
+                                );
+
+                                $settings_tabs_field->generate_field($args);
+
+                                ?>
+
 
                             </div>
 
@@ -516,6 +588,11 @@ function user_verification_settings_content_spam_protection(){
 
     $enable_username_block = isset($user_verification_settings['spam_protection']['enable_username_block']) ? $user_verification_settings['spam_protection']['enable_username_block'] : 'no';
     $blocked_username = isset($user_verification_settings['spam_protection']['blocked_username']) ? $user_verification_settings['spam_protection']['blocked_username'] : array();
+
+    $enable_browser_block = isset($user_verification_settings['spam_protection']['enable_browser_block']) ?
+        $user_verification_settings['spam_protection']['enable_browser_block'] : 'no';
+    $allowed_browsers = isset($user_verification_settings['spam_protection']['allowed_browsers']) ? $user_verification_settings['spam_protection']['allowed_browsers'] : array();
+
 
     //echo '<pre>'.var_export($user_verification_settings, true).'</pre>';
 
@@ -600,7 +677,38 @@ function user_verification_settings_content_spam_protection(){
 
 
 
+        $args = array(
+            'id'		=> 'enable_browser_block',
+            'parent'		=> 'user_verification_settings[spam_protection]',
+            'title'		=> __('Enable device/browser block','user-verification'),
+            'details'	=> __('User will not able to register blocked device or browser, like chrome, safari, etc.','user-verification'),
+            'type'		=> 'select',
+            'value'		=> $enable_browser_block,
+            'default'		=> '',
+            'args'		=> array('yes'=>__('Yes','user-verification'), 'no'=>__('No','user-verification')  ),
+        );
 
+        $settings_tabs_field->generate_field($args);
+
+
+
+        $args = array(
+            'id'		=> 'allowed_browsers',
+            'parent'		=> 'user_verification_settings[spam_protection]',
+            'title'		=> __('Allowed devices/browsers','user-verification'),
+            'details'	=> __('Select the browser list to allow user login.','user-verification'),
+            'type'		=> 'checkbox',
+            'style'		=> array('inline'=>false ),
+
+            'value'		=> $allowed_browsers,
+            'args'		=> array('chrome'=>__('Chrome','user-verification'), 'safari'=>__('Safari','user-verification')
+            ),
+
+            'default'		=> array(),
+
+        );
+
+        $settings_tabs_field->generate_field($args);
 
 
 

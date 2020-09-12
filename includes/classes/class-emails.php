@@ -5,16 +5,10 @@ class class_user_verification_emails{
 	
 	public function __construct(){
 
-		//add_action('add_meta_boxes', array($this, 'meta_boxes_job'));
-		//add_action('save_post', array($this, 'meta_boxes_job_save'));
 
 		}
 
     public function send_email($email_data){
-
-
-        //error_log($email_data['email_to']);
-
 
 
         $email_to = isset($email_data['email_to']) ? $email_data['email_to'] : '';
@@ -53,19 +47,10 @@ class class_user_verification_emails{
         $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 
 
-        //error_log($email_to);
-        //error_log($subject);
-        //error_log($email_body);
-
-        //error_log(serialize($email_data));
-
-
 //        if($status){
 //            error_log('mail sent');
-//
 //        }else{
 //            error_log('mail not sent');
-//
 //        }
 
         return $status;
@@ -176,4 +161,3 @@ class class_user_verification_emails{
 	}
 }
 	
-//new class_user_verification_emails();

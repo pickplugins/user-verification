@@ -12,7 +12,6 @@ class class_user_verification_settings{
 
     public function _menu_init() {
 
-        //add_menu_page(__('User Verification', 'breadcrumb'), __('User Verification', 'breadcrumb'), 'manage_options', 'user_verification', array( $this, 'settings' ), 'dashicons-arrow-right-alt');
         add_submenu_page( 'users.php', __( 'User Verification', 'user-verification' ), __( 'User Verification', 'user-verification' ), 'manage_options', 'user_verification', array( $this, 'settings' ) );
 
 

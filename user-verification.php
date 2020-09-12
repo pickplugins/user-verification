@@ -119,7 +119,7 @@ class UserVerification{
 
         require_once( user_verification_plugin_dir . 'includes/classes/class-emails.php');
 		require_once( user_verification_plugin_dir . 'includes/classes/class-settings.php');
-        require_once( user_verification_plugin_dir . 'includes/classes/uv-class-column-users.php');
+        require_once( user_verification_plugin_dir . 'includes/classes/class-column-users.php');
         require_once( user_verification_plugin_dir . 'includes/classes/class-settings-tabs.php');
         require_once( user_verification_plugin_dir . 'includes/settings-hook.php');
         require_once( user_verification_plugin_dir . 'includes/classes/class-admin-notices.php');
