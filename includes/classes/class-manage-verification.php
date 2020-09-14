@@ -238,6 +238,7 @@ class class_user_verification_manage_verification{
                     width: 100%;
                     height: 100%;
                     background: #50505094;
+                    z-index: 99999999;
                 }
 
                 .inner{
@@ -572,6 +573,7 @@ class class_user_verification_manage_verification{
                     width: 100%;
                     height: 100%;
                     background: #50505094;
+                    z-index: 99999999;
                 }
 
                 .inner{
