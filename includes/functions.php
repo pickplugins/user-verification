@@ -480,6 +480,8 @@ function uv_resend_verification_form($attr){
                 $email_body = wpautop($email_body);
 
                 $verification_page_url = get_permalink($verification_page_id);
+                $verification_page_url = !empty($verification_page_url) ? $verification_page_url : get_bloginfo('url');
+
                 $permalink_structure = get_option('permalink_structure');
 
                 $user_activation_key =  md5(uniqid('', true) );
@@ -685,6 +687,7 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 
 
             $verification_page_url = get_permalink($verification_page_id);
+            $verification_page_url = !empty($verification_page_url) ? $verification_page_url : get_bloginfo('url');
 
 
             $resend_verification_url = add_query_arg(
@@ -773,6 +776,9 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
         $email_body = wpautop($email_body);
 
         $verification_page_url = get_permalink($verification_page_id);
+        $verification_page_url = !empty($verification_page_url) ? $verification_page_url : get_bloginfo('url');
+
+
         $permalink_structure = get_option('permalink_structure');
 
         $user_activation_key =  md5(uniqid('', true) );
