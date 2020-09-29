@@ -738,24 +738,7 @@ function user_verification_user_roles() {
 }
 
 
-add_action('nsl_pre_register_new_user','user_verification_nsl_pre_register_new_user', 90);
 
-function user_verification_nsl_pre_register_new_user($is_enable){
-
-    remove_action('user_register','user_verification_user_registered');
-
-}
-
-
-add_filter('user_verification_enable','user_verification_enable_nsl', 90);
-
-function user_verification_enable_nsl($is_enable){
-
-    // condition here
-
-    return 'no';
-
-}
 
 
 add_action( 'user_register', 'user_verification_user_registered', 30 );
