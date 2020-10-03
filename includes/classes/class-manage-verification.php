@@ -376,6 +376,7 @@ class class_user_verification_manage_verification{
                     $user_data 	= get_userdata( $user_id );
 
 
+                    do_action('user_verification_email_verified', array('user_id'=> $user_id));
 
 
                     $user_roles = !empty($user_data->roles) ? $user_data->roles : array();
