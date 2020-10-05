@@ -310,7 +310,7 @@ function user_verification_registered_message( $errors, $redirect_to ) {
 		
 		$tmp = $errors->errors;
 
-		$old = __('Registration complete. Please check your email 1.', 'user-verification');
+		$old = __('Registration complete. Please check your email.', 'user-verification');
 		$new = $registration_success;
 
 		foreach( $tmp['registered'] as $index => $msg ){
@@ -383,7 +383,7 @@ function uv_filter_check_activation() {
         _deprecated_function( __FUNCTION__, '1.0.46', '' );
 
 
-        $html.= __('This shortcode is no longer need. only admin can see this message');
+        $html.= __('This shortcode is no longer need, only admin can see this message');
 
     }
 
@@ -599,8 +599,6 @@ function uv_resend_verification_form($attr){
 		wp_nonce_field( 'nonce_resend_verification' );
 		?>
 		<input type="hidden" name="resend_verification_hidden" value="Y">
-
-
 		<input type="email" name="email" placeholder="<?php echo __('Email address','user-verification'); ?>" value="">
 		<input type="submit" value="<?php echo __('Resend','user-verification'); ?>" name="submit">
 
