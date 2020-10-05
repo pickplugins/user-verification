@@ -29,6 +29,8 @@ function user_verification_settings_content_woocommerce(){
 
     //delete_option('user_verification_settings');
 
+    //echo '<pre>'.var_export($user_verification_settings['woocommerce'], true).'</pre>';
+
 
     $disable_auto_login = isset($user_verification_settings['woocommerce']['disable_auto_login']) ? $user_verification_settings['woocommerce']['disable_auto_login'] : 'yes';
     $message_after_registration = isset($user_verification_settings['woocommerce']['message_after_registration']) ? $user_verification_settings['woocommerce']['message_after_registration'] : 'yes';
@@ -77,7 +79,7 @@ function user_verification_settings_content_woocommerce(){
 
         $args = array(
             'id'		=> 'redirect_after_payment',
-            'parent'		=> 'user_verification_settings[email_verification]',
+            'parent'		=> 'user_verification_settings[woocommerce]',
             'title'		=> __('Redirect after payment','user-verification'),
             'details'	=> __('You can set custom page to redirect after successfully payment, and this page should check verification status and take action to stay logged-in or logged-out the user automatically. please use following shortcode <code>[user_verification_message message="Please check email to verify account first"]</code> to check verification status, it will automatically logged-out the unverified user and display the custom message.','user-verification'),
             'type'		=> 'select',
@@ -90,18 +92,6 @@ function user_verification_settings_content_woocommerce(){
         $settings_tabs_field->generate_field($args);
 
 
-        $args = array(
-            'id'		=> 'disable_auto_login',
-            'parent'		=> 'user_verification_settings[woocommerce]',
-            'title'		=> __('Disable auto login','user-verification'),
-            'details'	=> __('You can disable auto login after registration via WooCommerce register form. this also disable login on checkout page.','user-verification'),
-            'type'		=> 'select',
-            'value'		=> $disable_auto_login,
-            'default'		=> '',
-            'args'		=> array('yes'=>__('Yes','user-verification'), 'no'=>__('No','user-verification')  ),
-        );
-
-        $settings_tabs_field->generate_field($args);
 
 
         ?>

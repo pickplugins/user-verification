@@ -403,6 +403,7 @@ function user_verification_check_status($attr) {
     $uv_check = isset($_GET['uv_check']) ? sanitize_text_field($_GET['uv_check']) : '';
 
     $msg = isset($attr['message']) ? $attr['message'] :__( 'Please check email to get verify first.','user-verification');
+
     if(is_user_logged_in() && $uv_check == 'true'){
         $userid = get_current_user_id();
         $status = user_verification_is_verified($userid);
