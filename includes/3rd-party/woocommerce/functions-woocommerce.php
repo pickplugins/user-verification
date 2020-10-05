@@ -126,6 +126,10 @@ function user_verification_woocommerce_thankyou( $order_id ){
 
     $order = new WC_Order( $order_id );
 
+//    if($disable_auto_login == 'yes'){
+//        return;
+//    }
+
     if($redirect_after_payment == 'none'){
         return;
     }
