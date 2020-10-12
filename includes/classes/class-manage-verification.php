@@ -117,7 +117,7 @@ class class_user_verification_manage_verification{
                     '{site_url}' => esc_url_raw($site_url),
                     '{site_logo_url}' => esc_url_raw($site_logo_url),
 
-                    '{first_name}' => esc_html($user_data->last_name),
+                    '{first_name}' => esc_html($user_data->first_name),
                     '{last_name}' => esc_html($user_data->last_name),
                     '{user_display_name}' => esc_html($user_data->display_name),
                     '{user_email}' => esc_html($user_data->user_email),
@@ -416,7 +416,7 @@ class class_user_verification_manage_verification{
                         '{site_url}' => esc_url_raw($site_url),
                         '{site_logo_url}' => esc_url_raw($site_logo_url),
 
-                        '{first_name}' => esc_html($user_data->last_name),
+                        '{first_name}' => esc_html($user_data->first_name),
                         '{last_name}' => esc_html($user_data->last_name),
                         '{user_display_name}' => esc_html($user_data->display_name),
                         '{user_email}' => esc_html($user_data->user_email),

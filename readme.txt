@@ -166,7 +166,7 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 = 1.0.37 =
-* 2020-06-08 add - added email parameter user_first_name, user_last_name
+* 2020-06-08 add - added email parameter first_name, last_name
 
 
 = 1.0.36 =
