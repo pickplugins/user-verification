@@ -318,7 +318,17 @@ class class_user_verification_manage_verification{
             $jsData = array();
 
             global $wpdb;
-            $table = $wpdb->prefix . "usermeta";
+
+            if(is_multisite()){
+                $table = $wpdb->base_prefix . "usermeta";
+            }else{
+                $table = $wpdb->prefix . "usermeta";
+            }
+
+
+
+            //$table = $wpdb->prefix . "usermeta";
+
             $meta_data	= $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE meta_value = %s", $activation_key ) );
             $user_id = $meta_data->user_id;
 

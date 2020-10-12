@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 5.5
-	Stable tag: 1.0.49
+	Stable tag: 1.0.50
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+= 1.0.50 =
+* 2020-12-12 add - multi site compatibility added
+* 2020-12-12 add - action hook added user_verification_email_verified
 
 
 = 1.0.49 =
