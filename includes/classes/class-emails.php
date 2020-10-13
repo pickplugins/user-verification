@@ -10,6 +10,8 @@ class class_user_verification_emails{
 
     public function send_email($email_data){
 
+        $email_data = apply_filters('user_verification_email_data',$email_data);
+
 
         $email_to = isset($email_data['email_to']) ? $email_data['email_to'] : '';
         $email_bcc = isset($email_data['email_bcc']) ? $email_data['email_bcc'] : '';

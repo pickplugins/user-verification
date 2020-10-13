@@ -1,0 +1,30 @@
+{
+	"admin_pages": [
+		"user_verification"
+	],
+	"options": {
+		"user_verification_settings": {
+			"recaptcha": {
+				"sitekey": {}
+			}
+		},
+		"email_templates_data": {
+			"user_registered": {
+				"reply_to_name": {},
+				"subject": {},
+				"html": {}
+			},
+			"email_confirmed": {
+				"reply_to_name": {},
+				"subject": {},
+				"html": {}
+			},
+			"email_resend_key": {
+				"reply_to_name": {},
+				"subject": {},
+				"html": {}
+			}
+
+		}
+	}
+}
