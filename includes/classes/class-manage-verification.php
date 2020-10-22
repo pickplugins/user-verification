@@ -121,7 +121,7 @@ class class_user_verification_manage_verification{
                     '{last_name}' => esc_html($user_data->last_name),
                     '{user_display_name}' => esc_html($user_data->display_name),
                     '{user_email}' => esc_html($user_data->user_email),
-                    '{user_name}' => esc_html($user_data->user_nicename),
+                    '{user_name}' => esc_html($user_data->user_login),
                     '{user_avatar}' => get_avatar( $user_data->user_email, 60 ),
 
                     '{ac_activaton_url}' => esc_url_raw($verification_url),
