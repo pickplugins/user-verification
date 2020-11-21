@@ -348,7 +348,7 @@ class class_user_verification_manage_verification{
                     update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
                     $jsData['activation_status'] = 1;
                     $jsData['status_icon'] = '<i class="far fa-check-circle"></i>';
-                    $jsData['status_text'] = __('Thanks for verified','user-verification');
+                    $jsData['status_text'] = __('Thanks for Verifying','user-verification');
 
 
                     $class_user_verification_emails = new class_user_verification_emails();
@@ -511,8 +511,9 @@ class class_user_verification_manage_verification{
                     <?php if(!empty($redirect_after_verification) && $redirect_after_verification != 'none'): ?>
                         <div class="redirect">
                             <p><?php echo __('You will redirect after verification','user-verification'); ?></p>
-                            <a href="<?php echo esc_url_raw($redirect_page_url); ?>"><?php echo __('Click if not redirect 
-                            automatically','user-verification'); ?></a>
+                            <a href="<?php echo esc_url_raw($redirect_page_url); ?>">
+                              <?php echo __('Click if not redirect automatically','user-verification'); ?>
+                            </a>
                         </div>
                     <?php endif; ?>
 
