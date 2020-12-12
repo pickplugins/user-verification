@@ -31,7 +31,19 @@ class class_user_verification_manage_verification{
 
 
                 $user_verification_settings = get_option('user_verification_settings');
-                $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
+
+
+
+              $messages = isset($user_verification_settings['messages']) ? $user_verification_settings['messages'] : array();
+              $activation_sent = isset($messages['activation_sent']) ? $messages['activation_sent'] : __('Verification mail has sent.','user-verification');
+              $verification_success = isset($messages['verification_success']) ? $messages['verification_success'] : __('Verification mail has sent.','user-verification');
+              $please_wait = isset($messages['please_wait']) ? $messages['please_wait'] : '';
+              $mail_instruction = isset($messages['mail_instruction']) ? $messages['mail_instruction'] : __('Please check your mail inbox and follow the instruction. don\'t forget to check spam or trash folder.', 'user-verification');
+
+              $title_sending_verification = isset($messages['title_sending_verification']) ? $messages['title_sending_verification'] : __('Sending verification mail','user-verification');
+
+
+              $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
 
                 if($email_verification_enable != 'yes') return;
 
@@ -158,7 +170,7 @@ class class_user_verification_manage_verification{
             if($mail_status){
                 $jsData['mail_sent'] = true;
                 $jsData['status_icon'] = '<i class="far fa-check-circle"></i>';
-                $jsData['status_text'] = __('Verification mail has sent.','user-verification');
+                $jsData['status_text'] = $activation_sent;
 
             }else {
                 $jsData['mail_sent'] = false;
@@ -172,16 +184,17 @@ class class_user_verification_manage_verification{
                 <div class="inner">
                     <span class="close"><i class="fas fa-times"></i></span>
 
-                    <h2 class="status-title"><?php echo __('Sending verification mail','user-verification'); ?></h2>
+                    <h2 class="status-title"><?php echo $title_sending_verification; ?></h2>
 
                     <div class="status">
+
                         <span class="status-icon"><i class="fas fa-spin fa-spinner"></i></span>
-                        <span class="status-text"><?php echo __('Please wait...','user-verification'); ?></span>
+                        <span class="status-text"><?php echo $please_wait; ?></span>
 
                     </div>
 
                     <div class="description">
-                        <p><?php echo __('Please check your mail inbox and follow the instruction. don\'t forget to check spam or trash folder.', 'user-verification'); ?></p>
+                        <p><?php echo $mail_instruction; ?></p>
                     </div>
 
 
@@ -306,7 +319,17 @@ class class_user_verification_manage_verification{
             $activation_key = isset($_REQUEST['activation_key']) ? sanitize_text_field($_REQUEST['activation_key']) : '';
             $user_verification_settings = get_option('user_verification_settings');
 
-            $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
+
+          $messages = isset($user_verification_settings['messages']) ? $user_verification_settings['messages'] : array();
+          $verification_success = isset($messages['verification_success']) ? $messages['verification_success'] : __('Thanks for Verifying.','user-verification');
+          $verification_fail = isset($messages['verification_fail']) ? $messages['verification_fail'] : __('Sorry! Verification failed.','user-verification');
+          $please_wait = isset($messages['please_wait']) ? $messages['please_wait'] : '';
+          $title_checking_verification = isset($messages['title_checking_verification']) ? $messages['title_checking_verification'] : __('Checking Verification','user-verification');
+
+
+
+
+          $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
             $redirect_after_verification = isset($user_verification_settings['email_verification']['redirect_after_verification']) ? $user_verification_settings['email_verification']['redirect_after_verification'] : '';
             $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
 
@@ -342,13 +365,13 @@ class class_user_verification_manage_verification{
                 if($user_activation_status != 0){
                     $jsData['activation_status'] = 0;
                     $jsData['status_icon'] = '<i class="fas fa-user-times"></i>';
-                    $jsData['status_text'] = __('Sorry! Verification failed.','user-verification');
+                    $jsData['status_text'] = $verification_fail;
 
                 }else{
                     update_user_meta( $meta_data->user_id, 'user_activation_status', 1 );
                     $jsData['activation_status'] = 1;
                     $jsData['status_icon'] = '<i class="far fa-check-circle"></i>';
-                    $jsData['status_text'] = __('Thanks for Verifying','user-verification');
+                    $jsData['status_text'] = $verification_success;
 
 
                     $class_user_verification_emails = new class_user_verification_emails();
@@ -499,11 +522,11 @@ class class_user_verification_manage_verification{
 
                     <span class="close"><i class="fas fa-times"></i></span>
 
-                    <h2 class="status-title"><?php echo __('Checking Verification','user-verification'); ?></h2>
+                    <h2 class="status-title"><?php echo $title_checking_verification; ?></h2>
 
                     <div class="status">
                         <span class="status-icon"><i class="fas fa-spin fa-spinner"></i></span>
-                        <span class="status-text"><?php echo __('Please wait...','user-verification'); ?></span>
+                        <span class="status-text"><?php echo $please_wait; ?></span>
 
                     </div>
 

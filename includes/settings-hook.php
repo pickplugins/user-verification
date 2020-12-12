@@ -123,6 +123,12 @@ function user_verification_settings_content_email_verification(){
         $verify_email = isset($user_verification_settings['messages']['verify_email']) ? $user_verification_settings['messages']['verify_email'] : '';
         $registration_success = isset($user_verification_settings['messages']['registration_success']) ? $user_verification_settings['messages']['registration_success'] : '';
         $verification_success = isset($user_verification_settings['messages']['verification_success']) ? $user_verification_settings['messages']['verification_success'] : '';
+        $verification_fail = isset($user_verification_settings['messages']['verification_fail']) ? $user_verification_settings['messages']['verification_fail'] : '';
+        $please_wait = isset($user_verification_settings['messages']['please_wait']) ? $user_verification_settings['messages']['please_wait'] : '';
+        $mail_instruction = isset($user_verification_settings['messages']['mail_instruction']) ? $user_verification_settings['messages']['mail_instruction'] : '';
+        $title_checking_verification = isset($user_verification_settings['messages']['title_checking_verification']) ? $user_verification_settings['messages']['title_checking_verification'] : '';
+        $title_sending_verification = isset($user_verification_settings['messages']['title_sending_verification']) ? $user_verification_settings['messages']['title_sending_verification'] : '';
+
         $key_expired = isset($user_verification_settings['messages']['key_expired']) ? $user_verification_settings['messages']['key_expired'] : '';
         $captcha_error = isset($user_verification_settings['messages']['captcha_error']) ? $user_verification_settings['messages']['captcha_error'] : '';
 
@@ -197,6 +203,68 @@ function user_verification_settings_content_email_verification(){
             'value'		=> $verification_success,
             'default'		=> '',
 
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+        $args = array(
+          'id'		=> 'verification_fail',
+          'parent'		=> 'user_verification_settings[messages]',
+          'title'		=> __('Verification fail','user-verification'),
+          'details'	=> __('Show custom message when verification failed','user-verification'),
+          'type'		=> 'textarea',
+          'value'		=> $verification_fail,
+          'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+        $args = array(
+          'id'		=> 'please_wait',
+          'parent'		=> 'user_verification_settings[messages]',
+          'title'		=> __('Please wait text','user-verification'),
+          'details'	=> __('Show custom for "please wait"','user-verification'),
+          'type'		=> 'textarea',
+          'value'		=> $please_wait,
+          'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+        $args = array(
+          'id'		=> 'mail_instruction',
+          'parent'		=> 'user_verification_settings[messages]',
+          'title'		=> __('Please wait text','user-verification'),
+          'details'	=> __('Show custom for "please wait"','user-verification'),
+          'type'		=> 'textarea',
+          'value'		=> $mail_instruction,
+          'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+        $args = array(
+          'id'		=> 'title_checking_verification',
+          'parent'		=> 'user_verification_settings[messages]',
+          'title'		=> __('Popup title checking verification','user-verification'),
+          'details'	=> __('Show custom for "checking verification"','user-verification'),
+          'type'		=> 'textarea',
+          'value'		=> $title_checking_verification,
+          'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+        $args = array(
+          'id'		=> 'title_sending_verification',
+          'parent'		=> 'user_verification_settings[messages]',
+          'title'		=> __('Popup title sending verification','user-verification'),
+          'details'	=> __('Show custom for "sending verification"','user-verification'),
+          'type'		=> 'textarea',
+          'value'		=> $title_sending_verification,
+          'default'		=> '',
         );
 
         $settings_tabs_field->generate_field($args);
