@@ -726,13 +726,9 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 function user_verification_user_roles() {
 
 	$wp_roles = new WP_Roles();
-
-	//var_dump($wp_roles);
 	$roles = $wp_roles->get_names();
 
 	return  $roles;
-	// Below code will print the all list of roles.
-	//echo '<pre>'.var_export($wp_roles, true).'</pre>';
 
 }
 
@@ -745,6 +741,7 @@ add_action( 'user_register', 'user_verification_user_registered', 30 );
 if ( ! function_exists( 'user_verification_user_registered' ) ) {
     function user_verification_user_registered( $user_id ) {
 
+        $send_mail = true;
 
         $user_verification_settings = get_option('user_verification_settings');
         $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
@@ -803,6 +800,7 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
                 if(in_array($role, $user_roles)){
                     //update_option('uv_custom_option', $role);
                     update_user_meta( $user_id, 'user_activation_status', 1 );
+                    $send_mail = false;
                     return;
                 }
 
@@ -864,7 +862,7 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
 
-        if($enable == 'yes'){
+        if($enable == 'yes' && $send_mail == true){
             $mail_status = $class_user_verification_emails->send_email($email_data);
 
         }

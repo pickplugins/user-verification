@@ -3,8 +3,8 @@
 	Donate link: http://pickplugins.com
 	Tags:  User Verification
 	Requires at least: 4.1
-	Tested up to: 5.5
-	Stable tag: 1.0.51
+	Tested up to: 5.6
+	Stable tag: 1.0.52
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+
+= 1.0.52 =
+* 2020-12-15 add - new translation fields added.
 
 = 1.0.51 =
 * 2020-10-14 add - new filter hook user_verification_enable added to bypass user verification
