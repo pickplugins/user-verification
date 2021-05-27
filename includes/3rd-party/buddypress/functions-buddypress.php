@@ -25,7 +25,7 @@ function validate_email_edu(){
 
         if($is_blocked){
             //$errors[] = sprintf(__( 'This %s domain is blocked!', 'user-verification' ), '<strong>'.$email_domain.'</strong>');
-            $bp->signup->errors['signup_email'] = sprintf(__( 'This %s domain is blocked!', 'user-verification' ), $email_domain);
+            $bp->signup->errors['signup_email'] = sprintf(__( 'This %s domain is blocked!', 'user-verification' ), esc_url_raw($email_domain));
         }
 
 
@@ -36,7 +36,7 @@ function validate_email_edu(){
 
         if(!$is_allowed){
             //$errors[] = sprintf(__( 'This %s domain is not allowed!', 'user-verification' ), '<strong>'.$email_domain.'</strong>');
-            $bp->signup->errors['signup_email'] = sprintf(__( 'This %s domain is not allowed!', 'user-verification' ), $email_domain);
+            $bp->signup->errors['signup_email'] = sprintf(__( 'This %s domain is not allowed!', 'user-verification' ), esc_url_raw($email_domain));
         }
 
 
@@ -52,7 +52,7 @@ function validate_email_edu(){
         $username_blocked = user_verification_is_username_blocked($username);
 
         if($username_blocked){
-            $bp->signup->errors['signup_username'] = sprintf(__( 'This %s username is not allowed!', 'user-verification' ), $username);
+            $bp->signup->errors['signup_username'] = sprintf(__( 'This %s username is not allowed!', 'user-verification' ), esc_html($username));
 
         }
 
@@ -130,23 +130,31 @@ function bp_members_signup_custom_column_uv_bp( $val, $column_name, $signup_obje
         $uv_status 				= $user_activation_status == 1 ? __('Verified', 'user-verification') : __('Unverified', 'user-verification');
         $activation_key = get_user_meta( $user_id, 'user_activation_key', true );
 
-        echo "<div class='uv_status'>$uv_status</div>";
-        echo "<div class='row-actions'>";
+
+        ?>
+        <div class='uv_status'><?php echo esc_html($uv_status); ?></div>
+        <div class='row-actions'>
+        <?php
 
 
         if( $user_activation_status == 0 ) {
 
-            echo "<span class='uv_action uv_approve' user_id='$user_id' do='approve'>".__('Mark as verified', 'user-verification')."</span>";
+            ?>
+            <span class="uv_action uv_approve" user_id="<?php echo esc_attr($user_id); ?>" do="approve"><?php __('Mark as verified', 'user-verification'); ?>></span>
+            <?php
         }
 
         if( $user_activation_status == 1 ) {
 
-            echo "<span class='uv_action uv_remove_approval' user_id='$user_id' do='remove_approval'>".__('Mark as unverified', 'user-verification')."</span>";
+            ?>
+            <span class="uv_action uv_remove_approval" user_id="<?php echo esc_attr($user_id); ?>" do="remove_approval"><?php __('Mark as unverified', 'user-verification'); ?>></span>
+            <?php
         }
 
-        echo "<span class='activation_key' > ".$activation_key."</span>";
-
-        echo "</div>";
+        ?>
+        <span class='activation_key' > <?php echo  esc_html($activation_key); ?></span>
+    </div>
+    <?php
 
         return ob_get_clean();
     }

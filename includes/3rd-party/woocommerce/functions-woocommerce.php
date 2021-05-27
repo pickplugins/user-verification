@@ -69,7 +69,8 @@ function uv_woocommerce_registration_protect_username( $validation_error, $usern
     $is_blocked = user_verification_is_username_blocked($username);
     if($is_blocked){
 
-        $validation_error->add( 'blocked_username', __( "<strong>{$username}</strong> username is not allowed!", 'user-verification' ));
+        $validation_error->add( 'blocked_username', sprintf(__( "<strong>%s</strong> username is not allowed!", 'user-verification' ),$username));
+
     }
 
     return $validation_error;

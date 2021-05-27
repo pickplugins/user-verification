@@ -17,6 +17,8 @@ class class_user_verification_notices{
         $output = array();
 
         wp_parse_str($_SERVER['QUERY_STRING'], $output);
+        $output = user_verification_recursive_sanitize_arr($output);
+
         $mark_as_verified = isset($output['mark_as_verified']) ? sanitize_text_field($output['mark_as_verified']) : '';
 
         if(empty($mark_as_verified)) return;
@@ -41,7 +43,7 @@ class class_user_verification_notices{
             <div class="updated notice is-dismissible">
                 <p>
                     <?php
-                    echo sprintf(__('%s marked as verified', 'user-verification'), '<strong>'.$display_name.'</strong>')
+                    echo sprintf(__('<strong>%s</strong> marked as verified', 'user-verification'), esc_html($display_name))
                     ?>
                 </p>
 
@@ -62,6 +64,8 @@ class class_user_verification_notices{
 
 
         wp_parse_str($_SERVER['QUERY_STRING'], $output);
+        $output = user_verification_recursive_sanitize_arr($output);
+
         $mark_as_unverified = isset($output['mark_as_unverified']) ? sanitize_text_field($output['mark_as_unverified']) : '';
 
         if(empty($mark_as_unverified)) return;
@@ -86,7 +90,7 @@ class class_user_verification_notices{
             <div class="updated notice is-dismissible">
                 <p>
                     <?php
-                    echo sprintf(__('%s marked as Unverified', 'user-verification'), '<strong>'.$display_name.'</strong>')
+                    echo sprintf(__('<strong>%s</strong> marked as Unverified', 'user-verification'), esc_html($display_name))
                     ?>
                 </p>
 
@@ -106,6 +110,8 @@ class class_user_verification_notices{
         $output = array();
 
         wp_parse_str($_SERVER['QUERY_STRING'], $output);
+        $output = user_verification_recursive_sanitize_arr($output);
+
         $resend_verification = isset($output['resend_verification']) ? sanitize_text_field($output['resend_verification']) : '';
 
 
@@ -256,7 +262,7 @@ class class_user_verification_notices{
             <div class="updated notice is-dismissible">
                 <p>
                     <?php
-                    echo sprintf(__('Verification mail resend to %s', 'user-verification'), '<strong>'.$display_name.'</strong>')
+                    echo sprintf(__('Verification mail resend to <strong>%s</strong>', 'user-verification'), esc_html($display_name))
                     ?>
                 </p>
 

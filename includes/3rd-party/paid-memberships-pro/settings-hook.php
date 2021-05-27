@@ -5,7 +5,7 @@ add_filter('user_verification_settings_tabs', 'user_verification_settings_tabs_p
 
 function user_verification_settings_tabs_pmp($tabs){
 
-    $current_tab = isset($_REQUEST['tab']) ? $_REQUEST['tab'] : 'email_verification';
+    $current_tab = isset($_REQUEST['tab']) ? sanitize_text_field($_REQUEST['tab']) : 'email_verification';
 
 
 
@@ -45,15 +45,15 @@ function user_verification_settings_content_paid_memberships_pro(){
 
     ?>
     <div class="section">
-        <div class="section-title"><?php echo __('WooCommerce', 'user-verification'); ?></div>
-        <p class="description section-description"><?php echo __('Customize options for WooCommerce.', 'user-verification'); ?></p>
+        <div class="section-title"><?php echo __('Paid Memberships Pro', 'user-verification'); ?></div>
+        <p class="description section-description"><?php echo __('Customize options for Paid Memberships Pro.', 'user-verification'); ?></p>
 
         <?php
 
 
         $args = array(
             'id'		=> 'disable_auto_login',
-            'parent'		=> 'user_verification_settings[ultimate_member]',
+            'parent'		=> 'user_verification_settings[paid_memberships_pro]',
             'title'		=> __('Disable auto login','user-verification'),
             'details'	=> __('You can disable auto login after registration via Paid Memberships Pro checkout(register) form.','user-verification'),
             'type'		=> 'select',
@@ -67,7 +67,7 @@ function user_verification_settings_content_paid_memberships_pro(){
 
         $args = array(
             'id'		=> 'message_checkout_page',
-            'parent'		=> 'user_verification_settings[ultimate_member]',
+            'parent'		=> 'user_verification_settings[paid_memberships_pro]',
             'title'		=> __('Display message on checkout confirmation page','user-verification'),
             'details'	=> __('You can display custom message on checkout confirmation page.','user-verification'),
             'type'		=> 'text',
@@ -80,7 +80,7 @@ function user_verification_settings_content_paid_memberships_pro(){
 
         $args = array(
             'id'		=> 'redirect_timout',
-            'parent'		=> 'user_verification_settings[ultimate_member]',
+            'parent'		=> 'user_verification_settings[paid_memberships_pro]',
             'title'		=> __('Automatically logout after second','user-verification'),
             'details'	=> __('After successfully checkout user will wait for few second to display the message and then redirect to another page. <br> 1000 = 1 second','user-verification'),
             'type'		=> 'text',
@@ -96,7 +96,7 @@ function user_verification_settings_content_paid_memberships_pro(){
 
         $args = array(
             'id'		=> 'redirect_after_checkout',
-            'parent'		=> 'user_verification_settings[email_verification]',
+            'parent'		=> 'user_verification_settings[paid_memberships_pro]',
             'title'		=> __('Redirect to this page after checkout','user-verification'),
             'details'	=> __('You can set custom page to redirect and logout after few second passed, where user can see instruction what to do next to get verified.','user-verification'),
             'type'		=> 'select',

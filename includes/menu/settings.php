@@ -2,7 +2,7 @@
 if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
-$current_tab = isset($_REQUEST['tab']) ? $_REQUEST['tab'] : 'email_verification';
+$current_tab = isset($_REQUEST['tab']) ? sanitize_text_field($_REQUEST['tab']) : 'email_verification';
 
 $user_verification_settings_tab = array();
 
@@ -86,9 +86,9 @@ $user_verification_settings = get_option('user_verification_settings');
 ?>
 <div class="wrap">
 	<div id="icon-tools" class="icon32"><br></div><h2><?php echo sprintf(__('%s Settings', 'user-verification'), user_verification_plugin_name)?></h2>
-		<form  method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+		<form  method="post" action="<?php echo str_replace( '%7E', '~', esc_url_raw($_SERVER['REQUEST_URI'])); ?>">
 	        <input type="hidden" name="user_verification_hidden" value="Y">
-            <input type="hidden" name="tab" value="<?php echo $current_tab; ?>">
+            <input type="hidden" name="tab" value="<?php echo esc_attr($current_tab); ?>">
             <?php
             if(!empty($_POST['user_verification_hidden'])){
                 $nonce = sanitize_text_field($_POST['_wpnonce']);

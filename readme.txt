@@ -3,8 +3,8 @@
 	Donate link: http://pickplugins.com
 	Tags:  User Verification
 	Requires at least: 4.1
-	Tested up to: 5.6
-	Stable tag: 1.0.52
+	Tested up to: 5.7
+	Stable tag: 1.0.56
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,18 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+= 1.0.56 =
+* 2021-04-18 fix - Paid Memberships Pro settings saving issue fixed.
+
+= 1.0.55 =
+* 2021-04-18 fix - HTML format issue fixed.
+
+= 1.0.54 =
+* 2021-04-18 fix - security issue update
+
+= 1.0.53 =
+* 2020-02-14 fix - settings reset issue fixed.
 
 
 = 1.0.52 =

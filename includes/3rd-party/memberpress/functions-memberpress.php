@@ -21,7 +21,7 @@ function mepr_validate_signup_uv( $errors ) {
 
 
     if($is_blocked){
-        $errors[] = sprintf(__( 'This %s domain is blocked!', 'user-verification' ), '<strong>'.$email_domain.'</strong>');
+        $errors[] = sprintf(__( 'This <strong>%s</strong> domain is blocked!', 'user-verification' ), esc_url_raw($email_domain));
     }
 
 
@@ -31,7 +31,7 @@ function mepr_validate_signup_uv( $errors ) {
 
 
     if(!$is_allowed){
-        $errors[] = sprintf(__( 'This %s domain is not allowed!', 'user-verification' ), '<strong>'.$email_domain.'</strong>');
+        $errors[] = sprintf(__( 'This <strong>%s</strong> domain is not allowed!', 'user-verification' ), esc_url_raw($email_domain));
 
     }
 
@@ -40,7 +40,7 @@ function mepr_validate_signup_uv( $errors ) {
     //var_dump($user_login);
 
     if($username_blocked){
-        $errors[] = sprintf(__( 'This %s username is not allowed!', 'user-verification' ), '<strong>'.$user_login.'</strong>');
+        $errors[] = sprintf(__( 'This <strong>%s</strong> username is not allowed!', 'user-verification' ), esc_html($user_login));
 
     }
 

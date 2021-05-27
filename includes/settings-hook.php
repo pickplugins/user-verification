@@ -14,7 +14,11 @@ function user_verification_settings_content_email_verification(){
     $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
     $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
     $redirect_after_verification = isset($user_verification_settings['email_verification']['redirect_after_verification']) ? $user_verification_settings['email_verification']['redirect_after_verification'] : '';
-    $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
+
+  $redirect_after_verification_url = isset($user_verification_settings['email_verification']['redirect_after_verification_url']) ? $user_verification_settings['email_verification']['redirect_after_verification_url'] : '';
+
+
+  $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
     $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
 
 
@@ -55,6 +59,10 @@ function user_verification_settings_content_email_verification(){
         $settings_tabs_field->generate_field($args);
 
 
+        $pages_list = user_verification_get_pages_list();
+
+        $pages_list['custom'] = __('- - Custom - -', 'user-verification');
+
         $args = array(
             'id'		=> 'redirect_after_verification',
             'parent'		=> 'user_verification_settings[email_verification]',
@@ -63,12 +71,26 @@ function user_verification_settings_content_email_verification(){
             'type'		=> 'select',
             'value'		=> $redirect_after_verification,
             'default'		=> '',
-            'args'		=> user_verification_get_pages_list(),
+            'args'		=> $pages_list,
 
         );
 
         $settings_tabs_field->generate_field($args);
 
+
+
+        $args = array(
+          'id'		=> 'redirect_after_verification_url',
+          'parent'		=> 'user_verification_settings[messages]',
+          'title'		=> __('Custom URL to redirect','user-verification'),
+          'details'	=> __('Custom URL to redirect after verification','user-verification'),
+          'type'		=> 'text',
+          'value'		=> $redirect_after_verification_url,
+          'default'		=> '',
+
+        );
+
+        $settings_tabs_field->generate_field($args);
 
 
 
@@ -314,9 +336,9 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
     function user_verification_settings_content_email_templates(){
 
         $settings_tabs_field = new settings_tabs_field();
-        $class_license_manager_emails = new class_user_verification_emails();
-        $templates_data_default = $class_license_manager_emails->email_templates_data();
-        $email_templates_parameters = $class_license_manager_emails->email_templates_parameters();
+        $class_user_verification_emails = new class_user_verification_emails();
+        $templates_data_default = $class_user_verification_emails->email_templates_data();
+        $email_templates_parameters = $class_user_verification_emails->email_templates_parameters();
 
 
         $user_verification_settings = get_option('user_verification_settings');
@@ -610,7 +632,7 @@ if(!function_exists('user_verification_settings_content_email_templates')) {
 
 
             $args = array(
-                'id'		=> 'license_manager_email_templates',
+                'id'		=> 'email_templates',
                 //'parent'		=> '',
                 'title'		=> __('Email templates','user-verification'),
                 'details'	=> __('Customize email templates.','user-verification'),
@@ -1009,6 +1031,6 @@ add_action('user_verification_settings_save', 'user_verification_settings_save')
 
 function user_verification_settings_save(){
 
-    $user_verification_settings = isset($_POST['user_verification_settings']) ?  stripslashes_deep($_POST['user_verification_settings']) : array();
+    $user_verification_settings = isset($_POST['user_verification_settings']) ?  user_verification_recursive_sanitize_arr($_POST['user_verification_settings']) : array();
     update_option('user_verification_settings', $user_verification_settings);
 }

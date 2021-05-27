@@ -55,7 +55,7 @@ function user_verification_clean_user_meta(){
 
 
 
-add_action('user_verification_activation', 'user_verification_upgrade_settings');
+//add_action('user_verification_activation', 'user_verification_upgrade_settings');
 
 function user_verification_upgrade_settings(){
 

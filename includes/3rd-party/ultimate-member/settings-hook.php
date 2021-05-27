@@ -5,7 +5,7 @@ add_filter('user_verification_settings_tabs', 'user_verification_settings_tabs_u
 
 function user_verification_settings_tabs_ultimate_member($tabs){
 
-    $current_tab = isset($_REQUEST['tab']) ? $_REQUEST['tab'] : 'email_verification';
+    $current_tab = isset($_REQUEST['tab']) ? sanitize_text_field($_REQUEST['tab']) : 'email_verification';
 
 
 

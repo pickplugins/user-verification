@@ -43,8 +43,8 @@ class class_user_verification_users_columns{
             $activation_key = get_user_meta( $user_id, 'user_activation_key', true );
 
             ?>
-            <div class='uv_status status-<?php echo $user_activation_status; ?>'>
-                <?php echo $uv_status; ?>
+            <div class='uv_status status-<?php echo esc_attr($user_activation_status); ?>'>
+                <?php echo esc_html($uv_status); ?>
             </div>
             <div class='row-actions'>
                 <?php
@@ -78,10 +78,10 @@ class class_user_verification_users_columns{
                     ?>
 
                     <span class="mark_as_verified">
-                        <a href="<?php echo $mark_as_verified_url; ?>"><?php echo __('Mark as Verified', 'user-verification'); ?></a>
+                        <a href="<?php echo esc_url_raw($mark_as_verified_url); ?>"><?php echo __('Mark as Verified', 'user-verification'); ?></a>
                     </span> |
                     <span class="resend_verification">
-                        <a  href="<?php echo $resend_verification_url; ?>"><?php echo __('Resend verification', 'user-verification'); ?></a>
+                        <a  href="<?php echo esc_url_raw($resend_verification_url); ?>"><?php echo __('Resend verification', 'user-verification'); ?></a>
                     </span>
                     <?php
 
@@ -100,13 +100,13 @@ class class_user_verification_users_columns{
 
                     ?>
                     <span class="mark_as_unverified">
-                        <a href="<?php echo $mark_as_unverified_url; ?>"><?php echo __('Mark as unverified', 'user-verification'); ?></a>
+                        <a href="<?php echo esc_url_raw($mark_as_unverified_url); ?>"><?php echo __('Mark as unverified', 'user-verification'); ?></a>
                     </span>
                     <?php
                 }
                 ?>
                 <span class='activation_key' title="<?php echo __('Activation key', 'user-verification'); ?>" ><?php
-                    echo $activation_key; ?></span>
+                    echo esc_html($activation_key); ?></span>
             </div>
 
             <?php

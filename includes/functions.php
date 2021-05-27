@@ -79,7 +79,7 @@ function user_verification_bulk_action_admin_notice() {
             <p>
                 <?php
 
-                echo sprintf(__('%s user account marked as verified.', 'user-verification'), $user_count);
+                echo sprintf(__('%s user account marked as verified.', 'user-verification'), esc_html($user_count));
 
                 ?>
             </p>
@@ -102,7 +102,7 @@ function user_verification_bulk_action_admin_notice() {
             <p>
                 <?php
 
-                echo sprintf(__('%s user account marked as unverified.', 'user-verification'), $user_count);
+                echo sprintf(__('%s user account marked as unverified.', 'user-verification'), esc_html($user_count));
 
                 ?>
             </p>
@@ -151,7 +151,7 @@ function uv_registration_protect_username( $errors, $sanitized_user_login, $user
 
 
     if($username_blocked){
-        $errors->add( 'blocked_username', __( "<strong>{$sanitized_user_login}</strong> username is not allowed!", 'user-verification' ));
+        $errors->add( 'blocked_username', __( "<strong>{".esc_html($sanitized_user_login)."}</strong> username is not allowed!", 'user-verification' ));
     }
 
     return $errors;
@@ -261,7 +261,7 @@ function uv_registration_protect_blocked_domain( $errors, $sanitized_user_login,
 
 
     if($is_blocked){
-        $errors->add( 'blocked_domain', sprintf(__( "This %s domain is blocked!", 'user-verification' ), '<strong>'.$email_domain.'</strong>') );
+        $errors->add( 'blocked_domain', sprintf(__( "This <strong>%s</strong> domain is blocked!", 'user-verification' ), esc_url_raw($email_domain)) );
     }
 
     return $errors;
@@ -283,7 +283,7 @@ function uv_registration_protect_allowed_domain( $errors, $sanitized_user_login,
 //    error_log('$is_allowed:'. $email_domain);
 
     if(!$is_allowed){
-        $errors->add( 'allowed_domain', sprintf(__( "This %s domain is not allowed!", 'user-verification' ), '<strong>'.$email_domain.'</strong>') );
+        $errors->add( 'allowed_domain', sprintf(__( "This <strong>%s</strong> domain is not allowed!", 'user-verification' ), esc_url_raw($email_domain)) );
     }
 
     return $errors;
@@ -726,9 +726,13 @@ function uv_user_authentication( $errors, $username, $passwords ) {
 function user_verification_user_roles() {
 
 	$wp_roles = new WP_Roles();
+
+	//var_dump($wp_roles);
 	$roles = $wp_roles->get_names();
 
 	return  $roles;
+	// Below code will print the all list of roles.
+	//echo '<pre>'.var_export($wp_roles, true).'</pre>';
 
 }
 
@@ -741,7 +745,6 @@ add_action( 'user_register', 'user_verification_user_registered', 30 );
 if ( ! function_exists( 'user_verification_user_registered' ) ) {
     function user_verification_user_registered( $user_id ) {
 
-        $send_mail = true;
 
         $user_verification_settings = get_option('user_verification_settings');
         $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
@@ -800,7 +803,6 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
                 if(in_array($role, $user_roles)){
                     //update_option('uv_custom_option', $role);
                     update_user_meta( $user_id, 'user_activation_status', 1 );
-                    $send_mail = false;
                     return;
                 }
 
@@ -862,7 +864,7 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
 
-        if($enable == 'yes' && $send_mail == true){
+        if($enable == 'yes'){
             $mail_status = $class_user_verification_emails->send_email($email_data);
 
         }
@@ -877,3 +879,17 @@ if ( ! function_exists( 'user_verification_user_registered' ) ) {
 
 
 
+
+function user_verification_recursive_sanitize_arr($array) {
+
+    foreach ( $array as $key => &$value ) {
+        if ( is_array( $value ) ) {
+            $value = user_verification_recursive_sanitize_arr($value);
+        }
+        else {
+            $value = wp_kses_post( $value );
+        }
+    }
+
+    return $array;
+}

@@ -3,7 +3,7 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 1.0.52
+Version: 1.0.56
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -85,7 +85,7 @@ class UserVerification{
 
         /*
          * Custom action hook for plugin deactivation.
-         * Action hook: license_manager_deactivation
+         * Action hook: user_verification_deactivation
          * */
         do_action('user_verification_deactivation');
     }
@@ -148,10 +148,12 @@ class UserVerification{
 		
 		wp_enqueue_script('jquery');
 
+
 		//wp_enqueue_script('uv_front_js', plugins_url( '/assets/front/js/scripts.js' , __FILE__ ) , array( 'jquery' ));
 		//wp_localize_script( 'uv_front_js', 'uv_ajax', array( 'uv_ajaxurl' => admin_url( 'admin-ajax.php')));
 
         wp_register_style('user_verification', user_verification_plugin_url.'assets/front/css/style.css');
+        wp_enqueue_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js' );
 
         //global
         wp_register_style('font-awesome-4', user_verification_plugin_url.'assets/global/css/font-awesome-4.css');
