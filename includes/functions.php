@@ -1,6 +1,22 @@
 <?php
 if ( ! defined('ABSPATH')) exit;  // if direct access 
 
+function user_verification_login_redirect( $url, $query, $user ) {
+
+    //error_log(serialize($query));
+
+    return home_url();
+}
+
+//add_filter( 'login_redirect', 'user_verification_login_redirect', 10, 3 );
+
+
+
+
+
+
+
+
 function user_verification_is_verified($userid){
 
     $status = get_user_meta($userid, 'user_activation_status', true);

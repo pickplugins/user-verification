@@ -331,20 +331,9 @@ class class_user_verification_manage_verification{
 
           $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
             $redirect_after_verification = isset($user_verification_settings['email_verification']['redirect_after_verification']) ? $user_verification_settings['email_verification']['redirect_after_verification'] : '';
-
-          $redirect_after_verification_url = isset($user_verification_settings['email_verification']['redirect_after_verification_url']) ? $user_verification_settings['email_verification']['redirect_after_verification_url'] : '';
-
             $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
 
-
-            if($redirect_after_verification == 'custom' ){
-              $redirect_page_url = $redirect_after_verification_url;
-
-            }else{
-              $redirect_page_url = get_permalink($redirect_after_verification);
-
-            }
-
+            $redirect_page_url = get_permalink($redirect_after_verification);
 
 
             //var_dump($verification_key);
@@ -525,8 +514,6 @@ class class_user_verification_manage_verification{
                 $jsData['is_valid_icon'] = '<i class="far fa-times-circle"></i>';
 
             }
-
-
 
 
             ?>

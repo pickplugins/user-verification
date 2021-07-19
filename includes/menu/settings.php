@@ -13,6 +13,19 @@ $user_verification_settings_tab[] = array(
     'active' => ($current_tab == 'email_verification') ? true : false,
 );
 
+$user_verification_settings_tab[] = array(
+    'id' => 'email_otp',
+    'title' => sprintf(__('%s  Email OTP','user-verification'),'<i class="fas fa-key"></i>'),
+    'priority' => 2,
+    'active' => ($current_tab == 'mail_otp') ? true : false,
+);
+
+$user_verification_settings_tab[] = array(
+    'id' => 'sms_otp',
+    'title' => sprintf(__('%s  SMS OTP','user-verification'),'<i class="fas fa-sms"></i>'),
+    'priority' => 2,
+    'active' => ($current_tab == 'sms_otp') ? true : false,
+);
 
 $user_verification_settings_tab[] = array(
     'id' => 'spam_protection',

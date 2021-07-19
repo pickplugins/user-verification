@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 5.7
-	Stable tag: 1.0.56
+	Stable tag: 1.0.57
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -106,6 +106,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+= 1.0.57 =
+* 2021-07-18 fix - recamptcha issue fixed.
+
 
 = 1.0.56 =
 * 2021-04-18 fix - Paid Memberships Pro settings saving issue fixed.

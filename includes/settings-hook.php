@@ -14,11 +14,7 @@ function user_verification_settings_content_email_verification(){
     $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
     $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
     $redirect_after_verification = isset($user_verification_settings['email_verification']['redirect_after_verification']) ? $user_verification_settings['email_verification']['redirect_after_verification'] : '';
-
-  $redirect_after_verification_url = isset($user_verification_settings['email_verification']['redirect_after_verification_url']) ? $user_verification_settings['email_verification']['redirect_after_verification_url'] : '';
-
-
-  $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
+    $login_after_verification = isset($user_verification_settings['email_verification']['login_after_verification']) ? $user_verification_settings['email_verification']['login_after_verification'] : '';
     $exclude_user_roles = isset($user_verification_settings['email_verification']['exclude_user_roles']) ? $user_verification_settings['email_verification']['exclude_user_roles'] : array();
 
 
@@ -59,10 +55,6 @@ function user_verification_settings_content_email_verification(){
         $settings_tabs_field->generate_field($args);
 
 
-        $pages_list = user_verification_get_pages_list();
-
-        $pages_list['custom'] = __('- - Custom - -', 'user-verification');
-
         $args = array(
             'id'		=> 'redirect_after_verification',
             'parent'		=> 'user_verification_settings[email_verification]',
@@ -71,26 +63,12 @@ function user_verification_settings_content_email_verification(){
             'type'		=> 'select',
             'value'		=> $redirect_after_verification,
             'default'		=> '',
-            'args'		=> $pages_list,
+            'args'		=> user_verification_get_pages_list(),
 
         );
 
         $settings_tabs_field->generate_field($args);
 
-
-
-        $args = array(
-          'id'		=> 'redirect_after_verification_url',
-          'parent'		=> 'user_verification_settings[messages]',
-          'title'		=> __('Custom URL to redirect','user-verification'),
-          'details'	=> __('Custom URL to redirect after verification','user-verification'),
-          'type'		=> 'text',
-          'value'		=> $redirect_after_verification_url,
-          'default'		=> '',
-
-        );
-
-        $settings_tabs_field->generate_field($args);
 
 
 
@@ -825,6 +803,9 @@ function user_verification_settings_content_recaptcha(){
 
 
     $sitekey = isset($user_verification_settings['recaptcha']['sitekey']) ? $user_verification_settings['recaptcha']['sitekey'] : '';
+    $secretkey = isset($user_verification_settings['recaptcha']['secretkey']) ? $user_verification_settings['recaptcha']['secretkey'] : '';
+    $recaptcha_version = isset($user_verification_settings['recaptcha']['version']) ? $user_verification_settings['recaptcha']['version'] : 'v2_checkbox';
+
     $default_login_page = isset($user_verification_settings['recaptcha']['default_login_page']) ? $user_verification_settings['recaptcha']['default_login_page'] : 'no';
     $default_registration_page = isset($user_verification_settings['recaptcha']['default_registration_page']) ? $user_verification_settings['recaptcha']['default_registration_page'] : 'no';
     $default_lostpassword_page = isset($user_verification_settings['recaptcha']['default_lostpassword_page']) ? $user_verification_settings['recaptcha']['default_lostpassword_page'] : 'no';
@@ -842,6 +823,20 @@ function user_verification_settings_content_recaptcha(){
         <?php
 
         $args = array(
+            'id'		=> 'version',
+            'parent'		=> 'user_verification_settings[recaptcha]',
+            'title'		=> __('Recaptcha version','user-verification'),
+            'details'	=> __('Select recaptcha version.','user-verification'),
+            'type'		=> 'select',
+            'value'		=> $recaptcha_version,
+            'default'		=> '',
+            'args'		=> array('v3'=>__('V3','user-verification'), 'v2_checkbox'=>__('V2 - Checkbox','user-verification')  ), //'v2_invisible'=>__('V2 - Invisible','user-verification')
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+        $args = array(
             'id'		=> 'sitekey',
             'parent'		=> 'user_verification_settings[recaptcha]',
             'title'		=> __('reCAPTCHA sitekey','user-verification'),
@@ -852,6 +847,19 @@ function user_verification_settings_content_recaptcha(){
         );
 
         $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'		=> 'secretkey',
+            'parent'		=> 'user_verification_settings[recaptcha]',
+            'title'		=> __('reCAPTCHA secret key','user-verification'),
+            'details'	=> __('Google reCAPTCHA secret key, please register here <a href="https://www.google.com/recaptcha/admin/">https://www.google.com/recaptcha/admin/</a>','user-verification'),
+            'type'		=> 'text',
+            'value'		=> $secretkey,
+            'default'		=> '',
+        );
+
+        $settings_tabs_field->generate_field($args);
+
 
         $args = array(
             'id'		=> 'default_login_page',

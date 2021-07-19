@@ -3,7 +3,7 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 1.0.56
+Version: 1.0.57
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -19,17 +19,19 @@ class UserVerification{
 	
 	public function __construct(){
 	
-		$this->uv_define_constants();
+		$this->_define_constants();
 
-        $this->uv_loading_functions();
-		$this->uv_declare_classes();
-		$this->uv_loading_script();
+        $this->_load_functions();
+		$this->_load_classes();
+		$this->_load_script();
 
 
 		add_action( 'init', array( $this, '_textdomain' ));
         register_activation_hook( __FILE__, array( $this, '_activation' ) );
         register_deactivation_hook(__FILE__, array($this, '_deactivation'));
-        //add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) );
+        //add_filter( 'cron_schedules', array( $this, '_cron_schedules' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, '_front_scripts' ) );
+        add_action( 'login_enqueue_scripts', array( $this, '_login_scripts' ) );
 
 	}
 
@@ -42,7 +44,7 @@ class UserVerification{
 		load_plugin_textdomain( 'user-verification', false, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 
-    function cron_schedules( $schedules ){
+    function _cron_schedules( $schedules ){
 
         $schedules['1minute'] = array(
             'interval'  => 60,
@@ -91,7 +93,7 @@ class UserVerification{
     }
 
 
-	public function uv_loading_functions() {
+	public function _load_functions() {
 		
 		require_once( user_verification_plugin_dir . 'includes/functions.php');
 		require_once( user_verification_plugin_dir . 'includes/functions-recaptcha.php');
@@ -100,20 +102,20 @@ class UserVerification{
 
         require_once( user_verification_plugin_dir . 'includes/3rd-party/3rd-party.php');
 
+        require_once( user_verification_plugin_dir . 'includes/functions-user-profile.php');
 
 
     }
 	
 
-	public function uv_loading_script() {
+	public function _load_script() {
 	
 		add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
-		add_action( 'wp_enqueue_scripts', array( $this, 'uv_front_scripts' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'uv_admin_scripts' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, '_admin_scripts' ) );
 	}
 	
 
-	public function uv_declare_classes() {
+	public function _load_classes() {
         require_once( user_verification_plugin_dir . 'includes/classes/class-manage-verification.php');
 
 
@@ -127,7 +129,7 @@ class UserVerification{
 
     }
 	
-	public function uv_define_constants() {
+	public function _define_constants() {
 
         $this->_define('user_verification_plugin_name', __('User Verification','user-verification') );
         $this->_define('user_verification_plugin_url', plugins_url('/', __FILE__)  );
@@ -143,8 +145,19 @@ class UserVerification{
 			define( $name, $value );
 		}
 	}
-		
-	public function uv_front_scripts(){
+
+
+    public function _login_scripts(){
+        wp_enqueue_script('jquery');
+        wp_register_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js' );
+        wp_enqueue_script('scripts-login', plugins_url( '/assets/front/js/scripts-login.js' , __FILE__ ) , array( 'jquery' ));
+
+        wp_localize_script( 'scripts-login', 'user_verification_ajax', array( 'user_verification_ajaxurl' => admin_url( 'admin-ajax.php')));
+
+
+    }
+
+	public function _front_scripts(){
 		
 		wp_enqueue_script('jquery');
 
@@ -153,14 +166,14 @@ class UserVerification{
 		//wp_localize_script( 'uv_front_js', 'uv_ajax', array( 'uv_ajaxurl' => admin_url( 'admin-ajax.php')));
 
         wp_register_style('user_verification', user_verification_plugin_url.'assets/front/css/style.css');
-        wp_enqueue_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js' );
+        wp_register_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js' );
 
         //global
         wp_register_style('font-awesome-4', user_verification_plugin_url.'assets/global/css/font-awesome-4.css');
         wp_register_style('font-awesome-5', user_verification_plugin_url.'assets/global/css/font-awesome-5.css');
 	}
 
-	public function uv_admin_scripts(){
+	public function _admin_scripts(){
 
         $screen = get_current_screen();
 
