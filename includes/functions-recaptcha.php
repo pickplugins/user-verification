@@ -3,7 +3,7 @@ if ( ! defined('ABSPATH')) exit;  // if direct access
 
 
 
-add_action('login_form', 'user_verification_login_form_otp');
+//add_action('login_form', 'user_verification_login_form_otp');
 function user_verification_login_form_otp(){
 
     $user_verification_settings = get_option('user_verification_settings');
@@ -113,7 +113,7 @@ add_action('wp_ajax_user_verification_send_otp', 'user_verification_send_otp');
 add_action('wp_ajax_nopriv_user_verification_send_otp', 'user_verification_send_otp');
 
 
-add_filter('check_password','user_verification_check_password_otp', 99, 4);
+//add_filter('check_password','user_verification_check_password_otp', 99, 4);
 function user_verification_check_password_otp($check, $password, $hash, $user_id) {
 
     error_log($check);
@@ -129,7 +129,7 @@ function user_verification_check_password_otp($check, $password, $hash, $user_id
 }
 
 
-add_filter('wp_authenticate_user','user_verification_auth_otp',10,2);
+//add_filter('wp_authenticate_user','user_verification_auth_otp',10,2);
 function user_verification_auth_otp($user, $password) {
 
     $error = array();
