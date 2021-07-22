@@ -334,6 +334,7 @@ class class_user_verification_manage_verification{
             $verification_page_id = isset($user_verification_settings['email_verification']['verification_page_id']) ? $user_verification_settings['email_verification']['verification_page_id'] : '';
 
             $redirect_page_url = get_permalink($redirect_after_verification);
+            $redirect_page_url = apply_filters('user_verification_redirect_after_verification_url', $redirect_page_url);
 
 
             //var_dump($verification_key);
