@@ -227,7 +227,13 @@ function user_verification_validate_login_captcha($user, $password) {
 		$captcha = isset($_POST['g-recaptcha-response']) ? sanitize_text_field($_POST['g-recaptcha-response']) : '';
 
 
-        $response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=". $secretkey ."&response=". $_POST['g-recaptcha-response']);
+        $response = wp_remote_post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            [
+                'secret' => $secretkey,
+                'response' => $_POST['g-recaptcha-response'],
+            ]
+        );
         $response = json_decode($response["body"], true);
 
         //error_log(serialize($response));
@@ -278,7 +284,13 @@ function uv_registration_errors( $errors, $sanitized_user_login, $user_email ) {
 
     $secretkey = isset($user_verification_settings['recaptcha']['secretkey']) ? $user_verification_settings['recaptcha']['secretkey'] : '';
 
-    $response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=". $secretkey ."&response=". $_POST['g-recaptcha-response']);
+    $response = wp_remote_post(
+        'https://www.google.com/recaptcha/api/siteverify',
+        [
+            'secret' => $secretkey,
+            'response' => $_POST['g-recaptcha-response'],
+        ]
+    );
     $response = json_decode($response["body"], true);
 
 	if($default_registration_page == 'yes'):
@@ -332,7 +344,13 @@ function uv_lostpassword_post_errors( $errors ) {
 
         $secretkey = isset($user_verification_settings['recaptcha']['secretkey']) ? $user_verification_settings['recaptcha']['secretkey'] : '';
 
-        $response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=". $secretkey ."&response=". $_POST['g-recaptcha-response']);
+        $response = wp_remote_post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            [
+                'secret' => $secretkey,
+                'response' => $_POST['g-recaptcha-response'],
+            ]
+        );
         $response = json_decode($response["body"], true);
 
 		if ( $response["success"] != true ) {
@@ -401,7 +419,13 @@ function wooc_validate_extra_register_fields( $username, $email, $validation_err
     $captcha_error = isset($user_verification_settings['messages']['captcha_error']) ? $user_verification_settings['messages']['captcha_error'] : __('Captcha Error. Please try again.','user-verification');
     $secretkey = isset($user_verification_settings['recaptcha']['secretkey']) ? $user_verification_settings['recaptcha']['secretkey'] : '';
 
-    $response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=". $secretkey ."&response=". $_POST['g-recaptcha-response']);
+    $response = wp_remote_post(
+        'https://www.google.com/recaptcha/api/siteverify',
+        [
+            'secret' => $secretkey,
+            'response' => $_POST['g-recaptcha-response'],
+        ]
+    );
     $response = json_decode($response["body"], true);
 
 	if($wc_register_form == 'yes' && isset($_POST['g-recaptcha-response'])):
@@ -501,7 +525,13 @@ function uv_verify_recaptcha_comment_form( $commentdata ) {
 
     $secretkey = isset($user_verification_settings['recaptcha']['secretkey']) ? $user_verification_settings['recaptcha']['secretkey'] : '';
 
-    $response = wp_remote_get("https://www.google.com/recaptcha/api/siteverify?secret=". $secretkey ."&response=". $_POST['g-recaptcha-response']);
+    $response = wp_remote_post(
+        'https://www.google.com/recaptcha/api/siteverify',
+        [
+            'secret' => $secretkey,
+            'response' => $_POST['g-recaptcha-response'],
+        ]
+    );
     $response = json_decode($response["body"], true);
 
 	if($comment_form == 'yes'):
