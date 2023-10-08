@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 6.3
-	Stable tag: 2.0.18
+	Stable tag: 2.0.19
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,6 +136,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
+
+
+= 2.0.19 =
+* 2023-10-08 fix - Double verification mail for WP User Manager plugin issue fixed.
 
 
 = 2.0.18 =
