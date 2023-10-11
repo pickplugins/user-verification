@@ -397,10 +397,8 @@ function user_verification_auth_otp_default_login($user, $password)
 
     $isvalidPass = false;
     if ($wp_hasher->CheckPassword($password, $user->user_pass)) {
-        error_log("YES, Matched");
         $isvalidPass = true;
     } else {
-        error_log("No, Wrong Password");
         $isvalidPass = false;
     }
     error_log($isvalidPass);
@@ -417,7 +415,6 @@ function user_verification_auth_otp_default_login($user, $password)
     $enable_wc_login = isset($user_verification_settings['email_otp']['enable_wc_login']) ? $user_verification_settings['email_otp']['enable_wc_login'] : 'no';
     $allow_password = isset($user_verification_settings['email_otp']['allow_password']) ? $user_verification_settings['email_otp']['allow_password'] : 'yes';
 
-    error_log('error - 1 ');
 
     if ($allow_password == 'yes') {
 
@@ -440,6 +437,8 @@ function user_verification_auth_otp_default_login($user, $password)
             }
 
             if (!$error->has_errors()) {
+                delete_user_meta($user_id, 'uv_otp');
+
                 return  $user;
             } else {
                 return  $error;
@@ -462,6 +461,8 @@ function user_verification_auth_otp_default_login($user, $password)
         }
 
         if (!$error->has_errors()) {
+            delete_user_meta($user_id, 'uv_otp');
+
             return  $user;
         } else {
             return  $error;
