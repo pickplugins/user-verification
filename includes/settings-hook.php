@@ -720,6 +720,7 @@ function user_verification_settings_content_email_otp()
     $enable_default_register = isset($user_verification_settings['email_otp']['enable_default_register']) ? $user_verification_settings['email_otp']['enable_default_register'] : 'no';
     $length = isset($user_verification_settings['email_otp']['length']) ? $user_verification_settings['email_otp']['length'] : 6;
     $character_source = isset($user_verification_settings['email_otp']['character_source']) ? $user_verification_settings['email_otp']['character_source'] : ['uppercase', 'lowercase'];
+    $allow_password = isset($user_verification_settings['email_otp']['allow_password']) ? $user_verification_settings['email_otp']['allow_password'] : 'yes';
 
     //$password = user_verification_random_password($length, $character_source)
 
@@ -743,27 +744,39 @@ function user_verification_settings_content_email_otp()
         );
 
         $settings_tabs_field->generate_field($args);
-
-
         $args = array(
-            'id'        => 'enable_wc_login',
+            'id'        => 'allow_password',
             'parent'        => 'user_verification_settings[email_otp]',
-            'title'        => __('Enable on WooCommerce login', 'user-verification'),
-            'details'    => __('Enable OTP on WooCommerce login page. every time a user try to login via WooCommerce login form will require a OTP send via mail.', 'user-verification'),
-            'disabled'        => ($enable_default_login != 'yes') ? true : false,
-            'disabledMessage'        => 'Please enable OTP on default login first',
-            'conditions' => array(
-                'field' => 'user_verification_settings[email_otp][enable_default_login]',
-                'value' => 'yes',
-                'type' => '='
-            ),
+            'title'        => __('Allow Passowrd', 'user-verification'),
+            'details'    => __('Allow password in OTP field', 'user-verification'),
             'type'        => 'select',
-            'value'        => $enable_wc_login,
+            'value'        => $allow_password,
             'default'        => '',
             'args'        => array('yes' => __('Yes', 'user-verification'), 'no' => __('No', 'user-verification')),
         );
 
         $settings_tabs_field->generate_field($args);
+
+
+        // $args = array(
+        //     'id'        => 'enable_wc_login',
+        //     'parent'        => 'user_verification_settings[email_otp]',
+        //     'title'        => __('Enable on WooCommerce login', 'user-verification'),
+        //     'details'    => __('Enable OTP on WooCommerce login page. every time a user try to login via WooCommerce login form will require a OTP send via mail.', 'user-verification'),
+        //     'disabled'        => ($enable_default_login != 'yes') ? true : false,
+        //     'disabledMessage'        => 'Please enable OTP on default login first',
+        //     'conditions' => array(
+        //         'field' => 'user_verification_settings[email_otp][enable_default_login]',
+        //         'value' => 'yes',
+        //         'type' => '='
+        //     ),
+        //     'type'        => 'select',
+        //     'value'        => $enable_wc_login,
+        //     'default'        => '',
+        //     'args'        => array('yes' => __('Yes', 'user-verification'), 'no' => __('No', 'user-verification')),
+        // );
+
+        // $settings_tabs_field->generate_field($args);
 
 
         $args = array(

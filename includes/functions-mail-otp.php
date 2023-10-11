@@ -74,7 +74,7 @@ callback: user_verification_woocommerce_login_form_otp_scripts
 */
 
 
-add_action('woocommerce_login_form', 'user_verification_woocommerce_login_form_otp_scripts', 99);
+//add_action('woocommerce_login_form', 'user_verification_woocommerce_login_form_otp_scripts', 99);
 function user_verification_woocommerce_login_form_otp_scripts()
 {
 
@@ -374,26 +374,6 @@ function user_verification_check_password_otp_default_login($check, $password, $
 }
 
 
-//add_filter('check_password', 'user_verification_check_password_otp_wc_login', 99, 4);
-function user_verification_check_password_otp_wc_login($check, $password, $hash, $user_id)
-{
-
-    $user_verification_settings = get_option('user_verification_settings');
-    $enable_wc_login = isset($user_verification_settings['email_otp']['enable_wc_login']) ? $user_verification_settings['email_otp']['enable_wc_login'] : 'no';
-
-    if ($enable_wc_login != 'yes') return $check;
-
-    // error_log('user_verification_check_password_otp_wc_login');
-
-    //    error_log($check);
-    //    error_log($password);
-    //    error_log($hash);
-    //    error_log($user_id);
-
-    //$errors = [];
-
-    return true;
-}
 
 
 
@@ -408,43 +388,84 @@ Authenticate user via OTP
 add_filter('wp_authenticate_user', 'user_verification_auth_otp_default_login', 10, 2);
 function user_verification_auth_otp_default_login($user, $password)
 {
+    require_once(ABSPATH . 'wp-includes/class-phpass.php');
+    $user_id = isset($user->ID) ? $user->ID : '';
+    $saved_otp = get_user_meta($user_id, 'uv_otp', true);
+    $error = new WP_Error();
 
+    $wp_hasher = new PasswordHash(8, TRUE);
+
+    $isvalidPass = false;
+    if ($wp_hasher->CheckPassword($password, $user->user_pass)) {
+        error_log("YES, Matched");
+        $isvalidPass = true;
+    } else {
+        error_log("No, Wrong Password");
+        $isvalidPass = false;
+    }
+    error_log($isvalidPass);
+    // error_log('$user->user_pass: ' . $user->user_pass);
+
+
+    // error_log('wp_hash_password: ' . wp_hash_password($password));
+    // error_log('$password: ' . $password);
+    // error_log('$user_id: ' . $user_id);
+    // error_log('user_verification_auth_otp_default_login');
 
     $user_verification_settings = get_option('user_verification_settings');
     $enable_default_login = isset($user_verification_settings['email_otp']['enable_default_login']) ? $user_verification_settings['email_otp']['enable_default_login'] : 'no';
     $enable_wc_login = isset($user_verification_settings['email_otp']['enable_wc_login']) ? $user_verification_settings['email_otp']['enable_wc_login'] : 'no';
+    $allow_password = isset($user_verification_settings['email_otp']['allow_password']) ? $user_verification_settings['email_otp']['allow_password'] : 'yes';
 
-    if ($enable_default_login != 'yes') return $user;
-    if ($enable_wc_login != 'yes') return $user;
+    error_log('error - 1 ');
 
+    if ($allow_password == 'yes') {
 
-    $error = new WP_Error();
+        if ($isvalidPass) {
+            return $user;
+        } else {
 
+            if ($enable_default_login != 'yes') return $user;
 
-    $user_id = isset($user->ID) ? $user->ID : '';
-    //$uv_otp = isset($_POST['pwd']) ? sanitize_text_field($_POST['pwd']) : '';
+            if (empty($password)) {
+                $error->add('otp_empty', __('OTP should not empty. 1', 'user-verification'));
+            }
 
+            if (empty($saved_otp)) {
+                $error->add('otp_not_found', __('OTP not found.', 'user-verification'));
+            }
 
-    if (empty($password)) {
-        $error->add('otp_empty', __('OTP should not empty. 1', 'user-verification'));
-    }
+            if ($saved_otp != $password) {
+                $error->add('otp_not_match', __('OTP is not correct.', 'user-verification'));
+            }
 
-    $saved_otp = get_user_meta($user_id, 'uv_otp', true);
-
-    if (empty($saved_otp)) {
-        $error->add('otp_not_found', __('OTP not found.', 'user-verification'));
-    }
-
-
-    if ($saved_otp != $password) {
-        $error->add('otp_not_match', __('OTP is not correct.', 'user-verification'));
-    }
-
-
-    if (!$error->has_errors()) {
-        return  $user;
+            if (!$error->has_errors()) {
+                return  $user;
+            } else {
+                return  $error;
+            }
+        }
     } else {
-        return  $error;
+
+        if ($enable_default_login != 'yes') return $user;
+
+        if (empty($password)) {
+            $error->add('otp_empty', __('OTP should not empty. 1', 'user-verification'));
+        }
+
+        if (empty($saved_otp)) {
+            $error->add('otp_not_found', __('OTP not found.', 'user-verification'));
+        }
+
+        if ($saved_otp != $password) {
+            $error->add('otp_not_match', __('OTP is not correct.', 'user-verification'));
+        }
+
+        if (!$error->has_errors()) {
+            return  $user;
+        } else {
+            return  $error;
+        }
     }
 }
 
