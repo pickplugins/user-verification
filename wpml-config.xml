@@ -7,9 +7,6 @@
 				<key name="logo_id"/>
 
 			<key name="recaptcha">
-				<key name="sitekey"/>
-				<key name="secretkey"/>
-				<key name="version"/>
 				<key name="default_login_page"/>
 				<key name="default_registration_page"/>
 				<key name="default_lostpassword_page"/>
@@ -18,11 +15,7 @@
 
 
 
-			<key name="email_otp">
-				<key name="enable_default_login"/>
-				<key name="enable_wc_login"/>
-				<key name="enable_default_register"/>
-			</key>
+
 
 			<key name="temp_login">
 				<key name="enable"/>

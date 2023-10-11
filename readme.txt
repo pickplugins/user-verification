@@ -139,6 +139,7 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 = 2.0.21 =
 * 2023-10-11 fix - OTP remove after login successful.
+* 2023-10-11 fix - OTP enable saving for polylang issue fixed
 
 = 2.0.20 =
 * 2023-10-11 fix - Remove support for WooCommerce OTP 
