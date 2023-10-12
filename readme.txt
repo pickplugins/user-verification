@@ -4,7 +4,7 @@
 	Tags:  User Verification
 	Requires at least: 4.1
 	Tested up to: 6.3
-	Stable tag: 2.0.21
+	Stable tag: 2.0.22
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,10 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+
+= 2.0.22 =
+* 2023-10-12 fix - WooCommerce OTP is added.
 
 
 = 2.0.21 =

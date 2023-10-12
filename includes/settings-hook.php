@@ -758,25 +758,25 @@ function user_verification_settings_content_email_otp()
         $settings_tabs_field->generate_field($args);
 
 
-        // $args = array(
-        //     'id'        => 'enable_wc_login',
-        //     'parent'        => 'user_verification_settings[email_otp]',
-        //     'title'        => __('Enable on WooCommerce login', 'user-verification'),
-        //     'details'    => __('Enable OTP on WooCommerce login page. every time a user try to login via WooCommerce login form will require a OTP send via mail.', 'user-verification'),
-        //     'disabled'        => ($enable_default_login != 'yes') ? true : false,
-        //     'disabledMessage'        => 'Please enable OTP on default login first',
-        //     'conditions' => array(
-        //         'field' => 'user_verification_settings[email_otp][enable_default_login]',
-        //         'value' => 'yes',
-        //         'type' => '='
-        //     ),
-        //     'type'        => 'select',
-        //     'value'        => $enable_wc_login,
-        //     'default'        => '',
-        //     'args'        => array('yes' => __('Yes', 'user-verification'), 'no' => __('No', 'user-verification')),
-        // );
+        $args = array(
+            'id'        => 'enable_wc_login',
+            'parent'        => 'user_verification_settings[email_otp]',
+            'title'        => __('Enable on WooCommerce login', 'user-verification'),
+            'details'    => __('Enable OTP on WooCommerce login page. every time a user try to login via WooCommerce login form will require a OTP send via mail.', 'user-verification'),
+            'disabled'        => ($enable_default_login != 'yes') ? true : false,
+            'disabledMessage'        => 'Please enable OTP on default login first',
+            'conditions' => array(
+                'field' => 'user_verification_settings[email_otp][enable_default_login]',
+                'value' => 'yes',
+                'type' => '='
+            ),
+            'type'        => 'select',
+            'value'        => $enable_wc_login,
+            'default'        => '',
+            'args'        => array('yes' => __('Yes', 'user-verification'), 'no' => __('No', 'user-verification')),
+        );
 
-        // $settings_tabs_field->generate_field($args);
+        $settings_tabs_field->generate_field($args);
 
 
         $args = array(

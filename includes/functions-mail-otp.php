@@ -74,7 +74,7 @@ callback: user_verification_woocommerce_login_form_otp_scripts
 */
 
 
-//add_action('woocommerce_login_form', 'user_verification_woocommerce_login_form_otp_scripts', 99);
+add_action('woocommerce_login_form', 'user_verification_woocommerce_login_form_otp_scripts', 99);
 function user_verification_woocommerce_login_form_otp_scripts()
 {
 
@@ -363,12 +363,6 @@ function user_verification_check_password_otp_default_login($check, $password, $
     //if ($enable_wc_login != 'yes') return $check;
 
 
-    //error_log('user_verification_check_password_otp_default_login');
-    //    error_log($password);
-    //    error_log($hash);
-    //    error_log($user_id);
-
-    //$errors = [];
 
     return true;
 }
@@ -385,7 +379,7 @@ function user_verification_check_password_otp_default_login($check, $password, $
 Authenticate user via OTP
 */
 
-add_filter('wp_authenticate_user', 'user_verification_auth_otp_default_login', 10, 2);
+add_filter('wp_authenticate_user', 'user_verification_auth_otp_default_login', 99, 2);
 function user_verification_auth_otp_default_login($user, $password)
 {
     require_once(ABSPATH . 'wp-includes/class-phpass.php');
@@ -401,14 +395,7 @@ function user_verification_auth_otp_default_login($user, $password)
     } else {
         $isvalidPass = false;
     }
-    error_log($isvalidPass);
-    // error_log('$user->user_pass: ' . $user->user_pass);
 
-
-    // error_log('wp_hash_password: ' . wp_hash_password($password));
-    // error_log('$password: ' . $password);
-    // error_log('$user_id: ' . $user_id);
-    // error_log('user_verification_auth_otp_default_login');
 
     $user_verification_settings = get_option('user_verification_settings');
     $enable_default_login = isset($user_verification_settings['email_otp']['enable_default_login']) ? $user_verification_settings['email_otp']['enable_default_login'] : 'no';
@@ -425,7 +412,7 @@ function user_verification_auth_otp_default_login($user, $password)
             if ($enable_default_login != 'yes') return $user;
 
             if (empty($password)) {
-                $error->add('otp_empty', __('OTP should not empty. 1', 'user-verification'));
+                $error->add('empty_password', __('OTP should not empty. 1', 'user-verification'));
             }
 
             if (empty($saved_otp)) {
