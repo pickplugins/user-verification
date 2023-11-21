@@ -1032,13 +1032,16 @@ if (!function_exists('user_verification_user_registered')) {
     function user_verification_user_registered($user_id)
     {
 
+        error_log('##user_verification_user_registered##');
 
         $user_verification_settings = get_option('user_verification_settings');
         $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
 
         $email_verification_enable = apply_filters('user_verification_enable', $email_verification_enable, $user_id);
+        $user_activation_status = get_user_meta($user_id, 'user_activation_status', true);
 
 
+        if ($user_activation_status == 1) return;
         if ($email_verification_enable != 'yes') return;
 
         $class_user_verification_emails = new class_user_verification_emails();

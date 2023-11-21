@@ -4,20 +4,6 @@ if (!defined('ABSPATH')) exit;  // if direct access
 
 
 
-//add_filter("wpum_after_registration", "uv_wpum_after_registration",99,3);
-
-function uv_wpum_after_registration($user_id, $values, $form)
-{
-
-
-    //error_log($user_id);
-
-
-    $userdata = get_user_by($user_id, 'ID');
-
-    do_action('user_register', $user_id,  $userdata);
-}
-
 
 
 

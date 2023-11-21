@@ -176,6 +176,8 @@ add_filter('registration_errors', 'user_verification_registration_form_recaptcha
 function user_verification_registration_form_recaptcha_validate($errors, $sanitized_user_login, $user_email)
 {
 
+    error_log(serialize($errors));
+
     $user_verification_settings = get_option('user_verification_settings');
     $default_registration_page = isset($user_verification_settings['recaptcha']['default_registration_page']) ? $user_verification_settings['recaptcha']['default_registration_page'] : '';
     $captcha_error = isset($user_verification_settings['messages']['captcha_error']) ? $user_verification_settings['messages']['captcha_error'] : __('Captcha Error. Please try again.', 'user-verification');
@@ -193,6 +195,8 @@ function user_verification_registration_form_recaptcha_validate($errors, $saniti
             }
         endif;
     }
+
+    error_log(serialize($errors));
 
 
 
@@ -336,7 +340,7 @@ function user_verification_woocommerce_register_form_recaptcha()
         <?php
         elseif ($recaptcha_version == 'v3') :
         ?>
-            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+            <input type="hidden" id="g-recaptcha-response-wc" name="g-recaptcha-response">
             <input type="hidden" name="action" value="validate_captcha">
             <script>
                 grecaptcha.ready(function() {
@@ -347,7 +351,7 @@ function user_verification_woocommerce_register_form_recaptcha()
                         })
                         .then(function(token) {
                             // add token value to form
-                            document.getElementById('g-recaptcha-response').value = token;
+                            document.getElementById('g-recaptcha-response-wc').value = token;
                         });
                 });
             </script>

@@ -233,13 +233,13 @@ class UserVerification
         wp_register_style('user_verification', user_verification_plugin_url . 'assets/front/css/style.css');
 
 
-        if ($default_login_page == 'yes') {
-            if ($recaptcha_version == 'v2_checkbox') {
-                wp_enqueue_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js', [], null);
-            } elseif ($recaptcha_version == 'v3') {
-                wp_enqueue_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js?render=' . $sitekey, [], null);
-            }
+        //if ($default_login_page == 'yes') {
+        if ($recaptcha_version == 'v2_checkbox') {
+            wp_enqueue_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js', [], null);
+        } elseif ($recaptcha_version == 'v3') {
+            wp_enqueue_script('recaptcha_js',  'https://www.google.com/recaptcha/api.js?render=' . $sitekey, [], null);
         }
+        //}
 
 
 
