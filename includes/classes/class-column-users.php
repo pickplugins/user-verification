@@ -136,8 +136,13 @@ class class_user_verification_users_columns
                 <?php
                 }
                 ?>
-                <span class='activation_key' title="<?php echo __('Activation key', 'user-verification'); ?>"><?php
-                                                                                                                echo esc_html($activation_key); ?></span>
+
+                <?php
+
+
+
+                ?>
+
             </div>
 
 <?php
