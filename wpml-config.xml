@@ -1,0 +1,150 @@
+<wpml-config>
+	<admin-texts>
+
+
+		<key name="user_verification_settings">
+
+				<key name="logo_id"/>
+
+			<key name="recaptcha">
+				<key name="default_login_page"/>
+				<key name="default_registration_page"/>
+				<key name="default_lostpassword_page"/>
+				<key name="comment_form"/>
+			</key>
+
+
+
+
+
+			<key name="temp_login">
+				<key name="enable"/>
+				<key name="duration"/>
+				<key name="require_verification"/>
+
+			</key>
+			
+			<key name="unverified">
+				<key name="delete_user"/>
+
+
+			</key>
+
+			
+
+			<key name="spam_protection">
+				<key name="enable_domain_block"/>
+				<key name="blocked_domain"/>
+				<key name="allowed_domain"/>
+				<key name="enable_username_block"/>
+				<key name="blocked_username"/>
+			</key>
+
+			<key name="isspammy">
+				<key name="report_comment_spam"/>
+				<key name="report_comment_trash"/>
+				<key name="block_comment"/>
+				<key name="comment_form_notice"/>
+				<key name="comment_form_notice_text"/>
+				<key name="block_register"/>
+				<key name="block_login"/>
+
+
+
+			</key>
+
+
+
+
+			
+
+			<key name="email_verification">
+				<key name="enable"/>
+				<key name="verification_page_id"/>
+				<key name="redirect_after_verification"/>
+				<key name="login_after_verification"/>
+				<key name="exclude_user_roles"/>
+
+			</key>
+			
+			<key name="messages">
+				<key name="invalid_key"/>
+				<key name="activation_sent"/>
+				<key name="registration_success"/>
+				<key name="verification_success"/>
+				<key name="verification_fail"/>
+				<key name="please_wait"/>
+				<key name="mail_instruction"/>
+				<key name="redirect_after_verify"/>
+				<key name="not_redirect"/>
+				<key name="title_checking_verification"/>
+				<key name="captcha_error"/>
+
+
+
+
+			</key>
+
+			
+
+
+			<key name="email_templates_data">
+				<key name="user_registered">
+
+					<key name="email_bcc"/>
+					<key name="email_from"/>
+					<key name="email_from_name"/>
+					<key name="reply_to"/>
+					<key name="reply_to_name"/>
+					<key name="email_bcc"/>
+					<key name="subject"/>
+					<key name="html"/>
+					<key name="enable"/>
+					<key name="description"/>
+
+
+				
+				</key>
+				<key name="email_confirmed">
+					<key name="email_bcc"/>
+					<key name="email_from"/>
+					<key name="email_from_name"/>
+					<key name="reply_to"/>
+					<key name="reply_to_name"/>
+					<key name="email_bcc"/>
+					<key name="subject"/>
+					<key name="html"/>
+					<key name="enable"/>
+					<key name="description"/>
+				</key>
+				<key name="email_resend_key">
+					<key name="email_bcc"/>
+					<key name="email_from"/>
+					<key name="email_from_name"/>
+					<key name="reply_to"/>
+					<key name="reply_to_name"/>
+					<key name="email_bcc"/>
+					<key name="subject"/>
+					<key name="html"/>
+					<key name="enable"/>
+					<key name="description"/>
+				</key>
+				<key name="send_mail_otp">
+					<key name="email_bcc"/>
+					<key name="email_from"/>
+					<key name="email_from_name"/>
+					<key name="reply_to"/>
+					<key name="reply_to_name"/>
+					<key name="email_bcc"/>
+					<key name="subject"/>
+					<key name="html"/>
+					<key name="enable"/>
+					<key name="description"/>
+				</key>
+				
+
+			</key>
+		</key>
+
+	</admin-texts>
+</wpml-config>

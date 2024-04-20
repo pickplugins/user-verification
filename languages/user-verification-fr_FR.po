@@ -1,0 +1,1612 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: User Verification\n"
+"POT-Creation-Date: 2023-06-02 11:48+0600\n"
+"PO-Revision-Date: 2023-06-02 11:52+0600\n"
+"Last-Translator: \n"
+"Language-Team: pickplugins <support@pickplugins.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: templates\n"
+"X-Poedit-SearchPath-1: includes\n"
+"X-Poedit-SearchPath-2: templates\n"
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:28
+#, php-format
+msgid "This %s domain is blocked!"
+msgstr ""
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:39
+#, php-format
+msgid "This %s domain is not allowed!"
+msgstr ""
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:55
+#, php-format
+msgid "This %s username is not allowed!"
+msgstr ""
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:87
+msgid "Verification Status"
+msgstr ""
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:130
+#: includes/classes/class-column-users.php:53
+#: includes/classes/class-column-users.php:64
+msgid "Verified"
+msgstr ""
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:130
+#: includes/classes/class-column-users.php:53
+#: includes/classes/class-column-users.php:68
+msgid "Unverified"
+msgstr ""
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:143
+#: includes/functions.php:363
+msgid "Mark as verified"
+msgstr ""
+
+#: includes/3rd-party/buddypress/functions-buddypress.php:150
+#: includes/classes/class-column-users.php:134 includes/functions.php:364
+msgid "Mark as unverified"
+msgstr ""
+
+#: includes/3rd-party/memberpress/functions-memberpress.php:22
+#: includes/functions.php:654
+#, php-format
+msgid "This <strong>%s</strong> domain is blocked!"
+msgstr ""
+
+#: includes/3rd-party/memberpress/functions-memberpress.php:32
+#: includes/functions.php:676
+#, php-format
+msgid "This <strong>%s</strong> domain is not allowed!"
+msgstr ""
+
+#: includes/3rd-party/memberpress/functions-memberpress.php:41
+#, php-format
+msgid "This <strong>%s</strong> username is not allowed!"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/functions-paid-memberships-pro.php:145
+#: includes/3rd-party/ultimate-member/functions-ultimate-member.php:56
+#: includes/3rd-party/woocommerce/functions-woocommerce.php:46
+#: includes/3rd-party/woocommerce/functions-woocommerce.php:87
+msgid "This email domain is not allowed!"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:15
+#, php-format
+msgid "%s Paid Memberships Pro"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:47
+msgid "Paid Memberships Pro"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:48
+msgid "Customize options for Paid Memberships Pro."
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:56
+#: includes/3rd-party/ultimate-member/settings-hook.php:53
+#: includes/3rd-party/wp-user-manager/settings-hook.php:52
+msgid "Disable auto login"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:57
+msgid ""
+"You can disable auto login after registration via Paid Memberships Pro "
+"checkout(register) form."
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:61
+#: includes/3rd-party/ultimate-member/settings-hook.php:58
+#: includes/3rd-party/woocommerce/settings-hook.php:80
+#: includes/3rd-party/woocommerce/settings-hook.php:94
+#: includes/3rd-party/woocommerce/settings-hook.php:179
+#: includes/3rd-party/woocommerce/settings-hook.php:193
+#: includes/3rd-party/woocommerce/settings-hook.php:206
+#: includes/3rd-party/wp-user-manager/settings-hook.php:57
+#: includes/settings-hook.php:40 includes/settings-hook.php:86
+#: includes/settings-hook.php:101 includes/settings-hook.php:412
+#: includes/settings-hook.php:493 includes/settings-hook.php:741
+#: includes/settings-hook.php:762 includes/settings-hook.php:776
+#: includes/settings-hook.php:874 includes/settings-hook.php:916
+#: includes/settings-hook.php:948 includes/settings-hook.php:980
+#: includes/settings-hook.php:1063 includes/settings-hook.php:1076
+#: includes/settings-hook.php:1089 includes/settings-hook.php:1102
+#: includes/settings-hook.php:1130 includes/settings-hook.php:1144
+#: includes/settings-hook.php:1251 includes/settings-hook.php:1265
+#: includes/settings-hook.php:1279 includes/settings-hook.php:1293
+#: includes/settings-hook.php:1356 includes/settings-hook.php:1369
+#: includes/settings-hook.php:1479 includes/settings-hook.php:1530
+#: includes/settings-hook.php:1568
+msgid "Yes"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:61
+#: includes/3rd-party/ultimate-member/settings-hook.php:58
+#: includes/3rd-party/woocommerce/settings-hook.php:80
+#: includes/3rd-party/woocommerce/settings-hook.php:94
+#: includes/3rd-party/woocommerce/settings-hook.php:179
+#: includes/3rd-party/woocommerce/settings-hook.php:193
+#: includes/3rd-party/woocommerce/settings-hook.php:206
+#: includes/3rd-party/wp-user-manager/settings-hook.php:57
+#: includes/settings-hook.php:40 includes/settings-hook.php:86
+#: includes/settings-hook.php:101 includes/settings-hook.php:412
+#: includes/settings-hook.php:493 includes/settings-hook.php:741
+#: includes/settings-hook.php:762 includes/settings-hook.php:776
+#: includes/settings-hook.php:874 includes/settings-hook.php:916
+#: includes/settings-hook.php:948 includes/settings-hook.php:980
+#: includes/settings-hook.php:1063 includes/settings-hook.php:1076
+#: includes/settings-hook.php:1089 includes/settings-hook.php:1102
+#: includes/settings-hook.php:1130 includes/settings-hook.php:1144
+#: includes/settings-hook.php:1251 includes/settings-hook.php:1265
+#: includes/settings-hook.php:1279 includes/settings-hook.php:1293
+#: includes/settings-hook.php:1356 includes/settings-hook.php:1369
+#: includes/settings-hook.php:1479 includes/settings-hook.php:1530
+#: includes/settings-hook.php:1568
+msgid "No"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:70
+msgid "Display message on checkout confirmation page"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:71
+msgid "You can display custom message on checkout confirmation page."
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:83
+msgid "Automatically logout after second"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:84
+msgid ""
+"After successfully checkout user will wait for few second to display the "
+"message and then redirect to another page. <br> 1000 = 1 second"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:99
+msgid "Redirect to this page after checkout"
+msgstr ""
+
+#: includes/3rd-party/paid-memberships-pro/settings-hook.php:100
+msgid ""
+"You can set custom page to redirect and logout after few second passed, "
+"where user can see instruction what to do next to get verified."
+msgstr ""
+
+#: includes/3rd-party/ultimate-member/functions-ultimate-member.php:47
+msgid "Username is blocked"
+msgstr ""
+
+#: includes/3rd-party/ultimate-member/settings-hook.php:14
+#, php-format
+msgid "%s Ultimate Member"
+msgstr ""
+
+#: includes/3rd-party/ultimate-member/settings-hook.php:44
+msgid "Ultimate Member"
+msgstr ""
+
+#: includes/3rd-party/ultimate-member/settings-hook.php:45
+msgid "Customize options for Ultimate Member."
+msgstr ""
+
+#: includes/3rd-party/ultimate-member/settings-hook.php:54
+#: includes/3rd-party/wp-user-manager/settings-hook.php:53
+msgid ""
+"You can disable auto login after registration via ultimate member register "
+"form."
+msgstr ""
+
+#: includes/3rd-party/ultimate-member/settings-hook.php:67
+#: includes/3rd-party/woocommerce/settings-hook.php:104
+#: includes/3rd-party/wp-user-manager/settings-hook.php:66
+msgid "Display Message after successfully registration"
+msgstr ""
+
+#: includes/3rd-party/ultimate-member/settings-hook.php:68
+#: includes/3rd-party/wp-user-manager/settings-hook.php:67
+msgid ""
+"You can display custom message at profile header after redirect profile page "
+"via Ultimate Member."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/functions-woocommerce.php:70
+#, php-format
+msgid "<strong>%s</strong> username is not allowed!"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/functions-woocommerce.php:184
+#: includes/3rd-party/woocommerce/settings-hook.php:37
+msgid "Registration success, please check mail for details."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/functions-woocommerce.php:188
+msgid ""
+"Send in your registration application today!<br /> NOTE: Your account will "
+"be held for moderation and you will be unable to login until it is approved."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:14
+#, php-format
+msgid "%s WooCommerce"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:45
+msgid "WooCommerce"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:46
+msgid "Customize options for WooCommerce."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:55
+msgid "Redirect after registration"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:56
+msgid "You can set custom page to redirect after successfully registration."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:75
+msgid "Disable auto login on registration"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:76
+msgid ""
+"You can disable auto login after registration via WooCommerce register form. "
+"this also disable login on checkout page."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:89
+msgid "Disable auto login on checkout"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:90
+msgid "You can disable auto login on checkout page after completed the order."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:105
+msgid ""
+"You can display custom message on after successfully registration via "
+"WooCommerce register form."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:120
+msgid "Redirect after payment"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:121
+msgid ""
+"You can set custom page to redirect after successfully payment, and this "
+"page should check verification status and take action to stay logged-in or "
+"logged-out the user automatically. please use following shortcode "
+"<code>[user_verification_message message=\"Please check email to verify "
+"account first\"]</code> to check verification status, it will automatically "
+"logged-out the unverified user and display the custom message."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:165
+msgid "WooCommerce reCAPTCHA"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:166
+msgid "Customize options for WooCommerce reCAPTCHA."
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:174
+msgid "WooCommerce login form"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:175
+msgid "Enable reCAPTCHA on WooCommerce login form"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:188
+msgid "WooCommerce register form"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:189
+msgid "Enable reCAPTCHA on WooCommerce register form"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:201
+msgid "WooCommerce lost password form"
+msgstr ""
+
+#: includes/3rd-party/woocommerce/settings-hook.php:202
+msgid "Enable reCAPTCHA on WooCommerce lost password form"
+msgstr ""
+
+#: includes/3rd-party/wp-user-manager/functions.php:86
+#, php-format
+msgid "<strong>%s</strong> Username is blocked"
+msgstr ""
+
+#: includes/3rd-party/wp-user-manager/functions.php:100
+#, php-format
+msgid " This email domain <strong>%s</strong> is not allowed!"
+msgstr ""
+
+#: includes/3rd-party/wp-user-manager/settings-hook.php:14
+#, php-format
+msgid "%s WP User Manager"
+msgstr ""
+
+#: includes/3rd-party/wp-user-manager/settings-hook.php:43
+msgid "WP User Manager"
+msgstr ""
+
+#: includes/3rd-party/wp-user-manager/settings-hook.php:44
+msgid "Customize options for WP User Manager."
+msgstr ""
+
+#: includes/classes/class-admin-notices.php:51
+#, php-format
+msgid "<strong>%s</strong> marked as verified"
+msgstr ""
+
+#: includes/classes/class-admin-notices.php:99
+#, php-format
+msgid "<strong>%s</strong> marked as Unverified"
+msgstr ""
+
+#: includes/classes/class-admin-notices.php:277
+#, php-format
+msgid "Verification mail resend to <strong>%s</strong>"
+msgstr ""
+
+#: includes/classes/class-column-users.php:37
+msgid "Email Verification"
+msgstr ""
+
+#: includes/classes/class-column-users.php:72
+msgid "Old User"
+msgstr ""
+
+#: includes/classes/class-column-users.php:111
+msgid "Mark as Verified"
+msgstr ""
+
+#: includes/classes/class-column-users.php:114
+msgid "Resend verification"
+msgstr ""
+
+#: includes/classes/class-column-users.php:139
+msgid "Activation key"
+msgstr ""
+
+#: includes/classes/class-emails.php:105
+msgid "New User Registration"
+msgstr ""
+
+#: includes/classes/class-emails.php:106
+msgid "Notification email for admin when a new user is registered."
+msgstr ""
+
+#: includes/classes/class-emails.php:107
+msgid "New user submitted - {site_url}"
+msgstr ""
+
+#: includes/classes/class-emails.php:126
+msgid "Email Verification Confirmed"
+msgstr ""
+
+#: includes/classes/class-emails.php:127
+msgid "Notification email for confirming a new user."
+msgstr ""
+
+#: includes/classes/class-emails.php:128
+msgid "New user confirmed - {site_url}"
+msgstr ""
+
+#: includes/classes/class-emails.php:136
+msgid "Resend Activation Key"
+msgstr ""
+
+#: includes/classes/class-emails.php:137
+msgid "Notification email for resend activation key."
+msgstr ""
+
+#: includes/classes/class-emails.php:138
+msgid "Please verify account - {site_url}"
+msgstr ""
+
+#: includes/classes/class-emails.php:147
+msgid "Send Mail OTP"
+msgstr ""
+
+#: includes/classes/class-emails.php:148
+msgid "Notification email for sending mail OTP."
+msgstr ""
+
+#: includes/classes/class-emails.php:149
+msgid "OTP - {site_url}"
+msgstr ""
+
+#: includes/classes/class-emails.php:171 includes/classes/class-emails.php:186
+#: includes/classes/class-emails.php:200 includes/classes/class-emails.php:215
+msgid "Website title"
+msgstr ""
+
+#: includes/classes/class-emails.php:172 includes/classes/class-emails.php:187
+#: includes/classes/class-emails.php:201 includes/classes/class-emails.php:216
+msgid "Website tagline"
+msgstr ""
+
+#: includes/classes/class-emails.php:173 includes/classes/class-emails.php:188
+#: includes/classes/class-emails.php:202 includes/classes/class-emails.php:217
+msgid "Website URL"
+msgstr ""
+
+#: includes/classes/class-emails.php:174 includes/classes/class-emails.php:189
+#: includes/classes/class-emails.php:203 includes/classes/class-emails.php:218
+msgid "Website logo URL"
+msgstr ""
+
+#: includes/classes/class-emails.php:175 includes/classes/class-emails.php:190
+#: includes/classes/class-emails.php:204 includes/classes/class-emails.php:219
+msgid "Username"
+msgstr ""
+
+#: includes/classes/class-emails.php:176 includes/classes/class-emails.php:191
+#: includes/classes/class-emails.php:205 includes/classes/class-emails.php:220
+msgid "User display name"
+msgstr ""
+
+#: includes/classes/class-emails.php:177 includes/classes/class-emails.php:192
+#: includes/classes/class-emails.php:206 includes/classes/class-emails.php:221
+msgid "User first name"
+msgstr ""
+
+#: includes/classes/class-emails.php:178 includes/classes/class-emails.php:193
+#: includes/classes/class-emails.php:207 includes/classes/class-emails.php:222
+msgid "User last name"
+msgstr ""
+
+#: includes/classes/class-emails.php:179 includes/classes/class-emails.php:194
+#: includes/classes/class-emails.php:208 includes/classes/class-emails.php:223
+msgid "User avatar"
+msgstr ""
+
+#: includes/classes/class-emails.php:180 includes/classes/class-emails.php:195
+#: includes/classes/class-emails.php:209 includes/classes/class-emails.php:224
+msgid "User email address"
+msgstr ""
+
+#: includes/classes/class-emails.php:181 includes/classes/class-emails.php:210
+msgid "Account activation URL"
+msgstr ""
+
+#: includes/classes/class-emails.php:225
+msgid "OTP"
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:39
+#: includes/classes/class-manage-verification.php:40
+msgid "Verification mail has sent."
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:42
+#: includes/settings-hook.php:161
+msgid ""
+"Please check your mail inbox and follow the instruction. don't forget to "
+"check spam or trash folder."
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:44
+#: includes/settings-hook.php:168
+msgid "Sending verification mail"
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:179
+msgid "Sorry! there was an error."
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:328
+#: includes/settings-hook.php:158
+msgid "Thanks for Verifying."
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:330
+#: includes/settings-hook.php:154
+msgid "Sorry, activation key is not valid."
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:331
+#: includes/settings-hook.php:159
+msgid "Sorry! Verification failed."
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:332
+#: includes/settings-hook.php:160
+msgid "Please wait."
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:333
+#: includes/settings-hook.php:163
+msgid "You will redirect after verification"
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:334
+#: includes/settings-hook.php:164
+msgid "Click if not redirect automatically"
+msgstr ""
+
+#: includes/classes/class-manage-verification.php:336
+#: includes/settings-hook.php:167
+msgid "Checking Verification"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:437
+msgid "Placeholder.jpg"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:491
+#: includes/classes/class-settings-tabs.php:574
+msgid "Upload"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:492
+#: includes/classes/class-settings-tabs.php:575
+msgid "Clear"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:676
+#: includes/classes/class-settings-tabs.php:948
+msgid "Add"
+msgstr ""
+
+#: includes/classes/class-settings-tabs.php:824
+msgid "Reset"
+msgstr ""
+
+#: includes/classes/class-settings.php:15
+#: includes/functions-user-profile.php:37
+msgid "User Verification"
+msgstr ""
+
+#: includes/functions-ajax.php:22
+msgid "Activation mail has sent"
+msgstr ""
+
+#: includes/functions-ajax.php:35
+msgid "User already verified."
+msgstr ""
+
+#: includes/functions-ajax.php:166
+msgid "Sorry user doesn't exist."
+msgstr ""
+
+#: includes/functions-ajax.php:174
+msgid "Error something went wrong"
+msgstr ""
+
+#: includes/functions-mail-otp.php:26
+msgid "Send OTP"
+msgstr ""
+
+#: includes/functions-mail-otp.php:27
+msgid "Resend OTP"
+msgstr ""
+
+#: includes/functions-mail-otp.php:313
+msgid "ERROR: Security check failed."
+msgstr ""
+
+#: includes/functions-mail-otp.php:321
+msgid "ERROR: User login should not empty."
+msgstr ""
+
+#: includes/functions-mail-otp.php:335
+msgid "ERROR: User not found."
+msgstr ""
+
+#: includes/functions-mail-otp.php:353
+msgid "ERROR: OTP generation failed."
+msgstr ""
+
+#: includes/functions-mail-otp.php:516
+msgid "OTP should not empty. 1"
+msgstr ""
+
+#: includes/functions-mail-otp.php:522
+msgid "OTP not found."
+msgstr ""
+
+#: includes/functions-mail-otp.php:527
+msgid "OTP is not correct."
+msgstr ""
+
+#: includes/functions-recaptcha.php:181 includes/functions-recaptcha.php:380
+#: includes/functions-recaptcha.php:474
+msgid "Captcha Error. Please try again."
+msgstr ""
+
+#: includes/functions-recaptcha.php:568
+msgid "Captcha error, please try again."
+msgstr ""
+
+#: includes/functions-user-profile.php:42
+msgid "Phone number"
+msgstr ""
+
+#: includes/functions.php:14
+#, php-format
+msgid ""
+"This site uses User Verification plugin to reduce spam. <a href=\"%s\" "
+"target=\"_blank\" rel=\"nofollow noopener\">See how your comment data is "
+"processed</a>."
+msgstr ""
+
+#: includes/functions.php:46 includes/functions.php:117
+#: includes/functions.php:158 includes/functions.php:202
+#: includes/functions.php:261 includes/functions.php:305
+msgid "Unexpected Error! The query returned with an error."
+msgstr ""
+
+#: includes/functions.php:55
+msgid "Spammers are not allowed to register."
+msgstr ""
+
+#: includes/functions.php:74
+msgid "Spammers are not allowed to login."
+msgstr ""
+
+#: includes/functions.php:415
+#, php-format
+msgid "%s user account marked as verified."
+msgstr ""
+
+#: includes/functions.php:437
+#, php-format
+msgid "%s user account marked as unverified."
+msgstr ""
+
+#: includes/functions.php:488 includes/functions.php:504
+msgid "<strong>{"
+msgstr ""
+
+#: includes/functions.php:698 includes/settings-hook.php:157
+#, php-format
+msgid ""
+"Registration complete. Please verify the mail first, then visit the <a "
+"href=\"%s\">login page</a>."
+msgstr ""
+
+#: includes/functions.php:723
+msgid "None"
+msgstr ""
+
+#: includes/functions.php:777
+msgid "This shortcode is no longer need, only admin can see this message"
+msgstr ""
+
+#: includes/functions.php:795
+msgid "Please check email to get verify first."
+msgstr ""
+
+#: includes/functions.php:828
+msgid "Email address"
+msgstr ""
+
+#: includes/functions.php:831
+msgid "Resend"
+msgstr ""
+
+#: includes/functions.php:922 includes/settings-hook.php:156
+msgid "Verify your email first!"
+msgstr ""
+
+#: includes/functions.php:970 includes/functions.php:991
+msgid "Error:"
+msgstr ""
+
+#: includes/functions.php:973 includes/functions.php:994
+msgid "Resend verification email"
+msgstr ""
+
+#: includes/menu/settings.php:11
+#, php-format
+msgid "%s Email Verification"
+msgstr ""
+
+#: includes/menu/settings.php:18
+#, php-format
+msgid "%s  Email OTP"
+msgstr ""
+
+#: includes/menu/settings.php:32
+#, php-format
+msgid "%s Spam Protection"
+msgstr ""
+
+#: includes/menu/settings.php:39
+#, php-format
+msgid "%s IsSpammy Protection"
+msgstr ""
+
+#: includes/menu/settings.php:47
+#, php-format
+msgid "%s reCAPTCHA"
+msgstr ""
+
+#: includes/menu/settings.php:55
+#, php-format
+msgid "%s Email Templates"
+msgstr ""
+
+#: includes/menu/settings.php:76
+#, php-format
+msgid "%s Tools"
+msgstr ""
+
+#: includes/menu/settings.php:85
+#, php-format
+msgid "%s Help & support"
+msgstr ""
+
+#: includes/menu/settings.php:124
+#, php-format
+msgid "%s Settings"
+msgstr ""
+
+#: includes/menu/settings.php:135
+msgid "Changes Saved."
+msgstr ""
+
+#: includes/menu/settings.php:201
+msgid "Save Changes"
+msgstr ""
+
+#: includes/settings-hook.php:26
+msgid "Email verification"
+msgstr ""
+
+#: includes/settings-hook.php:27
+msgid "Customize options for email verification."
+msgstr ""
+
+#: includes/settings-hook.php:35
+msgid "Enable email verification"
+msgstr ""
+
+#: includes/settings-hook.php:36
+msgid "Select to enable or disable email verification."
+msgstr ""
+
+#: includes/settings-hook.php:49
+msgid "Choose verification page"
+msgstr ""
+
+#: includes/settings-hook.php:50
+msgid ""
+"Select page where verification will process. default home page if select "
+"none."
+msgstr ""
+
+#: includes/settings-hook.php:64
+msgid "Redirect after verification"
+msgstr ""
+
+#: includes/settings-hook.php:65
+msgid "Redirect to any page after successfully verified account."
+msgstr ""
+
+#: includes/settings-hook.php:81
+msgid "Automatically login after verification"
+msgstr ""
+
+#: includes/settings-hook.php:82
+msgid ""
+"Set yes to login automatically after verification completed, otherwise set "
+"no."
+msgstr ""
+
+#: includes/settings-hook.php:96
+msgid "Required verification on email change?"
+msgstr ""
+
+#: includes/settings-hook.php:97
+msgid "Resend email verification when user update their email."
+msgstr ""
+
+#: includes/settings-hook.php:126
+msgid "Exclude user role"
+msgstr ""
+
+#: includes/settings-hook.php:127
+msgid ""
+"You can exclude verification for these user roles to login on your site."
+msgstr ""
+
+#: includes/settings-hook.php:147
+msgid "Error messages"
+msgstr ""
+
+#: includes/settings-hook.php:148
+msgid "Customize error messages."
+msgstr ""
+
+#: includes/settings-hook.php:155
+msgid "Verification mail has been sent."
+msgstr ""
+
+#: includes/settings-hook.php:170
+msgid "Captcha not resolved."
+msgstr ""
+
+#: includes/settings-hook.php:179
+msgid "Invalid activation key"
+msgstr ""
+
+#: includes/settings-hook.php:180
+msgid "Show custom message when user activation key is invalid or wrong"
+msgstr ""
+
+#: includes/settings-hook.php:193
+msgid "Activation key has sent"
+msgstr ""
+
+#: includes/settings-hook.php:194
+msgid "Show custom message when activation key is sent to user email"
+msgstr ""
+
+#: includes/settings-hook.php:207
+msgid "Verify email address"
+msgstr ""
+
+#: includes/settings-hook.php:208
+msgid ""
+"Show custom message when user try to login without verifying email with "
+"proper activation key"
+msgstr ""
+
+#: includes/settings-hook.php:222
+msgid "Registration success message"
+msgstr ""
+
+#: includes/settings-hook.php:223
+msgid "User will get this message as soon as registered on your website"
+msgstr ""
+
+#: includes/settings-hook.php:237
+msgid "Verification successful"
+msgstr ""
+
+#: includes/settings-hook.php:238
+msgid "Show custom message when user successfully verified"
+msgstr ""
+
+#: includes/settings-hook.php:251
+msgid "Verification fail"
+msgstr ""
+
+#: includes/settings-hook.php:252
+msgid "Show custom message when verification failed"
+msgstr ""
+
+#: includes/settings-hook.php:263
+msgid "Please wait text"
+msgstr ""
+
+#: includes/settings-hook.php:264
+msgid "Show custom for \"please wait\""
+msgstr ""
+
+#: includes/settings-hook.php:275
+msgid "Mail instruction text"
+msgstr ""
+
+#: includes/settings-hook.php:276
+msgid "Add custom text for mail instructions."
+msgstr ""
+
+#: includes/settings-hook.php:287
+msgid "Redirect after verify text"
+msgstr ""
+
+#: includes/settings-hook.php:288
+msgid "Add custom text redirect after verification."
+msgstr ""
+
+#: includes/settings-hook.php:300
+msgid "Not redirect text"
+msgstr ""
+
+#: includes/settings-hook.php:301
+msgid "Add custom text not redirect automatically."
+msgstr ""
+
+#: includes/settings-hook.php:313
+msgid "Popup title checking verification"
+msgstr ""
+
+#: includes/settings-hook.php:314
+msgid "Show custom for \"checking verification\""
+msgstr ""
+
+#: includes/settings-hook.php:325
+msgid "Popup title sending verification"
+msgstr ""
+
+#: includes/settings-hook.php:326
+msgid "Show custom for \"sending verification\""
+msgstr ""
+
+#: includes/settings-hook.php:340
+msgid "Captcha error message"
+msgstr ""
+
+#: includes/settings-hook.php:341
+msgid "Show custom message when captcha error occurred."
+msgstr ""
+
+#: includes/settings-hook.php:385
+msgid "Email settings"
+msgstr ""
+
+#: includes/settings-hook.php:386
+msgid "Customize email settings."
+msgstr ""
+
+#: includes/settings-hook.php:393
+msgid "Email logo"
+msgstr ""
+
+#: includes/settings-hook.php:394
+msgid "Email logo URL to display on mail."
+msgstr ""
+
+#: includes/settings-hook.php:407
+msgid "Enable WPAutoP for emails"
+msgstr ""
+
+#: includes/settings-hook.php:408
+msgid "Enable WPautoP for email templates body text."
+msgstr ""
+
+#: includes/settings-hook.php:453
+msgid "Click to expand"
+msgstr ""
+
+#: includes/settings-hook.php:461 includes/settings-hook.php:1351
+msgid "Enable"
+msgstr ""
+
+#: includes/settings-hook.php:467
+msgid "Disabled"
+msgstr ""
+
+#: includes/settings-hook.php:488
+msgid "Enable?"
+msgstr ""
+
+#: includes/settings-hook.php:489
+msgid "Enable or disable this email notification."
+msgstr ""
+
+#: includes/settings-hook.php:507
+msgid "Email Bcc"
+msgstr ""
+
+#: includes/settings-hook.php:508
+msgid "Send a copy to these email(Bcc)"
+msgstr ""
+
+#: includes/settings-hook.php:523
+msgid "Email from name"
+msgstr ""
+
+#: includes/settings-hook.php:524
+msgid "Write email displaying from name"
+msgstr ""
+
+#: includes/settings-hook.php:540
+msgid "Email from"
+msgstr ""
+
+#: includes/settings-hook.php:541
+msgid "Email from email address"
+msgstr ""
+
+#: includes/settings-hook.php:555
+msgid "Reply to name"
+msgstr ""
+
+#: includes/settings-hook.php:556
+msgid "Email reply to name"
+msgstr ""
+
+#: includes/settings-hook.php:571
+msgid "Reply to"
+msgstr ""
+
+#: includes/settings-hook.php:572
+msgid "Reply to email address"
+msgstr ""
+
+#: includes/settings-hook.php:588
+msgid "Email subject"
+msgstr ""
+
+#: includes/settings-hook.php:589
+msgid "Write email subjects"
+msgstr ""
+
+#: includes/settings-hook.php:604
+msgid "Email body"
+msgstr ""
+
+#: includes/settings-hook.php:605
+msgid "Write email body"
+msgstr ""
+
+#: includes/settings-hook.php:642
+msgid "Parameter"
+msgstr ""
+
+#: includes/settings-hook.php:643
+msgid "Available parameter for this email template"
+msgstr ""
+
+#: includes/settings-hook.php:679
+msgid "Email templates"
+msgstr ""
+
+#: includes/settings-hook.php:680
+msgid "Customize email templates."
+msgstr ""
+
+#: includes/settings-hook.php:727
+msgid "Email OTP"
+msgstr ""
+
+#: includes/settings-hook.php:728
+msgid "Customize options for email OTP."
+msgstr ""
+
+#: includes/settings-hook.php:736
+msgid "Enable on default login"
+msgstr ""
+
+#: includes/settings-hook.php:737
+msgid ""
+"Enable OTP on default login page. every time a user try to login will "
+"require a OTP send via mail."
+msgstr ""
+
+#: includes/settings-hook.php:750
+msgid "Enable on WooCommerce login"
+msgstr ""
+
+#: includes/settings-hook.php:751
+msgid ""
+"Enable OTP on WooCommerce login page. every time a user try to login via "
+"WooCommerce login form will require a OTP send via mail."
+msgstr ""
+
+#: includes/settings-hook.php:771
+msgid "Enable on default register"
+msgstr ""
+
+#: includes/settings-hook.php:772
+msgid ""
+"Enable OTP on default registration page. every time a user try to register "
+"will require a OTP send via mail."
+msgstr ""
+
+#: includes/settings-hook.php:784
+msgid "OTP Length"
+msgstr ""
+
+#: includes/settings-hook.php:785
+msgid "Set custom length for OTP."
+msgstr ""
+
+#: includes/settings-hook.php:798
+msgid "OTP character source"
+msgstr ""
+
+#: includes/settings-hook.php:799
+msgid "Set OTP character source to generate"
+msgstr ""
+
+#: includes/settings-hook.php:804
+msgid "Numbers(0-9)"
+msgstr ""
+
+#: includes/settings-hook.php:805
+msgid "Uppercase characters"
+msgstr ""
+
+#: includes/settings-hook.php:806
+msgid "Lowercase characters"
+msgstr ""
+
+#: includes/settings-hook.php:807
+msgid "Special characters"
+msgstr ""
+
+#: includes/settings-hook.php:808
+msgid "Extra Special characters"
+msgstr ""
+
+#: includes/settings-hook.php:860
+msgid "Spam Protection"
+msgstr ""
+
+#: includes/settings-hook.php:861
+msgid "Customize options for spam protection."
+msgstr ""
+
+#: includes/settings-hook.php:869
+msgid "Enable domain block"
+msgstr ""
+
+#: includes/settings-hook.php:870
+msgid ""
+"You can enable email domain name blocking for spammy/temporary email account "
+"services."
+msgstr ""
+
+#: includes/settings-hook.php:882
+msgid "Blocked domains"
+msgstr ""
+
+#: includes/settings-hook.php:883
+msgid "One domain per line. without http:// or https:// or www."
+msgstr ""
+
+#: includes/settings-hook.php:887 includes/settings-hook.php:901
+msgid "domain.com"
+msgstr ""
+
+#: includes/settings-hook.php:896
+msgid "Allowed domains"
+msgstr ""
+
+#: includes/settings-hook.php:897
+msgid "One domain per line. without http:// or https:// or www"
+msgstr ""
+
+#: includes/settings-hook.php:911
+msgid "Enable username block"
+msgstr ""
+
+#: includes/settings-hook.php:912
+msgid "User will not able to register blocked username, like admin, info, etc."
+msgstr ""
+
+#: includes/settings-hook.php:926
+msgid "Blocked username"
+msgstr ""
+
+#: includes/settings-hook.php:927
+msgid ""
+"You can following string match <ul><li><b>^username</b> : String start with "
+"<b><i>username</i></b></li><li><b>username$</b> : String end by "
+"<b><i>username</i></b></li><li><b>username</b> : String contain "
+"<b><i>username</i></b></b></li></ul>"
+msgstr ""
+
+#: includes/settings-hook.php:931
+msgid "username"
+msgstr ""
+
+#: includes/settings-hook.php:943
+msgid "Enable generic mail block"
+msgstr ""
+
+#: includes/settings-hook.php:944
+msgid ""
+"User will not able to register blocked generic mail like these admin@, "
+"info@, support@, etc."
+msgstr ""
+
+#: includes/settings-hook.php:958
+msgid "Blocked generic mail"
+msgstr ""
+
+#: includes/settings-hook.php:959
+msgid ""
+"You can use following string match <ul><li><b>^admin@</b> : String start "
+"with <b><i>admin@</i></b></li><li><b>admin@$</b> : String end by "
+"<b><i>admin@</i></b></li><li><b>admin@</b> : String contain <b><i>admin@</"
+"i></b></b></li></ul>"
+msgstr ""
+
+#: includes/settings-hook.php:963
+msgid "admin@"
+msgstr ""
+
+#: includes/settings-hook.php:975
+msgid "Enable device/browser block"
+msgstr ""
+
+#: includes/settings-hook.php:976
+msgid ""
+"User will not able to register blocked device or browser, like chrome, "
+"safari, etc."
+msgstr ""
+
+#: includes/settings-hook.php:990
+msgid "Allowed devices/browsers"
+msgstr ""
+
+#: includes/settings-hook.php:991
+msgid "Select the browser list to allow user login."
+msgstr ""
+
+#: includes/settings-hook.php:997
+msgid "Chrome"
+msgstr ""
+
+#: includes/settings-hook.php:997
+msgid "Safari"
+msgstr ""
+
+#: includes/settings-hook.php:1040
+msgid "isspammy.com Integration"
+msgstr ""
+
+#: includes/settings-hook.php:1041
+msgid ""
+"Enable integration with <a href=\"http://isspammy.com\">http://isspammy.com</"
+"a>"
+msgstr ""
+
+#: includes/settings-hook.php:1058
+msgid "Report spam comments email"
+msgstr ""
+
+#: includes/settings-hook.php:1059
+msgid ""
+"Report spam comment email address to isspammy.com, when you marked a comment "
+"as spam it will send comment email address to isspammy.com via API"
+msgstr ""
+
+#: includes/settings-hook.php:1071
+msgid "Report trash comments email"
+msgstr ""
+
+#: includes/settings-hook.php:1072
+msgid ""
+"Report trash comment email address to isspammy.com, when you trashed a "
+"comment it will send comment email address to isspammy.com via API"
+msgstr ""
+
+#: includes/settings-hook.php:1084
+msgid "Block spammer comments"
+msgstr ""
+
+#: includes/settings-hook.php:1085
+msgid ""
+"When enabled it will blocked or deleted all comment from spammer reported on "
+"isspammy.com"
+msgstr ""
+
+#: includes/settings-hook.php:1097
+msgid "Display notice under comment form"
+msgstr ""
+
+#: includes/settings-hook.php:1098
+msgid "Display a privacy notice under comment forms."
+msgstr ""
+
+#: includes/settings-hook.php:1110
+msgid "Custom notice text"
+msgstr ""
+
+#: includes/settings-hook.php:1111
+#, php-format
+msgid ""
+"Display custom notice text under comment forms. please use %s to replace "
+"isspammy.com \n"
+"          privacy url https://isspammy.com/privacy-policy/"
+msgstr ""
+
+#: includes/settings-hook.php:1125
+msgid "Block user registeration"
+msgstr ""
+
+#: includes/settings-hook.php:1126
+msgid ""
+"When enabled it will blocked or deleted all registration from spammer "
+"reported on isspammy.com"
+msgstr ""
+
+#: includes/settings-hook.php:1139
+msgid "Block user login"
+msgstr ""
+
+#: includes/settings-hook.php:1140
+msgid ""
+"When enabled it will blocked all login from spammer reported on isspammy.com"
+msgstr ""
+
+#: includes/settings-hook.php:1199
+msgid "reCAPTCHA"
+msgstr ""
+
+#: includes/settings-hook.php:1200
+msgid "Customize options for reCAPTCHA."
+msgstr ""
+
+#: includes/settings-hook.php:1207
+msgid "Recaptcha version"
+msgstr ""
+
+#: includes/settings-hook.php:1208
+msgid "Select recaptcha version."
+msgstr ""
+
+#: includes/settings-hook.php:1212
+msgid "V3"
+msgstr ""
+
+#: includes/settings-hook.php:1212
+msgid "V2 - Checkbox"
+msgstr ""
+
+#: includes/settings-hook.php:1221
+msgid "reCAPTCHA sitekey"
+msgstr ""
+
+#: includes/settings-hook.php:1222
+msgid ""
+"Google reCAPTCHA sitekey, please register here <a href=\"https://www.google."
+"com/recaptcha/admin/\">https://www.google.com/recaptcha/admin/</a>"
+msgstr ""
+
+#: includes/settings-hook.php:1233
+msgid "reCAPTCHA secret key"
+msgstr ""
+
+#: includes/settings-hook.php:1234
+msgid ""
+"Google reCAPTCHA secret key, please register here <a href=\"https://www."
+"google.com/recaptcha/admin/\">https://www.google.com/recaptcha/admin/</a>"
+msgstr ""
+
+#: includes/settings-hook.php:1246
+msgid "Recaptcha on default login page"
+msgstr ""
+
+#: includes/settings-hook.php:1247
+msgid "Enable recaptcha on default login page."
+msgstr ""
+
+#: includes/settings-hook.php:1260
+msgid "Recaptcha on default registration page"
+msgstr ""
+
+#: includes/settings-hook.php:1261
+msgid "Enable recaptcha on default registration page."
+msgstr ""
+
+#: includes/settings-hook.php:1274
+msgid "Recaptcha on default reset password page"
+msgstr ""
+
+#: includes/settings-hook.php:1275
+msgid "Enable recaptcha on default reset password page."
+msgstr ""
+
+#: includes/settings-hook.php:1288
+msgid "Recaptcha on comment forms"
+msgstr ""
+
+#: includes/settings-hook.php:1289
+msgid "Enable recaptcha on comment forms."
+msgstr ""
+
+#: includes/settings-hook.php:1343
+msgid "Temporary login"
+msgstr ""
+
+#: includes/settings-hook.php:1352
+msgid "Enable temporary login via url."
+msgstr ""
+
+#: includes/settings-hook.php:1364
+msgid "Require verification"
+msgstr ""
+
+#: includes/settings-hook.php:1365
+msgid "Require email verification for temporary login."
+msgstr ""
+
+#: includes/settings-hook.php:1378
+msgid "Duration"
+msgstr ""
+
+#: includes/settings-hook.php:1379
+msgid "maximum duration for temp login. ex: 3600 (in second)"
+msgstr ""
+
+#: includes/settings-hook.php:1461
+msgid "Tools"
+msgstr ""
+
+#: includes/settings-hook.php:1468
+#, php-format
+msgid "Enable to delete unverified users. Next schedule <strong>%s</strong>"
+msgstr ""
+
+#: includes/settings-hook.php:1468
+msgid "Enable to delete unverified users."
+msgstr ""
+
+#: includes/settings-hook.php:1474
+msgid "Delete unverified users"
+msgstr ""
+
+#: includes/settings-hook.php:1488
+msgid "Delay "
+msgstr ""
+
+#: includes/settings-hook.php:1489
+msgid "Set delay for deliting unverified users. (in minutes)"
+msgstr ""
+
+#: includes/settings-hook.php:1501
+msgid "Delete interval unverified users"
+msgstr ""
+
+#: includes/settings-hook.php:1507 includes/settings-hook.php:1546
+msgid "10 minutes"
+msgstr ""
+
+#: includes/settings-hook.php:1508 includes/settings-hook.php:1547
+msgid "30 minutes"
+msgstr ""
+
+#: includes/settings-hook.php:1509 includes/settings-hook.php:1548
+msgid "6 hours"
+msgstr ""
+
+#: includes/settings-hook.php:1510 includes/settings-hook.php:1549
+msgid "Hourly"
+msgstr ""
+
+#: includes/settings-hook.php:1511 includes/settings-hook.php:1550
+msgid "Twicedaily"
+msgstr ""
+
+#: includes/settings-hook.php:1512 includes/settings-hook.php:1551
+msgid "Daily"
+msgstr ""
+
+#: includes/settings-hook.php:1513 includes/settings-hook.php:1552
+msgid "Weekly"
+msgstr ""
+
+#: includes/settings-hook.php:1520
+#, php-format
+msgid ""
+"Enable to Mark all existing user as verified. Next schedule <strong>%s</"
+"strong>"
+msgstr ""
+
+#: includes/settings-hook.php:1520
+msgid "Mark all existing user as verified. (*Not Recommended)"
+msgstr ""
+
+#: includes/settings-hook.php:1525
+msgid "Existing user as verified"
+msgstr ""
+
+#: includes/settings-hook.php:1540
+msgid "Existing user as verified interval"
+msgstr ""
+
+#: includes/settings-hook.php:1563
+msgid "Disable WordPress welcome email"
+msgstr ""
+
+#: includes/settings-hook.php:1564
+msgid "You can disable default WordPress notification mail for new user."
+msgstr ""
+
+#: includes/settings-hook.php:1576
+msgid "Default email from address"
+msgstr ""
+
+#: includes/settings-hook.php:1577
+msgid "Set Default email from address."
+msgstr ""
+
+#: includes/settings-hook.php:1589
+msgid "Default email from name"
+msgstr ""
+
+#: includes/settings-hook.php:1590
+msgid "Set Default email from name."
+msgstr ""
+
+#: includes/settings-hook.php:1627
+msgid "Get support"
+msgstr ""
+
+#: includes/settings-hook.php:1628
+msgid "Use following to get help and support from our expert team."
+msgstr ""
+
+#: includes/settings-hook.php:1634
+msgid ""
+"Ask question for free on our forum and get quick reply from our expert team "
+"members."
+msgstr ""
+
+#: includes/settings-hook.php:1635
+msgid "Create support ticket"
+msgstr ""
+
+#: includes/settings-hook.php:1637
+msgid "Read our documentation before asking your question."
+msgstr ""
+
+#: includes/settings-hook.php:1638
+msgid "Documentation"
+msgstr ""
+
+#: includes/settings-hook.php:1640
+msgid "Watch video tutorials."
+msgstr ""
+
+#: includes/settings-hook.php:1641
+msgid "All tutorials"
+msgstr ""
+
+#: includes/settings-hook.php:1654
+msgid "Ask question"
+msgstr ""
+
+#: includes/settings-hook.php:1679
+msgid "Submit reviews"
+msgstr ""
+
+#: templates/emails/email_confirmed.php:14
+msgid "{user_name} has successfully joined to {site_name}"
+msgstr ""
+
+#: templates/emails/email_reminder.php:13
+msgid "Hello {user_name}, Did you forget to verify your account."
+msgstr ""
+
+#: templates/emails/email_reminder.php:15
+#: templates/emails/email_resend_key.php:15
+#: templates/emails/user_registered.php:15
+msgid "Please verify your account by clicking the link below"
+msgstr ""
+
+#: templates/emails/email_reminder.php:17
+#: templates/emails/email_resend_key.php:17
+#: templates/emails/user_registered.php:17
+msgid "Activate account"
+msgstr ""
+
+#: templates/emails/email_resend_key.php:13
+#: templates/emails/user_registered.php:13
+msgid "Hello {user_name}, Thank you for joining here."
+msgstr ""
+
+#: templates/emails/send_mail_otp.php:13
+msgid "Hello {user_name}, Thank you for requesting OTP."
+msgstr ""
+
+#: templates/emails/send_mail_otp.php:15
+msgid "Please check bellow for OTP."
+msgstr ""
