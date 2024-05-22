@@ -34,10 +34,10 @@ jQuery(document).ready(function ($) {
 					$('.form-area.message').html(message);
 					$('.form-area.message').fadeIn();
 
-					setTimeout(() => {
-						$('.form-area.message').fadeOut();
+					// setTimeout(() => {
+					// 	$('.form-area.message').fadeOut();
 
-					}, 2000)
+					// }, 2000)
 
 
 				}

@@ -66,7 +66,6 @@ function uv_submit_wpum_form_validate_fields($bool, $fields, $values, $form_name
     $user_email = isset($fields['register']['user_email']['value']) ? $fields['register']['user_email']['value'] : '';
     $field = isset($fields['register']['user_email']) ? $fields['register']['user_email'] : [];
 
-    error_log(serialize($fields['register']));
 
 
     // your code here

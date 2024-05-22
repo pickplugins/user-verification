@@ -1111,7 +1111,6 @@ if (!function_exists('user_verification_user_registered')) {
         $verification_url = wp_nonce_url($verification_url,  'email_verification');
 
 
-        error_log($verification_url);
 
 
         $site_name = get_bloginfo('name');
@@ -1155,7 +1154,7 @@ if (!function_exists('user_verification_user_registered')) {
 
         // error_log(serialize($email_data));
 
-        error_log($enable);
+        //error_log($enable);
 
         if ($enable == 'yes') {
             $mail_status = $class_user_verification_emails->send_email($email_data);
