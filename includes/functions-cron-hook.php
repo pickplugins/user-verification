@@ -105,7 +105,6 @@ function user_verification_delete_unverified_user()
             $datetime_now = date('Y-m-d H:i:s', strtotime('+' . $gmt_offset . ' hour'));
             $seconds  = strtotime($datetime_now) - strtotime($user_registered_gmt);
 
-            error_log('$user_registered' . $user_registered);
 
 
             if ($seconds > $delete_user_delay_seconds) {

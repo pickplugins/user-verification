@@ -76,11 +76,7 @@ class class_user_verification_emails
         $status = wp_mail($email_to, $subject, $email_body, $headers, $attachments);
 
 
-        //        if($status){
-        //            error_log('mail sent');
-        //        }else{
-        //            error_log('mail not sent');
-        //        }
+
 
         return $status;
     }

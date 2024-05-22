@@ -129,7 +129,8 @@ function user_verification_settings_content_email_verification()
             'multiple'        => true,
             'value'        => $exclude_user_roles,
             'default'        => array('administrator'),
-            'attributes'        => array(),
+            'attributes'        => array('grid_id' => 'sdfs'),
+
             'args'        => user_verification_user_roles(),
         );
 
