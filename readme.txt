@@ -4,7 +4,7 @@
 	Tags:  User Verification, Email OTP, Block Spam Email, Passwordless login, Email Verification
 	Requires at least: 4.1
 	Tested up to: 6.5
-	Stable tag: 2.0.24
+	Stable tag: 2.0.25
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,9 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 == Changelog ==
 
 
+
+= 2.0.25 =
+* 2024-05-22 fix -Select2 conflict issue fixed.
 
 = 2.0.24 =
 * 2024-05-22 fix - Resolved Fadeout issue resend verification confirmation message.
