@@ -3,7 +3,7 @@
 Plugin Name: User Verification
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 2.0.24
+Version: 2.0.25
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -261,15 +261,7 @@ class UserVerification
         wp_enqueue_script('jquery-ui-core');
         wp_enqueue_script('jquery-ui-accordion');
 
-        wp_enqueue_script('uv_admin_js', plugins_url('/assets/admin/js/scripts.js', __FILE__), array('jquery'));
-        wp_localize_script('uv_admin_js', 'uv_ajax', array('uv_ajaxurl' => admin_url('admin-ajax.php')));
-        wp_localize_script('uv_admin_js', 'L10n_user_verification', array(
-            'confirm_text' => __('Are you sure?', 'user-verification'),
-            'reset_confirm_text' => __('Do you really want to reset?', 'user-verification'),
-            'mark_as_verified' => __('Mark as verified', 'user-verification'),
-            'mark_as_unverified' => __('Mark as unverified', 'user-verification'),
-            'updating' => __('Updating user', 'user-verification'),
-        ));
+
 
         wp_register_script('jquery.lazy', user_verification_plugin_url . 'assets/admin/js/jquery.lazy.js', array('jquery'));
 
@@ -292,6 +284,18 @@ class UserVerification
         //var_dump($screen);
 
         if ($screen->id == 'users_page_user_verification') {
+
+            wp_enqueue_script('uv_admin_js', plugins_url('/assets/admin/js/scripts.js', __FILE__), array('jquery'));
+            wp_localize_script('uv_admin_js', 'uv_ajax', array('uv_ajaxurl' => admin_url('admin-ajax.php')));
+            wp_localize_script('uv_admin_js', 'L10n_user_verification', array(
+                'confirm_text' => __('Are you sure?', 'user-verification'),
+                'reset_confirm_text' => __('Do you really want to reset?', 'user-verification'),
+                'mark_as_verified' => __('Mark as verified', 'user-verification'),
+                'mark_as_unverified' => __('Mark as unverified', 'user-verification'),
+                'updating' => __('Updating user', 'user-verification'),
+            ));
+
+
             wp_enqueue_style('uv_admin_style', user_verification_plugin_url . 'assets/admin/css/style.css');
             wp_enqueue_style('jquery-ui', user_verification_plugin_url . 'assets/global/css/jquery-ui.css');
 
