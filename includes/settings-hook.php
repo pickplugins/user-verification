@@ -169,6 +169,8 @@ function user_verification_settings_content_email_verification()
         $title_sending_verification = isset($messages['title_sending_verification']) ? $messages['title_sending_verification'] : __('Sending verification mail', 'user-verification');
 
         $captcha_error = isset($messages['captcha_error']) ? $messages['captcha_error'] : __('Captcha not resolved.', 'user-verification');
+        $otp_sent_success = isset($messages['otp_sent_success']) ? $messages['otp_sent_success'] : __('OTP has been sent successfully.', 'user-verification');
+        $otp_sent_error = isset($messages['otp_sent_error']) ? $messages['otp_sent_error'] : __('OTP generated, but unable to send mail.', 'user-verification');
 
 
 
@@ -347,6 +349,41 @@ function user_verification_settings_content_email_verification()
         );
 
         $settings_tabs_field->generate_field($args);
+        $args = array(
+            'id'        => 'otp_sent_success',
+            'parent'        => 'user_verification_settings[messages]',
+            'title'        => __('OTP sent success message', 'user-verification'),
+            'details'    => __('Show custom message when OTP sent successfully.', 'user-verification'),
+            'type'        => 'textarea',
+            'value'        => $otp_sent_success,
+            'default'        => '',
+
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+        $args = array(
+            'id'        => 'otp_sent_error',
+            'parent'        => 'user_verification_settings[messages]',
+            'title'        => __('OTP error message', 'user-verification'),
+            'details'    => __('Show custom message when OTP sending error occured.', 'user-verification'),
+            'type'        => 'textarea',
+            'value'        => $otp_sent_error,
+            'default'        => '',
+
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+
+
+
+
+
+
+
 
         ?>
 
@@ -715,6 +752,9 @@ function user_verification_settings_content_email_otp()
 
 
     $enable_default_login = isset($user_verification_settings['email_otp']['enable_default_login']) ? $user_verification_settings['email_otp']['enable_default_login'] : 'no';
+    $required_email_verified = isset($user_verification_settings['email_otp']['required_email_verified']) ? $user_verification_settings['email_otp']['required_email_verified'] : 'no';
+
+
     $enable_wc_login = isset($user_verification_settings['email_otp']['enable_wc_login']) ? $user_verification_settings['email_otp']['enable_wc_login'] : 'no';
 
 
@@ -745,6 +785,23 @@ function user_verification_settings_content_email_otp()
         );
 
         $settings_tabs_field->generate_field($args);
+
+        $args = array(
+            'id'        => 'required_email_verified',
+            'parent'        => 'user_verification_settings[email_otp]',
+            'title'        => __('Required email verified', 'user-verification'),
+            'details'    => __('Send OTP to only email verified users.', 'user-verification'),
+            'type'        => 'select',
+            'value'        => $required_email_verified,
+            'default'        => '',
+            'args'        => array('yes' => __('Yes', 'user-verification'), 'no' => __('No', 'user-verification')),
+        );
+
+        $settings_tabs_field->generate_field($args);
+
+
+
+
         $args = array(
             'id'        => 'allow_password',
             'parent'        => 'user_verification_settings[email_otp]',
@@ -1009,7 +1066,8 @@ function user_verification_settings_content_spam_protection()
 
             'value'        => $allowed_browsers,
             'args'        => array(
-                'chrome' => __('Chrome', 'user-verification'), 'safari' => __('Safari', 'user-verification')
+                'chrome' => __('Chrome', 'user-verification'),
+                'safari' => __('Safari', 'user-verification')
             ),
 
             'default'        => array(),
@@ -1425,7 +1483,8 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
         $delete_unverified_user = isset($user_verification_settings['unverified']['delete_user']) ? $user_verification_settings['unverified']['delete_user'] : 'no';
         $delete_user_interval = isset($user_verification_settings['unverified']['delete_user_interval']) ? $user_verification_settings['unverified']['delete_user_interval'] : 'daily';
-        $delete_user_delay = isset($user_verification_settings['unverified']['delay']) ? $user_verification_settings['unverified']['delay'] : '720';
+        $delete_user_delay = isset($user_verification_settings['unverified']['delay']) ? $user_verification_settings['unverified']['delay'] : 720;
+        $delete_max_number = isset($user_verification_settings['unverified']['delete_max_number']) ? $user_verification_settings['unverified']['delete_max_number'] : 20;
 
 
         $existing_user_verified = isset($user_verification_settings['unverified']['existing_user_verified']) ? $user_verification_settings['unverified']['existing_user_verified'] : 'no';
@@ -1473,7 +1532,7 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
     ?>
         <div class="section">
-            <div class="section-title"><?php echo __('Tools', 'user-verification'); ?></div>
+            <div class="section-title"><?php echo __('Delete unverified users', 'user-verification'); ?></div>
 
 
             <?php
@@ -1496,6 +1555,17 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'        => 'delete_max_number',
+                'parent'        => 'user_verification_settings[unverified]',
+                'title'        => __('Max number ', 'user-verification'),
+                'details'    => __('Set max number of users to delete', 'user-verification'),
+                'type'        => 'text',
+                'value'        => $delete_max_number,
+                'default'        => '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'        => 'delay',
@@ -1531,6 +1601,19 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
             $settings_tabs_field->generate_field($args);
 
+
+
+
+            ?>
+
+
+        </div>
+
+        <div class="section">
+            <div class="section-title"><?php echo __('Existing user', 'user-verification'); ?></div>
+            <p></p>
+
+            <?php
 
             $des = ($existing_user_verified == 'yes') ? sprintf(__('Enable to Mark all existing user as verified. Next schedule <strong>%s</strong>', 'user-verification'), $friendly_date2) : __('Mark all existing user as verified. (*Not Recommended)', 'user-verification');
 
@@ -1572,6 +1655,16 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
 
 
+            ?>
+
+        </div>
+
+        <div class="section">
+            <div class="section-title"><?php echo __('Default WordPress notification mail', 'user-verification'); ?></div>
+            <p></p>
+            <?php
+
+
             $args = array(
                 'id'        => 'new_user_notification_email',
                 'parent'        => 'user_verification_settings[disable]',
@@ -1610,13 +1703,11 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
             $settings_tabs_field->generate_field($args);
 
-
-
             ?>
-
-
         </div>
+
     <?php
+
 
 
     }

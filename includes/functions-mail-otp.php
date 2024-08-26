@@ -252,11 +252,16 @@ function user_verification_send_otp()
     $user_verification_settings = get_option('user_verification_settings');
     //$default_login_page = isset($user_verification_settings['recaptcha']['default_login_page']) ? $user_verification_settings['recaptcha']['default_login_page'] : '';
     $captcha_error = isset($user_verification_settings['messages']['captcha_error']) ? $user_verification_settings['messages']['captcha_error'] : '';
+    $otp_sent_error = isset($user_verification_settings['messages']['otp_sent_error']) ? $user_verification_settings['messages']['otp_sent_error'] : '';
+    $otp_sent_success = isset($user_verification_settings['messages']['otp_sent_success']) ? $user_verification_settings['messages']['otp_sent_success'] : '';
+
+
     $secretkey = isset($user_verification_settings['recaptcha']['secretkey']) ? $user_verification_settings['recaptcha']['secretkey'] : '';
 
 
     $length = isset($user_verification_settings['email_otp']['length']) ? $user_verification_settings['email_otp']['length'] : 6;
     $character_source = isset($user_verification_settings['email_otp']['character_source']) ? $user_verification_settings['email_otp']['character_source'] : ['uppercase', 'lowercase'];
+    $required_email_verified = isset($user_verification_settings['email_otp']['required_email_verified']) ? $user_verification_settings['email_otp']['required_email_verified'] : 'no';
 
 
     $password = user_verification_random_password($length, $character_source);
@@ -265,6 +270,17 @@ function user_verification_send_otp()
     if (empty($password)) :
         $error->add('empty_otp', __('ERROR: OTP generation failed.', 'user-verification'));
     endif;
+    if ($required_email_verified == 'yes') :
+
+        $user_activation_status = get_user_meta($user_id, 'user_activation_status', true);
+
+        if (!$user_activation_status) {
+            $error->add('verification_required', __('ERROR: Email verification required.', 'user-verification'));
+        }
+
+    endif;
+
+
 
 
     if (isset($_POST['g-recaptcha-response'])) :
@@ -320,9 +336,9 @@ function user_verification_send_otp()
 
 
         if ($otp_via_mail) {
-            $response['success_message'] = '<div class="message otp-message error">OTP has been sent successfully.</div>';
+            $response['success_message'] = '<div class="message otp-message error">' . $otp_sent_success . '</div>';
         } else {
-            $response['success_message'] = '<div class="message otp-message error">OTP generated, but unable to send mail.</div>';
+            $response['success_message'] = '<div class="message otp-message error">' . $otp_sent_error . '</div>';
         }
 
 
