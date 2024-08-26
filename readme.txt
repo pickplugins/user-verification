@@ -3,8 +3,8 @@
 	Donate link: http://pickplugins.com
 	Tags:  User Verification, Email OTP, Block Spam Email, Passwordless login, Email Verification
 	Requires at least: 4.1
-	Tested up to: 6.5
-	Stable tag: 2.0.25
+	Tested up to: 6.6
+	Stable tag: 2.0.26
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -137,6 +137,13 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 == Changelog ==
 
 
+
+= 2.0.26 =
+* 2024-05-22 add - Max number of delete unverified user input field added.
+* 2024-05-22 add - Filter user list page to display verified & unverified users.
+* 2024-05-22 add - Send OTP to verified user only option added
+* 2024-05-22 add - 'Nextend Social Login' plugin support added.
+* 2024-05-22 add - Custom message input for 'OTP has been sent successfully'
 
 = 2.0.25 =
 * 2024-05-22 fix -Select2 conflict issue fixed.
