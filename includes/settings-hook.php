@@ -361,7 +361,8 @@ function user_verification_settings_content_email_verification()
         );
 
         $settings_tabs_field->generate_field($args);
-        $settings_tabs_field->generate_field($args);
+
+
         $args = array(
             'id'        => 'otp_sent_error',
             'parent'        => 'user_verification_settings[messages]',
@@ -1482,7 +1483,8 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
         $delete_unverified_user = isset($user_verification_settings['unverified']['delete_user']) ? $user_verification_settings['unverified']['delete_user'] : 'no';
         $delete_user_interval = isset($user_verification_settings['unverified']['delete_user_interval']) ? $user_verification_settings['unverified']['delete_user_interval'] : 'daily';
-        $delete_user_delay = isset($user_verification_settings['unverified']['delay']) ? $user_verification_settings['unverified']['delay'] : '720';
+        $delete_user_delay = isset($user_verification_settings['unverified']['delay']) ? $user_verification_settings['unverified']['delay'] : 720;
+        $delete_max_number = isset($user_verification_settings['unverified']['delete_max_number']) ? $user_verification_settings['unverified']['delete_max_number'] : 20;
 
 
         $existing_user_verified = isset($user_verification_settings['unverified']['existing_user_verified']) ? $user_verification_settings['unverified']['existing_user_verified'] : 'no';
@@ -1530,7 +1532,7 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
     ?>
         <div class="section">
-            <div class="section-title"><?php echo __('Tools', 'user-verification'); ?></div>
+            <div class="section-title"><?php echo __('Delete unverified users', 'user-verification'); ?></div>
 
 
             <?php
@@ -1553,6 +1555,17 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
             $settings_tabs_field->generate_field($args);
 
+            $args = array(
+                'id'        => 'delete_max_number',
+                'parent'        => 'user_verification_settings[unverified]',
+                'title'        => __('Max number ', 'user-verification'),
+                'details'    => __('Set max number of users to delete', 'user-verification'),
+                'type'        => 'text',
+                'value'        => $delete_max_number,
+                'default'        => '',
+            );
+
+            $settings_tabs_field->generate_field($args);
 
             $args = array(
                 'id'        => 'delay',
@@ -1588,6 +1601,19 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
             $settings_tabs_field->generate_field($args);
 
+
+
+
+            ?>
+
+
+        </div>
+
+        <div class="section">
+            <div class="section-title"><?php echo __('Existing user', 'user-verification'); ?></div>
+            <p></p>
+
+            <?php
 
             $des = ($existing_user_verified == 'yes') ? sprintf(__('Enable to Mark all existing user as verified. Next schedule <strong>%s</strong>', 'user-verification'), $friendly_date2) : __('Mark all existing user as verified. (*Not Recommended)', 'user-verification');
 
@@ -1629,6 +1655,16 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
 
 
+            ?>
+
+        </div>
+
+        <div class="section">
+            <div class="section-title"><?php echo __('Default WordPress notification mail', 'user-verification'); ?></div>
+            <p></p>
+            <?php
+
+
             $args = array(
                 'id'        => 'new_user_notification_email',
                 'parent'        => 'user_verification_settings[disable]',
@@ -1667,13 +1703,11 @@ if (!function_exists('user_verification_settings_content_tools')) {
 
             $settings_tabs_field->generate_field($args);
 
-
-
             ?>
-
-
         </div>
+
     <?php
+
 
 
     }

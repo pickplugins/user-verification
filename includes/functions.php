@@ -1371,3 +1371,77 @@ function user_verification_change_mail_from_name($from_name)
 
     return $from_name;
 }
+
+
+function add_verification_status_filter($which)
+{
+
+    //var_dump($which);
+
+    // create sprintf templates for <select> and <option>s
+    $st = '<select name="verification_status_%s" style="float:none;"><option value="">%s</option>%s</select>';
+    $ot = '<option value="%s" %s>Section %s</option>';
+
+    // determine which filter button was clicked, if any and set section
+    $button = key(array_filter($_GET, function ($v) {
+        return __('Filter') === $v;
+    }));
+    $section = $_GET['verification_status_' . $button] ?? -1;
+
+    // generate <option> and <select> code
+    $options = implode('', array_map(function ($i) use ($ot, $section) {
+        return sprintf($ot, $i, selected($i, $section, false), $i);
+    }, range(0, 1)));
+    $select = sprintf($st, $which, __('Course Section...'), $options);
+
+    // output <select> and submit button
+    //echo $select;
+
+?>
+    <select name="verification_status_<?php echo $which; ?>" style="float:none;">
+        <option value="">Old Users</option>
+        <option value="1" <?php selected(1, $section, true); ?>>Verified</option>
+        <option value="0" <?php selected(0, $section, true); ?>>Unverified</option>
+    </select>
+<?php
+
+
+    submit_button(__('Filter'), null, $which, false);
+}
+add_action('restrict_manage_users', 'add_verification_status_filter');
+
+function filter_users_by_course_section($query)
+{
+
+    //$user_activation_status = get_user_meta($user_id, 'user_activation_status', true);
+
+
+    global $pagenow;
+    if (is_admin() && 'users.php' == $pagenow) {
+        $button = key(array_filter($_GET, function ($v) {
+            return __('Filter') === $v;
+        }));
+
+        $status = isset($_GET['verification_status_' . $button]) ? $_GET['verification_status_' . $button] : '';
+
+        error_log($button);
+        error_log($status);
+
+        if ($status == 1) {
+            $meta_query = [['key' => 'user_activation_status', 'value' => 1, 'compare' => '=']];
+            $query->set('meta_key', 'user_activation_status');
+            $query->set('meta_query', $meta_query);
+        }
+        if ($status == 0) {
+            $meta_query = [['key' => 'user_activation_status', 'value' => 0, 'compare' => '=']];
+            //$query->set('meta_key', 'user_activation_status');
+            $query->set('meta_query', $meta_query);
+        }
+        if (isset($_GET['verification_status_' . $button]) && ($_GET['verification_status_' . $button]) == '') {
+            $meta_query = [['key' => 'user_activation_status', 'value' => 0, 'compare' => 'NOT EXISTS']];
+            //$query->set('meta_key', 'user_activation_status');
+            $query->set('meta_query', $meta_query);
+        }
+    }
+}
+add_filter('pre_get_users', 'filter_users_by_course_section');
