@@ -99,7 +99,6 @@ function user_verification_trash_comment($comment_id, $comment)
     if ($report_comment_trash != 'yes') return;
 
     // do the code here
-    //error_log($comment_id);
     $domain = get_bloginfo('url');
 
 
@@ -140,7 +139,6 @@ function user_verification_spam_comment($comment_id, $comment)
     if ($report_comment_spam != 'yes') return;
 
     // do the code here
-    //error_log($comment_id);
     $domain = get_bloginfo('url');
 
 
@@ -244,7 +242,6 @@ function user_verification_preprocess_comment($commentdata)
     if ($block_comment != 'yes') return $commentdata;
 
     // do the code here
-    //error_log($commentdata['comment_author_email']);
     $domain = get_bloginfo('url');
 
 
@@ -289,7 +286,6 @@ function user_verification_duplicate_comment_id($dupe_id, $commentdata)
     if ($block_comment != 'yes') return $dupe_id;
 
     // do the code here
-    //error_log(serialize($commentdata));
 
 
     // API query parameters
@@ -646,8 +642,6 @@ function uv_registration_protect_blocked_domain($errors, $sanitized_user_login, 
     $email_parts = explode('@', $user_email);
     $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
 
-    //    error_log('$is_blocked:'. $is_blocked);
-    //    error_log('$is_blocked:'. $email_domain);
 
 
     if ($is_blocked) {
@@ -669,8 +663,6 @@ function uv_registration_protect_allowed_domain($errors, $sanitized_user_login, 
     $email_parts = explode('@', $user_email);
     $email_domain = isset($email_parts[1]) ? $email_parts[1] : '';
 
-    //    error_log('$is_allowed:'. $is_allowed);
-    //    error_log('$is_allowed:'. $email_domain);
 
     if (!$is_allowed) {
         $errors->add('allowed_domain', sprintf(__("This <strong>%s</strong> domain is not allowed!", 'user-verification'), esc_url_raw($email_domain)));
@@ -960,8 +952,6 @@ function uv_user_authentication($errors, $username, $passwords)
     }
 
     if ($user_activation_status == '') {
-        //error_log('step 1: ');
-        //error_log('$user_activation_status: ' . $user_activation_status);
 
         if ($existing_user_verified == 'yes') {
             //update_user_meta($user->ID, 'user_activation_status', 1);
@@ -979,14 +969,11 @@ function uv_user_authentication($errors, $username, $passwords)
         }
     }
     if ($user_activation_status === '1') {
-        //error_log('step 2: ');
-        //error_log('$user_activation_status: ' . $user_activation_status);
+
         return $errors;
     }
 
     if ($user_activation_status === '0') {
-        //error_log('step 3: ');
-        //error_log('$user_activation_status: ' . $user_activation_status);
 
         $message = sprintf(
             '<strong>%s</strong> %s <a href="%s">%s</a>',
@@ -1053,7 +1040,6 @@ if (!function_exists('user_verification_user_registered')) {
         // $email_templates_data = isset($user_verification_settings['email_templates_data']['user_registered']) ? $user_verification_settings['email_templates_data']['user_registered'] : $email_templates_data['user_registered'];
 
 
-        //error_log(serialize($email_templates_data));
         $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
 
         $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
@@ -1152,9 +1138,7 @@ if (!function_exists('user_verification_user_registered')) {
         $email_data['html'] = strtr($email_body, $vars);
         $email_data['attachments'] = array();
 
-        // error_log(serialize($email_data));
 
-        //error_log($enable);
 
         if ($enable == 'yes') {
             $mail_status = $class_user_verification_emails->send_email($email_data);
@@ -1424,8 +1408,7 @@ function filter_users_by_course_section($query)
 
         $status = isset($_GET['verification_status_' . $button]) ? $_GET['verification_status_' . $button] : '';
 
-        error_log($button);
-        error_log($status);
+
 
         if ($status == 1) {
             $meta_query = [['key' => 'user_activation_status', 'value' => 1, 'compare' => '=']];
