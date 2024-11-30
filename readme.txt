@@ -3,8 +3,8 @@
 	Donate link: http://pickplugins.com
 	Tags:  User Verification, Email OTP, Block Spam Email, Passwordless login, Email Verification
 	Requires at least: 4.1
-	Tested up to: 6.6
-	Stable tag: 2.0.26
+	Tested up to: 6.7
+	Stable tag: 2.0.27
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,7 +136,8 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
-
+= 2.0.27 =
+* 2024-05-22 fix - compatibility with WP 6.7 with text loading issue fixed.
 
 = 2.0.26 =
 * 2024-05-22 add - Max number of delete unverified user input field added.

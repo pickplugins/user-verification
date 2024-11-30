@@ -3,7 +3,7 @@
     $(document).ready(function () {
         $(".settings-tabs-loading").fadeOut();
         $(".settings-tabs").fadeIn();
-        //$("[data-depends]").formFieldDependency()
+
         accordion = $(".settings-tabs .accordion").accordion({
             heightStyle: 'content',
             active: 99,
@@ -94,7 +94,7 @@
                 src_url = attachment.url;
                 src_filename = attachment.filename;
 
-                //console.log(attachment);
+
 
                 $(this_).prev().val(attachmentId);
 
@@ -133,7 +133,7 @@
 
                 attachmentId = attachment.id;
                 src_url = attachment.url;
-                //console.log(attachment);
+
 
                 $(this_).prev().val(src_url);
 
@@ -224,7 +224,7 @@
                 //editor_enabled = $(this).attr('editor_enabled');
 
 
-                //console.log(typeof wp.editor);
+
 
                 if (el_attr == 'no' && typeof wp.editor != 'undefined') {
                     wp.editor.initialize(el_id, {
@@ -254,7 +254,7 @@
             editor_enabled = $(this).attr('editor_enabled');
 
 
-            //console.log(typeof wp.editor);
+
 
             if (editor_enabled == 'no' && typeof wp.editor != 'undefined') {
                 wp.editor.initialize(id, {
