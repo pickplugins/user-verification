@@ -60,6 +60,7 @@ function user_verification_delete_unverified_user()
 
     $user_verification_settings = get_option('user_verification_settings');
     $delete_user_delay = isset($user_verification_settings['unverified']['delay']) ? $user_verification_settings['unverified']['delay'] : '720';
+    $delete_max_number = isset($user_verification_settings['unverified']['delete_max_number']) ? $user_verification_settings['unverified']['delete_max_number'] : 20;
 
     $delete_user_delay_seconds = $delete_user_delay * 60;
 
@@ -80,7 +81,7 @@ function user_verification_delete_unverified_user()
             //'role'    => 'administrator',
             'orderby' => 'ID',
             'order'   => 'ASC',
-            'number'  => 20,
+            'number'  => $delete_max_number,
             'paged'   => 1,
             'meta_query' => $meta_query,
 
