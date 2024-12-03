@@ -1150,19 +1150,19 @@ if (!function_exists('user_verification_user_registered')) {
 
 
 
-function user_verification_recursive_sanitize_arr($array)
-{
+// function user_verification_recursive_sanitize_arr($array)
+// {
 
-    foreach ($array as $key => &$value) {
-        if (is_array($value)) {
-            $value = user_verification_recursive_sanitize_arr($value);
-        } else {
-            $value = wp_unslash(_wp_specialchars($value, ENT_QUOTES));
-        }
-    }
+//     foreach ($array as $key => &$value) {
+//         if (is_array($value)) {
+//             $value = user_verification_recursive_sanitize_arr($value);
+//         } else {
+//             $value = wp_unslash(_wp_specialchars($value, ENT_QUOTES));
+//         }
+//     }
 
-    return $array;
-}
+//     return $array;
+// }
 
 
 
@@ -1428,3 +1428,20 @@ function filter_users_by_course_section($query)
     }
 }
 add_filter('pre_get_users', 'filter_users_by_course_section');
+
+
+function user_verification_recursive_sanitize_arr($array)
+{
+    foreach ($array as $key => &$value) {
+        if (is_array($value)) {
+            $value = user_verification_recursive_sanitize_arr($value);
+        } else {
+            if ($key == 'url') {
+                $value = esc_url_raw($value);
+            } else {
+                $value = wp_kses_post($value);
+            }
+        }
+    }
+    return $array;
+}

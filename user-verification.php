@@ -123,6 +123,7 @@ class UserVerification
         require_once(user_verification_plugin_dir . 'includes/3rd-party/3rd-party.php');
 
         require_once(user_verification_plugin_dir . 'includes/functions-user-profile.php');
+        require_once(user_verification_plugin_dir . 'includes/functions-rest.php');
     }
 
 
