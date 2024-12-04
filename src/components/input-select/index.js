@@ -78,11 +78,11 @@ class PGinputSelect extends Component {
                 onChange(currentVal);
               }}
             >
-              {options.map(x => {
+              {options.map((x,index) => {
                 var selected = val.includes(x.value)
 
                 return (
-                  <option value={x.value} selected={selected}
+                  <option key={index} value={x.value} selected={selected}
                   >{x.label}</option>
                 )
               })}
