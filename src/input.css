@@ -71,7 +71,9 @@
 
 /* custom CSS  */
 
-
+.pg-dashboard input[type="text"]:focus{
+  box-shadow: none !important;
+}
 
 
 

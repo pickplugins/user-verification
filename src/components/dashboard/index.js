@@ -3,17 +3,13 @@ import { applyFilters } from "@wordpress/hooks";
 import { __ } from "@wordpress/i18n";
 
 import apiFetch from "@wordpress/api-fetch";
-import {
-	__experimentalInputControl as InputControl,
-	Spinner
-} from "@wordpress/components";
+import { Spinner } from "@wordpress/components";
 import { useEffect, useState } from "@wordpress/element";
-import {
-	settings
-} from "@wordpress/icons";
-import PGDropdown from "../../components/dropdown";
+import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
+import EmailVerification from "./EmailVerification";
+import ErrorMessage from "./ErrorMessage";
 
 function Html(props) {
 	if (!props.warn) {
@@ -30,15 +26,11 @@ function Html(props) {
 
 	var isProFeature = applyFilters("isProFeature", true);
 	var optionDataDefault = {
-
-
 		apiKeys: {},
 	};
 	var [optionData, setoptionData] = useState({}); // Using the hook.
 	var [optionDataSaved, setoptionDataSaved] = useState({}); // Using the hook.
 	var [dashboardTabs, setdashboardTabs] = useState([
-
-
 		{
 			name: "general",
 			title: "General",
@@ -47,10 +39,7 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
-
 	]);
-
-
 
 	// var [isProFeature, setisProFeature] = useState(
 	// 	optionData?.license?.activated ? false : true
@@ -70,8 +59,6 @@ function Html(props) {
 			method: "POST",
 			data: { option: "user_verification_settings" },
 		}).then((res) => {
-
-
 			console.log(res);
 
 			setisLoading(false);
@@ -106,8 +93,6 @@ function Html(props) {
 			}
 		});
 	}
-
-
 
 	//////////////////////////import setting
 	const [fileContent, setFileContent] = useState(null);
@@ -169,19 +154,19 @@ function Html(props) {
 			)
 				.toString()
 				.padStart(2, "0")}-${currentDate
-					.getDate()
-					.toString()
-					.padStart(2, "0")}`;
+				.getDate()
+				.toString()
+				.padStart(2, "0")}`;
 			const formattedTime = `${currentDate
 				.getHours()
 				.toString()
 				.padStart(2, "0")}${currentDate
-					.getMinutes()
-					.toString()
-					.padStart(2, "0")}${currentDate
-						.getSeconds()
-						.toString()
-						.padStart(2, "0")}`;
+				.getMinutes()
+				.toString()
+				.padStart(2, "0")}${currentDate
+				.getSeconds()
+				.toString()
+				.padStart(2, "0")}`;
 			const filename = `combo-blocks-setting-${formattedDate}-${formattedTime}.json`;
 			download(filename, JSON.stringify(optionDataX, null, 2));
 		};
@@ -193,7 +178,6 @@ function Html(props) {
 			</button>
 		);
 	}
-
 
 	var unitArgs = {
 		px: { label: "PX", value: "px" },
@@ -214,8 +198,29 @@ function Html(props) {
 		vmax: { label: "VMAX", value: "vmax" },
 	};
 
-
-
+	const updateEmailVerification = (key, value) => {
+		setoptionData({
+			...optionData,
+			email_verification: {
+				...optionData.email_verification, // Keep the existing keys
+				[key]: value, // Update the specific field
+			},
+		});
+	};
+	const updateErrorMessage = (key, value) => {
+		setoptionData({
+			...optionData,
+			messages: {
+				...optionData.messages, // Keep the existing keys
+				[key]: value, // Update the specific field
+			},
+		});
+	};
+	const handleExcludeUserRolesChange = (newVal) => {
+		const values = newVal.map((option) => option.value);
+		console.log(values);
+		updateEmailVerification("exclude_user_roles", values);
+	};
 
 	// ! hello
 	return (
@@ -294,10 +299,8 @@ function Html(props) {
 					</div>
 				</div>
 			</div>
-			{/* {JSON.stringify(optionData)} */}
-			<div
-				id=""
-				className="pg-setting-input-text  ">
+			{JSON.stringify(optionData)}
+			<div id="" className="pg-setting-input-text  ">
 				<PGtabs
 					activeTab="disableBlocks"
 					orientation="vertical"
@@ -305,7 +308,7 @@ function Html(props) {
 					navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500"
 					navItemSelectedClass="bg-gray-700"
 					activeClass="active-tab"
-					onSelect={(tabName) => { }}
+					onSelect={(tabName) => {}}
 					tabs={dashboardTabs}>
 					<PGtab name="overview">
 						<div className="flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font ">
@@ -313,138 +316,106 @@ function Html(props) {
 						</div>
 					</PGtab>
 					<PGtab name="general">
-						<div className="text-2xl font-bold mb-7">
-							{__("Genral Settings", "user-verification")}
+						<div className="text-2xl font-bold mb-2">
+							{__("Email verification", "user-verification")}
 						</div>
+						<p className="text-base mb-7">
+							{__(
+								"Customize options for email verification.",
+								"user-verification"
+							)}
+						</p>
 						<div className="flex mb-5  justify-start gap-2 items-center ">
-							<label className=" text-lg w-[300px]">
-								{__("Container Width", "user-verification")}
-							</label>
-							<InputControl
-								type="number"
-								value={
-									optionData.container == null ||
-										optionData.container.width == undefined
-										? ""
-										: optionData.container.width.match(/-?\d+/g)[0]
-								}
-								onChange={(newVal) => {
-									var container = { ...optionData.container };
-									var widthValX =
-										container.width == undefined ||
-											container.width.match(/-?\d+/g) == null
-											? 0
-											: container.width.match(/-?\d+/g)[0];
-									var widthUnitX =
-										container.width == undefined ||
-											container.width.match(/[a-zA-Z%]+/g) == null
-											? "px"
-											: container.width.match(/[a-zA-Z%]+/g)[0];
-									var containerX = {
-										...optionData.container,
-										width: newVal + widthUnitX,
-									};
-									setoptionData({ ...optionData, container: containerX });
+							<EmailVerification
+								val={optionData.email_verification}
+								updateEnable={(newVal) => {
+									updateEmailVerification("enable", newVal);
 								}}
+								updateEmailReverify={(newVal) => {
+									updateEmailVerification("email_update_reverify", newVal);
+								}}
+								updateVerificationPageId={(newVal) => {
+									updateEmailVerification("verification_page_id", newVal);
+								}}
+								updateRedirectAfterVerification={(newVal) => {
+									updateEmailVerification(
+										"redirect_after_verification",
+										newVal
+									);
+								}}
+								updateLoginAfterVerification={(newVal) => {
+									updateEmailVerification("login_after_verification", newVal);
+								}}
+								updateExcludeUserRoles={handleExcludeUserRolesChange}
 							/>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={unitArgs}
-								buttonTitle={
-									optionData?.container?.width.match(/[a-zA-Z%]+/g) == null
-										? __("Choose", "user-verification")
-										: optionData.container.width.match(/[a-zA-Z%]+/g)[0]
-								}
-								onChange={(option, index) => {
-									var container = { ...optionData.container };
-									var widthValX =
-										container.width == undefined ||
-											container.width.match(/-?\d+/g) == null
-											? 0
-											: container.width.match(/-?\d+/g)[0];
-									var widthUnitX =
-										container.width == undefined ||
-											container.width.match(/[a-zA-Z%]+/g) == null
-											? "px"
-											: container.width.match(/[a-zA-Z%]+/g)[0];
-									var containerX = {
-										...optionData.container,
-										width: widthValX + option.value,
-									};
-									setoptionData({ ...optionData, container: containerX });
-								}}
-								values={""}></PGDropdown>
 						</div>
-						<div className="flex mb-5 justify-start gap-2 items-center ">
-							<label className=" text-lg w-[300px]">
-								{__("Editor Width", "user-verification")}
-							</label>
-							<InputControl
-								type="number"
-								value={
-									optionData.editor == null ||
-										optionData.editor.width == undefined
-										? ""
-										: optionData.editor.width.match(/-?\d+/g)[0]
-								}
-								onChange={(newVal) => {
-									var editor = { ...optionData.editor };
-									var widthValX =
-										editor.width == undefined ||
-											editor.width.match(/-?\d+/g) == null
-											? 0
-											: editor.width.match(/-?\d+/g)[0];
-									var widthUnitX =
-										editor.width == undefined ||
-											editor.width.match(/[a-zA-Z%]+/g) == null
-											? "px"
-											: editor.width.match(/[a-zA-Z%]+/g)[0];
-									var editorX = {
-										...optionData.editor,
-										width: newVal + widthUnitX,
-									};
-									setoptionData({ ...optionData, editor: editorX });
+
+						<div className="text-2xl font-bold mb-2">
+							{__("Email verification", "user-verification")}
+						</div>
+						<p className="text-base mb-7">
+							{__(
+								"Customize options for email verification.",
+								"user-verification"
+							)}
+						</p>
+						<div className="flex mb-5  justify-start gap-2 items-center ">
+							<ErrorMessage
+								val={optionData.messages}
+								updateActivationSent={(e) => {
+									updateErrorMessage("activation_sent", e.target.value);
+								}}
+								updateCaptchaError={(e) => {
+									updateErrorMessage("captcha_error", e.target.value);
+								}}
+								updateInvalidKey={(e) => {
+									updateErrorMessage("invalid_key", e.target.value);
+								}}
+								updateMailInstruction={(e) => {
+									updateErrorMessage("mail_instruction", e.target.value);
+								}}
+								updateNotRedirect={(e) => {
+									updateErrorMessage("not_redirect", e.target.value);
+								}}
+								updateOtpSentError={(e) => {
+									updateErrorMessage("otp_sent_error", e.target.value);
+								}}
+								updateOtpSentSuccess={(e) => {
+									updateErrorMessage("otp_sent_success", e.target.value);
+								}}
+								updatePleaseWait={(e) => {
+									updateErrorMessage("please_wait", e.target.value);
+								}}
+								updateRedirectAfterVerify={(e) => {
+									updateErrorMessage("redirect_after_verify", e.target.value);
+								}}
+								updateRegistrationSuccess={(e) => {
+									updateErrorMessage("registration_success", e.target.value);
+								}}
+								updateTitleCheckingVerification={(e) => {
+									updateErrorMessage(
+										"title_checking_verification",
+										e.target.value
+									);
+								}}
+								updateTitleSendingVerification={(e) => {
+									updateErrorMessage(
+										"title_sending_verification",
+										e.target.value
+									);
+								}}
+								updateVerificationFail={(e) => {
+									updateErrorMessage("verification_fail", e.target.value);
+								}}
+								updateVerificationSuccess={(e) => {
+									updateErrorMessage("verification_success", e.target.value);
+								}}
+								updateVerifyEmail={(e) => {
+									updateErrorMessage("verify_email", e.target.value);
 								}}
 							/>
-							<PGDropdown
-								position="bottom right"
-								variant="secondary"
-								options={unitArgs}
-								buttonTitle={
-									optionData?.editor?.width.match(/[a-zA-Z%]+/g) == null
-										? __("Choose", "user-verification")
-										: optionData.editor.width.match(/[a-zA-Z%]+/g)[0]
-								}
-								onChange={(option, index) => {
-									var editor = { ...optionData.editor };
-									var widthValX =
-										editor.width == undefined ||
-											editor.width.match(/-?\d+/g) == null
-											? 0
-											: editor.width.match(/-?\d+/g)[0];
-									var widthUnitX =
-										editor.width == undefined ||
-											editor.width.match(/[a-zA-Z%]+/g) == null
-											? "px"
-											: editor.width.match(/[a-zA-Z%]+/g)[0];
-									var editorX = {
-										...optionData.editor,
-										width: widthValX + option.value,
-									};
-									setoptionData({ ...optionData, editor: editorX });
-								}}
-								values={""}></PGDropdown>
 						</div>
 					</PGtab>
-
-
-
-
-
-
-
-
 
 					<PGtab name="export/import">
 						<div>
@@ -457,7 +428,11 @@ function Html(props) {
 								</h3>
 								<div className="flex flex-col gap-4 items-start ">
 									<p className="!m-0 ">
-										{__("Please select the data file to import", "user-verification")}:{" "}
+										{__(
+											"Please select the data file to import",
+											"user-verification"
+										)}
+										:{" "}
 									</p>
 									<div className="flex items-start">
 										<div className="flex flex-col">

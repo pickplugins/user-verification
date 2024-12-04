@@ -1,5 +1,5 @@
 ﻿=== User Verification - Email Verification, Email OTP, Block Spam Email, Passwordless login   ===
-	Contributors: PickPlugins
+	Contributors: PickPlugins, NafisMahmudAyon
 	Donate link: http://pickplugins.com
 	Tags:  User Verification, Email OTP, Block Spam Email, Passwordless login, Email Verification
 	Requires at least: 4.1
