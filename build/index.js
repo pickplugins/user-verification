@@ -161,21 +161,19 @@ function Html(props) {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
     setisLoading(true);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
-      path: "/post-grid/v2/get_options",
+      path: "/user-verification/v2/get_options",
       method: "POST",
       data: {
         option: "user_verification_settings"
       }
     }).then(res => {
+      console.log(res);
       setisLoading(false);
       setdataLoaded(true);
       if (res.length != 0) {
         var resX = {
           ...res
         };
-        if (resX.addons.enabled == undefined) {
-          resX.addons.enabled = resX.addons.disabled;
-        }
         setoptionDataSaved(resX);
         setoptionData(resX);
       }
@@ -192,7 +190,7 @@ function Html(props) {
   function updateOption() {
     setisLoading(true);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
-      path: "/post-grid/v2/update_options",
+      path: "/user-verification/v2/update_options",
       method: "POST",
       data: {
         name: "user_verification_settings",
@@ -269,7 +267,7 @@ function Html(props) {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
       className: "pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-700 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700",
       onClick: handleExport
-    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export", "post-grid"));
+    }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export", "user-verification"));
   }
   var unitArgs = {
     px: {
@@ -355,13 +353,13 @@ function Html(props) {
     className: "flex flex-col w-max"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "text-[32px] md:text-[36px] lg:text-[40px] leading-[32px] md:leading-[36px] lg:leading-[40px] font-extrabold text-white whitespace-nowrap "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("User Verification", "post-grid")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("User Verification", "user-verification")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center flex-wrap gap-5 md:gap-4 "
   }, isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://comboblocks.com/pricing/?utm_source=CBDashboard&utm_medium=topNav&utm_campaign=CBPro",
     target: "_blank",
     className: "bg-amber-500 text-[16px] font-bold no-underline rounded-sm p-2 px-4 whitespace-nowrap cursor-pointer text-white lg:text-lg "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Buy Pro", "post-grid"))), isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Buy Pro", "user-verification"))), isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, null))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " flex w-full lg:w-auto"
@@ -371,24 +369,24 @@ function Html(props) {
     href: "https://pickplugins.com/create-support-ticket/",
     target: "_blank",
     className: " no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Create Support", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Create Support", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "https://comboblocks.com/documentations/",
     target: "_blank",
     className: " no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white   hover:text-white "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Documentation", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Documentation", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     className: "bg-amber-500 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white ",
     onClick: ev => {
       // resetOptionData();
       handleAlertConfirmation();
     }
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Reset", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Reset", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-green-700 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white flex items-center",
     onClick: ev => {
       updateOption();
     }
   }, isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: ""
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Save", "post-grid")), needSave && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Save", "user-verification")), needSave && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "w-5 inline-block h-5 ml-3 rounded-xl text-center bg-red-500"
   }, "!")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "",
@@ -406,15 +404,15 @@ function Html(props) {
     name: "overview"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Combo Blocks", "post-grid"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Combo Blocks", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "general"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl font-bold mb-7"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Genral Settings", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Genral Settings", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: " text-lg w-[300px]"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Container Width", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.__experimentalInputControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Container Width", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.__experimentalInputControl, {
     type: "number",
     value: optionData.container == null || optionData.container.width == undefined ? "" : optionData.container.width.match(/-?\d+/g)[0],
     onChange: newVal => {
@@ -436,7 +434,7 @@ function Html(props) {
     position: "bottom right",
     variant: "secondary",
     options: unitArgs,
-    buttonTitle: optionData?.container?.width.match(/[a-zA-Z%]+/g) == null ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Choose", "post-grid") : optionData.container.width.match(/[a-zA-Z%]+/g)[0],
+    buttonTitle: optionData?.container?.width.match(/[a-zA-Z%]+/g) == null ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Choose", "user-verification") : optionData.container.width.match(/[a-zA-Z%]+/g)[0],
     onChange: (option, index) => {
       var container = {
         ...optionData.container
@@ -457,7 +455,7 @@ function Html(props) {
     className: "flex mb-5 justify-start gap-2 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: " text-lg w-[300px]"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Editor Width", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.__experimentalInputControl, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Editor Width", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.__experimentalInputControl, {
     type: "number",
     value: optionData.editor == null || optionData.editor.width == undefined ? "" : optionData.editor.width.match(/-?\d+/g)[0],
     onChange: newVal => {
@@ -479,7 +477,7 @@ function Html(props) {
     position: "bottom right",
     variant: "secondary",
     options: unitArgs,
-    buttonTitle: optionData?.editor?.width.match(/[a-zA-Z%]+/g) == null ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Choose", "post-grid") : optionData.editor.width.match(/[a-zA-Z%]+/g)[0],
+    buttonTitle: optionData?.editor?.width.match(/[a-zA-Z%]+/g) == null ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Choose", "user-verification") : optionData.editor.width.match(/[a-zA-Z%]+/g)[0],
     onChange: (option, index) => {
       var editor = {
         ...optionData.editor
@@ -500,15 +498,15 @@ function Html(props) {
     name: "export/import"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl font-bold mb-7"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export/Import Settings", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export/Import Settings", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "text-lg w-[300px] m-0"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Import", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Import", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col gap-4 items-start "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "!m-0 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Please select the data file to import", "post-grid"), ":", " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Please select the data file to import", "user-verification"), ":", " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-start"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col"
@@ -520,20 +518,20 @@ function Html(props) {
     onChange: handleFileChange
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "text-[#ec942c] text-xs "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Supported file type", "post-grid"), ": .json")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Supported file type", "user-verification"), ": .json")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
     className: "pg-font flex gap-2 justify-center cursor-pointer py-2 px-4 capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-700",
     onClick: handleImport
   }, importStatus === "run" ? "Importing..." : "Import"), importStatus === "stop" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "text-emerald-500 m-0 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Imported", "post-grid")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Imported", "user-verification")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-4"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("h3", {
     className: "text-lg w-[300px] m-0 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export", "post-grid")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-4 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "!m-0 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export settings", "post-grid"), ":", " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ExportButton, null))))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export settings", "user-verification"), ":", " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ExportButton, null))))))));
 }
 class PGDashboard extends Component {
   constructor(props) {

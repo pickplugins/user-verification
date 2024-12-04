@@ -21,7 +21,7 @@ class UserVerificationRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'user-verification/v2',
 			'/update_options',
 			array(
 				'methods' => 'POST',
@@ -37,7 +37,7 @@ class UserVerificationRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'user-verification/v2',
 			'/get_options',
 			array(
 				'methods' => 'POST',
@@ -52,7 +52,7 @@ class UserVerificationRest
 
 
 		register_rest_route(
-			'post-grid/v2',
+			'user-verification/v2',
 			'/get_posts',
 			array(
 				'methods' => 'POST',
@@ -83,10 +83,10 @@ class UserVerificationRest
 		$message = "";
 		if (!empty($value)) {
 			$status = update_option($name, $value);
-			$message = __("Options updated", "post-grid");
+			$message = __("Options updated", "user-verification");
 		} else {
 			$status = false;
-			$message = __("Value should not empty", "post-grid");
+			$message = __("Value should not empty", "user-verification");
 		}
 
 
@@ -113,22 +113,11 @@ class UserVerificationRest
 
 		$option = isset($request['option']) ? $request['option'] : '';
 
+		error_log($option);
+
 		$response = get_option($option);
 
-		// $response['customFonts'] = [];
-		// $response['googleFonts'] = [];
-
-		// $response['container']['width'] = '1155px';
-
-		// $response['breakpoints'] = [];
-		// $response['colors'] = ['#fff'];
-		// $response['editor']['width'] = '1155px';
-		// $response['blocks']['disabled'] = [];
-		// $response['license']['key'] = '';
-		// $response['license']['status'] = '';
-		// $response['license']['created'] = '';
-		// $response['license']['renewed'] = '';
-		// $response['license']['expire'] = '';
+		error_log(serialize($response));
 
 		die(wp_json_encode($response));
 	}
