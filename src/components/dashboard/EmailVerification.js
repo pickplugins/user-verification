@@ -13,14 +13,12 @@ function Html(props) {
 
 	var onChange = props.onChange;
 
-	console.log(props.options);
 
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
 
 	useEffect(() => {
-		console.log(options);
-
+		onChange(options)
 	}, [options]);
 
 	const userRoleOptions = [
