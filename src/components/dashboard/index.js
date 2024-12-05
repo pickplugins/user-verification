@@ -9,7 +9,7 @@ import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
 import EmailOtp from "./EmailOtp";
-import EmailVerification from "./EmailVerification";
+import EmailVerification from "./EmailVerificationw";
 import ErrorMessage from "./ErrorMessage";
 
 function Html(props) {
