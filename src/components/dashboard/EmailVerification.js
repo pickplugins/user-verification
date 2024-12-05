@@ -15,13 +15,11 @@ function Html(props) {
 
 	console.log(props.options);
 
-
 	var [options, setoptions] = useState(props.options); // Using the hook.
 
-	useEffect(() => {
-		console.log(options);
-
-	}, [options]);
+	// useEffect(() => {
+	// 	console.log(options);
+	// }, [options]);
 
 	const userRoleOptions = [
 		{ value: "chocolate", label: "Chocolate" },
@@ -31,18 +29,13 @@ function Html(props) {
 	];
 	return (
 		<div className="w-[800px] space-y-3">
-
 			{JSON.stringify(options)}
-
 
 			<div className="text-2xl font-bold mb-2">
 				{__("Email verification", "user-verification")}
 			</div>
 			<p className="text-base mb-7">
-				{__(
-					"Customize options for email verification.",
-					"user-verification"
-				)}
+				{__("Customize options for email verification.", "user-verification")}
 			</p>
 			<div className="flex my-5 justify-between items-center ">
 				<label className="w-[400px]" htmlFor="emailVerification">
@@ -56,8 +49,7 @@ function Html(props) {
 						{ label: "No", value: "no" },
 					]}
 					onChange={(newVal) => {
-
-						var optionsX = { ...options, enable: newVal }
+						var optionsX = { ...options, enable: newVal };
 						setoptions(optionsX);
 					}}
 					multiple={false}
@@ -75,24 +67,12 @@ function Html(props) {
 						{ label: "No", value: "no" },
 					]}
 					onChange={(newVal) => {
-
-						var optionsX = { ...options, verification_page_id: newVal }
+						var optionsX = { ...options, verification_page_id: newVal };
 						setoptions(optionsX);
 					}}
 					multiple={false}
 				/>
 			</div>
-
-
-
-
-
-
-
-
-
-
-
 
 			<div className="flex items-center gap-4">
 				<label htmlFor="emailVerification">
@@ -219,9 +199,7 @@ function Html(props) {
 			</div>
 		</div>
 	);
-};
-
-
+}
 
 class EmailVerification extends Component {
 	constructor(props) {
@@ -236,7 +214,13 @@ class EmailVerification extends Component {
 	}
 	render() {
 		var { onChange, options } = this.props;
-		return <Html onChange={onChange} options={options} warn={this.state.showWarning} />;
+		return (
+			<Html
+				onChange={onChange}
+				options={options}
+				warn={this.state.showWarning}
+			/>
+		);
 	}
 }
 export default EmailVerification;

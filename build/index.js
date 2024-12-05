@@ -411,10 +411,10 @@ const cn = (...args) => {
 
 /***/ }),
 
-/***/ "./src/components/dashboard/EmailOtp.js":
-/*!**********************************************!*\
-  !*** ./src/components/dashboard/EmailOtp.js ***!
-  \**********************************************/
+/***/ "./src/components/dashboard/EmailVerification.js":
+/*!*******************************************************!*\
+  !*** ./src/components/dashboard/EmailVerification.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -423,280 +423,174 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
-/* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
-/* harmony import */ var aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! aspect-ui/Tooltip */ "./node_modules/aspect-ui/lib/cjs/components/Tooltip/index.js");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aspect-ui/Tooltip */ "./node_modules/aspect-ui/lib/cjs/components/Tooltip/index.js");
+/* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
+
+
+const {
+  Component
+} = wp.element;
 
 
 
 
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
+  var onChange = props.onChange;
+  console.log(props.options);
+  var [options, setoptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(props.options); // Using the hook.
 
+  // useEffect(() => {
+  // 	console.log(options);
+  // }, [options]);
 
-const EmailOtp = ({
-  val,
-  update
-}) => {
-  const handleUpdate = (key, value) => {
-    update(key, value);
-  };
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable on default login", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    val: val.enable_default_login,
-    options: [{
-      label: "Yes",
-      value: "yes"
-    }, {
-      label: "No",
-      value: "no"
-    }],
-    onChange: newVal => handleUpdate("enable_default_login", newVal),
-    multiple: false
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.Tooltip, {
-    direction: "top",
-    arrowColor: "#d1d5db",
-    showOnClick: true,
-    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
-    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable OTP on default login page. every time a user try to login will require a OTP send via mail.", "user-verification"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Required email verified", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    val: val.required_email_verified,
-    options: [{
-      label: "Yes",
-      value: "yes"
-    }, {
-      label: "No",
-      value: "no"
-    }],
-    onChange: newVal => handleUpdate("required_email_verified", newVal),
-    multiple: false
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.Tooltip, {
-    direction: "top",
-    arrowColor: "#d1d5db",
-    showOnClick: true,
-    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
-    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Send OTP to only email verified users.", "user-verification"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allow Passowrd", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    val: val.allow_password,
-    options: [{
-      label: "Yes",
-      value: "yes"
-    }, {
-      label: "No",
-      value: "no"
-    }],
-    onChange: newVal => handleUpdate("allow_password", newVal),
-    multiple: false
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.Tooltip, {
-    direction: "top",
-    arrowColor: "#d1d5db",
-    showOnClick: true,
-    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
-    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Allow password in OTP field", "user-verification"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable on WooCommerce login", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.Tooltip, {
-    direction: "top",
-    arrowColor: "#d1d5db",
-    showOnClick: true,
-    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
-    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Enable OTP on WooCommerce login page. every time a user try to login via WooCommerce login form will require a OTP send via mail.", "user-verification"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-4"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: ""
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("OTP Length", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex items-center gap-2"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    val: val.length,
-    onChange: newVal => handleUpdate("length", newVal)
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.Tooltip, {
-    direction: "top",
-    arrowColor: "#d1d5db",
-    showOnClick: true,
-    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
-    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_4__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Set custom length for OTP.", "user-verification"))))));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmailOtp);
-
-/***/ }),
-
-/***/ "./src/components/dashboard/ErrorMessage.js":
-/*!**************************************************!*\
-  !*** ./src/components/dashboard/ErrorMessage.js ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Textarea__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Textarea */ "./src/components/dashboard/Textarea.js");
-
-
-
-
-const ErrorMessage = ({
-  val,
-  updateActivationSent,
-  updateCaptchaError,
-  updateInvalidKey,
-  updateMailInstruction,
-  updateNotRedirect,
-  updateOtpSentError,
-  updateOtpSentSuccess,
-  updatePleaseWait,
-  updateRedirectAfterVerify,
-  updateRegistrationSuccess,
-  updateTitleCheckingVerification,
-  updateTitleSendingVerification,
-  updateVerificationFail,
-  updateVerificationSuccess,
-  updateVerifyEmail
-}) => {
+  const userRoleOptions = [{
+    value: "chocolate",
+    label: "Chocolate"
+  }, {
+    value: "strawberry",
+    label: "Strawberry"
+  }, {
+    value: "vanilla",
+    label: "Vanilla"
+  }, {
+    value: "administrator",
+    label: "Administrator"
+  }];
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "space-y-3 w-full"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Invalid activation key", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when user activation key is invalid or wrong", "user-verification"),
-    val: val.invalid_key,
-    update: updateInvalidKey
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Activation key has sent", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when activation key is sent to user email", "user-verification"),
-    val: val.activation_sent,
-    update: updateActivationSent
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Verify email address", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when user try to login without verifying email with proper activation key", "user-verification"),
-    val: val.verify_email,
-    update: updateVerifyEmail
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Registration success message", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("User will get this message as soon as registered on your website", "user-verification"),
-    val: val.registration_success,
-    update: updateRegistrationSuccess
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Verification successful", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when user successfully verified", "user-verification"),
-    val: val.verification_success,
-    update: updateVerificationSuccess
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Verification fail", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when verification failed", "user-verification"),
-    val: val.verification_fail,
-    update: updateVerificationFail
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Please wait text", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Show custom for "please wait"', "user-verification"),
-    val: val.please_wait,
-    update: updatePleaseWait
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Mail instruction text", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add custom text for mail instructions.", "user-verification"),
-    val: val.mail_instruction,
-    update: updateMailInstruction
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Redirect after verify text", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add custom text redirect after verification.", "user-verification"),
-    val: val.redirect_after_verify,
-    update: updateRedirectAfterVerify
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Not redirect text", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Add custom text not redirect automatically.", "user-verification"),
-    val: val.not_redirect,
-    update: updateNotRedirect
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Popup title checking verification", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Show custom for "checking verification"', "user-verification"),
-    val: val.title_checking_verification,
-    update: updateTitleCheckingVerification
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Popup title sending verification", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Show custom for "sending verification"', "user-verification"),
-    val: val.title_sending_verification,
-    update: updateTitleSendingVerification
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Captcha error message", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when captcha error occurred.", "user-verification"),
-    val: val.captcha_error,
-    update: updateCaptchaError
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("OTP sent success message", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when OTP sent successfully.", "user-verification"),
-    val: val.otp_sent_success,
-    update: updateOtpSentSuccess
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Textarea__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("OTP error message", "user-verification"),
-    subtitle: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)("Show custom message when OTP sending error occured.", "user-verification"),
-    val: val.otp_sent_error,
-    update: updateOtpSentError
-  }));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ErrorMessage);
-
-/***/ }),
-
-/***/ "./src/components/dashboard/Textarea.js":
-/*!**********************************************!*\
-  !*** ./src/components/dashboard/Textarea.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-const Textarea = ({
-  title,
-  val,
-  update,
-  subtitle
-}) => {
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex flex-col"
+    className: "w-[800px] space-y-3"
+  }, JSON.stringify(options), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl font-bold mb-2"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email verification", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+    className: "text-base mb-7"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Customize options for email verification.", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex my-5 justify-between items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
-    htmlFor: "",
-    className: "font-medium text-base mb-2"
-  }, title), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
-    className: "flex-1 text-[12px] ",
-    value: val,
-    onChange: update
-  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "text-gray-500 font-light !text-[11px] !mt-1"
-  }, subtitle));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Textarea);
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Enable email verification", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    inputClass: "!py-1 px-2  border border-2 border-solid",
+    val: options?.enable,
+    options: [{
+      label: "Yes",
+      value: "yes"
+    }, {
+      label: "No",
+      value: "no"
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        enable: newVal
+      };
+      setoptions(optionsX);
+    },
+    multiple: false
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Choose verification page", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    inputClass: "!py-1 px-2  border border-2 border-solid",
+    val: options?.verification_page_id,
+    options: [{
+      label: "Yes",
+      value: "yes"
+    }, {
+      label: "No",
+      value: "no"
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        verification_page_id: newVal
+      };
+      setoptions(optionsX);
+    },
+    multiple: false
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Redirect after verification", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.Tooltip, {
+    direction: "top",
+    arrowColor: "#d1d5db",
+    showOnClick: true,
+    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
+    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Redirect to any page after successfully verified account.", "user-verification"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Automatically login after verification", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.Tooltip, {
+    direction: "top",
+    arrowColor: "#d1d5db",
+    showOnClick: true,
+    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
+    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Set yes to login automatically after verification completed, otherwise set no.", "user-verification"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Required verification on email change?", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.Tooltip, {
+    direction: "top",
+    arrowColor: "#d1d5db",
+    showOnClick: true,
+    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
+    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Resend email verification when user update their email.", "user-verification"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-4"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Exclude user role", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-1 items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.Tooltip, {
+    direction: "top",
+    arrowColor: "#d1d5db",
+    showOnClick: true,
+    actionClassName: "flex items-center justify-center h-[24px] aspect-square font-medium bg-gray-300 rounded-full text-emerald-700",
+    contentClassName: "bg-gray-300 px-4 py-2 max-w-[350px] text-justify"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipAction, null, "?"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(aspect_ui_Tooltip__WEBPACK_IMPORTED_MODULE_3__.TooltipContent, null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("You can exclude verification for these user roles to login on your site.", "user-verification"))))));
+}
+class EmailVerification extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+  render() {
+    var {
+      onChange,
+      options
+    } = this.props;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+      onChange: onChange,
+      options: options,
+      warn: this.state.showWarning
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmailVerification);
 
 /***/ }),
 
@@ -722,12 +616,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
 /* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
-/* harmony import */ var _EmailOtp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EmailOtp */ "./src/components/dashboard/EmailOtp.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module './EmailVerification'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ErrorMessage */ "./src/components/dashboard/ErrorMessage.js");
+/* harmony import */ var _EmailVerification__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EmailVerification */ "./src/components/dashboard/EmailVerification.js");
 
 const {
   Component
@@ -741,20 +633,12 @@ const {
 
 
 
-
-
 function Html(props) {
   if (!props.warn) {
     return null;
   }
-  var [dataLoaded, setdataLoaded] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false); // Using the hook.
-  var [debounce, setDebounce] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null); // Using the hook.
   var [isLoading, setisLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false); // Using the hook.
-  var [colorPopup, setcolorPopup] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null); // Using the hook.
-  var [license, setlicense] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null); // Using the hook.
   var [needSave, setneedSave] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false); // Using the hook.
-  var [licenseError, setlicenseError] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null); // Using the hook.
-  var [licenseCheckedData, setlicenseCheckedData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null); // Using the hook.
 
   var isProFeature = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.applyFilters)("isProFeature", true);
   var optionDataDefault = {
@@ -763,17 +647,10 @@ function Html(props) {
   var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
-    name: "general",
-    title: "General",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
-    className: "tab-general",
-    hidden: false,
-    isPro: false
-  }, {
-    name: "emailOtp",
-    title: "Email OTP",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"],
-    className: "tab-email-otp",
+    name: "tabEmailVerification",
+    title: "Email Verification",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
+    className: "tab-tabEmailVerification",
     hidden: false,
     isPro: false
   }]);
@@ -798,16 +675,15 @@ function Html(props) {
         option: "user_verification_settings"
       }
     }).then(res => {
-      console.log(res);
-      setisLoading(false);
-      setdataLoaded(true);
       if (res.length != 0) {
         var resX = {
           ...res
         };
+        console.log(resX);
         setoptionDataSaved(resX);
         setoptionData(resX);
       }
+      setisLoading(false);
     });
   }, []);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
@@ -900,120 +776,17 @@ function Html(props) {
       onClick: handleExport
     }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export", "user-verification"));
   }
-  var unitArgs = {
-    px: {
-      label: "PX",
-      value: "px"
-    },
-    em: {
-      label: "EM",
-      value: "em"
-    },
-    rem: {
-      label: "REM",
-      value: "rem"
-    },
-    auto: {
-      label: "AUTO",
-      value: "auto"
-    },
-    "%": {
-      label: "%",
-      value: "%"
-    },
-    cm: {
-      label: "CM",
-      value: "cm"
-    },
-    mm: {
-      label: "MM",
-      value: "mm"
-    },
-    in: {
-      label: "IN",
-      value: "in"
-    },
-    pt: {
-      label: "PT",
-      value: "pt"
-    },
-    pc: {
-      label: "PC",
-      value: "pc"
-    },
-    ex: {
-      label: "EX",
-      value: "ex"
-    },
-    ch: {
-      label: "CH",
-      value: "ch"
-    },
-    vw: {
-      label: "VW",
-      value: "vw"
-    },
-    vh: {
-      label: "VH",
-      value: "vh"
-    },
-    vmin: {
-      label: "VMIN",
-      value: "vmin"
-    },
-    vmax: {
-      label: "VMAX",
-      value: "vmax"
-    }
-  };
-  const updateEmailVerification = (key, value) => {
-    setoptionData({
+  function onChangeEmailVerification(options) {
+    console.log("first");
+    var optionDataX = {
       ...optionData,
-      email_verification: {
-        ...optionData.email_verification,
-        // Keep the existing keys
-        [key]: value // Update the specific field
-      }
-    });
-  };
-  const updateErrorMessage = (key, value) => {
-    setoptionData({
-      ...optionData,
-      messages: {
-        ...optionData.messages,
-        // Keep the existing keys
-        [key]: value // Update the specific field
-      }
-    });
-  };
-  const handleEmailVerificationUpdate = (key, value) => {
-    // updateEmailVerification(key, value);
-    setoptionData({
-      ...optionData,
-      email_verification: {
-        ...optionData.email_verification,
-        // Keep the existing keys
-        [key]: value // Update the specific field
-      }
-    });
-  };
-  const handleEmailOTPUpdate = (key, value) => {
-    // updateEmailVerification(key, value);
-    setoptionData({
-      ...optionData,
-      email_otp: {
-        ...optionData.email_otp,
-        // Keep the existing keys
-        [key]: value // Update the specific field
-      }
-    });
-  };
-  console.log(optionData.email_otp);
-
-  // ! hello
+      email_verification: options
+    };
+    setoptionData(optionDataX);
+  }
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "pg-setting-input-text pg-dashboard"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, null), !isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-gray-300 text-white py-5 p-3"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex gap-3 justify-center items-center flex-wrap lg:justify-between"
@@ -1062,11 +835,11 @@ function Html(props) {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, null)), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Save", "user-verification")), needSave && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: "w-5 inline-block h-5 ml-3 rounded-xl text-center bg-red-500"
-  }, "!")))))), JSON.stringify(optionData), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "!")))))), JSON.stringify(optionData.email_verification), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     id: "",
     className: "pg-setting-input-text  "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "disableBlocks",
+    activeTab: "tabEmailVerification",
     orientation: "vertical",
     contentClass: " p-5 bg-white w-full",
     navItemClass: "bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500",
@@ -1079,79 +852,19 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Combo Blocks", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "emailOtp"
+    name: "tabEmailVerification"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-2xl font-bold mb-2"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email OTP", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "text-base mb-7"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Customize options for email OTP.", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EmailOtp__WEBPACK_IMPORTED_MODULE_8__["default"], {
-    val: optionData.email_otp,
-    update: handleEmailOTPUpdate
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    name: "general"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-2xl font-bold mb-2"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email verification", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
-    className: "text-base mb-7"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Customize options for email verification.", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Object(function webpackMissingModule() { var e = new Error("Cannot find module './EmailVerification'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
-    val: optionData.email_verification,
-    update: handleEmailVerificationUpdate
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EmailVerification__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    options: optionData.email_verification,
+    onChange: () => onChangeEmailVerification()
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl font-bold mb-2"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email verification", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "text-base mb-7"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Customize options for email verification.", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ErrorMessage__WEBPACK_IMPORTED_MODULE_10__["default"], {
-    val: optionData.messages,
-    updateActivationSent: e => {
-      updateErrorMessage("activation_sent", e.target.value);
-    },
-    updateCaptchaError: e => {
-      updateErrorMessage("captcha_error", e.target.value);
-    },
-    updateInvalidKey: e => {
-      updateErrorMessage("invalid_key", e.target.value);
-    },
-    updateMailInstruction: e => {
-      updateErrorMessage("mail_instruction", e.target.value);
-    },
-    updateNotRedirect: e => {
-      updateErrorMessage("not_redirect", e.target.value);
-    },
-    updateOtpSentError: e => {
-      updateErrorMessage("otp_sent_error", e.target.value);
-    },
-    updateOtpSentSuccess: e => {
-      updateErrorMessage("otp_sent_success", e.target.value);
-    },
-    updatePleaseWait: e => {
-      updateErrorMessage("please_wait", e.target.value);
-    },
-    updateRedirectAfterVerify: e => {
-      updateErrorMessage("redirect_after_verify", e.target.value);
-    },
-    updateRegistrationSuccess: e => {
-      updateErrorMessage("registration_success", e.target.value);
-    },
-    updateTitleCheckingVerification: e => {
-      updateErrorMessage("title_checking_verification", e.target.value);
-    },
-    updateTitleSendingVerification: e => {
-      updateErrorMessage("title_sending_verification", e.target.value);
-    },
-    updateVerificationFail: e => {
-      updateErrorMessage("verification_fail", e.target.value);
-    },
-    updateVerificationSuccess: e => {
-      updateErrorMessage("verification_success", e.target.value);
-    },
-    updateVerifyEmail: e => {
-      updateErrorMessage("verify_email", e.target.value);
-    }
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "export/import"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl font-bold mb-7"
@@ -1188,7 +901,7 @@ function Html(props) {
     className: "flex gap-4 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "!m-0 "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export settings", "user-verification"), ":", " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ExportButton, null))))))));
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Export settings", "user-verification"), ":", " "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ExportButton, null)))))))));
 }
 class PGDashboard extends Component {
   constructor(props) {
@@ -1230,30 +943,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
 
 const {
   Component
 } = wp.element;
-
-
-
 class PGinputSelect extends Component {
   render() {
     var {
       val,
       options,
       multiple,
+      inputClass,
+      wrapperClass,
       onChange
     } = this.props;
+    val = val == undefined ? "" : val;
     function Html() {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-        className: "w-full"
-      }, multiple == true && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
-        className: "w-full",
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, multiple == true && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        className: `w-full ${inputClass} `,
         multiple: true,
         onChange: event => {
           var options = event.target.options;
@@ -1272,6 +979,7 @@ class PGinputSelect extends Component {
           selected: isSelected
         }, x.label);
       }))), multiple == false && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("select", {
+        className: `w-full ${inputClass} `,
         onChange: event => {
           var currentVal = options[event.target.options.selectedIndex].value;
           onChange(currentVal);
@@ -1289,97 +997,6 @@ class PGinputSelect extends Component {
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGinputSelect);
-
-/***/ }),
-
-/***/ "./src/components/input-text/index.js":
-/*!********************************************!*\
-  !*** ./src/components/input-text/index.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-
-const {
-  Component
-} = wp.element;
-
-
-
-function Html(props) {
-  if (!props.warn) {
-    return null;
-  }
-  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
-    className: props.className,
-    id: props.id,
-    value: props.value,
-    type: "text",
-    size: props.size,
-    name: props.name,
-    placeholder: props.placeholder,
-    minlength: props.minlength,
-    maxlength: props.maxlength,
-    required: props.required,
-    disabled: props.disabled,
-    onChange: newVal => {
-      props.onChange(newVal);
-    }
-  }));
-}
-class PGinputText extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showWarning: true
-    };
-    this.handleToggleClick = this.handleToggleClick.bind(this);
-  }
-  handleToggleClick() {
-    this.setState(state => ({
-      showWarning: !state.showWarning
-    }));
-  }
-  render() {
-    var {
-      value,
-      placeholder,
-      className,
-      id,
-      name,
-      size,
-      minlength,
-      maxlength,
-      required,
-      disabled,
-      onChange
-    } = this.props;
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
-      val: value,
-      name: name,
-      id: id,
-      size: size,
-      placeholder: placeholder,
-      className: className,
-      minlength: minlength,
-      maxlength: maxlength,
-      required: required,
-      disabled: disabled,
-      onChange: onChange,
-      warn: this.state.showWarning
-    });
-  }
-}
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGinputText);
 
 /***/ }),
 

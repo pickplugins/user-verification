@@ -1,10 +1,7 @@
 
 
 const { Component } = wp.element;
-import { Button, Dropdown, } from '@wordpress/components'
 
-import { __experimentalInputControl as InputControl, ColorPalette } from '@wordpress/components';
-import { memo, useMemo, useState } from '@wordpress/element'
 
 
 
@@ -18,13 +15,14 @@ class PGinputSelect extends Component {
       val,
       options,
       multiple,
-
+      inputClass,
+      wrapperClass,
       onChange,
 
 
     } = this.props;
 
-
+    val = (val == undefined) ? "" : val;
 
 
     function Html() {
@@ -33,10 +31,10 @@ class PGinputSelect extends Component {
 
       return (
 
-        <div className='w-full'>
+        <>
 
           {multiple == true && (<>
-            <select className='w-full'
+            <select className={`w-full ${inputClass} `}
               multiple
               onChange={(event) => {
 
@@ -72,13 +70,13 @@ class PGinputSelect extends Component {
 
           {multiple == false && (<>
             <select
-
+              className={`w-full ${inputClass} `}
               onChange={(event) => {
                 var currentVal = options[event.target.options.selectedIndex].value;
                 onChange(currentVal);
               }}
             >
-              {options.map((x,index) => {
+              {options.map((x, index) => {
                 var selected = val.includes(x.value)
 
                 return (
@@ -92,7 +90,7 @@ class PGinputSelect extends Component {
 
 
 
-        </div>
+        </>
 
 
 
