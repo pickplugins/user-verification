@@ -187,6 +187,10 @@ function Html(props) {
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
 
+
+			{JSON.stringify(optionData.email_verification)}
+
+
 			{isLoading && (
 
 				<Spinner />
