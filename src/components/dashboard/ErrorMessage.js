@@ -1,166 +1,293 @@
+import { useEffect, useState } from "@wordpress/element";
+const { Component } = wp.element;
+
 import { __ } from "@wordpress/i18n";
 import React from "react";
-import Textarea from "./Textarea";
 
-const ErrorMessage = ({
-	val,
-	updateActivationSent,
-	updateCaptchaError,
-	updateInvalidKey,
-	updateMailInstruction,
-	updateNotRedirect,
-	updateOtpSentError,
-	updateOtpSentSuccess,
-	updatePleaseWait,
-	updateRedirectAfterVerify,
-	updateRegistrationSuccess,
-	updateTitleCheckingVerification,
-	updateTitleSendingVerification,
-	updateVerificationFail,
-	updateVerificationSuccess,
-	updateVerifyEmail,
-}) => {
+function Html(props) {
+	if (!props.warn) {
+		return null;
+	}
+
+	var onChange = props.onChange;
+
+	var [options, setoptions] = useState(props.options); // Using the hook.
+
+	console.log(options)
+
+	useEffect(() => {
+		onChange(options);
+	}, [options]);
+
 	return (
-		<div className="space-y-3 w-full">
-			<Textarea
-				title={__("Invalid activation key", "user-verification")}
-				subtitle={__(
-					"Show custom message when user activation key is invalid or wrong",
-					"user-verification"
-				)}
-				val={val.invalid_key}
-				update={updateInvalidKey}
-			/>
+		<div className="w-[800px] space-y-3">
+			{JSON.stringify(options)}
 
-			<Textarea
-				title={__("Activation key has sent", "user-verification")}
-				subtitle={__(
-					"Show custom message when activation key is sent to user email",
-					"user-verification"
-				)}
-				val={val.activation_sent}
-				update={updateActivationSent}
-			/>
+			<div className="text-2xl font-bold mb-2">
+				{__("Error messages", "user-verification")}
+			</div>
+			<p className="text-base mb-7">
+				{__("Customize error messages.", "user-verification")}
+			</p>
 
-			<Textarea
-				title={__("Verify email address", "user-verification")}
-				subtitle={__(
-					"Show custom message when user try to login without verifying email with proper activation key",
-					"user-verification"
-				)}
-				val={val.verify_email}
-				update={updateVerifyEmail}
-			/>
-			<Textarea
-				title={__("Registration success message", "user-verification")}
-				subtitle={__(
-					"User will get this message as soon as registered on your website",
-					"user-verification"
-				)}
-				val={val.registration_success}
-				update={updateRegistrationSuccess}
-			/>
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Invalid activation key", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.invalid_key}
+					onChange={(newVal) => {
+						var optionsX = { ...options, invalid_key: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
 
-			<Textarea
-				title={__("Verification successful", "user-verification")}
-				subtitle={__(
-					"Show custom message when user successfully verified",
-					"user-verification"
-				)}
-				val={val.verification_success}
-				update={updateVerificationSuccess}
-			/>
-			<Textarea
-				title={__("Verification fail", "user-verification")}
-				subtitle={__(
-					"Show custom message when verification failed",
-					"user-verification"
-				)}
-				val={val.verification_fail}
-				update={updateVerificationFail}
-			/>
-			<Textarea
-				title={__("Please wait text", "user-verification")}
-				subtitle={__('Show custom for "please wait"', "user-verification")}
-				val={val.please_wait}
-				update={updatePleaseWait}
-			/>
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Activation key has sent", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.activation_sent}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							activation_sent: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
 
-			<Textarea
-				title={__("Mail instruction text", "user-verification")}
-				subtitle={__(
-					"Add custom text for mail instructions.",
-					"user-verification"
-				)}
-				val={val.mail_instruction}
-				update={updateMailInstruction}
-			/>
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Verify email address", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.verify_email}
+					onChange={(newVal) => {
+						var optionsX = { ...options, verify_email: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
 
-			<Textarea
-				title={__("Redirect after verify text", "user-verification")}
-				subtitle={__(
-					"Add custom text redirect after verification.",
-					"user-verification"
-				)}
-				val={val.redirect_after_verify}
-				update={updateRedirectAfterVerify}
-			/>
-			<Textarea
-				title={__("Not redirect text", "user-verification")}
-				subtitle={__(
-					"Add custom text not redirect automatically.",
-					"user-verification"
-				)}
-				val={val.not_redirect}
-				update={updateNotRedirect}
-			/>
-			<Textarea
-				title={__("Popup title checking verification", "user-verification")}
-				subtitle={__(
-					'Show custom for "checking verification"',
-					"user-verification"
-				)}
-				val={val.title_checking_verification}
-				update={updateTitleCheckingVerification}
-			/>
-			<Textarea
-				title={__("Popup title sending verification", "user-verification")}
-				subtitle={__(
-					'Show custom for "sending verification"',
-					"user-verification"
-				)}
-				val={val.title_sending_verification}
-				update={updateTitleSendingVerification}
-			/>
-			<Textarea
-				title={__("Captcha error message", "user-verification")}
-				subtitle={__(
-					"Show custom message when captcha error occurred.",
-					"user-verification"
-				)}
-				val={val.captcha_error}
-				update={updateCaptchaError}
-			/>
-			<Textarea
-				title={__("OTP sent success message", "user-verification")}
-				subtitle={__(
-					"Show custom message when OTP sent successfully.",
-					"user-verification"
-				)}
-				val={val.otp_sent_success}
-				update={updateOtpSentSuccess}
-			/>
-			<Textarea
-				title={__("OTP error message", "user-verification")}
-				subtitle={__(
-					"Show custom message when OTP sending error occured.",
-					"user-verification"
-				)}
-				val={val.otp_sent_error}
-				update={updateOtpSentError}
-			/>
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Registration success message", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.registration_success}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							registration_success: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Verification successful", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.verification_success}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							verification_success: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Verification fail", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.verification_fail}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							verification_fail: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Please wait text", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.please_wait}
+					onChange={(newVal) => {
+						var optionsX = { ...options, please_wait: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Mail instruction text", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.mail_instruction}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							mail_instruction: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Redirect after verify text", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.redirect_after_verify}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							redirect_after_verify: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Not redirect text", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.not_redirect}
+					onChange={(newVal) => {
+						var optionsX = { ...options, not_redirect: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Popup title checking verification", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.title_checking_verification}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							title_checking_verification: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Popup title sending verification", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.title_sending_verification}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							title_sending_verification: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("Captcha error message", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.captcha_error}
+					onChange={(newVal) => {
+						var optionsX = { ...options, captcha_error: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("OTP sent success message", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.otp_sent_success}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							otp_sent_success: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+			<div className="flex flex-col">
+				<label htmlFor="" className="font-medium text-base mb-2">
+					{__("OTP error message", "user-verification")}
+				</label>
+				<textarea
+					className="flex-1 text-[12px]"
+					value={options?.otp_sent_error}
+					onChange={(newVal) => {
+						var optionsX = { ...options, otp_sent_error: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
 		</div>
 	);
-};
+}
 
-export default ErrorMessage;
+class EmailVerification extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { showWarning: true };
+		this.handleToggleClick = this.handleToggleClick.bind(this);
+	}
+	handleToggleClick() {
+		this.setState((state) => ({
+			showWarning: !state.showWarning,
+		}));
+	}
+	render() {
+		var { onChange, options } = this.props;
+		return (
+			<Html
+				onChange={onChange}
+				options={options}
+				warn={this.state.showWarning}
+			/>
+		);
+	}
+}
+export default EmailVerification;

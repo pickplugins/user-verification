@@ -8,7 +8,9 @@ import { useEffect, useState } from "@wordpress/element";
 import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
+import EmailOtp from "./EmailOtp";
 import EmailVerification from "./EmailVerification";
+import ErrorMessage from "./ErrorMessage";
 
 function Html(props) {
 	if (!props.warn) {
@@ -32,6 +34,62 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
+		{
+			name: "tabEmailOTP",
+			title: "Email OTP",
+			icon: settings,
+			className: "tab-tabEmailOTP",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "tabIsSpammy",
+			title: "IsSpammy Protection",
+			icon: settings,
+			className: "tab-tabIsSpammy",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "tabSpam",
+			title: "Spam Protection",
+			icon: settings,
+			className: "tab-tabSpam",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "tabEmailTemplates",
+			title: "Email Templates",
+			icon: settings,
+			className: "tab-tabEmailTemplates",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "tabreCAPTCHA",
+			title: "reCAPTCHA",
+			icon: settings,
+			className: "tab-tabreCAPTCHA",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "tabTools",
+			title: "Tools",
+			icon: settings,
+			className: "tab-tabTools",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "tabHelp",
+			title: "Help & support",
+			icon: settings,
+			className: "tab-tabHelp",
+			hidden: false,
+			isPro: false,
+		},
 	]);
 
 	// var [isProFeature, setisProFeature] = useState(
@@ -52,7 +110,6 @@ function Html(props) {
 			method: "POST",
 			data: { option: "user_verification_settings" },
 		}).then((res) => {
-
 			if (res.length != 0) {
 				var resX = { ...res };
 
@@ -147,19 +204,19 @@ function Html(props) {
 			)
 				.toString()
 				.padStart(2, "0")}-${currentDate
-					.getDate()
-					.toString()
-					.padStart(2, "0")}`;
+				.getDate()
+				.toString()
+				.padStart(2, "0")}`;
 			const formattedTime = `${currentDate
 				.getHours()
 				.toString()
 				.padStart(2, "0")}${currentDate
-					.getMinutes()
-					.toString()
-					.padStart(2, "0")}${currentDate
-						.getSeconds()
-						.toString()
-						.padStart(2, "0")}`;
+				.getMinutes()
+				.toString()
+				.padStart(2, "0")}${currentDate
+				.getSeconds()
+				.toString()
+				.padStart(2, "0")}`;
 			const filename = `combo-blocks-setting-${formattedDate}-${formattedTime}.json`;
 			download(filename, JSON.stringify(optionDataX, null, 2));
 		};
@@ -173,16 +230,13 @@ function Html(props) {
 	}
 
 	function onChangeEmailVerification(options) {
-console.log("first")
-		var optionDataX = { ...optionData, email_verification: options }
+		var optionDataX = { ...optionData, email_verification: options };
 		setoptionData(optionDataX);
-
 	}
-
-
-
-
-
+	function onChangeErrorMessages(options) {
+		var optionDataX = { ...optionData, messages: options };
+		setoptionData(optionDataX);
+	}
 
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
@@ -264,7 +318,7 @@ console.log("first")
 							</div>
 						</div>
 					</div>
-					{JSON.stringify(optionData.email_verification)}
+					{JSON.stringify(optionData.email_otp)}
 					<div id="" className="pg-setting-input-text  ">
 						<PGtabs
 							activeTab="tabEmailVerification"
@@ -280,78 +334,26 @@ console.log("first")
 									{__("Combo Blocks", "user-verification")}
 								</div>
 							</PGtab>
+							<PGtab name="tabEmailOTP">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<EmailOtp
+										options={optionData.email_otp}
+										onChange={onChangeEmailVerification}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="tabEmailVerification">
 								<div className="flex mb-5  justify-start gap-2 items-center ">
 									<EmailVerification
 										options={optionData.email_verification}
-										onChange={() => onChangeEmailVerification()}
+										onChange={onChangeEmailVerification}
 									/>
 								</div>
-
-								<div className="text-2xl font-bold mb-2">
-									{__("Email verification", "user-verification")}
-								</div>
-								<p className="text-base mb-7">
-									{__(
-										"Customize options for email verification.",
-										"user-verification"
-									)}
-								</p>
 								<div className="flex mb-5  justify-start gap-2 items-center ">
-									{/* <ErrorMessage
-								val={optionData.messages}
-								updateActivationSent={(e) => {
-									updateErrorMessage("activation_sent", e.target.value);
-								}}
-								updateCaptchaError={(e) => {
-									updateErrorMessage("captcha_error", e.target.value);
-								}}
-								updateInvalidKey={(e) => {
-									updateErrorMessage("invalid_key", e.target.value);
-								}}
-								updateMailInstruction={(e) => {
-									updateErrorMessage("mail_instruction", e.target.value);
-								}}
-								updateNotRedirect={(e) => {
-									updateErrorMessage("not_redirect", e.target.value);
-								}}
-								updateOtpSentError={(e) => {
-									updateErrorMessage("otp_sent_error", e.target.value);
-								}}
-								updateOtpSentSuccess={(e) => {
-									updateErrorMessage("otp_sent_success", e.target.value);
-								}}
-								updatePleaseWait={(e) => {
-									updateErrorMessage("please_wait", e.target.value);
-								}}
-								updateRedirectAfterVerify={(e) => {
-									updateErrorMessage("redirect_after_verify", e.target.value);
-								}}
-								updateRegistrationSuccess={(e) => {
-									updateErrorMessage("registration_success", e.target.value);
-								}}
-								updateTitleCheckingVerification={(e) => {
-									updateErrorMessage(
-										"title_checking_verification",
-										e.target.value
-									);
-								}}
-								updateTitleSendingVerification={(e) => {
-									updateErrorMessage(
-										"title_sending_verification",
-										e.target.value
-									);
-								}}
-								updateVerificationFail={(e) => {
-									updateErrorMessage("verification_fail", e.target.value);
-								}}
-								updateVerificationSuccess={(e) => {
-									updateErrorMessage("verification_success", e.target.value);
-								}}
-								updateVerifyEmail={(e) => {
-									updateErrorMessage("verify_email", e.target.value);
-								}}
-							/> */}
+									<ErrorMessage
+										options={optionData.messages}
+										onChange={onChangeErrorMessages}
+									/>
 								</div>
 							</PGtab>
 
