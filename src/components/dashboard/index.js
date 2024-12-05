@@ -9,20 +9,13 @@ import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
 import EmailVerification from "./EmailVerification";
-import ErrorMessage from "./ErrorMessage";
 
 function Html(props) {
 	if (!props.warn) {
 		return null;
 	}
-	var [dataLoaded, setdataLoaded] = useState(false); // Using the hook.
-	var [debounce, setDebounce] = useState(null); // Using the hook.
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
-	var [colorPopup, setcolorPopup] = useState(null); // Using the hook.
-	var [license, setlicense] = useState(null); // Using the hook.
 	var [needSave, setneedSave] = useState(false); // Using the hook.
-	var [licenseError, setlicenseError] = useState(null); // Using the hook.
-	var [licenseCheckedData, setlicenseCheckedData] = useState(null); // Using the hook.
 
 	var isProFeature = applyFilters("isProFeature", true);
 	var optionDataDefault = {
@@ -32,10 +25,10 @@ function Html(props) {
 	var [optionDataSaved, setoptionDataSaved] = useState({}); // Using the hook.
 	var [dashboardTabs, setdashboardTabs] = useState([
 		{
-			name: "general",
-			title: "General",
+			name: "tabEmailVerification",
+			title: "Email Verification",
 			icon: settings,
-			className: "tab-general",
+			className: "tab-tabEmailVerification",
 			hidden: false,
 			isPro: false,
 		},
@@ -59,16 +52,16 @@ function Html(props) {
 			method: "POST",
 			data: { option: "user_verification_settings" },
 		}).then((res) => {
-			console.log(res);
 
-			setisLoading(false);
-			setdataLoaded(true);
 			if (res.length != 0) {
 				var resX = { ...res };
+
+				console.log(resX);
 
 				setoptionDataSaved(resX);
 				setoptionData(resX);
 			}
+			setisLoading(false);
 		});
 	}, []);
 	useEffect(() => {
@@ -154,19 +147,19 @@ function Html(props) {
 			)
 				.toString()
 				.padStart(2, "0")}-${currentDate
-				.getDate()
-				.toString()
-				.padStart(2, "0")}`;
+					.getDate()
+					.toString()
+					.padStart(2, "0")}`;
 			const formattedTime = `${currentDate
 				.getHours()
 				.toString()
 				.padStart(2, "0")}${currentDate
-				.getMinutes()
-				.toString()
-				.padStart(2, "0")}${currentDate
-				.getSeconds()
-				.toString()
-				.padStart(2, "0")}`;
+					.getMinutes()
+					.toString()
+					.padStart(2, "0")}${currentDate
+						.getSeconds()
+						.toString()
+						.padStart(2, "0")}`;
 			const filename = `combo-blocks-setting-${formattedDate}-${formattedTime}.json`;
 			download(filename, JSON.stringify(optionDataX, null, 2));
 		};
@@ -179,188 +172,143 @@ function Html(props) {
 		);
 	}
 
-	var unitArgs = {
-		px: { label: "PX", value: "px" },
-		em: { label: "EM", value: "em" },
-		rem: { label: "REM", value: "rem" },
-		auto: { label: "AUTO", value: "auto" },
-		"%": { label: "%", value: "%" },
-		cm: { label: "CM", value: "cm" },
-		mm: { label: "MM", value: "mm" },
-		in: { label: "IN", value: "in" },
-		pt: { label: "PT", value: "pt" },
-		pc: { label: "PC", value: "pc" },
-		ex: { label: "EX", value: "ex" },
-		ch: { label: "CH", value: "ch" },
-		vw: { label: "VW", value: "vw" },
-		vh: { label: "VH", value: "vh" },
-		vmin: { label: "VMIN", value: "vmin" },
-		vmax: { label: "VMAX", value: "vmax" },
-	};
+	function onChangeEmailVerification(options) {
 
-	const updateEmailVerification = (key, value) => {
-		setoptionData({
-			...optionData,
-			email_verification: {
-				...optionData.email_verification, // Keep the existing keys
-				[key]: value, // Update the specific field
-			},
-		});
-	};
-	const updateErrorMessage = (key, value) => {
-		setoptionData({
-			...optionData,
-			messages: {
-				...optionData.messages, // Keep the existing keys
-				[key]: value, // Update the specific field
-			},
-		});
-	};
-	const handleExcludeUserRolesChange = (newVal) => {
-		const values = newVal.map((option) => option.value);
-		console.log(values);
-		updateEmailVerification("exclude_user_roles", values);
-	};
+		var optionDataX = { ...optionData, email_verification: options }
+		setoptionData(optionDataX);
 
-	// ! hello
+	}
+
+
+
+
+
+
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
-			<div className="bg-gray-300 text-white py-5 p-3">
-				<div className="flex gap-3 justify-center items-center flex-wrap lg:justify-between">
-					<div className="flex justify-center flex-wrap  md:justify-between  ">
-						<div className=" flex  items-center flex-wrap gap-4 md:flex-nowrap md:justify-between md:gap-6 ">
-							<div className=" flex gap-4 w-full items-center md:w-auto ">
-								<span className="flex flex-col w-max">
-									<span className="text-[32px] md:text-[36px] lg:text-[40px] leading-[32px] md:leading-[36px] lg:leading-[40px] font-extrabold text-white whitespace-nowrap ">
-										{__("User Verification", "user-verification")}
-									</span>
-								</span>
+
+			{isLoading && (
+
+				<Spinner />
+
+			)}
+
+			{!isLoading && (
+
+				<>
+
+					<div className="bg-gray-300 text-white py-5 p-3">
+						<div className="flex gap-3 justify-center items-center flex-wrap lg:justify-between">
+							<div className="flex justify-center flex-wrap  md:justify-between  ">
+								<div className=" flex  items-center flex-wrap gap-4 md:flex-nowrap md:justify-between md:gap-6 ">
+									<div className=" flex gap-4 w-full items-center md:w-auto ">
+										<span className="flex flex-col w-max">
+											<span className="text-[32px] md:text-[36px] lg:text-[40px] leading-[32px] md:leading-[36px] lg:leading-[40px] font-extrabold text-white whitespace-nowrap ">
+												{__("User Verification", "user-verification")}
+											</span>
+										</span>
+									</div>
+									<div className="flex items-center flex-wrap gap-5 md:gap-4 ">
+										{isProFeature && (
+											<>
+												<a
+													href="https://comboblocks.com/pricing/?utm_source=CBDashboard&utm_medium=topNav&utm_campaign=CBPro"
+													target="_blank"
+													className="bg-amber-500 text-[16px] font-bold no-underline rounded-sm p-2 px-4 whitespace-nowrap cursor-pointer text-white lg:text-lg ">
+													{__("Buy Pro", "user-verification")}
+												</a>
+											</>
+										)}
+										{isLoading && (
+											<span className="">
+												<Spinner />
+											</span>
+										)}
+									</div>
+								</div>
 							</div>
-							<div className="flex items-center flex-wrap gap-5 md:gap-4 ">
-								{isProFeature && (
-									<>
-										<a
-											href="https://comboblocks.com/pricing/?utm_source=CBDashboard&utm_medium=topNav&utm_campaign=CBPro"
-											target="_blank"
-											className="bg-amber-500 text-[16px] font-bold no-underline rounded-sm p-2 px-4 whitespace-nowrap cursor-pointer text-white lg:text-lg ">
-											{__("Buy Pro", "user-verification")}
-										</a>
-									</>
-								)}
-								{isLoading && (
-									<span className="">
-										<Spinner />
-									</span>
-								)}
+							<div className=" flex w-full lg:w-auto">
+								<div className="flex gap-2 items-center flex-wrap ">
+									<a
+										href="https://pickplugins.com/create-support-ticket/"
+										target="_blank"
+										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ">
+										{__("Create Support", "user-verification")}
+									</a>
+									<a
+										href="https://comboblocks.com/documentations/"
+										target="_blank"
+										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white   hover:text-white ">
+										{__("Documentation", "user-verification")}
+									</a>
+									<button
+										className="bg-amber-500 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white "
+										onClick={(ev) => {
+											// resetOptionData();
+											handleAlertConfirmation();
+										}}>
+										{__("Reset", "user-verification")}
+									</button>
+									<div
+										className="bg-green-700 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white flex items-center"
+										onClick={(ev) => {
+											updateOption();
+										}}>
+										{isLoading && (
+											<span className="">
+												<Spinner />
+											</span>
+										)}
+
+										<span>{__("Save", "user-verification")}</span>
+										{needSave && (
+											<span className="w-5 inline-block h-5 ml-3 rounded-xl text-center bg-red-500">
+												!
+											</span>
+										)}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div className=" flex w-full lg:w-auto">
-						<div className="flex gap-2 items-center flex-wrap ">
-							<a
-								href="https://pickplugins.com/create-support-ticket/"
-								target="_blank"
-								className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ">
-								{__("Create Support", "user-verification")}
-							</a>
-							<a
-								href="https://comboblocks.com/documentations/"
-								target="_blank"
-								className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white   hover:text-white ">
-								{__("Documentation", "user-verification")}
-							</a>
-							<button
-								className="bg-amber-500 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white "
-								onClick={(ev) => {
-									// resetOptionData();
-									handleAlertConfirmation();
-								}}>
-								{__("Reset", "user-verification")}
-							</button>
-							<div
-								className="bg-green-700 rounded-sm text-md p-2 px-4 cursor-pointer pg-font text-white flex items-center"
-								onClick={(ev) => {
-									updateOption();
-								}}>
-								{isLoading && (
-									<span className="">
-										<Spinner />
-									</span>
-								)}
+					<div id="" className="pg-setting-input-text  ">
+						<PGtabs
+							activeTab="tabEmailVerification"
+							orientation="vertical"
+							contentClass=" p-5 bg-white w-full"
+							navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500"
+							navItemSelectedClass="bg-gray-700"
+							activeClass="active-tab"
+							onSelect={(tabName) => { }}
+							tabs={dashboardTabs}>
+							<PGtab name="overview">
+								<div className="flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font ">
+									{__("Combo Blocks", "user-verification")}
+								</div>
+							</PGtab>
+							<PGtab name="tabEmailVerification">
 
-								<span>{__("Save", "user-verification")}</span>
-								{needSave && (
-									<span className="w-5 inline-block h-5 ml-3 rounded-xl text-center bg-red-500">
-										!
-									</span>
-								)}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			{JSON.stringify(optionData)}
-			<div id="" className="pg-setting-input-text  ">
-				<PGtabs
-					activeTab="disableBlocks"
-					orientation="vertical"
-					contentClass=" p-5 bg-white w-full"
-					navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500"
-					navItemSelectedClass="bg-gray-700"
-					activeClass="active-tab"
-					onSelect={(tabName) => {}}
-					tabs={dashboardTabs}>
-					<PGtab name="overview">
-						<div className="flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font ">
-							{__("Combo Blocks", "user-verification")}
-						</div>
-					</PGtab>
-					<PGtab name="general">
-						<div className="text-2xl font-bold mb-2">
-							{__("Email verification", "user-verification")}
-						</div>
-						<p className="text-base mb-7">
-							{__(
-								"Customize options for email verification.",
-								"user-verification"
-							)}
-						</p>
-						<div className="flex mb-5  justify-start gap-2 items-center ">
-							<EmailVerification
-								val={optionData.email_verification}
-								updateEnable={(newVal) => {
-									updateEmailVerification("enable", newVal);
-								}}
-								updateEmailReverify={(newVal) => {
-									updateEmailVerification("email_update_reverify", newVal);
-								}}
-								updateVerificationPageId={(newVal) => {
-									updateEmailVerification("verification_page_id", newVal);
-								}}
-								updateRedirectAfterVerification={(newVal) => {
-									updateEmailVerification(
-										"redirect_after_verification",
-										newVal
-									);
-								}}
-								updateLoginAfterVerification={(newVal) => {
-									updateEmailVerification("login_after_verification", newVal);
-								}}
-								updateExcludeUserRoles={handleExcludeUserRolesChange}
-							/>
-						</div>
+								<div className="flex mb-5  justify-start gap-2 items-center ">
 
-						<div className="text-2xl font-bold mb-2">
-							{__("Email verification", "user-verification")}
-						</div>
-						<p className="text-base mb-7">
-							{__(
-								"Customize options for email verification.",
-								"user-verification"
-							)}
-						</p>
-						<div className="flex mb-5  justify-start gap-2 items-center ">
-							<ErrorMessage
+									<EmailVerification
+										options={optionData.email_verification}
+										onChange={onChangeEmailVerification}
+									/>
+
+
+								</div>
+
+								<div className="text-2xl font-bold mb-2">
+									{__("Email verification", "user-verification")}
+								</div>
+								<p className="text-base mb-7">
+									{__(
+										"Customize options for email verification.",
+										"user-verification"
+									)}
+								</p>
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									{/* <ErrorMessage
 								val={optionData.messages}
 								updateActivationSent={(e) => {
 									updateErrorMessage("activation_sent", e.target.value);
@@ -413,70 +361,74 @@ function Html(props) {
 								updateVerifyEmail={(e) => {
 									updateErrorMessage("verify_email", e.target.value);
 								}}
-							/>
-						</div>
-					</PGtab>
+							/> */}
+								</div>
+							</PGtab>
 
-					<PGtab name="export/import">
-						<div>
-							<div className="text-2xl font-bold mb-7">
-								{__("Export/Import Settings", "user-verification")}
-							</div>
-							<div className="flex gap-4">
-								<h3 className="text-lg w-[300px] m-0">
-									{__("Import", "user-verification")}
-								</h3>
-								<div className="flex flex-col gap-4 items-start ">
-									<p className="!m-0 ">
-										{__(
-											"Please select the data file to import",
-											"user-verification"
-										)}
-										:{" "}
-									</p>
-									<div className="flex items-start">
-										<div className="flex flex-col">
-											<input
-												type="file"
-												name=""
-												id=""
-												accept=".json"
-												onChange={handleFileChange}
-											/>
-											<p className="text-[#ec942c] text-xs ">
-												{__("Supported file type", "user-verification")}: .json
+							<PGtab name="export/import">
+								<div>
+									<div className="text-2xl font-bold mb-7">
+										{__("Export/Import Settings", "user-verification")}
+									</div>
+									<div className="flex gap-4">
+										<h3 className="text-lg w-[300px] m-0">
+											{__("Import", "user-verification")}
+										</h3>
+										<div className="flex flex-col gap-4 items-start ">
+											<p className="!m-0 ">
+												{__(
+													"Please select the data file to import",
+													"user-verification"
+												)}
+												:{" "}
 											</p>
+											<div className="flex items-start">
+												<div className="flex flex-col">
+													<input
+														type="file"
+														name=""
+														id=""
+														accept=".json"
+														onChange={handleFileChange}
+													/>
+													<p className="text-[#ec942c] text-xs ">
+														{__("Supported file type", "user-verification")}: .json
+													</p>
+												</div>
+												<div>
+													<button
+														className="pg-font flex gap-2 justify-center cursor-pointer py-2 px-4 capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-700"
+														onClick={handleImport}>
+														{importStatus === "run" ? "Importing..." : "Import"}
+													</button>
+													{importStatus === "stop" && (
+														<p className="text-emerald-500 m-0 ">
+															{__("Imported", "user-verification")}
+														</p>
+													)}
+												</div>
+											</div>
 										</div>
-										<div>
-											<button
-												className="pg-font flex gap-2 justify-center cursor-pointer py-2 px-4 capitalize bg-gray-700 text-white font-medium rounded hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-700"
-												onClick={handleImport}>
-												{importStatus === "run" ? "Importing..." : "Import"}
-											</button>
-											{importStatus === "stop" && (
-												<p className="text-emerald-500 m-0 ">
-													{__("Imported", "user-verification")}
-												</p>
-											)}
+									</div>
+									<div className="flex gap-4">
+										<h3 className="text-lg w-[300px] m-0 ">
+											{__("Export", "user-verification")}
+										</h3>
+										<div className="flex gap-4 items-center ">
+											<p className="!m-0 ">
+												{__("Export settings", "user-verification")}:{" "}
+											</p>
+											<ExportButton />
 										</div>
 									</div>
 								</div>
-							</div>
-							<div className="flex gap-4">
-								<h3 className="text-lg w-[300px] m-0 ">
-									{__("Export", "user-verification")}
-								</h3>
-								<div className="flex gap-4 items-center ">
-									<p className="!m-0 ">
-										{__("Export settings", "user-verification")}:{" "}
-									</p>
-									<ExportButton />
-								</div>
-							</div>
-						</div>
-					</PGtab>
-				</PGtabs>
-			</div>
+							</PGtab>
+						</PGtabs>
+					</div>
+				</>
+
+			)}
+
 		</div>
 	);
 }
