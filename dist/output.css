@@ -296,10 +296,6 @@
   width: 8rem;
 }
 
-.w-40 {
-  width: 10rem;
-}
-
 .w-5 {
   width: 1.25rem;
 }
@@ -340,6 +336,14 @@
   width: 30px;
 }
 
+.w-\[400px\] {
+  width: 400px;
+}
+
+.w-\[800px\] {
+  width: 800px;
+}
+
 .w-\[95\%\] {
   width: 95%;
 }
@@ -357,20 +361,12 @@
   width: max-content;
 }
 
-.w-96 {
-  width: 24rem;
-}
-
-.w-\[800px\] {
-  width: 800px;
-}
-
-.w-\[400px\] {
-  width: 400px;
-}
-
 .max-w-\[350px\] {
   max-width: 350px;
+}
+
+.max-w-\[400px\] {
+  max-width: 400px;
 }
 
 .max-w-\[calc\(100\%_-_50px\)\] {
@@ -481,6 +477,12 @@
 
 .gap-5 {
   gap: 1.25rem;
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-3 > :not([hidden]) ~ :not([hidden]) {
@@ -757,8 +759,9 @@
   padding: 1.25rem;
 }
 
-.\!p-2 {
-  padding: 0.5rem !important;
+.\!py-1 {
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
 }
 
 .\!py-2 {
@@ -809,11 +812,6 @@
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
-}
-
-.\!py-1 {
-  padding-top: 0.25rem !important;
-  padding-bottom: 0.25rem !important;
 }
 
 .pb-1 {
