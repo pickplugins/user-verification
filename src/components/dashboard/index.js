@@ -8,6 +8,7 @@ import { useEffect, useState } from "@wordpress/element";
 import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
+import EmailOtp from "./EmailOtp";
 import EmailVerification from "./EmailVerification";
 import ErrorMessage from "./ErrorMessage";
 
@@ -36,6 +37,14 @@ function Html(props) {
 			title: "General",
 			icon: settings,
 			className: "tab-general",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "emailOtp",
+			title: "Email OTP",
+			icon: settings,
+			className: "tab-email-otp",
 			hidden: false,
 			isPro: false,
 		},
@@ -216,11 +225,28 @@ function Html(props) {
 			},
 		});
 	};
-	const handleExcludeUserRolesChange = (newVal) => {
-		const values = newVal.map((option) => option.value);
-		console.log(values);
-		updateEmailVerification("exclude_user_roles", values);
+	const handleEmailVerificationUpdate = (key, value) => {
+		// updateEmailVerification(key, value);
+		setoptionData({
+			...optionData,
+			email_verification: {
+				...optionData.email_verification, // Keep the existing keys
+				[key]: value, // Update the specific field
+			},
+		});
 	};
+	const handleEmailOTPUpdate = (key, value) => {
+		// updateEmailVerification(key, value);
+		setoptionData({
+			...optionData,
+			email_otp: {
+				...optionData.email_otp, // Keep the existing keys
+				[key]: value, // Update the specific field
+			},
+		});
+	};
+
+	console.log(optionData.email_otp);
 
 	// ! hello
 	return (
@@ -315,6 +341,18 @@ function Html(props) {
 							{__("Combo Blocks", "user-verification")}
 						</div>
 					</PGtab>
+					<PGtab name="emailOtp">
+						<div className="text-2xl font-bold mb-2">
+							{__("Email OTP", "user-verification")}
+						</div>
+						<p className="text-base mb-7">
+							{__("Customize options for email OTP.", "user-verification")}
+						</p>
+						<EmailOtp
+							val={optionData.email_otp}
+							update={handleEmailOTPUpdate}
+						/>
+					</PGtab>
 					<PGtab name="general">
 						<div className="text-2xl font-bold mb-2">
 							{__("Email verification", "user-verification")}
@@ -326,7 +364,7 @@ function Html(props) {
 							)}
 						</p>
 						<div className="flex mb-5  justify-start gap-2 items-center ">
-							<EmailVerification
+							{/* <EmailVerification
 								val={optionData.email_verification}
 								updateEnable={(newVal) => {
 									updateEmailVerification("enable", newVal);
@@ -347,6 +385,10 @@ function Html(props) {
 									updateEmailVerification("login_after_verification", newVal);
 								}}
 								updateExcludeUserRoles={handleExcludeUserRolesChange}
+							/> */}
+							<EmailVerification
+								val={optionData.email_verification}
+								update={handleEmailVerificationUpdate}
 							/>
 						</div>
 
