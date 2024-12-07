@@ -29,7 +29,7 @@ function Html(props) {
 	return (
 		<div className="w-[800px]">
 			<div className="text-2xl font-bold mb-2">
-				{__("isspammy.com Integration", "user-verification")}
+				{__("IsSpammy.com Integration", "user-verification")}
 			</div>
 			<p className="text-base mb-7">
 				{__("Enable integration with", "user-verification")}{" "}

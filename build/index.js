@@ -4320,7 +4320,7 @@ function Html(props) {
     className: "w-[800px]"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl font-bold mb-2"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("isspammy.com Integration", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("IsSpammy.com Integration", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
     className: "text-base mb-7"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Enable integration with", "user-verification"), " ", (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
     href: "http://isspammy.com/"
@@ -5153,6 +5153,13 @@ function Html(props) {
   var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
+    name: "overview",
+    title: "Overview",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_16__["default"],
+    className: "tab-overview",
+    hidden: false,
+    isPro: false
+  }, {
     name: "tabEmailVerification",
     title: "Email Verification",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_16__["default"],
@@ -5168,7 +5175,7 @@ function Html(props) {
     isPro: false
   }, {
     name: "tabIsSpammy",
-    title: "IsSpammy Protection",
+    title: "IsSpammy",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_16__["default"],
     className: "tab-tabIsSpammy",
     hidden: false,
@@ -5199,6 +5206,20 @@ function Html(props) {
     title: "Tools",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_16__["default"],
     className: "tab-tabTools",
+    hidden: false,
+    isPro: false
+  }, {
+    name: "magicLogin",
+    title: "Magic Login",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_16__["default"],
+    className: "tab-magicLogin",
+    hidden: false,
+    isPro: false
+  }, {
+    name: "emailValidation",
+    title: "Email Validation",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_16__["default"],
+    className: "tab-emailValidation",
     hidden: false,
     isPro: false
   }, {
@@ -5403,11 +5424,7 @@ function Html(props) {
     className: "text-[32px] md:text-[36px] lg:text-[40px] leading-[32px] md:leading-[36px] lg:leading-[40px] font-extrabold text-white whitespace-nowrap "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("User Verification", "user-verification")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex items-center flex-wrap gap-5 md:gap-4 "
-  }, isProFeature && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "https://comboblocks.com/pricing/?utm_source=CBDashboard&utm_medium=topNav&utm_campaign=CBPro",
-    target: "_blank",
-    className: "bg-amber-500 text-[16px] font-bold no-underline rounded-sm p-2 px-4 whitespace-nowrap cursor-pointer text-white lg:text-lg "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Buy Pro", "user-verification"))), isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
+  }, isLoading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
     className: ""
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Spinner, null))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: " flex w-full lg:w-auto"
@@ -5440,9 +5457,10 @@ function Html(props) {
     id: "",
     className: "pg-setting-input-text  "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "tabEmailVerification",
+    activeTab: "overview",
     orientation: "vertical",
     contentClass: " p-5 bg-white w-full",
+    navItemsWrapClass: "block w-[300px]",
     navItemClass: "bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500",
     navItemSelectedClass: "bg-gray-700",
     activeClass: "active-tab",
@@ -5451,8 +5469,58 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "overview"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font "
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Combo Blocks", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: ""
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "grid grid-cols-4 gap-5 text-white"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-blue-800\t p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Verify Emaill Sent"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-blue-800\t p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Emaill Verified"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-blue-800\t p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Email OTP Sent"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-blue-800\t p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Total Spam Blocked"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-indigo-800 p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Comment Spam"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-violet-800 p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Login Spam"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-fuchsia-800 p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Registration Spam"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "bg-fuchsia-800 p-5 text-center space-y-3"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-xl"
+  }, "Cooment Spam Report"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl"
+  }, "1236"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "tabHelp"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
@@ -6121,16 +6189,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
 
 const {
   Component,
   RawHTML,
   useState
 } = wp.element;
-
 
 function MyFunction(props) {
   if (!props.warn) {
@@ -6140,6 +6205,8 @@ function MyFunction(props) {
   var contentClass = props.contentClass == undefined ? "py-3" : props.contentClass;
   var navItemClass = props.navItemClass == undefined ? "bg-gray-200" : props.navItemClass;
   var navItemSelectedClass = props.navItemSelectedClass == undefined ? "!bg-gray-400" : props.navItemSelectedClass;
+  var navItemsWrapClassDef = orientation == "vertical" ? "block w-[200px] " : "flex overflow-hidden tabsNavs cursor-move ";
+  var navItemsWrapClass = props.navItemsWrapClass == undefined ? navItemsWrapClassDef : props.navItemsWrapClass;
   const [selected, setSelected] = useState(props.activeTab);
   const [scrollTo, setscrollTo] = useState(200);
   var content;
@@ -6180,9 +6247,7 @@ function MyFunction(props) {
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: orientation == "vertical" ? "flex tabsWrapper" : "relative tabsWrapper"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "relative"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: orientation == "vertical" ? "block w-[200px] " : "flex overflow-hidden  tabsNavs cursor-move ",
+    className: navItemsWrapClass,
     onWheel: onWheel
   }, props.tabs.map(tab => {
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6193,7 +6258,7 @@ function MyFunction(props) {
       }
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: `flex ${orientation == "vertical" ? "" : "flex-col"} justify-center items-center`
-    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_1__["default"], {
       fill: "#404040",
       icon: tab.icon,
       size: 24
@@ -6221,7 +6286,7 @@ function MyFunction(props) {
   // 		<Icon fill="#333" icon={chevronRight} />
   // 	</div>
   // </div>
-  ), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  , (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: `tabContent  ${contentClass}`
   }, content));
 }
@@ -6244,6 +6309,7 @@ class PGtabs extends Component {
       orientation,
       activeClass,
       contentClass,
+      navItemsWrapClass,
       navItemClass,
       navItemSelectedClass,
       onSelect,
@@ -6259,6 +6325,7 @@ class PGtabs extends Component {
       navItemSelectedClass: navItemSelectedClass,
       onSelect: onSelect,
       activeTab: activeTab,
+      navItemsWrapClass: navItemsWrapClass,
       warn: this.state.showWarning
     }));
   }
