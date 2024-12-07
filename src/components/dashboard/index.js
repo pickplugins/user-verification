@@ -9,8 +9,13 @@ import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
 import EmailOtp from "./EmailOtp";
+import EmailTemplates from "./EmailTemplates";
 import EmailVerification from "./EmailVerification";
 import ErrorMessage from "./ErrorMessage";
+import IsSpammy from "./IsSpammy";
+import ReCaptcha from "./reCaptcha";
+import SpamProtection from "./SpamProtection";
+import Tools from "./Tools";
 
 function Html(props) {
 	if (!props.warn) {
@@ -233,6 +238,30 @@ function Html(props) {
 		var optionDataX = { ...optionData, email_verification: options };
 		setoptionData(optionDataX);
 	}
+	function onChangeIsSpammy(options) {
+		var optionDataX = { ...optionData, isspammy: options };
+		setoptionData(optionDataX);
+	}
+	function onChangeEmailOTP(options) {
+		var optionDataX = { ...optionData, email_otp: options };
+		setoptionData(optionDataX);
+	}
+	function onChangeReCaptcha(options) {
+		var optionDataX = { ...optionData, recaptcha: options };
+		setoptionData(optionDataX);
+	}
+	function onChangeTools(options) {
+		var optionDataX = { options };
+		setoptionData(optionDataX);
+	}
+	function onChangeEmailTemplates(options) {
+		var optionDataX = { options };
+		setoptionData(optionDataX);
+	}
+	function onChangeSpamProtection(options) {
+		var optionDataX = { ...optionData, spam_protection: options };
+		setoptionData(optionDataX);
+	}
 	function onChangeErrorMessages(options) {
 		var optionDataX = { ...optionData, messages: options };
 		setoptionData(optionDataX);
@@ -318,7 +347,6 @@ function Html(props) {
 							</div>
 						</div>
 					</div>
-					{JSON.stringify(optionData.email_otp)}
 					<div id="" className="pg-setting-input-text  ">
 						<PGtabs
 							activeTab="tabEmailVerification"
@@ -334,11 +362,106 @@ function Html(props) {
 									{__("Combo Blocks", "user-verification")}
 								</div>
 							</PGtab>
+							<PGtab name="tabHelp">
+								<div className="">
+									<div className="text-2xl font-bold mb-2">
+										{__("Get support", "user-verification")}
+									</div>
+									<p className="text-base mb-7">
+										{__(
+											"Use following to get help and support from our expert team.",
+											"user-verification"
+										)}
+									</p>
+									<div className="mb-4">
+										<div className="text-[14px]">Ask question</div>
+										<p>
+											Ask question for free on our forum and get quick reply from
+											our expert team members.
+										</p>
+										<a
+											className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+											href="https://www.pickplugins.com/create-support-ticket/">
+											Create support ticket
+										</a>
+									</div>
+									<p>Read our documentation before asking your question.</p>
+									<a
+										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+										href="https://pickplugins.com/documentation/user-verification/">
+										Documentation
+									</a>
+									<p>Watch video tutorials.</p>
+									<a
+										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+										href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bJmrpEqtjsj9nnR6jiKTDt">
+										Watch video tutorials.
+									</a>
+									<p>Submit reviews</p>
+									<p>
+										We wish your 2 minutes to write your feedback about the Post
+										Grid plugin.
+									</p>
+									<p>
+										give us{" "}
+										<span className="text-[#ffae19]">
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+											<i class="fas fa-star"></i>
+										</span>
+									</p>
+									<a
+										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+										href="https://wordpress.org/support/plugin/user-verification/reviews/#new-post">
+										<i className="fab fa-wordpress"></i>
+										Write a review
+									</a>
+								</div>
+							</PGtab>
+							<PGtab name="tabEmailTemplates">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<EmailTemplates
+										options={optionData}
+										onChange={onChangeEmailTemplates}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="tabTools">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<Tools options={optionData} onChange={onChangeTools} />
+								</div>
+							</PGtab>
+							<PGtab name="tabreCAPTCHA">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<ReCaptcha
+										options={optionData.recaptcha}
+										onChange={onChangeReCaptcha}
+									/>
+								</div>
+							</PGtab>
 							<PGtab name="tabEmailOTP">
 								<div className="flex mb-5  justify-start gap-2 items-center ">
 									<EmailOtp
 										options={optionData.email_otp}
-										onChange={onChangeEmailVerification}
+										onChange={onChangeEmailOTP}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="tabSpam">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<SpamProtection
+										options={optionData.spam_protection}
+										onChange={onChangeSpamProtection}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="tabIsSpammy">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<IsSpammy
+										options={optionData.isspammy}
+										onChange={onChangeIsSpammy}
 									/>
 								</div>
 							</PGtab>
