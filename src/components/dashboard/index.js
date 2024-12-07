@@ -31,6 +31,15 @@ function Html(props) {
 	var [optionData, setoptionData] = useState({}); // Using the hook.
 	var [optionDataSaved, setoptionDataSaved] = useState({}); // Using the hook.
 	var [dashboardTabs, setdashboardTabs] = useState([
+
+		{
+			name: "overview",
+			title: "Overview",
+			icon: settings,
+			className: "tab-overview",
+			hidden: false,
+			isPro: false,
+		},
 		{
 			name: "tabEmailVerification",
 			title: "Email Verification",
@@ -49,7 +58,7 @@ function Html(props) {
 		},
 		{
 			name: "tabIsSpammy",
-			title: "IsSpammy Protection",
+			title: "IsSpammy",
 			icon: settings,
 			className: "tab-tabIsSpammy",
 			hidden: false,
@@ -87,6 +96,24 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
+		{
+			name: "magicLogin",
+			title: "Magic Login",
+			icon: settings,
+			className: "tab-magicLogin",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "emailValidation",
+			title: "Email Validation",
+			icon: settings,
+			className: "tab-emailValidation",
+			hidden: false,
+			isPro: false,
+		},
+
+
 		{
 			name: "tabHelp",
 			title: "Help & support",
@@ -209,19 +236,19 @@ function Html(props) {
 			)
 				.toString()
 				.padStart(2, "0")}-${currentDate
-				.getDate()
-				.toString()
-				.padStart(2, "0")}`;
+					.getDate()
+					.toString()
+					.padStart(2, "0")}`;
 			const formattedTime = `${currentDate
 				.getHours()
 				.toString()
 				.padStart(2, "0")}${currentDate
-				.getMinutes()
-				.toString()
-				.padStart(2, "0")}${currentDate
-				.getSeconds()
-				.toString()
-				.padStart(2, "0")}`;
+					.getMinutes()
+					.toString()
+					.padStart(2, "0")}${currentDate
+						.getSeconds()
+						.toString()
+						.padStart(2, "0")}`;
 			const filename = `combo-blocks-setting-${formattedDate}-${formattedTime}.json`;
 			download(filename, JSON.stringify(optionDataX, null, 2));
 		};
@@ -285,16 +312,7 @@ function Html(props) {
 										</span>
 									</div>
 									<div className="flex items-center flex-wrap gap-5 md:gap-4 ">
-										{isProFeature && (
-											<>
-												<a
-													href="https://comboblocks.com/pricing/?utm_source=CBDashboard&utm_medium=topNav&utm_campaign=CBPro"
-													target="_blank"
-													className="bg-amber-500 text-[16px] font-bold no-underline rounded-sm p-2 px-4 whitespace-nowrap cursor-pointer text-white lg:text-lg ">
-													{__("Buy Pro", "user-verification")}
-												</a>
-											</>
-										)}
+
 										{isLoading && (
 											<span className="">
 												<Spinner />
@@ -349,17 +367,60 @@ function Html(props) {
 					</div>
 					<div id="" className="pg-setting-input-text  ">
 						<PGtabs
-							activeTab="tabEmailVerification"
+							activeTab="overview"
 							orientation="vertical"
 							contentClass=" p-5 bg-white w-full"
+							navItemsWrapClass="block w-[300px]"
 							navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500"
 							navItemSelectedClass="bg-gray-700"
 							activeClass="active-tab"
-							onSelect={(tabName) => {}}
+							onSelect={(tabName) => { }}
 							tabs={dashboardTabs}>
 							<PGtab name="overview">
-								<div className="flex w-full h-full justify-center items-center font-bold text-3xl text-gray-800 pg-font ">
-									{__("Combo Blocks", "user-verification")}
+								<div className="">
+
+									<div className="grid grid-cols-4 gap-5 text-white">
+
+										<div className="bg-blue-800	 p-5 text-center space-y-3">
+											<div className="text-xl">Verify Emaill Sent</div>
+											<div className="text-2xl">1236</div>
+										</div>
+										<div className="bg-blue-800	 p-5 text-center space-y-3">
+											<div className="text-xl">Emaill Verified</div>
+											<div className="text-2xl">1236</div>
+										</div>
+										<div className="bg-blue-800	 p-5 text-center space-y-3">
+											<div className="text-xl">Email OTP Sent</div>
+											<div className="text-2xl">1236</div>
+										</div>
+
+										<div className="bg-blue-800	 p-5 text-center space-y-3">
+											<div className="text-xl">Total Spam Blocked</div>
+											<div className="text-2xl">1236</div>
+										</div>
+										<div className="bg-indigo-800 p-5 text-center space-y-3">
+											<div className="text-xl">Comment Spam</div>
+											<div className="text-2xl">1236</div>
+										</div>
+										<div className="bg-violet-800 p-5 text-center space-y-3">
+											<div className="text-xl">Login Spam</div>
+											<div className="text-2xl">1236</div>
+										</div>
+										<div className="bg-fuchsia-800 p-5 text-center space-y-3">
+											<div className="text-xl">Registration Spam</div>
+											<div className="text-2xl">1236</div>
+										</div>
+
+										<div className="bg-fuchsia-800 p-5 text-center space-y-3">
+											<div className="text-xl">Cooment Spam Report</div>
+											<div className="text-2xl">1236</div>
+										</div>
+
+
+
+
+									</div>
+
 								</div>
 							</PGtab>
 							<PGtab name="tabHelp">
