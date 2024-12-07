@@ -3,7 +3,6 @@ const { Component } = wp.element;
 
 import { __ } from "@wordpress/i18n";
 import React from "react";
-import Select from "react-select/base";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 
@@ -30,24 +29,25 @@ function Html(props) {
 	return (
 		<div className="w-[800px]">
 			<div className="text-2xl font-bold mb-2">
-				{__("Email OTP", "user-verification")}
+				{__("isspammy.com Integration", "user-verification")}
 			</div>
 			<p className="text-base mb-7">
-				{__("Customize options for email OTP.", "user-verification")}
+				{__("Enable integration with", "user-verification")}{" "}
+				<a href="http://isspammy.com/"></a>
 			</p>
 			<div className="flex my-5 justify-between items-center ">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Enable on default login", "user-verification")}
+					{__("Report spam comments email", "user-verification")}
 				</label>
 				<PGinputSelect
 					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.enable_default_login}
+					val={options?.report_comment_spam}
 					options={[
 						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
 					]}
 					onChange={(newVal) => {
-						var optionsX = { ...options, enable_default_login: newVal };
+						var optionsX = { ...options, report_comment_spam: newVal };
 						setoptions(optionsX);
 					}}
 					multiple={false}
@@ -55,29 +55,46 @@ function Html(props) {
 			</div>
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Required email verified", "user-verification")}
+					{__("Report trash comments email", "user-verification")}
 				</label>
 				<PGinputSelect
 					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.required_email_verified}
+					val={options?.report_comment_trash}
 					options={[
 						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
 					]}
 					onChange={(newVal) => {
-						var optionsX = { ...options, required_email_verified: newVal };
+						var optionsX = { ...options, report_comment_trash: newVal };
 						setoptions(optionsX);
 					}}
 					multiple={false}
 				/>
 			</div>
-
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Allow Password", "user-verification")}
+					{__("Block spammer comments", "user-verification")}
 				</label>
 				<PGinputSelect
-					val={options?.allow_password}
+					inputClass="!py-1 px-2  border-2 border-solid"
+					val={options?.block_comment}
+					options={[
+						{ label: "Yes", value: "yes" },
+						{ label: "No", value: "no" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = { ...options, block_comment: newVal };
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+			<div className="flex  my-5  justify-between items-center">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Display notice under comment form", "user-verification")}
+				</label>
+				<PGinputSelect
+					val={options?.comment_form_notice}
 					inputClass="!py-1 px-2 border-2 border-solid"
 					options={[
 						{ label: "Yes", value: "yes" },
@@ -86,7 +103,7 @@ function Html(props) {
 					onChange={(newVal) => {
 						var optionsX = {
 							...options,
-							allow_password: newVal,
+							comment_form_notice: newVal,
 						};
 						setoptions(optionsX);
 					}}
@@ -95,84 +112,67 @@ function Html(props) {
 			</div>
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Enable on WooCommerce login", "user-verification")}
-				</label>
-				<PGinputSelect
-					val={"No"}
-					inputClass="!py-1 px-2  border-2 border-solid"
-					options={[
-						{ label: "Yes", value: "yes" },
-						{ label: "No", value: "no" },
-					]}
-					onChange={(newVal) => {}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="">
-					{__("OTP Length", "user-verification")}
+					{__("Custom notice text", "user-verification")}
 				</label>
 				<PGinputText
-					value={options?.length}
+					value={options?.comment_form_notice_text}
 					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					onChange={(newVal) => {
-						var optionsX = { ...options, length: newVal.target.value };
+						var optionsX = {
+							...options,
+							comment_form_notice_text: newVal.target.value,
+						};
 						setoptions(optionsX);
 					}}
 				/>
 			</div>
-			<div className="flex  my-5  justify-between items-start">
+			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("OTP character source", "user-verification")}
+					{__("Block user registration", "user-verification")}
 				</label>
-				<div className="flex flex-1 flex-wrap items-center gap-4">
-					<label className="flex items-center space-x-2">
-						<input
-							type="checkbox"
-							checked={options?.character_source.includes("number")}
-							onChange={() => toggleCheckbox("number")}
-						/>
-						<span>{__("Numbers (0-9)", "user-verification")}</span>
-					</label>
-					<label className="flex items-center space-x-2">
-						<input
-							type="checkbox"
-							checked={options?.character_source.includes("uppercase")}
-							onChange={() => toggleCheckbox("uppercase")}
-						/>
-						<span>{__("Uppercase characters", "user-verification")}</span>
-					</label>
-					<label className="flex items-center space-x-2">
-						<input
-							type="checkbox"
-							checked={options?.character_source.includes("lowercase")}
-							onChange={() => toggleCheckbox("lowercase")}
-						/>
-						<span>{__("Lowercase characters", "user-verification")}</span>
-					</label>
-					<label className="flex items-center space-x-2">
-						<input
-							type="checkbox"
-							checked={options?.character_source.includes("special")}
-							onChange={() => toggleCheckbox("special")}
-						/>
-						<span>{__("Special characters", "user-verification")}</span>
-					</label>
-					<label className="flex items-center space-x-2">
-						<input
-							type="checkbox"
-							checked={options?.character_source.includes("extraspecial")}
-							onChange={() => toggleCheckbox("extraspecial")}
-						/>
-						<span>{__("Extra Special characters", "user-verification")}</span>
-					</label>
-				</div>
+				<PGinputSelect
+					val={options?.block_register}
+					inputClass="!py-1 px-2 border-2 border-solid"
+					options={[
+						{ label: "Yes", value: "yes" },
+						{ label: "No", value: "no" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							block_register: newVal,
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+			<div className="flex  my-5  justify-between items-center">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Block user login", "user-verification")}
+				</label>
+				<PGinputSelect
+					val={options?.block_login}
+					inputClass="!py-1 px-2 border-2 border-solid"
+					options={[
+						{ label: "Yes", value: "yes" },
+						{ label: "No", value: "no" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							block_login: newVal,
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
 			</div>
 		</div>
 	);
 }
 
-class EmailOtp extends Component {
+class IsSpammy extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
@@ -194,4 +194,4 @@ class EmailOtp extends Component {
 		);
 	}
 }
-export default EmailOtp;
+export default IsSpammy;

@@ -26,8 +26,7 @@ function Html(props) {
 		{ value: "administrator", label: "Administrator" },
 	];
 	return (
-		<div className="w-[800px] space-y-3">
-			{JSON.stringify(options)}
+		<div className="w-[800px]">
 
 			<div className="text-2xl font-bold mb-2">
 				{__("Email verification", "user-verification")}
@@ -72,7 +71,7 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex items-center gap-4">
+			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Redirect after verification", "user-verification")}
 				</label>
@@ -93,7 +92,7 @@ function Html(props) {
 						multiple={false}
 					/>
 			</div>
-			<div className="flex items-center gap-4">
+			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Automatically login after verification", "user-verification")}
 				</label>
@@ -112,7 +111,7 @@ function Html(props) {
 					/>
 				
 			</div>
-			<div className="flex items-center gap-4">
+			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Required verification on email change?", "user-verification")}
 				</label>

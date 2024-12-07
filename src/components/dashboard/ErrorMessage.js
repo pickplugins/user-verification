@@ -20,8 +20,7 @@ function Html(props) {
 	}, [options]);
 
 	return (
-		<div className="w-[800px] space-y-3">
-			{JSON.stringify(options)}
+		<div className="w-[800px]">
 
 			<div className="text-2xl font-bold mb-2">
 				{__("Error messages", "user-verification")}
@@ -30,12 +29,12 @@ function Html(props) {
 				{__("Customize error messages.", "user-verification")}
 			</p>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Invalid activation key", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.invalid_key}
 					onChange={(newVal) => {
 						var optionsX = { ...options, invalid_key: newVal.target.value };
@@ -44,12 +43,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Activation key has sent", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.activation_sent}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -61,12 +60,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Verify email address", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.verify_email}
 					onChange={(newVal) => {
 						var optionsX = { ...options, verify_email: newVal.target.value };
@@ -75,12 +74,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Registration success message", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.registration_success}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -92,12 +91,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Verification successful", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.verification_success}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -109,12 +108,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Verification fail", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.verification_fail}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -126,12 +125,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Please wait text", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.please_wait}
 					onChange={(newVal) => {
 						var optionsX = { ...options, please_wait: newVal.target.value };
@@ -140,12 +139,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Mail instruction text", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.mail_instruction}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -157,12 +156,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Redirect after verify text", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.redirect_after_verify}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -174,12 +173,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Not redirect text", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.not_redirect}
 					onChange={(newVal) => {
 						var optionsX = { ...options, not_redirect: newVal.target.value };
@@ -188,12 +187,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Popup title checking verification", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.title_checking_verification}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -205,12 +204,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Popup title sending verification", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.title_sending_verification}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -222,12 +221,12 @@ function Html(props) {
 				/>
 			</div>
 
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("Captcha error message", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.captcha_error}
 					onChange={(newVal) => {
 						var optionsX = { ...options, captcha_error: newVal.target.value };
@@ -235,12 +234,12 @@ function Html(props) {
 					}}
 				/>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("OTP sent success message", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.otp_sent_success}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -251,12 +250,12 @@ function Html(props) {
 					}}
 				/>
 			</div>
-			<div className="flex flex-col">
+			<div className="flex  my-5  justify-between items-center">
 				<label htmlFor="" className="font-medium text-base mb-2">
 					{__("OTP error message", "user-verification")}
 				</label>
 				<textarea
-					className="flex-1 text-[12px]"
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					value={options?.otp_sent_error}
 					onChange={(newVal) => {
 						var optionsX = { ...options, otp_sent_error: newVal.target.value };
