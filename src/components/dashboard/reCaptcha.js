@@ -86,8 +86,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.default_login_page}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, default_login_page: newVal };
@@ -104,8 +104,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.default_registration_page}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, default_registration_page: newVal };
@@ -122,8 +122,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.default_lostpassword_page}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, default_lostpassword_page: newVal };
@@ -140,8 +140,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.comment_form}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, comment_form: newVal };
@@ -150,7 +150,7 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			
+
 		</div>
 	);
 }

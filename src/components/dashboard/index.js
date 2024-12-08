@@ -13,6 +13,7 @@ import EmailTemplates from "./EmailTemplates";
 import EmailVerification from "./EmailVerification";
 import ErrorMessage from "./ErrorMessage";
 import IsSpammy from "./IsSpammy";
+import MagicLogin from "./MagicLogin";
 import ReCaptcha from "./reCaptcha";
 import SpamProtection from "./SpamProtection";
 import Tools from "./Tools";
@@ -45,6 +46,14 @@ function Html(props) {
 			title: "Email Verification",
 			icon: settings,
 			className: "tab-tabEmailVerification",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "magicLogin",
+			title: "Magic Login",
+			icon: settings,
+			className: "tab-magicLogin",
 			hidden: false,
 			isPro: false,
 		},
@@ -96,14 +105,7 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
-		{
-			name: "magicLogin",
-			title: "Magic Login",
-			icon: settings,
-			className: "tab-magicLogin",
-			hidden: false,
-			isPro: false,
-		},
+
 		{
 			name: "emailValidation",
 			title: "Email Validation",
@@ -142,6 +144,11 @@ function Html(props) {
 			method: "POST",
 			data: { option: "user_verification_settings" },
 		}).then((res) => {
+
+
+			console.log(res);
+
+
 			if (res.length != 0) {
 				var resX = { ...res };
 
@@ -269,6 +276,12 @@ function Html(props) {
 		var optionDataX = { ...optionData, isspammy: options };
 		setoptionData(optionDataX);
 	}
+	function onChangeMagicLogin(options) {
+		var optionDataX = { ...optionData, magicLogin: options };
+		setoptionData(optionDataX);
+	}
+
+
 	function onChangeEmailOTP(options) {
 		var optionDataX = { ...optionData, email_otp: options };
 		setoptionData(optionDataX);
@@ -297,6 +310,8 @@ function Html(props) {
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
 			{isLoading && <Spinner />}
+
+
 
 			{!isLoading && (
 				<>
@@ -512,10 +527,13 @@ function Html(props) {
 							</PGtab>
 							<PGtab name="tabSpam">
 								<div className="flex mb-5  justify-start gap-2 items-center ">
-									<SpamProtection
-										options={optionData.spam_protection}
-										onChange={onChangeSpamProtection}
-									/>
+									{optionData?.spam_protection && (
+										<SpamProtection
+											options={optionData.spam_protection}
+											onChange={onChangeSpamProtection}
+										/>
+									)}
+
 								</div>
 							</PGtab>
 							<PGtab name="tabIsSpammy">
@@ -526,6 +544,21 @@ function Html(props) {
 									/>
 								</div>
 							</PGtab>
+							<PGtab name="magicLogin">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<MagicLogin
+										options={optionData.magicLogin}
+										onChange={onChangeMagicLogin}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="emailValidation">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									Coming Soon.
+								</div>
+							</PGtab>
+
+
 							<PGtab name="tabEmailVerification">
 								<div className="flex mb-5  justify-start gap-2 items-center ">
 									<EmailVerification

@@ -55,7 +55,7 @@ function Html(props) {
 						};
 						setoptions(optionsX);
 					}}
-					onClose={() => {}}
+					onClose={() => { }}
 					allowedTypes={ALLOWED_MEDIA_TYPES}
 					value={options?.logo_id}
 					render={({ open }) => {
@@ -80,8 +80,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.logo_id}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						console.log(newVal);
@@ -97,8 +97,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.mail_wpautop}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {

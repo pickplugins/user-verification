@@ -27,6 +27,9 @@ function Html(props) {
 	];
 	return (
 		<div className="w-[800px]">
+
+
+
 			<div className="text-2xl font-bold mb-2">
 				{__("Email verification", "user-verification")}
 			</div>
@@ -41,8 +44,9 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.enable}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
+
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, enable: newVal };

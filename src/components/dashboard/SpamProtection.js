@@ -68,8 +68,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.enable_domain_block}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, enable_domain_block: newVal };
@@ -79,69 +79,72 @@ function Html(props) {
 				/>
 			</div>
 			{options?.enable_domain_block === "yes" && (
-				<div className="flex my-7 items-start ">
-					<label className="w-[400px]" htmlFor="">
-						{__("Blocked domains", "user-verification")}
-					</label>
-					<div className="min-w-[400px] space-y-4">
-						<button
-							className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-							onClick={() => {
-								handleAddItem("blocked_domain");
-							}}>
-							ADD
-						</button>
-						{options?.blocked_domain.map((domain, i) => (
-							<div key={i} className="flex items-center gap-4">
-								<PGinputText
-									value={domain}
-									placeholder="domain.com"
-									className="!py-1 px-2 flex-1 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-									onChange={(e) =>
-										handleUpdateItem("blocked_domain", i, e.target.value)
-									}
-								/>
-								<button
-									className="bg-red-500 text-white px-2 py-1 rounded"
-									onClick={() => handleRemoveItem("blocked_domain", i)}>
-									x
-								</button>
-							</div>
-						))}
-					</div>
-				</div>
-			)}
-			<div className="flex my-7 items-start ">
-				<label className="w-[400px]" htmlFor="">
-					{__("Allowed domains", "user-verification")}
-				</label>
-				<div className="min-w-[400px] space-y-4">
-					<button
-						className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-						onClick={() => {
-							handleAddItem("allowed_domain");
-						}}>
-						ADD
-					</button>
-					{options?.allowed_domain.map((domain, i) => (
-						<div key={i} className="flex items-center gap-4">
-							<PGinputText
-								value={domain}
-								placeholder="domain.com"
-								className="!py-1 px-2 flex-1 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(e) =>
-									handleUpdateItem("allowed_domain", i, e.target.value)
-								}
-							/>
+				<>
+					<div className="flex my-7 items-start ">
+						<label className="w-[400px]" htmlFor="">
+							{__("Blocked domains", "user-verification")}
+						</label>
+						<div className="min-w-[400px] space-y-4">
 							<button
-								className="bg-red-500 text-white px-2 py-1 rounded"
-								onClick={() => handleRemoveItem("allowed_domain", i)}>
-								x
+								className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+								onClick={() => {
+									handleAddItem("blocked_domain");
+								}}>
+								ADD
 							</button>
+							{options?.blocked_domain.map((domain, i) => (
+								<div key={i} className="flex items-center gap-4">
+									<PGinputText
+										value={domain}
+										placeholder="domain.com"
+										className="!py-1 px-2 flex-1 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(e) =>
+											handleUpdateItem("blocked_domain", i, e.target.value)
+										}
+									/>
+									<button
+										className="bg-red-500 text-white px-2 py-1 rounded"
+										onClick={() => handleRemoveItem("blocked_domain", i)}>
+										x
+									</button>
+								</div>
+							))}
 						</div>
-					))}
-				</div>
-			</div>
+					</div>
+					<div className="flex my-7 items-start ">
+						<label className="w-[400px]" htmlFor="">
+							{__("Allowed domains", "user-verification")}
+						</label>
+						<div className="min-w-[400px] space-y-4">
+							<button
+								className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+								onClick={() => {
+									handleAddItem("allowed_domain");
+								}}>
+								ADD
+							</button>
+							{options?.allowed_domain.map((domain, i) => (
+								<div key={i} className="flex items-center gap-4">
+									<PGinputText
+										value={domain}
+										placeholder="domain.com"
+										className="!py-1 px-2 flex-1 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(e) =>
+											handleUpdateItem("allowed_domain", i, e.target.value)
+										}
+									/>
+									<button
+										className="bg-red-500 text-white px-2 py-1 rounded"
+										onClick={() => handleRemoveItem("allowed_domain", i)}>
+										x
+									</button>
+								</div>
+							))}
+						</div>
+					</div>
+				</>
+			)}
+
 
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
@@ -151,8 +154,9 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.enable_username_block}
 					options={[
-						{ label: "Yes", value: "yes" },
+
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, enable_username_block: newVal };
@@ -161,7 +165,7 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			{options?.enable_username_block && (
+			{options?.enable_username_block == "yes" && (
 				<div className="flex my-7 items-start ">
 					<label className="w-[400px]" htmlFor="">
 						{__("Blocked username", "user-verification")}
@@ -206,8 +210,8 @@ function Html(props) {
 					val={options?.generic_mail_block}
 					inputClass="!py-1 px-2 border-2 border-solid"
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
