@@ -48,73 +48,77 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Max number", "user-verification")}
-				</label>
-				<PGinputText
-					value={options?.unverified?.delete_max_number}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							unverified: {
-								...options.unverified,
-								delete_max_number: newVal.target.value,
-							},
-						};
-						setoptions(optionsX);
-					}}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Delay", "user-verification")}
-				</label>
-				<PGinputText
-					value={options?.unverified?.delay}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							unverified: {
-								...options.unverified,
-								delay: newVal.target.value,
-							},
-						};
-						setoptions(optionsX);
-					}}
-				/>
-			</div>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Delete interval unverified users", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.unverified?.delete_user_interval}
-					options={[
-						{ label: "10 minutes", value: "10minute" },
-						{ label: "30 minutes", value: "30minute" },
-						{ label: "6 hours", value: "6hours" },
-						{ label: "Hourly", value: "hourly" },
-						{ label: "Twicedaily", value: "twicedaily" },
-						{ label: "Daily", value: "daily" },
-						{ label: "Weekly", value: "weekly" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							unverified: {
-								...options.unverified,
-								delete_user_interval: newVal,
-							},
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
+			{options?.unverified?.delete_user === "yes" && (
+				<>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Max number", "user-verification")}
+						</label>
+						<PGinputText
+							value={options?.unverified?.delete_max_number}
+							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+							onChange={(newVal) => {
+								var optionsX = {
+									...options,
+									unverified: {
+										...options.unverified,
+										delete_max_number: newVal.target.value,
+									},
+								};
+								setoptions(optionsX);
+							}}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Delay", "user-verification")}
+						</label>
+						<PGinputText
+							value={options?.unverified?.delay}
+							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+							onChange={(newVal) => {
+								var optionsX = {
+									...options,
+									unverified: {
+										...options.unverified,
+										delay: newVal.target.value,
+									},
+								};
+								setoptions(optionsX);
+							}}
+						/>
+					</div>
+					<div className="flex my-5 justify-between items-center ">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Delete interval unverified users", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.unverified?.delete_user_interval}
+							options={[
+								{ label: "10 minutes", value: "10minute" },
+								{ label: "30 minutes", value: "30minute" },
+								{ label: "6 hours", value: "6hours" },
+								{ label: "Hourly", value: "hourly" },
+								{ label: "Twicedaily", value: "twicedaily" },
+								{ label: "Daily", value: "daily" },
+								{ label: "Weekly", value: "weekly" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = {
+									...options,
+									unverified: {
+										...options.unverified,
+										delete_user_interval: newVal,
+									},
+								};
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+				</>
+			)}
 			<div className="text-2xl font-bold mb-2">
 				{__("Existing user", "user-verification")}
 			</div>
@@ -142,35 +146,37 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Existing user as verified interval", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.unverified?.existing_user_verified_interval}
-					options={[
-						{ label: "10 minutes", value: "10minute" },
-						{ label: "30 minutes", value: "30minute" },
-						{ label: "6 hours", value: "6hours" },
-						{ label: "Hourly", value: "hourly" },
-						{ label: "Twicedaily", value: "twicedaily" },
-						{ label: "Daily", value: "daily" },
-						{ label: "Weekly", value: "weekly" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							unverified: {
-								...options.unverified,
-								existing_user_verified_interval: newVal,
-							},
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
+			{options?.unverified?.existing_user_verified && (
+				<div className="flex my-5 justify-between items-center ">
+					<label className="w-[400px]" htmlFor="emailVerification">
+						{__("Existing user as verified interval", "user-verification")}
+					</label>
+					<PGinputSelect
+						inputClass="!py-1 px-2  border-2 border-solid"
+						val={options?.unverified?.existing_user_verified_interval}
+						options={[
+							{ label: "10 minutes", value: "10minute" },
+							{ label: "30 minutes", value: "30minute" },
+							{ label: "6 hours", value: "6hours" },
+							{ label: "Hourly", value: "hourly" },
+							{ label: "Twicedaily", value: "twicedaily" },
+							{ label: "Daily", value: "daily" },
+							{ label: "Weekly", value: "weekly" },
+						]}
+						onChange={(newVal) => {
+							var optionsX = {
+								...options,
+								unverified: {
+									...options.unverified,
+									existing_user_verified_interval: newVal,
+								},
+							};
+							setoptions(optionsX);
+						}}
+						multiple={false}
+					/>
+				</div>
+			)}
 			<div className="text-2xl font-bold mb-2">
 				{__("Default WordPress notification mail", "user-verification")}
 			</div>
@@ -182,8 +188,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.disable?.new_user_notification_email}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -236,7 +242,6 @@ function Html(props) {
 					}}
 				/>
 			</div>
-			
 		</div>
 	);
 }

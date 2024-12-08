@@ -110,22 +110,24 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Custom notice text", "user-verification")}
-				</label>
-				<PGinputText
-					value={options?.comment_form_notice_text}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							comment_form_notice_text: newVal.target.value,
-						};
-						setoptions(optionsX);
-					}}
-				/>
-			</div>
+			{options?.comment_form_notice === "yes" && (
+				<div className="flex  my-5  justify-between items-center">
+					<label className="w-[400px]" htmlFor="emailVerification">
+						{__("Custom notice text", "user-verification")}
+					</label>
+					<PGinputText
+						value={options?.comment_form_notice_text}
+						className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+						onChange={(newVal) => {
+							var optionsX = {
+								...options,
+								comment_form_notice_text: newVal.target.value,
+							};
+							setoptions(optionsX);
+						}}
+					/>
+				</div>
+			)}
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Block user registration", "user-verification")}

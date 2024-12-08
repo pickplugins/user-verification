@@ -35,6 +35,7 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.version}
 					options={[
+						{ label: "Choose", value: "" },
 						{ label: "V2 Checkbox", value: "v2_checkbox" },
 						{ label: "V3", value: "v3" },
 					]}
