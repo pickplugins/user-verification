@@ -1,7 +1,7 @@
 import { useEffect, useState } from "@wordpress/element";
 const { Component } = wp.element;
 
-import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
+import { MediaUpload, RichText } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
 import React from "react";
@@ -46,36 +46,36 @@ function Html(props) {
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Email logo", "user-verification")}
 				</label>
-				<MediaUploadCheck>
-					<MediaUpload
-						onSelect={(media) => {
-							var optionsX = {
-								...options,
-								logo_id: media.id,
-							};
-							setoptions(optionsX);
-						}}
-						onClose={() => {}}
-						allowedTypes={ALLOWED_MEDIA_TYPES}
-						value={options?.logo_id}
-						render={({ open }) => {
-							return (
-								<>
-									{imageUrl && (
-										<img
-											src={imageUrl}
-											alt=""
-											className="cursor-pointer rounded-md"
-											onClick={() => {
-												open();
-											}}
-										/>
-									)}
-									<button onClick={open}>Open Media Library</button>
-								</>
-							);
-						}}></MediaUpload>
-				</MediaUploadCheck>
+				{/* <MediaUploadCheck> */}
+				<MediaUpload
+					onSelect={(media) => {
+						var optionsX = {
+							...options,
+							logo_id: media.id,
+						};
+						setoptions(optionsX);
+					}}
+					onClose={() => {}}
+					allowedTypes={ALLOWED_MEDIA_TYPES}
+					value={options?.logo_id}
+					render={({ open }) => {
+						return (
+							<>
+								{imageUrl && (
+									<img
+										src={imageUrl}
+										alt=""
+										className="cursor-pointer rounded-md"
+										onClick={() => {
+											open();
+										}}
+									/>
+								)}
+								<button onClick={open}>Open Media Library</button>
+							</>
+						);
+					}}></MediaUpload>
+				{/* </MediaUploadCheck> */}
 				{/* <PGinputFile
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.logo_id}
@@ -297,6 +297,51 @@ function Html(props) {
 									setoptions(optionsX);
 								}}
 							/>
+						</div>
+						<div className="flex flex-col  my-5 gap-4 ">
+							<label className="w-[400px]" htmlFor="emailVerification">
+								{__("Email body", "user-verification")}
+							</label>
+							<RichText
+								tagName={"div"}
+								value={options?.email_templates_data?.user_registered?.html}
+								allowedFormats={["core/bold", "core/italic", "core/link"]}
+								onChange={(newVal) => {
+									var optionsX = {
+										...options,
+										email_templates_data: {
+											...options.email_templates_data,
+											user_registered: {
+												...options.email_templates_data.user_registered,
+												html: newVal.target.value,
+											},
+										},
+									};
+									setoptions(optionsX);
+								}}
+								// onChange={(content) => {
+								// 	var options = { ...text.options, content: content };
+								// 	setAttributes({ text: { ...text, options: options } });
+								// }}
+								placeholder={__("Start Writing...")}
+							/>
+							{/* <PGinputText
+								value={options?.email_templates_data?.user_registered?.subject}
+								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+								onChange={(newVal) => {
+									var optionsX = {
+										...options,
+										email_templates_data: {
+											...options.email_templates_data,
+											user_registered: {
+												...options.email_templates_data.user_registered,
+												subject: newVal.target.value,
+											},
+										},
+									};
+									setoptions(optionsX);
+								}}
+							/> */}
 						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
@@ -557,6 +602,30 @@ function Html(props) {
 								}}
 							/>
 						</div>
+						<div className="flex flex-col  my-5 gap-4 ">
+							<label className="w-[400px]" htmlFor="emailVerification">
+								{__("Email body", "user-verification")}
+							</label>
+							<RichText
+								tagName={"div"}
+								value={options?.email_templates_data?.email_confirmed?.html}
+								allowedFormats={["core/bold", "core/italic", "core/link"]}
+								onChange={(newVal) => {
+									var optionsX = {
+										...options,
+										email_templates_data: {
+											...options.email_templates_data,
+											email_confirmed: {
+												...options.email_templates_data.email_confirmed,
+												html: newVal.target.value,
+											},
+										},
+									};
+									setoptions(optionsX);
+								}}
+								placeholder={__("Start Writing...")}
+							/>
+						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
 							<div className="flex items-center gap-2">
@@ -812,6 +881,30 @@ function Html(props) {
 								}}
 							/>
 						</div>
+						<div className="flex flex-col  my-5 gap-4 ">
+							<label className="w-[400px]" htmlFor="emailVerification">
+								{__("Email body", "user-verification")}
+							</label>
+							<RichText
+								tagName={"div"}
+								value={options?.email_templates_data?.email_resend_key?.html}
+								allowedFormats={["core/bold", "core/italic", "core/link"]}
+								onChange={(newVal) => {
+									var optionsX = {
+										...options,
+										email_templates_data: {
+											...options.email_templates_data,
+											email_resend_key: {
+												...options.email_templates_data.email_resend_key,
+												html: newVal.target.value,
+											},
+										},
+									};
+									setoptions(optionsX);
+								}}
+								placeholder={__("Start Writing...")}
+							/>
+						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
 							<div className="flex items-center gap-2">
@@ -1064,6 +1157,30 @@ function Html(props) {
 									};
 									setoptions(optionsX);
 								}}
+							/>
+						</div>
+						<div className="flex flex-col  my-5 gap-4 ">
+							<label className="w-[400px]" htmlFor="emailVerification">
+								{__("Email body", "user-verification")}
+							</label>
+							<RichText
+								tagName={"div"}
+								value={options?.email_templates_data?.send_mail_otp?.html}
+								allowedFormats={["core/bold", "core/italic", "core/link"]}
+								onChange={(newVal) => {
+									var optionsX = {
+										...options,
+										email_templates_data: {
+											...options.email_templates_data,
+											send_mail_otp: {
+												...options.email_templates_data.send_mail_otp,
+												html: newVal.target.value,
+											},
+										},
+									};
+									setoptions(optionsX);
+								}}
+								placeholder={__("Start Writing...")}
 							/>
 						</div>
 						<div>
