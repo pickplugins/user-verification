@@ -113,6 +113,8 @@ class UserVerificationRest
 
 		$option = isset($request['option']) ? $request['option'] : '';
 
+		//delete_option($option);
+
 		error_log($option);
 
 		$response = get_option($option);

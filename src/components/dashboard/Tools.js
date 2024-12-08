@@ -21,6 +21,10 @@ function Html(props) {
 
 	return (
 		<div className="w-[800px]">
+
+
+
+
 			<div className="text-2xl font-bold mb-2">
 				{__("Delete unverified users", "user-verification")}
 			</div>
@@ -32,8 +36,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.unverified?.delete_user}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -48,7 +52,7 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			{options?.unverified?.delete_user === "yes" && (
+			{options?.unverified?.delete_user == "yes" && (
 				<>
 					<div className="flex  my-5  justify-between items-center">
 						<label className="w-[400px]" htmlFor="emailVerification">
@@ -130,8 +134,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.unverified?.existing_user_verified}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
