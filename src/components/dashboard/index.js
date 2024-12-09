@@ -13,6 +13,7 @@ import EmailTemplates from "./EmailTemplates";
 import EmailVerification from "./EmailVerification";
 import ErrorMessage from "./ErrorMessage";
 import IsSpammy from "./IsSpammy";
+import MagicLogin from "./MagicLogin";
 import ReCaptcha from "./reCaptcha";
 import SpamProtection from "./SpamProtection";
 import Tools from "./Tools";
@@ -46,6 +47,14 @@ function Html(props) {
 			title: "Email Verification",
 			icon: settings,
 			className: "tab-tabEmailVerification",
+			hidden: false,
+			isPro: false,
+		},
+		{
+			name: "magicLogin",
+			title: "Magic Login",
+			icon: settings,
+			className: "tab-magicLogin",
 			hidden: false,
 			isPro: false,
 		},
@@ -97,14 +106,7 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
-		{
-			name: "magicLogin",
-			title: "Magic Login",
-			icon: settings,
-			className: "tab-magicLogin",
-			hidden: false,
-			isPro: false,
-		},
+
 		{
 			name: "emailValidation",
 			title: "Email Validation",
@@ -143,6 +145,11 @@ function Html(props) {
 			method: "POST",
 			data: { option: "user_verification_settings" },
 		}).then((res) => {
+
+
+			console.log(res);
+
+
 			if (res.length != 0) {
 				var resX = { ...res };
 
@@ -270,6 +277,12 @@ function Html(props) {
 		var optionDataX = { ...optionData, isspammy: options };
 		setoptionData(optionDataX);
 	}
+	function onChangeMagicLogin(options) {
+		var optionDataX = { ...optionData, magicLogin: options };
+		setoptionData(optionDataX);
+	}
+
+
 	function onChangeEmailOTP(options) {
 		var optionDataX = { ...optionData, email_otp: options };
 		setoptionData(optionDataX);
@@ -431,37 +444,41 @@ function Html(props) {
 											"user-verification"
 										)}
 									</p>
-									<div className="mb-4">
-										<div className="text-[14px]">Ask question</div>
-										<p>
-											Ask question for free on our forum and get quick reply
-											from our expert team members.
-										</p>
-										<a
-											className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-											href="https://www.pickplugins.com/create-support-ticket/">
-											Create support ticket
-										</a>
+									<div className="mb-8">
+										<div className="mb-4">
+											<div className="text-[14px]">Ask question</div>
+											<p>
+												Ask question for free on our forum and get quick reply
+												from our expert team members.
+											</p>
+											<a
+												className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+												href="https://www.pickplugins.com/create-support-ticket/">
+												Create support ticket
+											</a>
+										</div>
+										<div className="mb-4">
+											<p>Read our documentation before asking your question.</p>
+											<a
+												className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+												href="https://pickplugins.com/documentation/user-verification/">
+												Documentation
+											</a>
+										</div>
+										<div className="mb-4">
+											<p>Watch video tutorials.</p>
+											<a
+												className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+												href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bJmrpEqtjsj9nnR6jiKTDt">
+												Watch video tutorials.
+											</a>
+										</div>
 									</div>
-									<p>Read our documentation before asking your question.</p>
-									<a
-										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-										href="https://pickplugins.com/documentation/user-verification/">
-										Documentation
-									</a>
-									<p>Watch video tutorials.</p>
-									<a
-										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-										href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bJmrpEqtjsj9nnR6jiKTDt">
-										Watch video tutorials.
-									</a>
-									<p>Submit reviews</p>
+									<div className="text-[14px]">Submit reviews</div>
 									<p>
 										We wish your 2 minutes to write your feedback about the Post
 										Grid plugin.
-									</p>
-									<p>
-										give us{" "}
+									give us{" "}
 										<span className="text-[#ffae19]">
 											<i class="fas fa-star"></i>
 											<i class="fas fa-star"></i>
@@ -509,10 +526,12 @@ function Html(props) {
 							</PGtab>
 							<PGtab name="tabSpam">
 								<div className="flex mb-5  justify-start gap-2 items-center ">
-									<SpamProtection
-										options={optionData.spam_protection}
-										onChange={onChangeSpamProtection}
-									/>
+									{optionData?.spam_protection && (
+										<SpamProtection
+											options={optionData.spam_protection}
+											onChange={onChangeSpamProtection}
+										/>
+									)}
 								</div>
 							</PGtab>
 							<PGtab name="tabIsSpammy">
@@ -523,6 +542,20 @@ function Html(props) {
 									/>
 								</div>
 							</PGtab>
+							<PGtab name="magicLogin">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<MagicLogin
+										options={optionData.magicLogin}
+										onChange={onChangeMagicLogin}
+									/>
+								</div>
+							</PGtab>
+							<PGtab name="emailValidation">
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									Coming Soon.
+								</div>
+							</PGtab>
+
 							<PGtab name="tabEmailVerification">
 								<div className="flex mb-5  justify-start gap-2 items-center ">
 									<EmailVerification

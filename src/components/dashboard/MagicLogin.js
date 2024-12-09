@@ -26,123 +26,72 @@ function Html(props) {
 
 		setoptions({ ...options, character_source: updatedSource });
 	};
+
 	return (
 		<div className="w-[800px]">
+
+
+
 			<div className="text-2xl font-bold mb-2">
-				{__("IsSpammy.com Integration", "user-verification")}
+				{__("Magic Login", "user-verification")}
 			</div>
 			<p className="text-base mb-7">
-				{__("Enable integration with", "user-verification")}{" "}
-				<a href="http://isspammy.com/"></a>
+				{__("Enable passwordless login on your site, user will received login url to their mail inbox.", "user-verification")}{" "}
+
 			</p>
 			<div className="flex my-5 justify-between items-center ">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Report spam comments email", "user-verification")}
+					{__("Enable Magic Login", "user-verification")}
 				</label>
 				<PGinputSelect
 					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.report_comment_spam}
+					val={options?.enable}
 					options={[
 						{ label: "No", value: "no" },
 						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
-						var optionsX = { ...options, report_comment_spam: newVal };
+						var optionsX = { ...options, enable: newVal };
 						setoptions(optionsX);
 					}}
 					multiple={false}
 				/>
 			</div>
+
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Report trash comments email", "user-verification")}
+					{__("Required email verified", "user-verification")}
 				</label>
 				<PGinputSelect
 					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.report_comment_trash}
+					val={options?.required_email_verified}
 					options={[
 						{ label: "No", value: "no" },
 						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
-						var optionsX = { ...options, report_comment_trash: newVal };
+						var optionsX = { ...options, required_email_verified: newVal };
 						setoptions(optionsX);
 					}}
 					multiple={false}
 				/>
 			</div>
+
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Block spammer comments", "user-verification")}
+					{__("Redirect after login", "user-verification")}
 				</label>
 				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.block_comment}
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = { ...options, block_comment: newVal };
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Display notice under comment form", "user-verification")}
-				</label>
-				<PGinputSelect
-					val={options?.comment_form_notice}
+					val={options?.redirect_after_login}
 					inputClass="!py-1 px-2 border-2 border-solid"
 					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
+						{ label: "None", value: "none" },
+						{ label: "Sample Page", value: "sample" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
 							...options,
-							comment_form_notice: newVal,
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			{options?.comment_form_notice === "yes" && (
-				<div className="flex  my-5  justify-between items-center">
-					<label className="w-[400px]" htmlFor="emailVerification">
-						{__("Custom notice text", "user-verification")}
-					</label>
-					<PGinputText
-						value={options?.comment_form_notice_text}
-						className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-						onChange={(newVal) => {
-							var optionsX = {
-								...options,
-								comment_form_notice_text: newVal.target.value,
-							};
-							setoptions(optionsX);
-						}}
-					/>
-				</div>
-			)}
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Block user registration", "user-verification")}
-				</label>
-				<PGinputSelect
-					val={options?.block_register}
-					inputClass="!py-1 px-2 border-2 border-solid"
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							block_register: newVal,
+							redirect_after_login: newVal,
 						};
 						setoptions(optionsX);
 					}}
@@ -151,30 +100,70 @@ function Html(props) {
 			</div>
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Block user login", "user-verification")}
+					{__("Redirect after failed", "user-verification")}
 				</label>
 				<PGinputSelect
-					val={options?.block_login}
+					val={options?.redirect_after_failed}
 					inputClass="!py-1 px-2 border-2 border-solid"
 					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
+						{ label: "None", value: "none" },
+						{ label: "Sample Page", value: "sample" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
 							...options,
-							block_login: newVal,
+							redirect_after_failed: newVal,
 						};
 						setoptions(optionsX);
 					}}
 					multiple={false}
 				/>
 			</div>
+
+
+
+
+
+
+
+
+
+			<div className="flex  my-5  justify-between items-center">
+				<label className="w-[400px]" htmlFor="">
+					{__("Key Length", "user-verification")}
+				</label>
+				<PGinputText
+					value={options?.length}
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+					onChange={(newVal) => {
+						var optionsX = { ...options, length: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+			<div className="flex  my-5  justify-between items-center">
+				<label className="w-[400px]" htmlFor="">
+					{__("Attempt Max Limit", "user-verification")}
+				</label>
+				<PGinputText
+					value={options?.attemptMaxLimit}
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+					onChange={(newVal) => {
+						var optionsX = { ...options, attemptMaxLimit: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+
+
+
+
 		</div>
 	);
 }
 
-class IsSpammy extends Component {
+class MagicLogin extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { showWarning: true };
@@ -196,4 +185,4 @@ class IsSpammy extends Component {
 		);
 	}
 }
-export default IsSpammy;
+export default MagicLogin;

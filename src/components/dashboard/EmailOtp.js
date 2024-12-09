@@ -3,7 +3,6 @@ const { Component } = wp.element;
 
 import { __ } from "@wordpress/i18n";
 import React from "react";
-import Select from "react-select/base";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 
@@ -43,8 +42,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.enable_default_login}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, enable_default_login: newVal };
@@ -61,8 +60,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.required_email_verified}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = { ...options, required_email_verified: newVal };
@@ -80,8 +79,8 @@ function Html(props) {
 					val={options?.allow_password}
 					inputClass="!py-1 px-2 border-2 border-solid"
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -101,10 +100,10 @@ function Html(props) {
 					val={"No"}
 					inputClass="!py-1 px-2  border-2 border-solid"
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
-					onChange={(newVal) => {}}
+					onChange={(newVal) => { }}
 					multiple={false}
 				/>
 			</div>
