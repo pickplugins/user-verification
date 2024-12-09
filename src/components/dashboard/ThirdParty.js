@@ -3,7 +3,6 @@ const { Component } = wp.element;
 
 import { __ } from "@wordpress/i18n";
 import React from "react";
-import Select from "react-select/base";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 
