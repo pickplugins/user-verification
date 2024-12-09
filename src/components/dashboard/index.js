@@ -17,6 +17,7 @@ import MagicLogin from "./MagicLogin";
 import ReCaptcha from "./reCaptcha";
 import SpamProtection from "./SpamProtection";
 import Tools from "./Tools";
+import ThirdParty from "./ThirdParty";
 
 function Html(props) {
 	if (!props.warn) {
@@ -306,12 +307,14 @@ function Html(props) {
 		var optionDataX = { ...optionData, messages: options };
 		setoptionData(optionDataX);
 	}
+	function onChangeUserVerificationSettings(options) {
+		var optionDataX = { ...optionData, user_verification_settings: options };
+		setoptionData(optionDataX);
+	}
 
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
 			{isLoading && <Spinner />}
-
-
 
 			{!isLoading && (
 				<>
@@ -327,7 +330,6 @@ function Html(props) {
 										</span>
 									</div>
 									<div className="flex items-center flex-wrap gap-5 md:gap-4 ">
-
 										{isLoading && (
 											<span className="">
 												<Spinner />
@@ -389,13 +391,11 @@ function Html(props) {
 							navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500"
 							navItemSelectedClass="bg-gray-700"
 							activeClass="active-tab"
-							onSelect={(tabName) => { }}
+							onSelect={(tabName) => {}}
 							tabs={dashboardTabs}>
 							<PGtab name="overview">
 								<div className="">
-
 									<div className="grid grid-cols-4 gap-5 text-white">
-
 										<div className="bg-blue-800	 p-5 text-center space-y-3">
 											<div className="text-xl">Verify Emaill Sent</div>
 											<div className="text-2xl">1236</div>
@@ -430,12 +430,7 @@ function Html(props) {
 											<div className="text-xl">Cooment Spam Report</div>
 											<div className="text-2xl">1236</div>
 										</div>
-
-
-
-
 									</div>
-
 								</div>
 							</PGtab>
 							<PGtab name="tabHelp">
@@ -449,37 +444,41 @@ function Html(props) {
 											"user-verification"
 										)}
 									</p>
-									<div className="mb-4">
-										<div className="text-[14px]">Ask question</div>
-										<p>
-											Ask question for free on our forum and get quick reply from
-											our expert team members.
-										</p>
-										<a
-											className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-											href="https://www.pickplugins.com/create-support-ticket/">
-											Create support ticket
-										</a>
+									<div className="mb-8">
+										<div className="mb-4">
+											<div className="text-[14px]">Ask question</div>
+											<p>
+												Ask question for free on our forum and get quick reply
+												from our expert team members.
+											</p>
+											<a
+												className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+												href="https://www.pickplugins.com/create-support-ticket/">
+												Create support ticket
+											</a>
+										</div>
+										<div className="mb-4">
+											<p>Read our documentation before asking your question.</p>
+											<a
+												className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+												href="https://pickplugins.com/documentation/user-verification/">
+												Documentation
+											</a>
+										</div>
+										<div className="mb-4">
+											<p>Watch video tutorials.</p>
+											<a
+												className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
+												href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bJmrpEqtjsj9nnR6jiKTDt">
+												Watch video tutorials.
+											</a>
+										</div>
 									</div>
-									<p>Read our documentation before asking your question.</p>
-									<a
-										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-										href="https://pickplugins.com/documentation/user-verification/">
-										Documentation
-									</a>
-									<p>Watch video tutorials.</p>
-									<a
-										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
-										href="https://www.youtube.com/playlist?list=PL0QP7T2SN94bJmrpEqtjsj9nnR6jiKTDt">
-										Watch video tutorials.
-									</a>
-									<p>Submit reviews</p>
+									<div className="text-[14px]">Submit reviews</div>
 									<p>
 										We wish your 2 minutes to write your feedback about the Post
 										Grid plugin.
-									</p>
-									<p>
-										give us{" "}
+									give us{" "}
 										<span className="text-[#ffae19]">
 											<i class="fas fa-star"></i>
 											<i class="fas fa-star"></i>
@@ -533,7 +532,6 @@ function Html(props) {
 											onChange={onChangeSpamProtection}
 										/>
 									)}
-
 								</div>
 							</PGtab>
 							<PGtab name="tabIsSpammy">
@@ -558,7 +556,6 @@ function Html(props) {
 								</div>
 							</PGtab>
 
-
 							<PGtab name="tabEmailVerification">
 								<div className="flex mb-5  justify-start gap-2 items-center ">
 									<EmailVerification
@@ -570,6 +567,12 @@ function Html(props) {
 									<ErrorMessage
 										options={optionData.messages}
 										onChange={onChangeErrorMessages}
+									/>
+								</div>
+								<div className="flex mb-5  justify-start gap-2 items-center ">
+									<ThirdParty
+										options={optionData?.user_verification_settings}
+										onChange={onChangeUserVerificationSettings}
 									/>
 								</div>
 							</PGtab>
