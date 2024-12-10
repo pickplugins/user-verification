@@ -55,7 +55,7 @@ class PGinputText extends Component {
 
 		return (
 			<Html
-				val={value}
+				value={value}
 				name={name}
 				id={id}
 				size={size}
