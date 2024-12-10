@@ -12,15 +12,15 @@
   },
   "files": [
     "assets",
-    "addons",
+    "dist",
     "build",
     "includes",
     "languages",
     "sample-data",
-    "src",
     "templates",
-    "dist",
-    "post-grid.php"
+    "readme.txt",
+    "user-verification.php",
+    "wpml-config.xml"
   ],
   "keywords": [],
   "author": "",

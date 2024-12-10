@@ -34,14 +34,14 @@ function Html(props) {
 	var [optionDataSaved, setoptionDataSaved] = useState({}); // Using the hook.
 	var [dashboardTabs, setdashboardTabs] = useState([
 
-		{
-			name: "overview",
-			title: "Overview",
-			icon: settings,
-			className: "tab-overview",
-			hidden: false,
-			isPro: false,
-		},
+		// {
+		// 	name: "overview",
+		// 	title: "Overview",
+		// 	icon: settings,
+		// 	className: "tab-overview",
+		// 	hidden: false,
+		// 	isPro: false,
+		// },
 		{
 			name: "tabEmailVerification",
 			title: "Email Verification",
@@ -50,14 +50,14 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
-		{
-			name: "magicLogin",
-			title: "Magic Login",
-			icon: settings,
-			className: "tab-magicLogin",
-			hidden: false,
-			isPro: false,
-		},
+		// {
+		// 	name: "magicLogin",
+		// 	title: "Magic Login",
+		// 	icon: settings,
+		// 	className: "tab-magicLogin",
+		// 	hidden: false,
+		// 	isPro: false,
+		// },
 		{
 			name: "tabEmailOTP",
 			title: "Email OTP",
@@ -107,14 +107,14 @@ function Html(props) {
 			isPro: false,
 		},
 
-		{
-			name: "emailValidation",
-			title: "Email Validation",
-			icon: settings,
-			className: "tab-emailValidation",
-			hidden: false,
-			isPro: false,
-		},
+		// {
+		// 	name: "emailValidation",
+		// 	title: "Email Validation",
+		// 	icon: settings,
+		// 	className: "tab-emailValidation",
+		// 	hidden: false,
+		// 	isPro: false,
+		// },
 
 
 		{
@@ -347,7 +347,7 @@ function Html(props) {
 										{__("Create Support", "user-verification")}
 									</a>
 									<a
-										href="https://comboblocks.com/documentations/"
+										href="https://pickplugins.com/doc-category/user-verification/"
 										target="_blank"
 										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white   hover:text-white ">
 										{__("Documentation", "user-verification")}
@@ -384,12 +384,12 @@ function Html(props) {
 					</div>
 					<div id="" className="pg-setting-input-text  ">
 						<PGtabs
-							activeTab="overview"
+							activeTab="tabEmailVerification"
 							orientation="vertical"
 							contentClass=" p-5 bg-white w-full"
 							navItemsWrapClass="block w-[300px]"
-							navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500"
-							navItemSelectedClass="bg-gray-700"
+							navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500 "
+							navItemSelectedClass="bg-white "
 							activeClass="active-tab"
 							onSelect={(tabName) => {}}
 							tabs={dashboardTabs}>
