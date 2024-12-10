@@ -30,7 +30,7 @@ function Html(props) {
 			</p>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Invalid activation key", "user-verification")}
 				</label>
 				<textarea
@@ -44,7 +44,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Activation key has sent", "user-verification")}
 				</label>
 				<textarea
@@ -61,7 +61,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Verify email address", "user-verification")}
 				</label>
 				<textarea
@@ -75,7 +75,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Registration success message", "user-verification")}
 				</label>
 				<textarea
@@ -92,7 +92,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Verification successful", "user-verification")}
 				</label>
 				<textarea
@@ -109,7 +109,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Verification fail", "user-verification")}
 				</label>
 				<textarea
@@ -126,7 +126,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Please wait text", "user-verification")}
 				</label>
 				<textarea
@@ -140,7 +140,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Mail instruction text", "user-verification")}
 				</label>
 				<textarea
@@ -157,7 +157,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Redirect after verify text", "user-verification")}
 				</label>
 				<textarea
@@ -174,7 +174,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Not redirect text", "user-verification")}
 				</label>
 				<textarea
@@ -188,7 +188,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Popup title checking verification", "user-verification")}
 				</label>
 				<textarea
@@ -205,7 +205,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Popup title sending verification", "user-verification")}
 				</label>
 				<textarea
@@ -222,7 +222,7 @@ function Html(props) {
 			</div>
 
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("Captcha error message", "user-verification")}
 				</label>
 				<textarea
@@ -235,7 +235,7 @@ function Html(props) {
 				/>
 			</div>
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("OTP sent success message", "user-verification")}
 				</label>
 				<textarea
@@ -251,7 +251,7 @@ function Html(props) {
 				/>
 			</div>
 			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium text-base mb-2">
+				<label htmlFor="" className="font-medium  mb-2">
 					{__("OTP error message", "user-verification")}
 				</label>
 				<textarea

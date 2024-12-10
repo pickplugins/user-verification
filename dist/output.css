@@ -194,6 +194,10 @@
   margin-bottom: 1.75rem;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -220,10 +224,6 @@
 
 .mt-\[28px\] {
   margin-top: 28px;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
 }
 
 .block {
@@ -1043,12 +1043,21 @@
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
+.text-orange-500 {
+  --tw-text-opacity: 1;
+  color: rgb(249 115 22 / var(--tw-text-opacity, 1));
+}
+
 .no-underline {
   text-decoration-line: none;
 }
 
 .opacity-0 {
   opacity: 0;
+}
+
+.opacity-25 {
+  opacity: 0.25;
 }
 
 .shadow-lg {

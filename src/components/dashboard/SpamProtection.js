@@ -1,4 +1,5 @@
 import { useEffect, useState } from "@wordpress/element";
+import { Icon, close } from "@wordpress/icons";
 const { Component } = wp.element;
 
 import { __ } from "@wordpress/i18n";
@@ -19,13 +20,7 @@ function Html(props) {
 		onChange(options);
 	}, [options]);
 
-	const toggleCheckbox = (value) => {
-		const updatedSource = options.character_source.includes(value)
-			? options.character_source.filter((item) => item !== value) // Remove if already selected
-			: [...options.character_source, value]; // Add if not selected
 
-		setoptions({ ...options, character_source: updatedSource });
-	};
 
 	const handleAddItem = (property) => {
 		setoptions((prev) => ({
@@ -34,26 +29,14 @@ function Html(props) {
 		}));
 	};
 
-	const handleUpdateItem = (property, index, newVal) => {
-		const updatedItems = [...(options[property] || [])];
-		updatedItems[index] = newVal;
-		setoptions((prev) => ({
-			...prev,
-			[property]: updatedItems,
-		}));
-	};
 
-	const handleRemoveItem = (property, index) => {
-		const updatedItems = (options[property] || []).filter(
-			(_, i) => i !== index
-		);
-		setoptions((prev) => ({
-			...prev,
-			[property]: updatedItems,
-		}));
-	};
+
+
 	return (
 		<div className="w-[800px]">
+
+
+
 			<div className="text-2xl font-bold mb-2">
 				{__("Spam Protection", "user-verification")}
 			</div>
@@ -94,19 +77,41 @@ function Html(props) {
 							</button>
 							{options?.blocked_domain.map((domain, i) => (
 								<div key={i} className="flex items-center gap-4">
+
+
 									<PGinputText
 										value={domain}
 										placeholder="domain.com"
 										className="!py-1 px-2 flex-1 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(e) =>
-											handleUpdateItem("blocked_domain", i, e.target.value)
+										onChange={(e) => {
+
+
+											var optionsX = { ...options };
+
+											var blockedDomainX = optionsX.blocked_domain;
+											blockedDomainX[i] = e.target.value;
+											var optionsX = { ...options, blocked_domain: blockedDomainX };
+											setoptions(optionsX);
+
+
+										}
+
 										}
 									/>
-									<button
-										className="bg-red-500 text-white px-2 py-1 rounded"
-										onClick={() => handleRemoveItem("blocked_domain", i)}>
-										x
-									</button>
+									<div
+										className="bg-red-500 text-white px-2 py-1 rounded-sm cursor-pointer"
+										onClick={() => {
+
+											var optionsX = { ...options };
+
+											var blockedDomainX = optionsX.blocked_domain;
+											blockedDomainX.splice(i, 1)
+											var optionsX = { ...options, blocked_domain: blockedDomainX };
+											setoptions(optionsX);
+
+										}}>
+										<Icon fill="#fff" icon={close} />
+									</div>
 								</div>
 							))}
 						</div>
@@ -129,15 +134,33 @@ function Html(props) {
 										value={domain}
 										placeholder="domain.com"
 										className="!py-1 px-2 flex-1 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(e) =>
-											handleUpdateItem("allowed_domain", i, e.target.value)
+										onChange={(e) => {
+
+
+											var optionsX = { ...options };
+
+											var allowedDomainX = optionsX.allowed_domain;
+											allowedDomainX[i] = e.target.value;
+											var optionsX = { ...options, allowed_domain: allowedDomainX };
+											setoptions(optionsX);
+
+										}
+
 										}
 									/>
-									<button
-										className="bg-red-500 text-white px-2 py-1 rounded"
-										onClick={() => handleRemoveItem("allowed_domain", i)}>
-										x
-									</button>
+									<div
+										className="bg-red-500 text-white px-2 py-1 rounded-sm cursor-pointer"
+										onClick={() => {
+											var optionsX = { ...options };
+
+											var allowedDomainX = optionsX.allowed_domain;
+											allowedDomainX.splice(i, 1)
+											var optionsX = { ...options, allowed_domain: allowedDomainX };
+											setoptions(optionsX);
+
+										}}>
+										<Icon fill="#fff" icon={close} />
+									</div>
 								</div>
 							))}
 						</div>
@@ -187,15 +210,30 @@ function Html(props) {
 										value={domain}
 										placeholder="username"
 										className="!py-1 px-2 flex-1 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(e) =>
-											handleUpdateItem("blocked_username", i, e.target.value)
+										onChange={(e) => {
+											//handleUpdateItem("blocked_username", i, e.target.value)
+											var optionsX = { ...options };
+
+											var blockedUsernameX = optionsX.blocked_username;
+											blockedUsernameX[i] = e.target.value;
+											var optionsX = { ...options, blocked_username: blockedUsernameX };
+											setoptions(optionsX);
+
+										}
 										}
 									/>
-									<button
-										className="bg-red-500 text-white px-2 py-1 rounded"
-										onClick={() => handleRemoveItem("blocked_username", i)}>
-										x
-									</button>
+									<div
+										className="bg-red-500 text-white px-2 py-1 rounded-sm cursor-pointer"
+										onClick={() => {
+											var optionsX = { ...options };
+
+											var blockedUsernameX = optionsX.blocked_username;
+											blockedUsernameX.splice(i, 1)
+											var optionsX = { ...options, blocked_username: blockedUsernameX };
+											setoptions(optionsX);
+										}}>
+										<Icon fill="#fff" icon={close} />
+									</div>
 								</div>
 							);
 						})}
@@ -244,19 +282,37 @@ function Html(props) {
 										value={domain}
 										placeholder="admin@"
 										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-										onChange={(e) =>
-											handleUpdateItem(
-												"blocked_generic_mail",
-												i,
-												e.target.value
-											)
+										onChange={(e) => {
+											var optionsX = { ...options };
+
+											var blockedGenericMailX = optionsX.blocked_generic_mail;
+											blockedGenericMailX[i] = e.target.value;
+											var optionsX = { ...options, blocked_generic_mail: blockedGenericMailX };
+											setoptions(optionsX);
+										}
+
+
+
+
+
+
+
+
 										}
 									/>
-									<button
-										className="bg-red-500 text-white px-2 py-1 rounded"
-										onClick={() => handleRemoveItem("blocked_generic_mail", i)}>
-										x
-									</button>
+									<div
+										className="bg-red-500 text-white px-2 py-1 rounded-sm cursor-pointer"
+										onClick={() => {
+
+											var optionsX = { ...options };
+
+											var blockedGenericMailX = optionsX.blocked_generic_mail;
+											blockedGenericMailX.splice(i, 1)
+											var optionsX = { ...options, blocked_generic_mail: blockedGenericMailX };
+											setoptions(optionsX);
+										}}>
+										<Icon fill="#fff" icon={close} />
+									</div>
 								</div>
 							);
 						})}

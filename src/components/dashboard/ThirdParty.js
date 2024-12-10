@@ -27,6 +27,149 @@ function Html(props) {
 	];
 	return (
 		<div className="w-[800px]">
+
+
+			<div className="text-2xl font-bold mb-2">
+				{__("WooCommerce", "user-verification")}
+			</div>
+			<p className="text-base mb-7">
+				{__("Customize options for WooCommerce.", "user-verification")}
+			</p>
+			<div className="flex my-5 justify-between items-center ">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Redirect after registration", "user-verification")}
+				</label>
+				<PGinputSelect
+					inputClass="!py-1 px-2  border-2 border-solid"
+					val={options?.woocommerce?.redirect_after_registration}
+					options={[
+						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							woocommerce: {
+								...options.woocommerce,
+								redirect_after_registration: newVal,
+							},
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+			<div className="flex my-5 justify-between items-center ">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Disable auto login on registration", "user-verification")}
+				</label>
+				<PGinputSelect
+					inputClass="!py-1 px-2  border-2 border-solid"
+					val={options?.woocommerce?.disable_auto_login}
+					options={[
+						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							woocommerce: {
+								...options.woocommerce,
+								disable_auto_login: newVal,
+							},
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+			<div className="flex my-5 justify-between items-center ">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Disable auto login on checkout", "user-verification")}
+				</label>
+				<PGinputSelect
+					inputClass="!py-1 px-2  border-2 border-solid"
+					val={options?.woocommerce?.disable_auto_login_checkout}
+					options={[
+						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							woocommerce: {
+								...options.woocommerce,
+								disable_auto_login_checkout: newVal,
+							},
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+			<div className="flex my-5 justify-between items-center ">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Redirect after payment", "user-verification")}
+				</label>
+				<PGinputSelect
+					inputClass="!py-1 px-2  border-2 border-solid"
+					val={options?.woocommerce?.redirect_after_payment}
+					options={[
+						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							woocommerce: {
+								...options.woocommerce,
+								redirect_after_payment: newVal,
+							},
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+			<div className="flex my-5 justify-between items-center ">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__(
+						"Display Message after successfully registration",
+						"user-verification"
+					)}
+				</label>
+				<textarea
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+					inputClass="!py-1 px-2  border-2 border-solid"
+					val={options?.woocommerce?.message_after_registration}
+					options={[
+						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
+					]}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							woocommerce: {
+								...options.woocommerce,
+								message_after_registration: newVal,
+							},
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
 			<div className="text-2xl font-bold mb-2">
 				{__("Paid Memberships Pro", "user-verification")}
 			</div>
@@ -41,8 +184,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.paid_memberships_pro?.disable_auto_login}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -106,8 +249,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.paid_memberships_pro?.redirect_after_checkout}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -122,7 +265,7 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			///////////////////
+
 			<div className="text-2xl font-bold mb-2">
 				{__("Ultimate Member", "user-verification")}
 			</div>
@@ -137,8 +280,8 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.ultimate_member?.disable_auto_login}
 					options={[
-						{ label: "Yes", value: "yes" },
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {
@@ -175,138 +318,8 @@ function Html(props) {
 					}}
 				/>
 			</div>
-			/////////////////////
-			<div className="text-2xl font-bold mb-2">
-				{__("WooCommerce", "user-verification")}
-			</div>
-			<p className="text-base mb-7">
-				{__("Customize options for WooCommerce.", "user-verification")}
-			</p>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Redirect after registration", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.woocommerce?.redirect_after_registration}
-					options={[
-						{ label: "Yes", value: "yes" },
-						{ label: "No", value: "no" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							woocommerce: {
-								...options.woocommerce,
-								redirect_after_registration: newVal,
-							},
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Disable auto login on registration", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.woocommerce?.disable_auto_login}
-					options={[
-						{ label: "Yes", value: "yes" },
-						{ label: "No", value: "no" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							woocommerce: {
-								...options.woocommerce,
-								disable_auto_login: newVal,
-							},
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Disable auto login on checkout", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.woocommerce?.disable_auto_login_checkout}
-					options={[
-						{ label: "Yes", value: "yes" },
-						{ label: "No", value: "no" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							woocommerce: {
-								...options.woocommerce,
-								disable_auto_login_checkout: newVal,
-							},
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Redirect after payment", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.woocommerce?.redirect_after_payment}
-					options={[
-						{ label: "Yes", value: "yes" },
-						{ label: "No", value: "no" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							woocommerce: {
-								...options.woocommerce,
-								redirect_after_payment: newVal,
-							},
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__(
-						"Display Message after successfully registration'",
-						"user-verification"
-					)}
-				</label>
-				<textarea
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.woocommerce?.message_after_registration}
-					options={[
-						{ label: "Yes", value: "yes" },
-						{ label: "No", value: "no" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							woocommerce: {
-								...options.woocommerce,
-								message_after_registration: newVal,
-							},
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			///////////////////
+
+
 			<div className="text-2xl font-bold mb-2">
 				{__("WP User Manager", "user-verification")}
 			</div>
@@ -321,8 +334,9 @@ function Html(props) {
 					inputClass="!py-1 px-2  border-2 border-solid"
 					val={options?.wp_user_manager?.disable_auto_login}
 					options={[
-						{ label: "Yes", value: "yes" },
+
 						{ label: "No", value: "no" },
+						{ label: "Yes", value: "yes" },
 					]}
 					onChange={(newVal) => {
 						var optionsX = {

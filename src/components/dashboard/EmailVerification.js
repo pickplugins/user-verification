@@ -12,6 +12,8 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
+	var roles = props.roles;
+	var pageList = props.pageList;
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
 
@@ -19,16 +21,16 @@ function Html(props) {
 		onChange(options);
 	}, [options]);
 
-	const userRoleOptions = [
-		{ value: "chocolate", label: "Chocolate" },
-		{ value: "strawberry", label: "Strawberry" },
-		{ value: "vanilla", label: "Vanilla" },
-		{ value: "administrator", label: "Administrator" },
-	];
+
+
+
+
+
+
+
+
 	return (
 		<div className="w-[800px]">
-
-
 
 			<div className="text-2xl font-bold mb-2">
 				{__("Email verification", "user-verification")}
@@ -64,10 +66,7 @@ function Html(props) {
 						<PGinputSelect
 							inputClass="!py-1 px-2  border-2 border-solid"
 							val={options?.verification_page_id}
-							options={[
-								{ label: "Yes", value: "yes" },
-								{ label: "No", value: "no" },
-							]}
+							options={pageList}
 							onChange={(newVal) => {
 								var optionsX = { ...options, verification_page_id: newVal };
 								setoptions(optionsX);
@@ -82,10 +81,7 @@ function Html(props) {
 						<PGinputSelect
 							val={options?.redirect_after_verification}
 							inputClass="!py-1 px-2 border-2 border-solid"
-							options={[
-								{ label: "None", value: "none" },
-								{ label: "Sample Page", value: "sample" },
-							]}
+							options={pageList}
 							onChange={(newVal) => {
 								var optionsX = {
 									...options,
@@ -107,8 +103,9 @@ function Html(props) {
 							val={options?.login_after_verification}
 							inputClass="!py-1 px-2  border-2 border-solid"
 							options={[
-								{ label: "Yes", value: "yes" },
+
 								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
 							]}
 							onChange={(newVal) => {
 								var optionsX = { ...options, login_after_verification: newVal };
@@ -128,8 +125,8 @@ function Html(props) {
 							val={options?.email_update_reverify}
 							inputClass="!py-1 px-2  border-2 border-solid"
 							options={[
-								{ label: "Yes", value: "yes" },
 								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
 							]}
 							onChange={(newVal) => {
 								var optionsX = { ...options, email_update_reverify: newVal };
@@ -147,9 +144,9 @@ function Html(props) {
 								className="flex-1"
 								value={options?.exclude_user_roles.map(
 									(role) =>
-										userRoleOptions.find((option) => option.value === role) // Match role with options
+										roles.find((option) => option.value === role) // Match role with options
 								)}
-								options={userRoleOptions}
+								options={roles}
 								isMulti
 								closeMenuOnSelect={false}
 								onChange={(newVal) => {
@@ -181,11 +178,13 @@ class EmailVerification extends Component {
 		}));
 	}
 	render() {
-		var { onChange, options } = this.props;
+		var { onChange, options, roles, pageList } = this.props;
 		return (
 			<Html
 				onChange={onChange}
 				options={options}
+				roles={roles}
+				pageList={pageList}
 				warn={this.state.showWarning}
 			/>
 		);

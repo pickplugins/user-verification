@@ -17,7 +17,28 @@ class UserVerificationRest
 
 
 
-
+		register_rest_route(
+			'user-verification/v2',
+			'/user_roles_list',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'user_roles_list'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'user-verification/v2',
+			'/page_list',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'page_list'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 		register_rest_route(
@@ -62,6 +83,74 @@ class UserVerificationRest
 			)
 		);
 	}
+
+
+
+	/**
+	 * Return user_roles_list
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function user_roles_list($request)
+	{
+		$response = [];
+		//$formdata = isset($request['formdata']) ? $request['formdata'] : 'no data';
+		global $wp_roles;
+		$roles = [];
+		if ($wp_roles && property_exists($wp_roles, 'roles')) {
+			$rolesAll = isset($wp_roles->roles) ? $wp_roles->roles : [];
+			foreach ($rolesAll as $roleIndex => $role) {
+				$roles[$roleIndex] = $role['name'];
+			}
+		}
+		$response = $roles;
+		die(wp_json_encode($response));
+	}
+	/**
+	 * Return user_roles_list
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $post_data Post data.
+	 */
+	public function page_list($request)
+	{
+		$response = [];
+
+		$response['none'] = __('None', 'user-verification');
+
+		$args = array(
+			'sort_order' => 'asc',
+			'sort_column' => 'post_title',
+			'hierarchical' => 1,
+			'exclude' => '',
+			'include' => '',
+			'meta_key' => '',
+			'meta_value' => '',
+			'authors' => '',
+			'child_of' => 0,
+			'parent' => -1,
+			'exclude_tree' => '',
+			'number' => '',
+			'offset' => 0,
+			'post_type' => 'page',
+			'post_status' => 'publish,private'
+		);
+		$pages = get_pages($args);
+
+
+		foreach ($pages as $page) {
+			if ($page->post_title) $response[$page->ID] = $page->post_title;
+		}
+
+
+
+		die(wp_json_encode($response));
+	}
+
+
+
+
 
 
 

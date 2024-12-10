@@ -92,21 +92,32 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Enable on WooCommerce login", "user-verification")}
-				</label>
-				<PGinputSelect
-					val={"No"}
-					inputClass="!py-1 px-2  border-2 border-solid"
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => { }}
-					multiple={false}
-				/>
-			</div>
+
+
+			{options.enable_default_login == 'yes' && (
+
+				<div className="flex  my-5  justify-between items-center">
+					<label className="w-[400px]" htmlFor="emailVerification">
+						{__("Enable on WooCommerce login", "user-verification")}
+					</label>
+					<PGinputSelect
+						val={options?.enable_wc_login}
+						inputClass="!py-1 px-2  border-2 border-solid"
+						options={[
+							{ label: "No", value: "no" },
+							{ label: "Yes", value: "yes" },
+						]}
+						onChange={(newVal) => {
+							var optionsX = { ...options, enable_wc_login: newVal };
+							setoptions(optionsX);
+
+						}}
+						multiple={false}
+					/>
+				</div>
+			)}
+
+
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="">
 					{__("OTP Length", "user-verification")}

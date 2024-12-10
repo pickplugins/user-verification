@@ -103,6 +103,19 @@ function MyFunction(props) {
 									Pro
 								</span>
 							)}
+							{tab.isNew != null && tab.isNew && (
+								<span
+									className="pg-bg-color text-white px-2  text-sm rounded-sm"
+								>
+									New
+								</span>
+							)}
+
+
+
+
+
+
 						</div>
 					);
 				})}

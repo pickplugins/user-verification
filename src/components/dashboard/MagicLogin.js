@@ -12,6 +12,7 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
+	var pageList = props.pageList;
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
 
@@ -27,6 +28,16 @@ function Html(props) {
 		setoptions({ ...options, character_source: updatedSource });
 	};
 
+
+
+
+
+
+
+
+
+
+
 	return (
 		<div className="w-[800px]">
 
@@ -34,6 +45,8 @@ function Html(props) {
 
 			<div className="text-2xl font-bold mb-2">
 				{__("Magic Login", "user-verification")}
+
+				<span className="text-orange-500"> (Coming Soon)</span>
 			</div>
 			<p className="text-base mb-7">
 				{__("Enable passwordless login on your site, user will received login url to their mail inbox.", "user-verification")}{" "}
@@ -84,10 +97,7 @@ function Html(props) {
 				<PGinputSelect
 					val={options?.redirect_after_login}
 					inputClass="!py-1 px-2 border-2 border-solid"
-					options={[
-						{ label: "None", value: "none" },
-						{ label: "Sample Page", value: "sample" },
-					]}
+					options={pageList}
 					onChange={(newVal) => {
 						var optionsX = {
 							...options,
@@ -105,10 +115,7 @@ function Html(props) {
 				<PGinputSelect
 					val={options?.redirect_after_failed}
 					inputClass="!py-1 px-2 border-2 border-solid"
-					options={[
-						{ label: "None", value: "none" },
-						{ label: "Sample Page", value: "sample" },
-					]}
+					options={pageList}
 					onChange={(newVal) => {
 						var optionsX = {
 							...options,
@@ -175,11 +182,13 @@ class MagicLogin extends Component {
 		}));
 	}
 	render() {
-		var { onChange, options } = this.props;
+		var { onChange, options, pageList } = this.props;
 		return (
 			<Html
 				onChange={onChange}
 				options={options}
+				pageList={pageList}
+
 				warn={this.state.showWarning}
 			/>
 		);
