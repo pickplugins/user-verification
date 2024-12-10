@@ -46,111 +46,126 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("reCAPTCHA sitekey", "user-verification")}
-				</label>
-				<PGinputText
-					value={options?.sitekey}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							sitekey: newVal.target.value,
-						};
-						setoptions(optionsX);
-					}}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("reCAPTCHA secret key", "user-verification")}
-				</label>
-				<PGinputText
-					value={options?.secretkey}
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							secretkey: newVal.target.value,
-						};
-						setoptions(optionsX);
-					}}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Recaptcha on default login page", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.default_login_page}
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = { ...options, default_login_page: newVal };
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Recaptcha on default registration page", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.default_registration_page}
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = { ...options, default_registration_page: newVal };
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Recaptcha on default reset password page", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.default_lostpassword_page}
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = { ...options, default_lostpassword_page: newVal };
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Recaptcha on comment forms", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.comment_form}
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = { ...options, comment_form: newVal };
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-
+			{options?.version.length > 0 && (
+				<>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("reCAPTCHA sitekey", "user-verification")}
+						</label>
+						<PGinputText
+							value={options?.sitekey}
+							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+							onChange={(newVal) => {
+								var optionsX = {
+									...options,
+									sitekey: newVal.target.value,
+								};
+								setoptions(optionsX);
+							}}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("reCAPTCHA secret key", "user-verification")}
+						</label>
+						<PGinputText
+							value={options?.secretkey}
+							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+							onChange={(newVal) => {
+								var optionsX = {
+									...options,
+									secretkey: newVal.target.value,
+								};
+								setoptions(optionsX);
+							}}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Recaptcha on default login page", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.default_login_page}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, default_login_page: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__(
+								"Recaptcha on default registration page",
+								"user-verification"
+							)}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.default_registration_page}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = {
+									...options,
+									default_registration_page: newVal,
+								};
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__(
+								"Recaptcha on default reset password page",
+								"user-verification"
+							)}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.default_lostpassword_page}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = {
+									...options,
+									default_lostpassword_page: newVal,
+								};
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Recaptcha on comment forms", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.comment_form}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, comment_form: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }
