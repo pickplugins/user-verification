@@ -5486,28 +5486,32 @@ function Html(props) {
   };
   var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
-  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
-    name: "overview",
-    title: "Overview",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"],
-    className: "tab-overview",
-    hidden: false,
-    isPro: false
-  }, {
+  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([
+  // {
+  // 	name: "overview",
+  // 	title: "Overview",
+  // 	icon: settings,
+  // 	className: "tab-overview",
+  // 	hidden: false,
+  // 	isPro: false,
+  // },
+  {
     name: "tabEmailVerification",
     title: "Email Verification",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"],
     className: "tab-tabEmailVerification",
     hidden: false,
     isPro: false
-  }, {
-    name: "magicLogin",
-    title: "Magic Login",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"],
-    className: "tab-magicLogin",
-    hidden: false,
-    isPro: false
-  }, {
+  },
+  // {
+  // 	name: "magicLogin",
+  // 	title: "Magic Login",
+  // 	icon: settings,
+  // 	className: "tab-magicLogin",
+  // 	hidden: false,
+  // 	isPro: false,
+  // },
+  {
     name: "tabEmailOTP",
     title: "Email OTP",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"],
@@ -5549,14 +5553,17 @@ function Html(props) {
     className: "tab-tabTools",
     hidden: false,
     isPro: false
-  }, {
-    name: "emailValidation",
-    title: "Email Validation",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"],
-    className: "tab-emailValidation",
-    hidden: false,
-    isPro: false
-  }, {
+  },
+  // {
+  // 	name: "emailValidation",
+  // 	title: "Email Validation",
+  // 	icon: settings,
+  // 	className: "tab-emailValidation",
+  // 	hidden: false,
+  // 	isPro: false,
+  // },
+
+  {
     name: "tabHelp",
     title: "Help & support",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_17__["default"],
@@ -5777,7 +5784,7 @@ function Html(props) {
     target: "_blank",
     className: " no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Create Support", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
-    href: "https://comboblocks.com/documentations/",
+    href: "https://pickplugins.com/doc-category/user-verification/",
     target: "_blank",
     className: " no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white   hover:text-white "
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Documentation", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
@@ -5799,12 +5806,12 @@ function Html(props) {
     id: "",
     className: "pg-setting-input-text  "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    activeTab: "overview",
+    activeTab: "tabEmailVerification",
     orientation: "vertical",
     contentClass: " p-5 bg-white w-full",
     navItemsWrapClass: "block w-[300px]",
-    navItemClass: "bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500",
-    navItemSelectedClass: "bg-gray-700",
+    navItemClass: "bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500 ",
+    navItemSelectedClass: "bg-white ",
     activeClass: "active-tab",
     onSelect: tabName => {},
     tabs: dashboardTabs
