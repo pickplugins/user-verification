@@ -3,7 +3,7 @@ const { Component } = wp.element;
 
 import { __ } from "@wordpress/i18n";
 import React from "react";
-import Select from "react-select/base";
+import Select from "react-select";
 import PGinputSelect from "../input-select";
 
 function Html(props) {
@@ -144,7 +144,6 @@ function Html(props) {
 						</label>
 						<div className="flex flex-1 items-center gap-2">
 							<Select
-								// val={val.exclude_user_roles}
 								className="flex-1"
 								value={options?.exclude_user_roles.map(
 									(role) =>
@@ -154,8 +153,11 @@ function Html(props) {
 								isMulti
 								closeMenuOnSelect={false}
 								onChange={(newVal) => {
-									var optionsX = { ...options, exclude_user_roles: newVal };
-									setoptions(optionsX);
+									const selectedValues = newVal.map((option) => option.value);
+									setoptions({
+										...options,
+										exclude_user_roles: selectedValues,
+									});
 								}}
 								multiple={false}
 							/>
