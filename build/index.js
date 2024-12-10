@@ -2840,6 +2840,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
 /* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
+/* harmony import */ var _input_textarea__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../input-textarea */ "./src/components/input-textarea/index.js");
 
 
 const {
@@ -2851,11 +2852,14 @@ const {
 
 
 
+
 function Html(props) {
   if (!props.warn) {
     return null;
   }
   var onChange = props.onChange;
+  var [editorType, seteditorType] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)("rich"); // Using the hook.
+
   var [options, setoptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(props.options); // Using the hook.
   var [registration, setregistration] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   var [verification, setverification] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -2934,7 +2938,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-1"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "py-[10px] px-[15px] bg-gray-400 ",
+    className: "p-4 cursor-pointer bg-gray-400 hover:bg-gray-500",
     onClick: () => {
       setregistration(!registration);
     }
@@ -2953,11 +2957,11 @@ function Html(props) {
     inputClass: "!py-1 px-2  border-2 border-solid",
     val: options?.email_templates_data?.user_registered?.enable,
     options: [{
-      label: "Yes",
-      value: "yes"
-    }, {
       label: "No",
       value: "no"
+    }, {
+      label: "Yes",
+      value: "yes"
     }],
     onChange: newVal => {
       var optionsX = {
@@ -3104,7 +3108,19 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
+    onClick: ev => {
+      seteditorType("text");
+    }
+  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
+    onClick: ev => {
+      seteditorType("rich");
+    }
+  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
     tagName: "div",
     value: options?.email_templates_data?.user_registered?.html,
     allowedFormats: ["core/bold", "core/italic", "core/link"],
@@ -3127,6 +3143,22 @@ function Html(props) {
     // }}
     ,
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
+  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    value: options?.email_templates_data?.user_registered?.html,
+    className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          user_registered: {
+            ...options.email_templates_data.user_registered,
+            html: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
   }, "Parameter"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3176,7 +3208,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{ac_activaton_url}`)), " ", `=>`, " Account activation URL"), "Available parameter for this email template"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-1"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "py-[10px] px-[15px] bg-gray-400 ",
+    className: "p-4 cursor-pointer bg-gray-400 hover:bg-gray-500 ",
     onClick: () => {
       setverification(!verification);
     }
@@ -3195,11 +3227,11 @@ function Html(props) {
     inputClass: "!py-1 px-2  border-2 border-solid",
     val: options?.email_templates_data?.email_confirmed?.enable,
     options: [{
-      label: "Yes",
-      value: "yes"
-    }, {
       label: "No",
       value: "no"
+    }, {
+      label: "Yes",
+      value: "yes"
     }],
     onChange: newVal => {
       var optionsX = {
@@ -3409,7 +3441,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{user_email}`)), " ", `=>`, " User email address"), "Available parameter for this email template"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-1"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "py-[10px] px-[15px] bg-gray-400 ",
+    className: "p-4 cursor-pointer bg-gray-400 hover:bg-gray-500",
     onClick: () => {
       setactivation(!activation);
     }
@@ -3428,11 +3460,11 @@ function Html(props) {
     inputClass: "!py-1 px-2  border-2 border-solid",
     val: options?.email_templates_data?.email_resend_key?.enable,
     options: [{
-      label: "Yes",
-      value: "yes"
-    }, {
       label: "No",
       value: "no"
+    }, {
+      label: "Yes",
+      value: "yes"
     }],
     onChange: newVal => {
       var optionsX = {
@@ -3646,7 +3678,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{ac_activaton_url}`)), " ", `=>`, " Account activation URL"), "Available parameter for this email template"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-1"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "py-[10px] px-[15px] bg-gray-400 ",
+    className: "p-4 cursor-pointer bg-gray-400 hover:bg-gray-500",
     onClick: () => {
       setotp(!otp);
     }
@@ -3665,11 +3697,11 @@ function Html(props) {
     inputClass: "!py-1 px-2  border-2 border-solid",
     val: options?.email_templates_data?.send_mail_otp?.enable,
     options: [{
-      label: "Yes",
-      value: "yes"
-    }, {
       label: "No",
       value: "no"
+    }, {
+      label: "Yes",
+      value: "yes"
     }],
     onChange: newVal => {
       var optionsX = {
@@ -3979,7 +4011,7 @@ function Html(props) {
       setoptions(optionsX);
     },
     multiple: false
-  })), options?.enable === "yes" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), options?.enable == "yes" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
@@ -5984,16 +6016,14 @@ function Html(props) {
   };
   var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
-  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([
-  // {
-  // 	name: "overview",
-  // 	title: "Overview",
-  // 	icon: settings,
-  // 	className: "tab-overview",
-  // 	hidden: false,
-  // 	isPro: false,
-  // },
-  {
+  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
+    name: "overview",
+    title: "Overview",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    className: "tab-overview",
+    hidden: false,
+    isPro: false
+  }, {
     name: "tabEmailVerification",
     title: "Email Verification",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
@@ -6967,6 +6997,88 @@ class PGinputText extends Component {
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGinputText);
+
+/***/ }),
+
+/***/ "./src/components/input-textarea/index.js":
+/*!************************************************!*\
+  !*** ./src/components/input-textarea/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+const {
+  Component
+} = wp.element;
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
+    className: props.className,
+    id: props.id,
+    size: props.size,
+    name: props.name,
+    placeholder: props.placeholder,
+    minlength: props.minlength,
+    maxlength: props.maxlength,
+    required: props.required,
+    disabled: props.disabled,
+    onChange: newVal => {
+      props.onChange(newVal);
+    }
+  }, props.value);
+}
+class PGinputTextarea extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+  render() {
+    var {
+      value,
+      placeholder,
+      className,
+      id,
+      name,
+      size,
+      minlength,
+      maxlength,
+      required,
+      disabled,
+      onChange
+    } = this.props;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+      value: value,
+      name: name,
+      id: id,
+      size: size,
+      placeholder: placeholder,
+      className: className,
+      minlength: minlength,
+      maxlength: maxlength,
+      required: required,
+      disabled: disabled,
+      onChange: onChange,
+      warn: this.state.showWarning
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PGinputTextarea);
 
 /***/ }),
 
