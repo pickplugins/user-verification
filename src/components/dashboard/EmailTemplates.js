@@ -7,6 +7,7 @@ import { __ } from "@wordpress/i18n";
 import React from "react";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
+import PGinputTextarea from "../input-textarea";
 
 function Html(props) {
 	if (!props.warn) {
@@ -14,6 +15,8 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
+
+	var [editorType, seteditorType] = useState("rich"); // Using the hook.
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
 	var [registration, setregistration] = useState(false);
@@ -113,7 +116,7 @@ function Html(props) {
 			<div className="my-5">
 				<div className="my-1">
 					<div
-						className="py-[10px] px-[15px] bg-gray-400 "
+						className="p-4 cursor-pointer bg-gray-400 hover:bg-gray-500"
 						onClick={() => {
 							setregistration(!registration);
 						}}>
@@ -137,8 +140,8 @@ function Html(props) {
 								inputClass="!py-1 px-2  border-2 border-solid"
 								val={options?.email_templates_data?.user_registered?.enable}
 								options={[
-									{ label: "Yes", value: "yes" },
 									{ label: "No", value: "no" },
+									{ label: "Yes", value: "yes" },
 								]}
 								onChange={(newVal) => {
 									var optionsX = {
@@ -302,46 +305,66 @@ function Html(props) {
 							<label className="w-[400px]" htmlFor="emailVerification">
 								{__("Email body", "user-verification")}
 							</label>
-							<RichText
-								tagName={"div"}
-								value={options?.email_templates_data?.user_registered?.html}
-								allowedFormats={["core/bold", "core/italic", "core/link"]}
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												html: newVal.target.value,
+
+							<div className="flex ">
+								<div className={`${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`} onClick={ev => {
+									seteditorType("text")
+
+								}}>Text</div>
+								<div className={`${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`} onClick={ev => {
+									seteditorType("rich")
+
+								}}>Rich</div>
+							</div>
+
+
+							{editorType == "rich" && (
+								<RichText
+									tagName={"div"}
+									value={options?.email_templates_data?.user_registered?.html}
+									allowedFormats={["core/bold", "core/italic", "core/link"]}
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												user_registered: {
+													...options.email_templates_data.user_registered,
+													html: newVal.target.value,
+												},
 											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-								// onChange={(content) => {
-								// 	var options = { ...text.options, content: content };
-								// 	setAttributes({ text: { ...text, options: options } });
-								// }}
-								placeholder={__("Start Writing...")}
-							/>
-							{/* <PGinputText
-								value={options?.email_templates_data?.user_registered?.subject}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												subject: newVal.target.value,
+										};
+										setoptions(optionsX);
+									}}
+									// onChange={(content) => {
+									// 	var options = { ...text.options, content: content };
+									// 	setAttributes({ text: { ...text, options: options } });
+									// }}
+									placeholder={__("Start Writing...")}
+								/>
+							)}
+							{editorType == "text" && (
+								<PGinputTextarea
+									value={options?.email_templates_data?.user_registered?.html}
+									className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												user_registered: {
+													...options.email_templates_data.user_registered,
+													html: newVal.target.value,
+												},
 											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/> */}
+										};
+										setoptions(optionsX);
+									}}
+								/>
+
+							)}
+
+
 						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
@@ -417,7 +440,7 @@ function Html(props) {
 				</div>
 				<div className="my-1">
 					<div
-						className="py-[10px] px-[15px] bg-gray-400 "
+						className="p-4 cursor-pointer bg-gray-400 hover:bg-gray-500 "
 						onClick={() => {
 							setverification(!verification);
 						}}>
@@ -441,8 +464,8 @@ function Html(props) {
 								inputClass="!py-1 px-2  border-2 border-solid"
 								val={options?.email_templates_data?.email_confirmed?.enable}
 								options={[
-									{ label: "Yes", value: "yes" },
 									{ label: "No", value: "no" },
+									{ label: "Yes", value: "yes" },
 								]}
 								onChange={(newVal) => {
 									var optionsX = {
@@ -694,7 +717,7 @@ function Html(props) {
 				</div>
 				<div className="my-1">
 					<div
-						className="py-[10px] px-[15px] bg-gray-400 "
+						className="p-4 cursor-pointer bg-gray-400 hover:bg-gray-500"
 						onClick={() => {
 							setactivation(!activation);
 						}}>
@@ -718,8 +741,8 @@ function Html(props) {
 								inputClass="!py-1 px-2  border-2 border-solid"
 								val={options?.email_templates_data?.email_resend_key?.enable}
 								options={[
-									{ label: "Yes", value: "yes" },
 									{ label: "No", value: "no" },
+									{ label: "Yes", value: "yes" },
 								]}
 								onChange={(newVal) => {
 									var optionsX = {
@@ -979,7 +1002,7 @@ function Html(props) {
 				</div>
 				<div className="my-1">
 					<div
-						className="py-[10px] px-[15px] bg-gray-400 "
+						className="p-4 cursor-pointer bg-gray-400 hover:bg-gray-500"
 						onClick={() => {
 							setotp(!otp);
 						}}>
@@ -1003,8 +1026,9 @@ function Html(props) {
 								inputClass="!py-1 px-2  border-2 border-solid"
 								val={options?.email_templates_data?.send_mail_otp?.enable}
 								options={[
-									{ label: "Yes", value: "yes" },
+
 									{ label: "No", value: "no" },
+									{ label: "Yes", value: "yes" },
 								]}
 								onChange={(newVal) => {
 									var optionsX = {

@@ -57,7 +57,7 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-			{options?.enable === "yes" && (
+			{options?.enable == "yes" && (
 				<>
 					<div className="flex  my-5  justify-between items-center">
 						<label className="w-[400px]" htmlFor="emailVerification">
