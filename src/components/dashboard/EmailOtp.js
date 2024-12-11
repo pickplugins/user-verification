@@ -94,7 +94,7 @@ function Html(props) {
 			</div>
 
 
-			{options.enable_default_login == 'yes' && (
+			{options?.enable_default_login == 'yes' && (
 
 				<div className="flex  my-5  justify-between items-center">
 					<label className="w-[400px]" htmlFor="emailVerification">
