@@ -2899,16 +2899,31 @@ function Html(props) {
     render: ({
       open
     }) => {
-      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, imageUrl && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex flex-col items-center gap-2"
+      }, imageUrl && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
         src: imageUrl,
         alt: "",
-        className: "cursor-pointer rounded-md",
+        className: "cursor-pointer rounded-md max-w-[160px] max-h-[160px] object-contain border border-solid border-gray-300 p-1",
         onClick: () => {
           open();
         }
-      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
-        onClick: open
-      }, "Open Media Library"));
+      }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+        className: "flex items-center gap-2"
+      }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+        onClick: open,
+        className: "no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white"
+      }, "Open Media Library"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("button", {
+        onClick: () => {
+          var optionsX = {
+            ...options,
+            logo_id: ""
+          };
+          setoptions(optionsX);
+        },
+        className: "no-underline size-[38px] flex items-center justify-center text-[30px] rounded-sm !border !bg-transparent !border-solid !border-gray-700 hover:!border-red-700 text-gray-700   hover:text-red-700",
+        title: "Clear Logo"
+      }, "\xD7")));
     }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex my-5 justify-between items-center "
@@ -2977,7 +2992,7 @@ function Html(props) {
       setoptions(optionsX);
     },
     multiple: false
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), options?.email_templates_data?.user_registered?.enable === "yes" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
@@ -3103,7 +3118,7 @@ function Html(props) {
       };
       setoptions(optionsX);
     }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col  my-5 gap-4 "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
@@ -3247,7 +3262,7 @@ function Html(props) {
       setoptions(optionsX);
     },
     multiple: false
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), options?.email_templates_data?.email_confirmed?.enable === "yes" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
@@ -3373,12 +3388,24 @@ function Html(props) {
       };
       setoptions(optionsX);
     }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col  my-5 gap-4 "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
+    onClick: ev => {
+      seteditorType("text");
+    }
+  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
+    onClick: ev => {
+      seteditorType("rich");
+    }
+  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
     tagName: "div",
     value: options?.email_templates_data?.email_confirmed?.html,
     allowedFormats: ["core/bold", "core/italic", "core/link"],
@@ -3396,6 +3423,22 @@ function Html(props) {
       setoptions(optionsX);
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
+  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    value: options?.email_templates_data?.email_confirmed?.html,
+    className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          email_confirmed: {
+            ...options.email_templates_data.email_confirmed,
+            html: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
   }, "Parameter"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3480,7 +3523,7 @@ function Html(props) {
       setoptions(optionsX);
     },
     multiple: false
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), options?.email_templates_data?.email_resend_key?.enable === "yes" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
@@ -3606,12 +3649,24 @@ function Html(props) {
       };
       setoptions(optionsX);
     }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col  my-5 gap-4 "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
+    onClick: ev => {
+      seteditorType("text");
+    }
+  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
+    onClick: ev => {
+      seteditorType("rich");
+    }
+  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
     tagName: "div",
     value: options?.email_templates_data?.email_resend_key?.html,
     allowedFormats: ["core/bold", "core/italic", "core/link"],
@@ -3629,6 +3684,22 @@ function Html(props) {
       setoptions(optionsX);
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
+  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    value: options?.email_templates_data?.email_resend_key?.html,
+    className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          email_resend_key: {
+            ...options.email_templates_data.email_resend_key,
+            html: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
   }, "Parameter"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -3717,7 +3788,7 @@ function Html(props) {
       setoptions(optionsX);
     },
     multiple: false
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), options?.email_templates_data?.send_mail_otp?.enable === "yes" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
@@ -3843,12 +3914,24 @@ function Html(props) {
       };
       setoptions(optionsX);
     }
-  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex flex-col  my-5 gap-4 "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
+    onClick: ev => {
+      seteditorType("text");
+    }
+  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
+    onClick: ev => {
+      seteditorType("rich");
+    }
+  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
     tagName: "div",
     value: options?.email_templates_data?.send_mail_otp?.html,
     allowedFormats: ["core/bold", "core/italic", "core/link"],
@@ -3866,6 +3949,22 @@ function Html(props) {
       setoptions(optionsX);
     },
     placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
+  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    value: options?.email_templates_data?.send_mail_otp?.html,
+    className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_mail_otp: {
+            ...options.email_templates_data.send_mail_otp,
+            html: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     htmlFor: ""
   }, "Parameter"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -6016,16 +6115,14 @@ function Html(props) {
   };
   var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
-  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([
-  // {
-  // 	name: "overview",
-  // 	title: "Overview",
-  // 	icon: settings,
-  // 	className: "tab-overview",
-  // 	hidden: false,
-  // 	isPro: false,
-  // },
-  {
+  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
+    name: "overview",
+    title: "Overview",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    className: "tab-overview",
+    hidden: false,
+    isPro: false
+  }, {
     name: "tabEmailVerification",
     title: "Email Verification",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],

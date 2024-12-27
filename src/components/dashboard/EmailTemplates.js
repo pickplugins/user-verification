@@ -49,7 +49,6 @@ function Html(props) {
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Email logo", "user-verification")}
 				</label>
-				{/* <MediaUploadCheck> */}
 				<MediaUpload
 					onSelect={(media) => {
 						var optionsX = {
@@ -58,39 +57,44 @@ function Html(props) {
 						};
 						setoptions(optionsX);
 					}}
-					onClose={() => { }}
+					onClose={() => {}}
 					allowedTypes={ALLOWED_MEDIA_TYPES}
 					value={options?.logo_id}
 					render={({ open }) => {
 						return (
-							<>
+							<div className="flex flex-col items-center gap-2">
 								{imageUrl && (
 									<img
 										src={imageUrl}
 										alt=""
-										className="cursor-pointer rounded-md"
+										className="cursor-pointer rounded-md max-w-[160px] max-h-[160px] object-contain border border-solid border-gray-300 p-1"
 										onClick={() => {
 											open();
 										}}
 									/>
 								)}
-								<button onClick={open}>Open Media Library</button>
-							</>
+								<div className="flex items-center gap-2">
+									<button
+										onClick={open}
+										className="no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white">
+										Open Media Library
+									</button>
+									<button
+										onClick={() => {
+											var optionsX = {
+												...options,
+												logo_id: "",
+											};
+											setoptions(optionsX);
+										}}
+										className="no-underline size-[38px] flex items-center justify-center text-[30px] rounded-sm !border !bg-transparent !border-solid !border-gray-700 hover:!border-red-700 text-gray-700   hover:text-red-700"
+										title="Clear Logo">
+										&times;
+									</button>
+								</div>
+							</div>
 						);
 					}}></MediaUpload>
-				{/* </MediaUploadCheck> */}
-				{/* <PGinputFile
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.logo_id}
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						console.log(newVal);
-					}}
-					multiple={false}
-				/> */}
 			</div>
 			<div className="flex my-5 justify-between items-center ">
 				<label className="w-[400px]" htmlFor="emailVerification">
@@ -160,163 +164,182 @@ function Html(props) {
 							/>
 						</div>
 
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email Bcc", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.user_registered?.email_bcc
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												email_bcc: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.user_registered
-										?.email_from_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												email_from_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.user_registered?.email_from
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												email_from: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.user_registered?.reply_to_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												reply_to_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.user_registered?.reply_to}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												reply_to: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email subject", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.user_registered?.subject}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											user_registered: {
-												...options.email_templates_data.user_registered,
-												subject: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
+						{options?.email_templates_data?.user_registered?.enable ===
+							"yes" && (
+							<>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email Bcc", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.user_registered?.email_bcc
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													user_registered: {
+														...options.email_templates_data.user_registered,
+														email_bcc: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.user_registered
+												?.email_from_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													user_registered: {
+														...options.email_templates_data.user_registered,
+														email_from_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.user_registered?.email_from
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													user_registered: {
+														...options.email_templates_data.user_registered,
+														email_from: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.user_registered
+												?.reply_to_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													user_registered: {
+														...options.email_templates_data.user_registered,
+														reply_to_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.user_registered?.reply_to
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													user_registered: {
+														...options.email_templates_data.user_registered,
+														reply_to: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email subject", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.user_registered?.subject
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													user_registered: {
+														...options.email_templates_data.user_registered,
+														subject: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+							</>
+						)}
 						<div className="flex flex-col  my-5 gap-4 ">
 							<label className="w-[400px]" htmlFor="emailVerification">
 								{__("Email body", "user-verification")}
 							</label>
 
 							<div className="flex ">
-								<div className={`${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`} onClick={ev => {
-									seteditorType("text")
-
-								}}>Text</div>
-								<div className={`${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`} onClick={ev => {
-									seteditorType("rich")
-
-								}}>Rich</div>
+								<div
+									className={`${
+										editorType == "text" ? "bg-gray-500" : "bg-gray-400"
+									} p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("text");
+									}}>
+									Text
+								</div>
+								<div
+									className={`${
+										editorType == "rich" ? "bg-gray-500" : "bg-gray-400"
+									}  p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("rich");
+									}}>
+									Rich
+								</div>
 							</div>
-
 
 							{editorType == "rich" && (
 								<RichText
@@ -361,10 +384,7 @@ function Html(props) {
 										setoptions(optionsX);
 									}}
 								/>
-
 							)}
-
-
 						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
@@ -483,171 +503,222 @@ function Html(props) {
 								multiple={false}
 							/>
 						</div>
+						{options?.email_templates_data?.email_confirmed?.enable ===
+							"yes" && (
+							<>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email Bcc", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_confirmed?.email_bcc
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_confirmed: {
+														...options.email_templates_data.email_confirmed,
+														email_bcc: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_confirmed
+												?.email_from_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_confirmed: {
+														...options.email_templates_data.email_confirmed,
+														email_from_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_confirmed?.email_from
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_confirmed: {
+														...options.email_templates_data.email_confirmed,
+														email_from: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_confirmed
+												?.reply_to_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_confirmed: {
+														...options.email_templates_data.email_confirmed,
+														reply_to_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_confirmed?.reply_to
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_confirmed: {
+														...options.email_templates_data.email_confirmed,
+														reply_to: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email subject", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_confirmed?.subject
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_confirmed: {
+														...options.email_templates_data.email_confirmed,
+														subject: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+							</>
+						)}
 
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email Bcc", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_confirmed?.email_bcc
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_confirmed: {
-												...options.email_templates_data.email_confirmed,
-												email_bcc: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_confirmed
-										?.email_from_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_confirmed: {
-												...options.email_templates_data.email_confirmed,
-												email_from_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_confirmed?.email_from
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_confirmed: {
-												...options.email_templates_data.email_confirmed,
-												email_from: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_confirmed?.reply_to_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_confirmed: {
-												...options.email_templates_data.email_confirmed,
-												reply_to_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.email_confirmed?.reply_to}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_confirmed: {
-												...options.email_templates_data.email_confirmed,
-												reply_to: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email subject", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.email_confirmed?.subject}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_confirmed: {
-												...options.email_templates_data.email_confirmed,
-												subject: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
 						<div className="flex flex-col  my-5 gap-4 ">
 							<label className="w-[400px]" htmlFor="emailVerification">
 								{__("Email body", "user-verification")}
 							</label>
-							<RichText
-								tagName={"div"}
-								value={options?.email_templates_data?.email_confirmed?.html}
-								allowedFormats={["core/bold", "core/italic", "core/link"]}
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_confirmed: {
-												...options.email_templates_data.email_confirmed,
-												html: newVal.target.value,
+							<div className="flex ">
+								<div
+									className={`${
+										editorType == "text" ? "bg-gray-500" : "bg-gray-400"
+									} p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("text");
+									}}>
+									Text
+								</div>
+								<div
+									className={`${
+										editorType == "rich" ? "bg-gray-500" : "bg-gray-400"
+									}  p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("rich");
+									}}>
+									Rich
+								</div>
+							</div>
+							{editorType == "rich" && (
+								<RichText
+									tagName={"div"}
+									value={options?.email_templates_data?.email_confirmed?.html}
+									allowedFormats={["core/bold", "core/italic", "core/link"]}
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												email_confirmed: {
+													...options.email_templates_data.email_confirmed,
+													html: newVal.target.value,
+												},
 											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-								placeholder={__("Start Writing...")}
-							/>
+										};
+										setoptions(optionsX);
+									}}
+									placeholder={__("Start Writing...")}
+								/>
+							)}
+							{editorType == "text" && (
+								<PGinputTextarea
+									value={options?.email_templates_data?.email_confirmed?.html}
+									className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												email_confirmed: {
+													...options.email_templates_data.email_confirmed,
+													html: newVal.target.value,
+												},
+											},
+										};
+										setoptions(optionsX);
+									}}
+								/>
+							)}
 						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
@@ -760,173 +831,223 @@ function Html(props) {
 								multiple={false}
 							/>
 						</div>
+						{options?.email_templates_data?.email_resend_key?.enable ===
+							"yes" && (
+							<>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email Bcc", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_resend_key?.email_bcc
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_resend_key: {
+														...options.email_templates_data.email_resend_key,
+														email_bcc: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_resend_key
+												?.email_from_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_resend_key: {
+														...options.email_templates_data.email_resend_key,
+														email_from_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_resend_key
+												?.email_from
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_resend_key: {
+														...options.email_templates_data.email_resend_key,
+														email_from: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_resend_key
+												?.reply_to_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_resend_key: {
+														...options.email_templates_data.email_resend_key,
+														reply_to_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_resend_key?.reply_to
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_resend_key: {
+														...options.email_templates_data.email_resend_key,
+														reply_to: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email subject", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.email_resend_key?.subject
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													email_resend_key: {
+														...options.email_templates_data.email_resend_key,
+														subject: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+							</>
+						)}
 
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email Bcc", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_resend_key?.email_bcc
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_resend_key: {
-												...options.email_templates_data.email_resend_key,
-												email_bcc: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_resend_key
-										?.email_from_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_resend_key: {
-												...options.email_templates_data.email_resend_key,
-												email_from_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_resend_key?.email_from
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_resend_key: {
-												...options.email_templates_data.email_resend_key,
-												email_from: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_resend_key?.reply_to_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_resend_key: {
-												...options.email_templates_data.email_resend_key,
-												reply_to_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.email_resend_key?.reply_to
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_resend_key: {
-												...options.email_templates_data.email_resend_key,
-												reply_to: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email subject", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.email_resend_key?.subject}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_resend_key: {
-												...options.email_templates_data.email_resend_key,
-												subject: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
 						<div className="flex flex-col  my-5 gap-4 ">
 							<label className="w-[400px]" htmlFor="emailVerification">
 								{__("Email body", "user-verification")}
 							</label>
-							<RichText
-								tagName={"div"}
-								value={options?.email_templates_data?.email_resend_key?.html}
-								allowedFormats={["core/bold", "core/italic", "core/link"]}
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											email_resend_key: {
-												...options.email_templates_data.email_resend_key,
-												html: newVal.target.value,
+							<div className="flex ">
+								<div
+									className={`${
+										editorType == "text" ? "bg-gray-500" : "bg-gray-400"
+									} p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("text");
+									}}>
+									Text
+								</div>
+								<div
+									className={`${
+										editorType == "rich" ? "bg-gray-500" : "bg-gray-400"
+									}  p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("rich");
+									}}>
+									Rich
+								</div>
+							</div>
+							{editorType == "rich" && (
+								<RichText
+									tagName={"div"}
+									value={options?.email_templates_data?.email_resend_key?.html}
+									allowedFormats={["core/bold", "core/italic", "core/link"]}
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												email_resend_key: {
+													...options.email_templates_data.email_resend_key,
+													html: newVal.target.value,
+												},
 											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-								placeholder={__("Start Writing...")}
-							/>
+										};
+										setoptions(optionsX);
+									}}
+									placeholder={__("Start Writing...")}
+								/>
+							)}
+							{editorType == "text" && (
+								<PGinputTextarea
+									value={options?.email_templates_data?.email_resend_key?.html}
+									className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												email_resend_key: {
+													...options.email_templates_data.email_resend_key,
+													html: newVal.target.value,
+												},
+											},
+										};
+										setoptions(optionsX);
+									}}
+								/>
+							)}
 						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
@@ -1026,7 +1147,6 @@ function Html(props) {
 								inputClass="!py-1 px-2  border-2 border-solid"
 								val={options?.email_templates_data?.send_mail_otp?.enable}
 								options={[
-
 									{ label: "No", value: "no" },
 									{ label: "Yes", value: "yes" },
 								]}
@@ -1046,166 +1166,221 @@ function Html(props) {
 								multiple={false}
 							/>
 						</div>
+						{options?.email_templates_data?.send_mail_otp?.enable === "yes" && (
+							<>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email Bcc", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_mail_otp?.email_bcc
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_mail_otp: {
+														...options.email_templates_data.send_mail_otp,
+														email_bcc: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_mail_otp
+												?.email_from_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_mail_otp: {
+														...options.email_templates_data.send_mail_otp,
+														email_from_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_mail_otp?.email_from
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_mail_otp: {
+														...options.email_templates_data.send_mail_otp,
+														email_from: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_mail_otp
+												?.reply_to_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_mail_otp: {
+														...options.email_templates_data.send_mail_otp,
+														reply_to_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_mail_otp?.reply_to
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_mail_otp: {
+														...options.email_templates_data.send_mail_otp,
+														reply_to: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email subject", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_mail_otp?.subject
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_mail_otp: {
+														...options.email_templates_data.send_mail_otp,
+														subject: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+							</>
+						)}
 
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email Bcc", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.send_mail_otp?.email_bcc}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											send_mail_otp: {
-												...options.email_templates_data.send_mail_otp,
-												email_bcc: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.send_mail_otp?.email_from_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											send_mail_otp: {
-												...options.email_templates_data.send_mail_otp,
-												email_from_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email from", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.send_mail_otp?.email_from}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											send_mail_otp: {
-												...options.email_templates_data.send_mail_otp,
-												email_from: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to name", "user-verification")}
-							</label>
-							<PGinputText
-								value={
-									options?.email_templates_data?.send_mail_otp?.reply_to_name
-								}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											send_mail_otp: {
-												...options.email_templates_data.send_mail_otp,
-												reply_to_name: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Reply to", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.send_mail_otp?.reply_to}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											send_mail_otp: {
-												...options.email_templates_data.send_mail_otp,
-												reply_to: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
-						<div className="flex  my-5  justify-between items-center">
-							<label className="w-[400px]" htmlFor="emailVerification">
-								{__("Email subject", "user-verification")}
-							</label>
-							<PGinputText
-								value={options?.email_templates_data?.send_mail_otp?.subject}
-								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											send_mail_otp: {
-												...options.email_templates_data.send_mail_otp,
-												subject: newVal.target.value,
-											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-							/>
-						</div>
 						<div className="flex flex-col  my-5 gap-4 ">
 							<label className="w-[400px]" htmlFor="emailVerification">
 								{__("Email body", "user-verification")}
 							</label>
-							<RichText
-								tagName={"div"}
-								value={options?.email_templates_data?.send_mail_otp?.html}
-								allowedFormats={["core/bold", "core/italic", "core/link"]}
-								onChange={(newVal) => {
-									var optionsX = {
-										...options,
-										email_templates_data: {
-											...options.email_templates_data,
-											send_mail_otp: {
-												...options.email_templates_data.send_mail_otp,
-												html: newVal.target.value,
+							<div className="flex ">
+								<div
+									className={`${
+										editorType == "text" ? "bg-gray-500" : "bg-gray-400"
+									} p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("text");
+									}}>
+									Text
+								</div>
+								<div
+									className={`${
+										editorType == "rich" ? "bg-gray-500" : "bg-gray-400"
+									}  p-3 px-5`}
+									onClick={(ev) => {
+										seteditorType("rich");
+									}}>
+									Rich
+								</div>
+							</div>
+							{editorType == "rich" && (
+								<RichText
+									tagName={"div"}
+									value={options?.email_templates_data?.send_mail_otp?.html}
+									allowedFormats={["core/bold", "core/italic", "core/link"]}
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												send_mail_otp: {
+													...options.email_templates_data.send_mail_otp,
+													html: newVal.target.value,
+												},
 											},
-										},
-									};
-									setoptions(optionsX);
-								}}
-								placeholder={__("Start Writing...")}
-							/>
+										};
+										setoptions(optionsX);
+									}}
+									placeholder={__("Start Writing...")}
+								/>
+							)}
+							{editorType == "text" && (
+								<PGinputTextarea
+									value={options?.email_templates_data?.send_mail_otp?.html}
+									className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+									onChange={(newVal) => {
+										var optionsX = {
+											...options,
+											email_templates_data: {
+												...options.email_templates_data,
+												send_mail_otp: {
+													...options.email_templates_data.send_mail_otp,
+													html: newVal.target.value,
+												},
+											},
+										};
+										setoptions(optionsX);
+									}}
+								/>
+							)}
 						</div>
 						<div>
 							<label htmlFor="">Parameter</label>
