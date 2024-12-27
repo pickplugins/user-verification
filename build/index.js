@@ -2629,8 +2629,8 @@ function Html(props) {
     onChange(options);
   }, [options]);
   const toggleCheckbox = value => {
-    const updatedSource = options.character_source.includes(value) ? options.character_source.filter(item => item !== value) // Remove if already selected
-    : [...options.character_source, value]; // Add if not selected
+    const updatedSource = options?.character_source?.includes(value) ? options?.character_source?.filter(item => item !== value) // Remove if already selected
+    : [...options?.character_source, value]; // Add if not selected
 
     setoptions({
       ...options,
@@ -2761,31 +2761,31 @@ function Html(props) {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("number"),
+    checked: options?.character_source?.includes("number"),
     onChange: () => toggleCheckbox("number")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Numbers (0-9)", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("uppercase"),
+    checked: options?.character_source?.includes("uppercase"),
     onChange: () => toggleCheckbox("uppercase")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Uppercase characters", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("lowercase"),
+    checked: options?.character_source?.includes("lowercase"),
     onChange: () => toggleCheckbox("lowercase")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Lowercase characters", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("special"),
+    checked: options?.character_source?.includes("special"),
     onChange: () => toggleCheckbox("special")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Special characters", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("extraspecial"),
+    checked: options?.character_source?.includes("extraspecial"),
     onChange: () => toggleCheckbox("extraspecial")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Extra Special characters", "user-verification"))))));
 }
@@ -2858,8 +2858,6 @@ function Html(props) {
     return null;
   }
   var onChange = props.onChange;
-  var [editorType, seteditorType] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)("rich"); // Using the hook.
-
   var [options, setoptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(props.options); // Using the hook.
   var [registration, setregistration] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   var [verification, setverification] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
@@ -3123,42 +3121,8 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
-    onClick: ev => {
-      seteditorType("text");
-    }
-  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
-    onClick: ev => {
-      seteditorType("rich");
-    }
-  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    tagName: "div",
-    value: options?.email_templates_data?.user_registered?.html,
-    allowedFormats: ["core/bold", "core/italic", "core/link"],
-    onChange: newVal => {
-      var optionsX = {
-        ...options,
-        email_templates_data: {
-          ...options.email_templates_data,
-          user_registered: {
-            ...options.email_templates_data.user_registered,
-            html: newVal.target.value
-          }
-        }
-      };
-      setoptions(optionsX);
-    }
-    // onChange={(content) => {
-    // 	var options = { ...text.options, content: content };
-    // 	setAttributes({ text: { ...text, options: options } });
-    // }}
-    ,
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
-  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "user_registered",
     value: options?.email_templates_data?.user_registered?.html,
     className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
     onChange: newVal => {
@@ -3393,37 +3357,8 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
-    onClick: ev => {
-      seteditorType("text");
-    }
-  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
-    onClick: ev => {
-      seteditorType("rich");
-    }
-  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    tagName: "div",
-    value: options?.email_templates_data?.email_confirmed?.html,
-    allowedFormats: ["core/bold", "core/italic", "core/link"],
-    onChange: newVal => {
-      var optionsX = {
-        ...options,
-        email_templates_data: {
-          ...options.email_templates_data,
-          email_confirmed: {
-            ...options.email_templates_data.email_confirmed,
-            html: newVal.target.value
-          }
-        }
-      };
-      setoptions(optionsX);
-    },
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
-  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "email_confirmed",
     value: options?.email_templates_data?.email_confirmed?.html,
     className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
     onChange: newVal => {
@@ -3654,37 +3589,8 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
-    onClick: ev => {
-      seteditorType("text");
-    }
-  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
-    onClick: ev => {
-      seteditorType("rich");
-    }
-  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    tagName: "div",
-    value: options?.email_templates_data?.email_resend_key?.html,
-    allowedFormats: ["core/bold", "core/italic", "core/link"],
-    onChange: newVal => {
-      var optionsX = {
-        ...options,
-        email_templates_data: {
-          ...options.email_templates_data,
-          email_resend_key: {
-            ...options.email_templates_data.email_resend_key,
-            html: newVal.target.value
-          }
-        }
-      };
-      setoptions(optionsX);
-    },
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
-  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "email_resend_key",
     value: options?.email_templates_data?.email_resend_key?.html,
     className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
     onChange: newVal => {
@@ -3919,37 +3825,8 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
     htmlFor: "emailVerification"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "flex "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "text" ? "bg-gray-500" : "bg-gray-400"} p-3 px-5`,
-    onClick: ev => {
-      seteditorType("text");
-    }
-  }, "Text"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: `${editorType == "rich" ? "bg-gray-500" : "bg-gray-400"}  p-3 px-5`,
-    onClick: ev => {
-      seteditorType("rich");
-    }
-  }, "Rich")), editorType == "rich" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText, {
-    tagName: "div",
-    value: options?.email_templates_data?.send_mail_otp?.html,
-    allowedFormats: ["core/bold", "core/italic", "core/link"],
-    onChange: newVal => {
-      var optionsX = {
-        ...options,
-        email_templates_data: {
-          ...options.email_templates_data,
-          send_mail_otp: {
-            ...options.email_templates_data.send_mail_otp,
-            html: newVal.target.value
-          }
-        }
-      };
-      setoptions(optionsX);
-    },
-    placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Start Writing...")
-  }), editorType == "text" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "send_mail_otp",
     value: options?.email_templates_data?.send_mail_otp?.html,
     className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
     onChange: newVal => {
@@ -7111,17 +6988,71 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
 
 const {
   Component
 } = wp.element;
+
 function Html(props) {
   if (!props.warn) {
     return null;
   }
+  const [content, setContent] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
+  console.log(props.id);
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    //tinymce.execCommand('mceAddEditor', true, props.id);
+
+    // console.log(props.id);
+
+    // wp.editor.initialize(props.id, {
+    //   tinymce: {
+    //     wpautop: true,
+    //     toolbar1:
+    //       "bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv",
+    //     toolbar2:
+    //       "formatselect alignjustify forecolor | pastetext removeformat charmap | outdent indent | undo redo | wp_help",
+    //   },
+    //   quicktags: true,
+    //   mediaButtons: true,
+    // });
+
+    // Function to capture content change
+    // const updateContent = () => {
+    //   const newContent = wp.editor.getContent(props.id);
+
+    //   console.log(newContent);
+
+    //   setContent(newContent);
+    // };
+
+    // // Listen for changes in the content
+    // document.getElementById(props.id).addEventListener('input', updateContent);
+
+    // Cleanup on unmount
+    // return () => {
+    //   document.getElementById(props.id).removeEventListener('input', updateContent);
+    // };
+
+    tinymce.init({
+      selector: "#" + props.id,
+      toolbar: "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat",
+      height: "500px",
+      setup: editor => {
+        editor.on("change", e => {
+          const newContent = editor.getContent(); // Get the updated content
+          console.log(newContent);
+          props.onChange(newContent);
+        });
+      }
+    });
+  }, []);
   return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     className: props.className,
     id: props.id,
+    value: props.value,
+    type: "text",
     size: props.size,
     name: props.name,
     placeholder: props.placeholder,
@@ -7129,8 +7060,8 @@ function Html(props) {
     maxlength: props.maxlength,
     required: props.required,
     disabled: props.disabled,
-    onChange: newVal => {
-      props.onChange(newVal);
+    onChange: e => {
+      props.onChange(e.target.value);
     }
   }, props.value);
 }

@@ -395,9 +395,20 @@ function user_verification_check_password_otp_default_login($check, $password, $
 Authenticate user via OTP
 */
 
-add_filter('wp_authenticate_user', 'user_verification_auth_otp_default_login', 99, 2);
+//add_filter('wp_authenticate_user', 'user_verification_auth_otp_default_login', 99, 2);
 function user_verification_auth_otp_default_login($user, $password)
 {
+
+    // $user_verification_settings = get_option('user_verification_settings');
+    // $email_otp = $user_verification_settings['email_otp'];
+    // $enable_default_login = $email_otp['enable_default_login'];
+
+    error_log(serialize($user));
+
+    // if ($enable_default_login == 'no') {
+    //     return $user;
+    // }
+
     require_once(ABSPATH . 'wp-includes/class-phpass.php');
     $user_id = isset($user->ID) ? $user->ID : '';
     $saved_otp = get_user_meta($user_id, 'uv_otp', true);
@@ -428,7 +439,7 @@ function user_verification_auth_otp_default_login($user, $password)
             if ($enable_default_login != 'yes') return $user;
 
             if (empty($password)) {
-                $error->add('empty_password', __('OTP should not empty. 1', 'user-verification'));
+                $error->add('empty_password', __('OTP should not empty.', 'user-verification'));
             }
 
             if (empty($saved_otp)) {
@@ -452,7 +463,7 @@ function user_verification_auth_otp_default_login($user, $password)
         if ($enable_default_login != 'yes') return $user;
 
         if (empty($password)) {
-            $error->add('otp_empty', __('OTP should not empty. 1', 'user-verification'));
+            $error->add('otp_empty', __('OTP should not empty.', 'user-verification'));
         }
 
         if (empty($saved_otp)) {
