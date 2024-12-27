@@ -65,7 +65,7 @@ callback: user_verification_login_recaptcha_validate
 
 */
 
-add_filter('wp_authenticate_user', 'user_verification_login_recaptcha_validate', 10, 2);
+//add_filter('wp_authenticate_user', 'user_verification_login_recaptcha_validate', 10, 2);
 function user_verification_login_recaptcha_validate($user, $password)
 {
     $return_value = $user;

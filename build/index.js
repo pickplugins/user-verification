@@ -2629,8 +2629,8 @@ function Html(props) {
     onChange(options);
   }, [options]);
   const toggleCheckbox = value => {
-    const updatedSource = options.character_source.includes(value) ? options.character_source.filter(item => item !== value) // Remove if already selected
-    : [...options.character_source, value]; // Add if not selected
+    const updatedSource = options?.character_source?.includes(value) ? options?.character_source?.filter(item => item !== value) // Remove if already selected
+    : [...options?.character_source, value]; // Add if not selected
 
     setoptions({
       ...options,
@@ -2712,7 +2712,7 @@ function Html(props) {
       setoptions(optionsX);
     },
     multiple: false
-  })), options.enable_default_login == 'yes' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  })), options?.enable_default_login == 'yes' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5  justify-between items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "w-[400px]",
@@ -2761,31 +2761,31 @@ function Html(props) {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("number"),
+    checked: options?.character_source?.includes("number"),
     onChange: () => toggleCheckbox("number")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Numbers (0-9)", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("uppercase"),
+    checked: options?.character_source?.includes("uppercase"),
     onChange: () => toggleCheckbox("uppercase")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Uppercase characters", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("lowercase"),
+    checked: options?.character_source?.includes("lowercase"),
     onChange: () => toggleCheckbox("lowercase")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Lowercase characters", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("special"),
+    checked: options?.character_source?.includes("special"),
     onChange: () => toggleCheckbox("special")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Special characters", "user-verification"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
     className: "flex items-center space-x-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("input", {
     type: "checkbox",
-    checked: options?.character_source.includes("extraspecial"),
+    checked: options?.character_source?.includes("extraspecial"),
     onChange: () => toggleCheckbox("extraspecial")
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", null, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Extra Special characters", "user-verification"))))));
 }
@@ -6016,14 +6016,16 @@ function Html(props) {
   };
   var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
   var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
-  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
-    name: "overview",
-    title: "Overview",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
-    className: "tab-overview",
-    hidden: false,
-    isPro: false
-  }, {
+  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([
+  // {
+  // 	name: "overview",
+  // 	title: "Overview",
+  // 	icon: settings,
+  // 	className: "tab-overview",
+  // 	hidden: false,
+  // 	isPro: false,
+  // },
+  {
     name: "tabEmailVerification",
     title: "Email Verification",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],

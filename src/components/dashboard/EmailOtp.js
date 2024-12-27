@@ -20,9 +20,9 @@ function Html(props) {
 	}, [options]);
 
 	const toggleCheckbox = (value) => {
-		const updatedSource = options.character_source.includes(value)
-			? options.character_source.filter((item) => item !== value) // Remove if already selected
-			: [...options.character_source, value]; // Add if not selected
+		const updatedSource = options?.character_source?.includes(value)
+			? options?.character_source?.filter((item) => item !== value) // Remove if already selected
+			: [...options?.character_source, value]; // Add if not selected
 
 		setoptions({ ...options, character_source: updatedSource });
 	};
@@ -94,7 +94,7 @@ function Html(props) {
 			</div>
 
 
-			{options.enable_default_login == 'yes' && (
+			{options?.enable_default_login == 'yes' && (
 
 				<div className="flex  my-5  justify-between items-center">
 					<label className="w-[400px]" htmlFor="emailVerification">
@@ -139,7 +139,7 @@ function Html(props) {
 					<label className="flex items-center space-x-2">
 						<input
 							type="checkbox"
-							checked={options?.character_source.includes("number")}
+							checked={options?.character_source?.includes("number")}
 							onChange={() => toggleCheckbox("number")}
 						/>
 						<span>{__("Numbers (0-9)", "user-verification")}</span>
@@ -147,7 +147,7 @@ function Html(props) {
 					<label className="flex items-center space-x-2">
 						<input
 							type="checkbox"
-							checked={options?.character_source.includes("uppercase")}
+							checked={options?.character_source?.includes("uppercase")}
 							onChange={() => toggleCheckbox("uppercase")}
 						/>
 						<span>{__("Uppercase characters", "user-verification")}</span>
@@ -155,7 +155,7 @@ function Html(props) {
 					<label className="flex items-center space-x-2">
 						<input
 							type="checkbox"
-							checked={options?.character_source.includes("lowercase")}
+							checked={options?.character_source?.includes("lowercase")}
 							onChange={() => toggleCheckbox("lowercase")}
 						/>
 						<span>{__("Lowercase characters", "user-verification")}</span>
@@ -163,7 +163,7 @@ function Html(props) {
 					<label className="flex items-center space-x-2">
 						<input
 							type="checkbox"
-							checked={options?.character_source.includes("special")}
+							checked={options?.character_source?.includes("special")}
 							onChange={() => toggleCheckbox("special")}
 						/>
 						<span>{__("Special characters", "user-verification")}</span>
@@ -171,7 +171,7 @@ function Html(props) {
 					<label className="flex items-center space-x-2">
 						<input
 							type="checkbox"
-							checked={options?.character_source.includes("extraspecial")}
+							checked={options?.character_source?.includes("extraspecial")}
 							onChange={() => toggleCheckbox("extraspecial")}
 						/>
 						<span>{__("Extra Special characters", "user-verification")}</span>

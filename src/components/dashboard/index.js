@@ -36,14 +36,14 @@ function Html(props) {
 	var [optionDataSaved, setoptionDataSaved] = useState({}); // Using the hook.
 	var [dashboardTabs, setdashboardTabs] = useState([
 
-		{
-			name: "overview",
-			title: "Overview",
-			icon: settings,
-			className: "tab-overview",
-			hidden: false,
-			isPro: false,
-		},
+		// {
+		// 	name: "overview",
+		// 	title: "Overview",
+		// 	icon: settings,
+		// 	className: "tab-overview",
+		// 	hidden: false,
+		// 	isPro: false,
+		// },
 		{
 			name: "tabEmailVerification",
 			title: "Email Verification",
