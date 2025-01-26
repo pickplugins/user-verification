@@ -1209,33 +1209,33 @@ function Html(props) {
 															item.compare == "<" ||
 															item.compare == ">=" ||
 															item.compare == "<=") && (
-															<>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Values
-																	</label>
-																	<PGDropdown
-																		position="bottom right"
-																		variant="secondary"
-																		buttonTitle={
-																			item.value.length == 0
-																				? "Choose Month"
-																				: monthsNum[item.value].label
-																		}
-																		options={monthsNum}
-																		onChange={(option, optionIndex) => {
-																			var rulesX = [...rules];
-																			rulesX[groupIndex]["args"][index][
-																				"value"
-																			] = option.value;
-																			setrules(rulesX);
-																		}}
-																		value={item.value}></PGDropdown>
-																</PanelRow>
-															</>
-														)}
+																<>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Values
+																		</label>
+																		<PGDropdown
+																			position="bottom right"
+																			variant="secondary"
+																			buttonTitle={
+																				item.value.length == 0
+																					? "Choose Month"
+																					: monthsNum[item.value].label
+																			}
+																			options={monthsNum}
+																			onChange={(option, optionIndex) => {
+																				var rulesX = [...rules];
+																				rulesX[groupIndex]["args"][index][
+																					"value"
+																				] = option.value;
+																				setrules(rulesX);
+																			}}
+																			value={item.value}></PGDropdown>
+																	</PanelRow>
+																</>
+															)}
 
 														{/* {(item.compare == "between" ||
 															item.compare == "exist") && (
@@ -1313,7 +1313,7 @@ function Html(props) {
 																			var rulesX = [...rules];
 																			var valuesArray =
 																				rulesX[groupIndex]["args"][index][
-																					"values"
+																				"values"
 																				];
 
 																			if (valuesArray.length < 2) {
@@ -1399,63 +1399,62 @@ function Html(props) {
 															item.compare == "<" ||
 															item.compare == ">=" ||
 															item.compare == "<=") && (
-															<>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Values
-																	</label>
+																<>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Values
+																		</label>
 
-																	<Button
-																		className={`pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 ${
-																			enableDatePicker ? "!bg-gray-400" : ""
-																		}`}
-																		onClick={(ev) => {
-																			setenableDatePicker((prev) => !prev);
-																		}}>
-																		{item.value.length == 0
-																			? "Choose Date"
-																			: item.value}
-																	</Button>
-																</PanelRow>
+																		<Button
+																			className={`pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 ${enableDatePicker ? "!bg-gray-400" : ""
+																				}`}
+																			onClick={(ev) => {
+																				setenableDatePicker((prev) => !prev);
+																			}}>
+																			{item.value.length == 0
+																				? "Choose Date"
+																				: item.value}
+																		</Button>
+																	</PanelRow>
 
-																{enableDatePicker && (
-																	<Popover position="bottom left ">
-																		<div className="p-4">
-																			<DatePicker
-																				onChange={(newDate) => {
-																					const dateFull = new Date(newDate);
+																	{enableDatePicker && (
+																		<Popover position="bottom left ">
+																			<div className="p-4">
+																				<DatePicker
+																					onChange={(newDate) => {
+																						const dateFull = new Date(newDate);
 
-																					let day = dateFull.getDate();
-																					day = day < 10 ? "0" + day : day;
+																						let day = dateFull.getDate();
+																						day = day < 10 ? "0" + day : day;
 
-																					let month = dateFull.getMonth() + 1;
+																						let month = dateFull.getMonth() + 1;
 
-																					month =
-																						month.length > 1
-																							? month
-																							: "0" + month;
+																						month =
+																							month.length > 1
+																								? month
+																								: "0" + month;
 
-																					console.log(month);
+																						console.log(month);
 
-																					let year = dateFull.getFullYear();
+																						let year = dateFull.getFullYear();
 
-																					var dateStr =
-																						year + "-" + month + "-" + day;
-																					var rulesX = [...rules];
-																					rulesX[groupIndex]["args"][index][
-																						"value"
-																					] = dateStr;
-																					setrules(rulesX);
-																				}}
-																				is12Hour={true}
-																			/>
-																		</div>
-																	</Popover>
-																)}
-															</>
-														)}
+																						var dateStr =
+																							year + "-" + month + "-" + day;
+																						var rulesX = [...rules];
+																						rulesX[groupIndex]["args"][index][
+																							"value"
+																						] = dateStr;
+																						setrules(rulesX);
+																					}}
+																					is12Hour={true}
+																				/>
+																			</div>
+																		</Popover>
+																	)}
+																</>
+															)}
 
 														{item.compare == "between" && (
 															<>
@@ -1467,9 +1466,8 @@ function Html(props) {
 																	</label>
 
 																	<Button
-																		className={`pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 ${
-																			enableDatePicker ? "!bg-gray-400" : ""
-																		}`}
+																		className={`pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 ${enableDatePicker ? "!bg-gray-400" : ""
+																			}`}
 																		onClick={(ev) => {
 																			setenableDatePicker((prev) => !prev);
 																		}}>
@@ -1500,7 +1498,7 @@ function Html(props) {
 
 																					var valuesArray =
 																						rulesX[groupIndex]["args"][index][
-																							"values"
+																						"values"
 																						];
 
 																					if (valuesArray.length < 2) {
@@ -1560,9 +1558,8 @@ function Html(props) {
 																	</label>
 
 																	<Button
-																		className={`pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 ${
-																			enableDatePicker ? "!bg-gray-400" : ""
-																		}`}
+																		className={`pg-font flex gap-2 justify-center  cursor-pointer py-2 px-4 capitalize  !bg-gray-800 !text-white font-medium !rounded hover:!bg-gray-700 hover:text-white focus:outline-none focus:bg-gray-700 ${enableDatePicker ? "!bg-gray-400" : ""
+																			}`}
 																		onClick={(ev) => {
 																			setenableDatePicker((prev) => !prev);
 																		}}>
@@ -1671,33 +1668,33 @@ function Html(props) {
 															item.compare == "<" ||
 															item.compare == ">=" ||
 															item.compare == "<=") && (
-															<>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Values
-																	</label>
-																	<PGDropdown
-																		position="bottom right"
-																		variant="secondary"
-																		buttonTitle={
-																			item.value.length == 0
-																				? "Choose Day"
-																				: weekDayNumn[item.value].label
-																		}
-																		options={weekDayNumn}
-																		onChange={(option, optionIndex) => {
-																			var rulesX = [...rules];
-																			rulesX[groupIndex]["args"][index][
-																				"value"
-																			] = option.value;
-																			setrules(rulesX);
-																		}}
-																		value={item.value}></PGDropdown>
-																</PanelRow>
-															</>
-														)}
+																<>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Values
+																		</label>
+																		<PGDropdown
+																			position="bottom right"
+																			variant="secondary"
+																			buttonTitle={
+																				item.value.length == 0
+																					? "Choose Day"
+																					: weekDayNumn[item.value].label
+																			}
+																			options={weekDayNumn}
+																			onChange={(option, optionIndex) => {
+																				var rulesX = [...rules];
+																				rulesX[groupIndex]["args"][index][
+																					"value"
+																				] = option.value;
+																				setrules(rulesX);
+																			}}
+																			value={item.value}></PGDropdown>
+																	</PanelRow>
+																</>
+															)}
 
 														{/* {(item.compare == "between" ||
 															item.compare == "exist") && (
@@ -1823,7 +1820,7 @@ function Html(props) {
 																			var rulesX = [...rules];
 																			var valuesArray =
 																				rulesX[groupIndex]["args"][index][
-																					"values"
+																				"values"
 																				];
 
 																			if (valuesArray.length < 2) {
@@ -1906,33 +1903,33 @@ function Html(props) {
 															item.compare == "<" ||
 															item.compare == ">=" ||
 															item.compare == "<=") && (
-															<>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Values
-																	</label>
-																	<PGDropdown
-																		position="bottom right"
-																		variant="secondary"
-																		buttonTitle={
-																			item.value.length == 0
-																				? "Choose Hours"
-																				: hoursNum[item.value].label
-																		}
-																		options={hoursNum}
-																		onChange={(option, optionIndex) => {
-																			var rulesX = [...rules];
-																			rulesX[groupIndex]["args"][index][
-																				"value"
-																			] = option.value;
-																			setrules(rulesX);
-																		}}
-																		value={item.value}></PGDropdown>
-																</PanelRow>
-															</>
-														)}
+																<>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Values
+																		</label>
+																		<PGDropdown
+																			position="bottom right"
+																			variant="secondary"
+																			buttonTitle={
+																				item.value.length == 0
+																					? "Choose Hours"
+																					: hoursNum[item.value].label
+																			}
+																			options={hoursNum}
+																			onChange={(option, optionIndex) => {
+																				var rulesX = [...rules];
+																				rulesX[groupIndex]["args"][index][
+																					"value"
+																				] = option.value;
+																				setrules(rulesX);
+																			}}
+																			value={item.value}></PGDropdown>
+																	</PanelRow>
+																</>
+															)}
 
 														{/* {(item.compare == "between" ||
 															item.compare == "exist") && (
@@ -2058,7 +2055,7 @@ function Html(props) {
 																			var rulesX = [...rules];
 																			var valuesArray =
 																				rulesX[groupIndex]["args"][index][
-																					"values"
+																				"values"
 																				];
 
 																			if (valuesArray.length < 2) {
@@ -2427,55 +2424,55 @@ function Html(props) {
 
 														{(item.compare == "notExist" ||
 															item.compare == "exist") && (
-															<>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Values
-																	</label>
-																	<PGDropdown
-																		position="bottom right"
-																		variant="secondary"
-																		buttonTitle={"Choose Capabilities"}
-																		options={capabilities}
-																		onChange={(option, optionIndex) => {
-																			var rulesX = [...rules];
+																<>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Values
+																		</label>
+																		<PGDropdown
+																			position="bottom right"
+																			variant="secondary"
+																			buttonTitle={"Choose Capabilities"}
+																			options={capabilities}
+																			onChange={(option, optionIndex) => {
+																				var rulesX = [...rules];
 
-																			rulesX[groupIndex]["args"][index][
-																				"values"
-																			].push(option.value);
-																			setrules(rulesX);
-																		}}
-																		value={item.values}></PGDropdown>
-																</PanelRow>
+																				rulesX[groupIndex]["args"][index][
+																					"values"
+																				].push(option.value);
+																				setrules(rulesX);
+																			}}
+																			value={item.values}></PGDropdown>
+																	</PanelRow>
 
-																<div>
-																	{item.values.map((x, i) => {
-																		return (
-																			<div className="flex justify-between my-1">
-																				<span>{capabilities[x].label}</span>
-																				<span
-																					className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																					onClick={(ev) => {
-																						var visibleX = {
-																							...visible,
-																						};
-																						item.values.splice(i, 1);
+																	<div>
+																		{item.values.map((x, i) => {
+																			return (
+																				<div className="flex justify-between my-1">
+																					<span>{capabilities[x].label}</span>
+																					<span
+																						className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																						onClick={(ev) => {
+																							var visibleX = {
+																								...visible,
+																							};
+																							item.values.splice(i, 1);
 
-																						rulesX[groupIndex]["args"][index][
-																							"values"
-																						] = item.values;
-																						setrules(rulesX);
-																					}}>
-																					<Icon fill="#fff" icon={close} />
-																				</span>
-																			</div>
-																		);
-																	})}
-																</div>
-															</>
-														)}
+																							rulesX[groupIndex]["args"][index][
+																								"values"
+																							] = item.values;
+																							setrules(rulesX);
+																						}}>
+																						<Icon fill="#fff" icon={close} />
+																					</span>
+																				</div>
+																			);
+																		})}
+																	</div>
+																</>
+															)}
 													</>
 												)}
 												{/* //*isTaxonomy */}
@@ -2548,55 +2545,55 @@ function Html(props) {
 
 														{(item.compare == "notExist" ||
 															item.compare == "exist") && (
-															<>
-																<PanelRow className="mb-4">
-																	<label
-																		for=""
-																		className="font-medium text-slate-900 ">
-																		Values
-																	</label>
-																	<PGDropdown
-																		position="bottom right"
-																		variant="secondary"
-																		buttonTitle={"Choose Taxonomies"}
-																		options={taxonomies}
-																		onChange={(option, optionIndex) => {
-																			var rulesX = [...rules];
+																<>
+																	<PanelRow className="mb-4">
+																		<label
+																			for=""
+																			className="font-medium text-slate-900 ">
+																			Values
+																		</label>
+																		<PGDropdown
+																			position="bottom right"
+																			variant="secondary"
+																			buttonTitle={"Choose Taxonomies"}
+																			options={taxonomies}
+																			onChange={(option, optionIndex) => {
+																				var rulesX = [...rules];
 
-																			rulesX[groupIndex]["args"][index][
-																				"values"
-																			].push(option.value);
-																			setrules(rulesX);
-																		}}
-																		value={item.values}></PGDropdown>
-																</PanelRow>
+																				rulesX[groupIndex]["args"][index][
+																					"values"
+																				].push(option.value);
+																				setrules(rulesX);
+																			}}
+																			value={item.values}></PGDropdown>
+																	</PanelRow>
 
-																<div>
-																	{item.values.map((x, i) => {
-																		return (
-																			<div className="flex justify-between my-1">
-																				<span>{taxonomies[x]?.label}</span>
-																				<span
-																					className="bg-red-500 text-white p-1 cursor-pointer hover:"
-																					onClick={(ev) => {
-																						var visibleX = {
-																							...visible,
-																						};
-																						item.values.splice(i, 1);
+																	<div>
+																		{item.values.map((x, i) => {
+																			return (
+																				<div className="flex justify-between my-1">
+																					<span>{taxonomies[x]?.label}</span>
+																					<span
+																						className="bg-red-500 text-white p-1 cursor-pointer hover:"
+																						onClick={(ev) => {
+																							var visibleX = {
+																								...visible,
+																							};
+																							item.values.splice(i, 1);
 
-																						rulesX[groupIndex]["args"][index][
-																							"values"
-																						] = item.values;
-																						setrules(rulesX);
-																					}}>
-																					<Icon fill="#fff" icon={close} />
-																				</span>
-																			</div>
-																		);
-																	})}
-																</div>
-															</>
-														)}
+																							rulesX[groupIndex]["args"][index][
+																								"values"
+																							] = item.values;
+																							setrules(rulesX);
+																						}}>
+																						<Icon fill="#fff" icon={close} />
+																					</span>
+																				</div>
+																			);
+																		})}
+																	</div>
+																</>
+															)}
 													</>
 												)}
 												{/* //*URL String */}
@@ -2661,60 +2658,60 @@ function Html(props) {
 												{(id == "isPostMeta" ||
 													id == "isUserMeta" ||
 													id == "isCookie") && (
-													<>
-														<PanelRow>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Compare
-															</label>
-															<SelectControl
-																label=""
-																value={item.compare}
-																options={[
-																	{ label: "=", value: "=" },
-																	{ label: "!=", value: "!=" },
-																	{ label: "Contain", value: "contain" },
-																	{
-																		label: "Not Contain",
-																		value: "notContain",
-																	},
-																	// { label: ">=", value: ">=" },
-																	// { label: "<=", value: "<=" },
-																	// {
-																	// 	label: "between",
-																	// 	value: "between",
-																	// },
-																	// { label: "exist", value: "exist" },
-																]}
-																onChange={(newVal) => {
-																	var rulesX = [...rules];
-																	rulesX[groupIndex]["args"][index]["compare"] =
-																		newVal;
-																	setrules(rulesX);
-																}}
-															/>
-														</PanelRow>
+														<>
+															<PanelRow>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Compare
+																</label>
+																<SelectControl
+																	label=""
+																	value={item.compare}
+																	options={[
+																		{ label: "=", value: "=" },
+																		{ label: "!=", value: "!=" },
+																		{ label: "Contain", value: "contain" },
+																		{
+																			label: "Not Contain",
+																			value: "notContain",
+																		},
+																		// { label: ">=", value: ">=" },
+																		// { label: "<=", value: "<=" },
+																		// {
+																		// 	label: "between",
+																		// 	value: "between",
+																		// },
+																		// { label: "exist", value: "exist" },
+																	]}
+																	onChange={(newVal) => {
+																		var rulesX = [...rules];
+																		rulesX[groupIndex]["args"][index]["compare"] =
+																			newVal;
+																		setrules(rulesX);
+																	}}
+																/>
+															</PanelRow>
 
-														<PanelRow>
-															<label
-																for=""
-																className="font-medium text-slate-900 ">
-																Name
-															</label>
-															<InputControl
-																className="mr-2"
-																value={item.value}
-																onChange={(newVal) => {
-																	var rulesX = [...rules];
-																	rulesX[groupIndex]["args"][index].value =
-																		newVal;
-																	setrules(rulesX);
-																}}
-															/>
-														</PanelRow>
-													</>
-												)}
+															<PanelRow>
+																<label
+																	for=""
+																	className="font-medium text-slate-900 ">
+																	Name
+																</label>
+																<InputControl
+																	className="mr-2"
+																	value={item.value}
+																	onChange={(newVal) => {
+																		var rulesX = [...rules];
+																		rulesX[groupIndex]["args"][index].value =
+																			newVal;
+																		setrules(rulesX);
+																	}}
+																/>
+															</PanelRow>
+														</>
+													)}
 												{/* //*post meta */}
 												{id == "isDevice" && (
 													<>
@@ -2895,35 +2892,35 @@ function Html(props) {
 												{(id == "homePage" ||
 													id == "postsPage" ||
 													id == "frontPage") && (
-													<PanelRow>
-														<label
-															for=""
-															className="font-medium text-slate-900 ">
-															Compare
-														</label>
-														<SelectControl
-															label=""
-															value={item.compare}
-															options={[
-																// { label: "Include", value: "include" },
-																// { label: "Exclude", value: "exclude" },
-																{ label: "=", value: "=" },
-																{ label: "!=", value: "!=" },
-																// {
-																// 	label: "between",
-																// 	value: "between",
-																// },
-																// { label: "exist", value: "exist" },
-															]}
-															onChange={(newVal) => {
-																var rulesX = [...rules];
-																rulesX[groupIndex]["args"][index]["compare"] =
-																	newVal;
-																setrules(rulesX);
-															}}
-														/>
-													</PanelRow>
-												)}
+														<PanelRow>
+															<label
+																for=""
+																className="font-medium text-slate-900 ">
+																Compare
+															</label>
+															<SelectControl
+																label=""
+																value={item.compare}
+																options={[
+																	// { label: "Include", value: "include" },
+																	// { label: "Exclude", value: "exclude" },
+																	{ label: "=", value: "=" },
+																	{ label: "!=", value: "!=" },
+																	// {
+																	// 	label: "between",
+																	// 	value: "between",
+																	// },
+																	// { label: "exist", value: "exist" },
+																]}
+																onChange={(newVal) => {
+																	var rulesX = [...rules];
+																	rulesX[groupIndex]["args"][index]["compare"] =
+																		newVal;
+																	setrules(rulesX);
+																}}
+															/>
+														</PanelRow>
+													)}
 												{(id == "wcAccount" || id == "wcShop") && (
 													<div>No Option available for this condition.</div>
 												)}
@@ -3177,7 +3174,7 @@ function Html(props) {
 															}}
 														/>
 														{/* <PanelRow className='mb-4'>
-                                <label for=""  className="font-medium text-slate-900 " >{__('Element ID/Class', 'post-grid')}</label>
+                                <label for=""  className="font-medium text-slate-900 " >{__('Element ID/Class', 'user-verification')}</label>
                                 <InputControl
                                   className='mr-2'
                                   placeholder=".element or #elementId"

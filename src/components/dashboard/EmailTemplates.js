@@ -22,6 +22,7 @@ function Html(props) {
 	var [verification, setverification] = useState(false);
 	var [activation, setactivation] = useState(false);
 	var [otp, setotp] = useState(false);
+	var [magicLogin, setmagicLogin] = useState(false);
 
 	useEffect(() => {
 		onChange(options);
@@ -1297,6 +1298,303 @@ function Html(props) {
 						</div>
 					</div>
 				</div>
+				<div className="my-1">
+					<div
+						className="p-4 cursor-pointer bg-gray-400 hover:bg-gray-500"
+						onClick={() => {
+							setmagicLogin(!magicLogin);
+						}}>
+						{magicLogin ? (
+							<>
+								<i className="fas fa-chevron-down mr-4"></i>
+							</>
+						) : (
+							<>
+								<i className="fas fa-chevron-up mr-4"></i>
+							</>
+						)}
+						{__("Send Magic Login", "user-verification")}
+					</div>
+					<div className={`${magicLogin ? "block" : "hidden"} p-[10px]`}>
+						<div className="flex  my-5  justify-between items-center">
+							<label className="w-[400px]" htmlFor="emailVerification">
+								{__("Enable?", "user-verification")}
+							</label>
+							<PGinputSelect
+								inputClass="!py-1 px-2  border-2 border-solid"
+								val={options?.email_templates_data?.send_magic_login_url?.enable}
+								options={[
+									{ label: "No", value: "no" },
+									{ label: "Yes", value: "yes" },
+								]}
+								onChange={(newVal) => {
+									var optionsX = {
+										...options,
+										email_templates_data: {
+											...options.email_templates_data,
+											send_magic_login_url: {
+												...options.email_templates_data.send_magic_login_url,
+												enable: newVal,
+											},
+										},
+									};
+									setoptions(optionsX);
+								}}
+								multiple={false}
+							/>
+						</div>
+						{options?.email_templates_data?.send_magic_login_url?.enable === "yes" && (
+							<>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email Bcc", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_magic_login_url?.email_bcc
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_magic_login_url: {
+														...options.email_templates_data.send_magic_login_url,
+														email_bcc: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_magic_login_url
+												?.email_from_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_magic_login_url: {
+														...options.email_templates_data.send_magic_login_url,
+														email_from_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email from", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_magic_login_url?.email_from
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_magic_login_url: {
+														...options.email_templates_data.send_magic_login_url,
+														email_from: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to name", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_magic_login_url
+												?.reply_to_name
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_magic_login_url: {
+														...options.email_templates_data.send_magic_login_url,
+														reply_to_name: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Reply to", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_magic_login_url?.reply_to
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_magic_login_url: {
+														...options.email_templates_data.send_magic_login_url,
+														reply_to: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+								<div className="flex  my-5  justify-between items-center">
+									<label className="w-[400px]" htmlFor="emailVerification">
+										{__("Email subject", "user-verification")}
+									</label>
+									<PGinputText
+										value={
+											options?.email_templates_data?.send_magic_login_url?.subject
+										}
+										className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+										onChange={(newVal) => {
+											var optionsX = {
+												...options,
+												email_templates_data: {
+													...options.email_templates_data,
+													send_magic_login_url: {
+														...options.email_templates_data.send_magic_login_url,
+														subject: newVal.target.value,
+													},
+												},
+											};
+											setoptions(optionsX);
+										}}
+									/>
+								</div>
+							</>
+						)}
+
+						<div className="flex flex-col  my-5 gap-4 ">
+							<label className="w-[400px]" htmlFor="emailVerification">
+								{__("Email body", "user-verification")}
+							</label>
+
+
+
+							<PGinputTextarea
+								id={"send_magic_login_url"}
+								value={options?.email_templates_data?.send_magic_login_url?.html}
+								className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+								onChange={(newVal) => {
+									var optionsX = {
+										...options,
+										email_templates_data: {
+											...options.email_templates_data,
+											send_magic_login_url: {
+												...options.email_templates_data.send_magic_login_url,
+												html: newVal.target.value,
+											},
+										},
+									};
+									setoptions(optionsX);
+								}}
+							/>
+
+						</div>
+						<div>
+							<label htmlFor="">Parameter</label>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{site_name}`}</code>
+								</pre>{" "}
+								{`=>`} Website title
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{site_description}`}</code>
+								</pre>{" "}
+								{`=>`} Website tagline
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{site_url}`}</code>
+								</pre>{" "}
+								{`=>`} Website URL
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{site_logo_url}`}</code>
+								</pre>{" "}
+								{`=>`} Website logo URL
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{user_name}`}</code>
+								</pre>{" "}
+								{`=>`} Username
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{user_display_name}`}</code>
+								</pre>{" "}
+								{`=>`} User display name
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{first_name}`}</code>
+								</pre>{" "}
+								{`=>`} User first name
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{last_name}`}</code>
+								</pre>{" "}
+								{`=>`} User last name
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{user_avatar}`}</code>
+								</pre>{" "}
+								{`=>`} User avatar
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{user_email}`}</code>
+								</pre>{" "}
+								{`=>`} User email address
+							</div>
+							<div className="flex items-center gap-2">
+								<pre className="!my-1">
+									<code>{`{magic_login_url}`}</code>
+								</pre>{" "}
+								{`=>`} Magic login url
+							</div>
+							Available parameter for this email template
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 		</div>
 	);

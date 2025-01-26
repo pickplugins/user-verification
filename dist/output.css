@@ -42,6 +42,14 @@
   visibility: hidden;
 }
 
+.collapse {
+  visibility: collapse;
+}
+
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
@@ -307,6 +315,10 @@
   width: 2.5rem;
 }
 
+.w-12 {
+  width: 3rem;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -380,6 +392,14 @@
   width: max-content;
 }
 
+.w-36 {
+  width: 9rem;
+}
+
+.w-\[250px\] {
+  width: 250px;
+}
+
 .min-w-\[400px\] {
   min-width: 400px;
 }
@@ -414,6 +434,10 @@
 
 .grow {
   flex-grow: 1;
+}
+
+.table-fixed {
+  table-layout: fixed;
 }
 
 .border-collapse {
@@ -897,6 +921,11 @@
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pb-1 {

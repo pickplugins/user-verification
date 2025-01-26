@@ -242,7 +242,6 @@ function user_verification_send_otp()
     $user = (is_email($user_login)) ? get_user_by('email', $user_login) :  get_user_by('login', $user_login);
     $user_id = isset($user->ID) ? $user->ID : '';
 
-    //error_log($user_id);
 
     if (empty($user_id)) {
         $error->add('user_not_found', __('ERROR: User not found.', 'user-verification'));
@@ -403,7 +402,6 @@ function user_verification_auth_otp_default_login($user, $password)
     // $email_otp = $user_verification_settings['email_otp'];
     // $enable_default_login = $email_otp['enable_default_login'];
 
-    error_log(serialize($user));
 
     // if ($enable_default_login == 'no') {
     //     return $user;
@@ -541,8 +539,6 @@ function user_verification_send_otp_via_mail($user_data)
     // $email_templates_data = isset($user_verification_settings['email_templates_data']['send_mail_otp']) ? $user_verification_settings['email_templates_data']['send_mail_otp'] : $email_templates_data['send_mail_otp'];
 
 
-    //error_log(serialize($email_templates_data));
-
     $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
     $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
     $email_from_name = isset($email_templates_data['email_from_name']) ? $email_templates_data['email_from_name'] : '';
@@ -645,7 +641,6 @@ function user_verification_random_password($length, $character_source)
         $password .= substr($characters, wp_rand(0, strlen($characters) - 1), 1);
     }
 
-    // error_log($password);
 
 
     return $password;

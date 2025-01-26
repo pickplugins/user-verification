@@ -89,7 +89,24 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-
+			<div className="flex  my-5  justify-between items-center">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Magic Pogin Page", "user-verification")}
+				</label>
+				<PGinputSelect
+					val={options?.magic_login_page}
+					inputClass="!py-1 px-2 border-2 border-solid"
+					options={pageList}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							magic_login_page: newVal,
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Redirect after login", "user-verification")}
@@ -126,11 +143,6 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-
-
-
-
-
 
 
 

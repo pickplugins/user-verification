@@ -142,7 +142,7 @@ function Html(props) {
 						<div className="flex flex-1 items-center gap-2">
 							<Select
 								className="flex-1"
-								value={options?.exclude_user_roles.map(
+								value={options?.exclude_user_roles?.map(
 									(role) =>
 										roles.find((option) => option.value === role) // Match role with options
 								)}

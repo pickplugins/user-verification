@@ -1,6 +1,13 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access 
 
+
+
+
+
+
+
+
 add_shortcode('user_verification_clean_user_meta', 'user_verification_clean_user_meta');
 
 add_action('user_verification_clean_user_meta', 'user_verification_clean_user_meta');
@@ -56,7 +63,6 @@ add_action('user_verification_delete_unverified_user', 'user_verification_delete
 function user_verification_delete_unverified_user()
 {
 
-    error_log('###user_verification_delete_unverified_user: ' . date("Y-m-d H:i:s"));
 
     $user_verification_settings = get_option('user_verification_settings');
     $delete_user_delay = isset($user_verification_settings['unverified']['delay']) ? $user_verification_settings['unverified']['delay'] : '720';
@@ -89,7 +95,6 @@ function user_verification_delete_unverified_user()
     );
 
 
-    //error_log(serialize($users));
 
     if (!empty($users)) {
         foreach ($users as $user) {
@@ -161,6 +166,57 @@ function user_verification_existing_user_verified()
 
         if (!in_array('administrator', $user_roles)) {
             update_user_meta($user_id, 'user_activation_status', 1);
+        }
+    }
+}
+
+
+add_shortcode('user_verification_validated_users_email', 'user_verification_validated_users_email');
+
+
+add_action('user_verification_validated_users_email', 'user_verification_validated_users_email');
+
+function user_verification_validated_users_email()
+{
+
+    $EmailVerifier = new UserVerificationEmailVerifier();
+
+    $meta_query = array();
+
+    $meta_query[] = array(
+        array(
+            'key' => 'uv_validated_user',
+            'compare' => 'NOT EXISTS',
+        ),
+    );
+
+
+
+    $users = get_users(
+        array(
+            //'role'    => 'administrator',
+            'orderby' => 'ID',
+            'order'   => 'ASC',
+            'number'  => 3,
+            'paged'   => 1,
+            'meta_query' => $meta_query,
+
+        )
+    );
+
+
+
+    foreach ($users as $user) {
+        $user_id = $user->ID;
+        $user_email = $user->user_email;
+        $user_roles = $user->roles;
+
+
+        if (!in_array('administrator', $user_roles)) {
+            $status = $EmailVerifier->verifyEmail($user_email);
+
+
+            //update_user_meta($user_id, 'uv_validated_user', 1);
         }
     }
 }
