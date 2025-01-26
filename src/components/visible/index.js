@@ -50,16 +50,16 @@ function Html(props) {
 	var [rules, setrules] = useState(
 		visible?.rules == null || visible?.rules == undefined ? [] : visible.rules
 	);
-	console.log(rules);
+	// console.log(rules);
 
 	var [enableDatePicker, setenableDatePicker] = useState(false);
 	const [userRoles, setuserRoles] = useState({});
 	const [taxonomies, settaxonomies] = useState({});
-	console.log(taxonomies);
-	console.log(userRoles);
+	// console.log(taxonomies);
+	// console.log(userRoles);
 
 	useEffect(() => {
-		console.log(visible);
+		// console.log(visible);
 
 		props.onChange(visible);
 	}, [visible]);

@@ -40,7 +40,7 @@ var myStore = wp.data.select("postgrid-shop");
 const PGCustomScript = (props) => {
 	const [customScript, setCustomScript] = useState(props.args);
 
-	console.log(customScript);
+	// console.log(customScript);
 
 	useEffect(() => {
 		props.onChange(customScript);

@@ -180,7 +180,7 @@ function Html(props) {
 
 	useEffect(() => {
 
-		console.log(blockCssY);
+		// console.log(blockCssY);
 
 
 		myStore.generateBlockCss(blockCssY.items, blockId);

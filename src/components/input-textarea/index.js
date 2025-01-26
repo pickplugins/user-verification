@@ -9,7 +9,7 @@ function Html(props) {
 
 	const [content, setContent] = useState('');
 
-	console.log(props.id);
+	// console.log(props.id);
 
 
 	useEffect(() => {
@@ -54,7 +54,7 @@ function Html(props) {
 				"undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat", height: "500px", setup: (editor) => {
 					editor.on("change", (e) => {
 						const newContent = editor.getContent(); // Get the updated content
-						console.log(newContent); props.onChange(newContent);
+						// console.log(newContent); props.onChange(newContent);
 					});
 				},
 		});

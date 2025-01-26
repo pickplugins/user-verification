@@ -19,7 +19,7 @@ function Html(props) {
 	var onChange = props.onChange;
 	var roles = props.roles;
 
-	console.log(roles);
+	// console.log(roles);
 
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
@@ -115,7 +115,7 @@ function Html(props) {
 				if (response.ok && response.status < 400) {
 					response.json().then((data) => {
 
-						console.log(data);
+						// console.log(data);
 
 
 						setcheckEmail({ ...checkEmail, result: data, loading: false })
@@ -279,7 +279,7 @@ function Html(props) {
 						/>
 
 						<div className=" no-underline px-4 py-3 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white " onClick={ev => {
-							console.log("Helo")
+							// console.log("Helo")
 							checkMail();
 						}}>
 							{checkEmail.loading && (
@@ -308,7 +308,7 @@ function Html(props) {
 										var id = args[0]
 										var value = args[1]
 
-										console.log(args);
+										// console.log(args);
 
 										return (
 											<>

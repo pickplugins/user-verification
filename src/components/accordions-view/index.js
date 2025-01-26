@@ -159,7 +159,7 @@ function Html(props) {
 		}).then((res) => {
 			setisLoading(false);
 
-			console.log(res);
+			// console.log(res);
 
 			setpostData(res);
 			var post_content =
