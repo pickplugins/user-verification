@@ -10,9 +10,6 @@ function uv_wpum_after_registration($user_id, $values, $form)
 {
 
 
-    //error_log($user_id);
-
-
     $userdata = get_user_by($user_id, 'ID');
 
     do_action('user_register', $user_id,  $userdata);

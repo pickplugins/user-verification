@@ -1,0 +1,29 @@
+{
+  "isSyntaxValid": true,
+  "isValidEmail": true,
+  "hasValidDomain": true,
+  "isDisposableDomain": false,
+  "isFreeEmailProvider": true,
+  "isInboxFull": true,
+  "isGibberishEmail": false,
+  "checkDomainReputation": false,
+  "isSMTPBlacklisted": false,
+  "isRoleBasedEmail": true,
+  "isCatchAllDomain": true,
+  "verifySMTP": false
+}
+
+{
+  "isSyntaxValid": true,
+  "isValidEmail": true,
+  "hasValidDomain": true,
+  "isDisposableDomain": false,
+  "isFreeEmailProvider": true,
+  "isInboxFull": true,
+  "isGibberishEmail": false,
+  "checkDomainReputation": false,
+  "isSMTPBlacklisted": false,
+  "isRoleBasedEmail": true,
+  "isCatchAllDomain": true,
+  "verifySMTP": false
+}

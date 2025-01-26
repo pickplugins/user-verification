@@ -15,7 +15,15 @@ class UserVerificationRest
 	public function register_routes()
 	{
 
-
+		register_rest_route(
+			'user-verification/v2',
+			'/process_form_data',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'process_form_data'),
+				'permission_callback' => '__return_true',
+			)
+		);
 
 		register_rest_route(
 			'user-verification/v2',
@@ -84,7 +92,33 @@ class UserVerificationRest
 		);
 	}
 
+	/**
+	 * Return process_form_data
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $request Post data.
+	 */
+	public function process_form_data($request)
+	{
+		$response = [];
+		$data = $request->get_body();
+		$_wpnonce = $request->get_param('_wpnonce');
+		$_wp_http_referer = $request->get_param('_wp_http_referer');
+		$formType = $request->get_param('formType');
 
+		if (!wp_verify_nonce($_wpnonce, 'wp_rest')) {
+			$response['errors']['nonce_check_failed'] = __('Security Check Failed', 'user-verification');
+			return $response;
+		}
+
+
+
+		if (empty($errors)) {
+			$process_form = apply_filters('form_wrap_process_' . $formType,  $request);
+			$response = $process_form;
+		}
+		die(wp_json_encode($response));
+	}
 
 	/**
 	 * Return user_roles_list
@@ -204,11 +238,9 @@ class UserVerificationRest
 
 		//delete_option($option);
 
-		error_log($option);
 
 		$response = get_option($option);
 
-		error_log(serialize($response));
 
 		die(wp_json_encode($response));
 	}
@@ -236,7 +268,6 @@ class UserVerificationRest
 
 
 		$queryArgs = isset($post_data['queryArgs']) ? $post_data['queryArgs'] : [];
-		error_log(serialize($queryArgs));
 		$rawData = '<!-- wp:post-featured-image /--><!-- wp:post-title /--><!-- wp:post-excerpt /-->';
 		$rawData = !empty($post_data['rawData']) ? $post_data['rawData'] : $rawData;
 

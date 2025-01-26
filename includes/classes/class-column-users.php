@@ -104,6 +104,7 @@ class class_user_verification_users_columns
 
                     $resend_verification_url = wp_nonce_url($resend_verification_url,  'resend_verification');
 
+                    // error_log($resend_verification_url);
 
                 ?>
 

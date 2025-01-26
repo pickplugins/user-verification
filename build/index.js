@@ -2529,6 +2529,36 @@ function Icon({
 
 /***/ }),
 
+/***/ "./node_modules/@wordpress/icons/build-module/library/check.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@wordpress/icons/build-module/library/check.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/primitives */ "@wordpress/primitives");
+/* harmony import */ var _wordpress_primitives__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * WordPress dependencies
+ */
+
+const check = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.SVG, {
+  xmlns: "http://www.w3.org/2000/svg",
+  viewBox: "0 0 24 24"
+}, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_primitives__WEBPACK_IMPORTED_MODULE_1__.Path, {
+  d: "M16.7 7.1l-6.3 8.5-3.3-2.5-.9 1.2 4.5 3.4L17.9 8z"
+}));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (check);
+//# sourceMappingURL=check.js.map
+
+/***/ }),
+
 /***/ "./node_modules/@wordpress/icons/build-module/library/close.js":
 /*!*********************************************************************!*\
   !*** ./node_modules/@wordpress/icons/build-module/library/close.js ***!
@@ -2863,6 +2893,7 @@ function Html(props) {
   var [verification, setverification] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   var [activation, setactivation] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   var [otp, setotp] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
+  var [magicLogin, setmagicLogin] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(false);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     onChange(options);
   }, [options]);
@@ -3888,7 +3919,243 @@ function Html(props) {
     className: "flex items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
     className: "!my-1"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{otp_code}`)), " ", `=>`, " OTP"), "Available parameter for this email template")))));
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{otp_code}`)), " ", `=>`, " OTP"), "Available parameter for this email template"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "p-4 cursor-pointer bg-gray-400 hover:bg-gray-500",
+    onClick: () => {
+      setmagicLogin(!magicLogin);
+    }
+  }, magicLogin ? (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    className: "fas fa-chevron-down mr-4"
+  })) : (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
+    className: "fas fa-chevron-up mr-4"
+  })), (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Send Magic Login", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: `${magicLogin ? "block" : "hidden"} p-[10px]`
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Enable?", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    inputClass: "!py-1 px-2  border-2 border-solid",
+    val: options?.email_templates_data?.send_magic_login_url?.enable,
+    options: [{
+      label: "No",
+      value: "no"
+    }, {
+      label: "Yes",
+      value: "yes"
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            enable: newVal
+          }
+        }
+      };
+      setoptions(optionsX);
+    },
+    multiple: false
+  })), options?.email_templates_data?.send_magic_login_url?.enable === "yes" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email Bcc", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    value: options?.email_templates_data?.send_magic_login_url?.email_bcc,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            email_bcc: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email from name", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    value: options?.email_templates_data?.send_magic_login_url?.email_from_name,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            email_from_name: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email from", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    value: options?.email_templates_data?.send_magic_login_url?.email_from,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            email_from: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Reply to name", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    value: options?.email_templates_data?.send_magic_login_url?.reply_to_name,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            reply_to_name: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Reply to", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    value: options?.email_templates_data?.send_magic_login_url?.reply_to,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            reply_to: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email subject", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    value: options?.email_templates_data?.send_magic_login_url?.subject,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            subject: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-col  my-5 gap-4 "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)("Email body", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_textarea__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    id: "send_magic_login_url",
+    value: options?.email_templates_data?.send_magic_login_url?.html,
+    className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        email_templates_data: {
+          ...options.email_templates_data,
+          send_magic_login_url: {
+            ...options.email_templates_data.send_magic_login_url,
+            html: newVal.target.value
+          }
+        }
+      };
+      setoptions(optionsX);
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    htmlFor: ""
+  }, "Parameter"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{site_name}`)), " ", `=>`, " Website title"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{site_description}`)), " ", `=>`, " Website tagline"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{site_url}`)), " ", `=>`, " Website URL"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{site_logo_url}`)), " ", `=>`, " Website logo URL"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{user_name}`)), " ", `=>`, " Username"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{user_display_name}`)), " ", `=>`, " User display name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{first_name}`)), " ", `=>`, " User first name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{last_name}`)), " ", `=>`, " User last name"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{user_avatar}`)), " ", `=>`, " User avatar"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{user_email}`)), " ", `=>`, " User email address"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("pre", {
+    className: "!my-1"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, `{magic_login_url}`)), " ", `=>`, " Magic login url"), "Available parameter for this email template")))));
 }
 class EmailTemplates extends Component {
   constructor(props) {
@@ -3916,6 +4183,351 @@ class EmailTemplates extends Component {
   }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmailTemplates);
+
+/***/ }),
+
+/***/ "./src/components/dashboard/EmailValidation.js":
+/*!*****************************************************!*\
+  !*** ./src/components/dashboard/EmailValidation.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/icon/index.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/close.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/check.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
+/* harmony import */ var _input_text__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../input-text */ "./src/components/input-text/index.js");
+
+
+
+const {
+  Component
+} = wp.element;
+
+
+
+
+
+
+
+
+function Html(props) {
+  if (!props.warn) {
+    return null;
+  }
+  var onChange = props.onChange;
+  var roles = props.roles;
+  console.log(roles);
+  var [options, setoptions] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)(props.options); // Using the hook.
+  var [checkEmail, setcheckEmail] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)({
+    email: "public.nurhasan@gmail.com",
+    prams: {},
+    result: null,
+    loading: false
+  }); // Using the hook.
+
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    onChange(options);
+  }, [options]);
+  const toggleCheckbox = value => {
+    const updatedSource = options.validedPrams.includes(value) ? options.validedPrams.filter(item => item !== value) // Remove if already selected
+    : [...options.validedPrams, value]; // Add if not selected
+
+    setoptions({
+      ...options,
+      validedPrams: updatedSource
+    });
+  };
+  var validationPrams = {
+    isFreeEmailProvider: {
+      "label": "Free Email Provider",
+      "value": "isFreeEmailProvider"
+    },
+    isInboxFull: {
+      "label": "Inbox Full",
+      "value": "isInboxFull"
+    },
+    isGibberishEmail: {
+      "label": "Gibberish Email",
+      "value": "isGibberishEmail"
+    },
+    isSMTPBlacklisted: {
+      "label": "SMTP Blacklisted",
+      "value": "isSMTPBlacklisted"
+    },
+    isDisposableDomain: {
+      "label": "Disposable Domain",
+      "value": "isDisposableDomain"
+    },
+    isCatchAllDomain: {
+      "label": "Catch All Domain",
+      "value": "isCatchAllDomain"
+    },
+    isSyntaxValid: {
+      "label": "Syntax Valid",
+      "value": "isSyntaxValid"
+    },
+    isValidEmail: {
+      "label": "Valid Email",
+      "value": "isValidEmail"
+    },
+    hasValidDomain: {
+      "label": "Has Valid Domain",
+      "value": "hasValidDomain"
+    },
+    isRoleBasedEmail: {
+      "label": "Role Based Email",
+      "value": "isRoleBasedEmail"
+    },
+    verifySMTP: {
+      "label": "Verify SMTP",
+      "value": "verifySMTP"
+    },
+    checkDomainReputation: {
+      "label": "Domain Reputation",
+      "value": "checkDomainReputation"
+    }
+  };
+  function checkMail() {
+    setcheckEmail({
+      ...checkEmail,
+      loading: true
+    });
+    var postData = {
+      email: checkEmail.email
+    };
+    postData = JSON.stringify(postData);
+    fetch("http://localhost/wordpress/wp-json/app/v2/check_email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8"
+      },
+      body: postData
+    }).then(response => {
+      if (response.ok && response.status < 400) {
+        response.json().then(data => {
+          console.log(data);
+          setcheckEmail({
+            ...checkEmail,
+            result: data,
+            loading: false
+          });
+        });
+      }
+    }).catch(_error => {
+      //this.saveAsStatus = 'error';
+      // handle the error
+    });
+  }
+  return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "w-[800px]"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "text-2xl font-bold mb-2"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Email Validation By IsSpammy", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    activeTab: "settings",
+    orientation: "horizontal",
+    contentClass: " p-5 bg-white w-full",
+    navItemsWrapClass: "flex ",
+    navItemClass: "bg-gray-200 flex px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500 ",
+    navItemSelectedClass: "bg-gray-400 ",
+    activeClass: "active-tab",
+    onSelect: tabName => {},
+    tabs: [{
+      name: "settings",
+      title: "Settings",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
+      className: "tab-settings",
+      hidden: false,
+      isPro: false
+    }, {
+      name: "singleValidation",
+      title: "singleValidation",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
+      className: "tab-singleValidation",
+      hidden: false,
+      isPro: false
+    }]
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    name: "settings"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("IsSpammy API Key", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    value: options?.isSpammyApiKey,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        isSpammyApiKey: newVal.target.value
+      };
+      setoptions(optionsX);
+      setcheckEmail({
+        ...checkEmail,
+        email: newVal.target.value
+      });
+    }
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex my-5 justify-between items-center "
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Valided Existing User Emails", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    inputClass: "!py-1 px-2  border-2 border-solid",
+    val: options?.validedExistingUser,
+    options: [{
+      label: "No",
+      value: "no"
+    }, {
+      label: "Yes",
+      value: "yes"
+    }],
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        validedExistingUser: newVal
+      };
+      setoptions(optionsX);
+    },
+    multiple: false
+  })), options?.validedExistingUser == 'yes' && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex items-center mb-5"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("User Roles", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex flex-1 items-center gap-2"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    className: "flex-1",
+    value: options?.queryPrams?.roles?.map(role => roles.find(option => option.value === role) // Match role with options
+    ),
+    options: roles,
+    isMulti: true,
+    closeMenuOnSelect: false,
+    onChange: newVal => {
+      const selectedValues = newVal.map(option => option.value);
+      var optionsX = {
+        ...options
+      };
+      var queryPrams = optionsX.queryPrams;
+      queryPrams = {
+        ...queryPrams,
+        roles: selectedValues
+      };
+      var optionsX = {
+        ...options,
+        queryPrams: queryPrams
+      };
+      setoptions(optionsX);
+    },
+    multiple: false
+  }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    name: "singleValidation"
+  }, JSON.stringify(checkEmail), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5 gap-2  items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    placeholder: "yourmail@domain.com",
+    value: checkEmail?.email,
+    className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        isSpammyApiKey: newVal.target.value
+      };
+      setoptions(optionsX);
+      setcheckEmail({
+        ...checkEmail,
+        email: newVal.target.value
+      });
+    }
+  }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: " no-underline px-4 py-3 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ",
+    onClick: ev => {
+      console.log("Helo");
+      checkMail();
+    }
+  }, checkEmail.loading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null), " Loading..."), !checkEmail.loading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Check"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "my-5"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, JSON.stringify(checkEmail.result)), checkEmail.result != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
+    className: "table-fixed border-collapse"
+  }, Object.entries(checkEmail.result).map(args => {
+    var id = args[0];
+    var value = args[1];
+    console.log(args);
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, validationPrams[id] != undefined && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("tr", {
+      className: " "
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+      className: "w-[250px] py-4 border-0 border-b border-solid border-gray-400"
+    }, validationPrams[id]?.label), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("td", {
+      className: "w-[250px] py-4  border-0 border-b border-solid border-gray-400"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "flex items-center"
+    }, id == "isGibberishEmail" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      fill: "#f00",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"]
+    }), " No"), value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      fill: "#19561f",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"]
+    }), " Yes")), id == "isSMTPBlacklisted" && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, !value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      fill: "#f00",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"]
+    }), " No"), value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      fill: "#19561f",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"]
+    }), " Yes")), (id == "isSyntaxValid" || id == "hasValidDomain" || id == "isDisposableDomain" || id == "isFreeEmailProvider" || id == "checkDomainReputation" || id == "isRoleBasedEmail" || id == "isCatchAllDomain" || id == "verifySMTP" || id == "isInboxFull" || id == "isValidEmail") && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      fill: "#19561f",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_12__["default"]
+    }), " Yes"), !value && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_icons__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      fill: "#f00",
+      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_11__["default"]
+    }), " No")))))));
+  })))))));
+}
+class EmailValidation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true
+    };
+    this.handleToggleClick = this.handleToggleClick.bind(this);
+  }
+  handleToggleClick() {
+    this.setState(state => ({
+      showWarning: !state.showWarning
+    }));
+  }
+  render() {
+    var {
+      onChange,
+      options,
+      roles
+    } = this.props;
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(Html, {
+      onChange: onChange,
+      options: options,
+      roles: roles,
+      warn: this.state.showWarning
+    });
+  }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EmailValidation);
 
 /***/ }),
 
@@ -4076,7 +4688,7 @@ function Html(props) {
     className: "flex flex-1 items-center gap-2"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react_select__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "flex-1",
-    value: options?.exclude_user_roles.map(role => roles.find(option => option.value === role) // Match role with options
+    value: options?.exclude_user_roles?.map(role => roles.find(option => option.value === role) // Match role with options
     ),
     options: roles,
     isMulti: true,
@@ -4755,6 +5367,23 @@ function Html(props) {
       var optionsX = {
         ...options,
         required_email_verified: newVal
+      };
+      setoptions(optionsX);
+    },
+    multiple: false
+  })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "flex  my-5  justify-between items-center"
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
+    className: "w-[400px]",
+    htmlFor: "emailVerification"
+  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Magic Pogin Page", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    val: options?.magic_login_page,
+    inputClass: "!py-1 px-2 border-2 border-solid",
+    options: pageList,
+    onChange: newVal => {
+      var optionsX = {
+        ...options,
+        magic_login_page: newVal
       };
       setoptions(optionsX);
     },
@@ -5942,23 +6571,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
 /* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
 /* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
 /* harmony import */ var _EmailOtp__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EmailOtp */ "./src/components/dashboard/EmailOtp.js");
 /* harmony import */ var _EmailTemplates__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./EmailTemplates */ "./src/components/dashboard/EmailTemplates.js");
-/* harmony import */ var _EmailVerification__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./EmailVerification */ "./src/components/dashboard/EmailVerification.js");
-/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ErrorMessage */ "./src/components/dashboard/ErrorMessage.js");
-/* harmony import */ var _IsSpammy__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./IsSpammy */ "./src/components/dashboard/IsSpammy.js");
-/* harmony import */ var _MagicLogin__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./MagicLogin */ "./src/components/dashboard/MagicLogin.js");
-/* harmony import */ var _reCaptcha__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./reCaptcha */ "./src/components/dashboard/reCaptcha.js");
-/* harmony import */ var _SpamProtection__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./SpamProtection */ "./src/components/dashboard/SpamProtection.js");
-/* harmony import */ var _ThirdParty__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ThirdParty */ "./src/components/dashboard/ThirdParty.js");
-/* harmony import */ var _Tools__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Tools */ "./src/components/dashboard/Tools.js");
+/* harmony import */ var _EmailValidation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./EmailValidation */ "./src/components/dashboard/EmailValidation.js");
+/* harmony import */ var _EmailVerification__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./EmailVerification */ "./src/components/dashboard/EmailVerification.js");
+/* harmony import */ var _ErrorMessage__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ErrorMessage */ "./src/components/dashboard/ErrorMessage.js");
+/* harmony import */ var _IsSpammy__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./IsSpammy */ "./src/components/dashboard/IsSpammy.js");
+/* harmony import */ var _MagicLogin__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./MagicLogin */ "./src/components/dashboard/MagicLogin.js");
+/* harmony import */ var _reCaptcha__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./reCaptcha */ "./src/components/dashboard/reCaptcha.js");
+/* harmony import */ var _SpamProtection__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./SpamProtection */ "./src/components/dashboard/SpamProtection.js");
+/* harmony import */ var _ThirdParty__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ThirdParty */ "./src/components/dashboard/ThirdParty.js");
+/* harmony import */ var _Tools__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Tools */ "./src/components/dashboard/Tools.js");
 
 const {
   Component
 } = wp.element;
+
 
 
 
@@ -5995,21 +6626,21 @@ function Html(props) {
   var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
     name: "overview",
     title: "Overview",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-overview",
     hidden: false,
     isPro: false
   }, {
     name: "tabEmailVerification",
     title: "Email Verification",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabEmailVerification",
     hidden: false,
     isPro: false
   }, {
     name: "magicLogin",
     title: "Magic Login",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-magicLogin",
     hidden: false,
     isPro: false,
@@ -6017,49 +6648,49 @@ function Html(props) {
   }, {
     name: "tabEmailOTP",
     title: "Email OTP",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabEmailOTP",
     hidden: false,
     isPro: false
   }, {
     name: "tabIsSpammy",
     title: "IsSpammy",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabIsSpammy",
     hidden: false,
     isPro: false
   }, {
     name: "tabSpam",
     title: "Spam Protection",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabSpam",
     hidden: false,
     isPro: false
   }, {
     name: "tabEmailTemplates",
     title: "Email Templates",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabEmailTemplates",
     hidden: false,
     isPro: false
   }, {
     name: "tabreCAPTCHA",
     title: "reCAPTCHA",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabreCAPTCHA",
     hidden: false,
     isPro: false
   }, {
     name: "tabTools",
     title: "Tools",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabTools",
     hidden: false,
     isPro: false
   }, {
     name: "emailValidation",
     title: "Email Validation",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-emailValidation",
     hidden: false,
     isPro: false,
@@ -6067,7 +6698,7 @@ function Html(props) {
   }, {
     name: "tabHelp",
     title: "Help & support",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_18__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_19__["default"],
     className: "tab-tabHelp",
     hidden: false,
     isPro: false
@@ -6246,6 +6877,13 @@ function Html(props) {
     var optionDataX = {
       ...optionData,
       magicLogin: options
+    };
+    setoptionData(optionDataX);
+  }
+  function onChangeEmailValidation(options) {
+    var optionDataX = {
+      ...optionData,
+      emailValidation: options
     };
     setoptionData(optionDataX);
   }
@@ -6468,14 +7106,14 @@ function Html(props) {
     name: "tabTools"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Tools__WEBPACK_IMPORTED_MODULE_17__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Tools__WEBPACK_IMPORTED_MODULE_18__["default"], {
     options: optionData,
     onChange: onChangeTools
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "tabreCAPTCHA"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_reCaptcha__WEBPACK_IMPORTED_MODULE_14__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_reCaptcha__WEBPACK_IMPORTED_MODULE_15__["default"], {
     options: optionData.recaptcha,
     onChange: onChangeReCaptcha
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -6489,21 +7127,21 @@ function Html(props) {
     name: "tabSpam"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, optionData?.spam_protection && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SpamProtection__WEBPACK_IMPORTED_MODULE_15__["default"], {
+  }, optionData?.spam_protection && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SpamProtection__WEBPACK_IMPORTED_MODULE_16__["default"], {
     options: optionData.spam_protection,
     onChange: onChangeSpamProtection
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "tabIsSpammy"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_IsSpammy__WEBPACK_IMPORTED_MODULE_12__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_IsSpammy__WEBPACK_IMPORTED_MODULE_13__["default"], {
     options: optionData.isspammy,
     onChange: onChangeIsSpammy
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "magicLogin"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_MagicLogin__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_MagicLogin__WEBPACK_IMPORTED_MODULE_14__["default"], {
     options: optionData.magicLogin,
     onChange: onChangeMagicLogin,
     pageList: pageList
@@ -6511,27 +7149,28 @@ function Html(props) {
     name: "emailValidation"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-2xl font-bold mb-2"
-  }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Email Validation", "user-verification"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("span", {
-    className: "text-orange-500"
-  }, " (Coming Soon)")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EmailValidation__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    options: optionData.emailValidation,
+    onChange: onChangeEmailValidation,
+    pageList: pageList,
+    roles: roles
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
     name: "tabEmailVerification"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EmailVerification__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EmailVerification__WEBPACK_IMPORTED_MODULE_11__["default"], {
     options: optionData.email_verification,
     onChange: onChangeEmailVerification,
     pageList: pageList,
     roles: roles
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ErrorMessage__WEBPACK_IMPORTED_MODULE_11__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ErrorMessage__WEBPACK_IMPORTED_MODULE_12__["default"], {
     options: optionData.messages,
     onChange: onChangeErrorMessages
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ThirdParty__WEBPACK_IMPORTED_MODULE_16__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ThirdParty__WEBPACK_IMPORTED_MODULE_17__["default"], {
     options: optionData?.user_verification_settings,
     onChange: onChangeUserVerificationSettings
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {

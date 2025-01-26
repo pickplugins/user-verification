@@ -10,6 +10,7 @@ import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
 import EmailOtp from "./EmailOtp";
 import EmailTemplates from "./EmailTemplates";
+import EmailValidation from "./EmailValidation";
 import EmailVerification from "./EmailVerification";
 import ErrorMessage from "./ErrorMessage";
 import IsSpammy from "./IsSpammy";
@@ -332,10 +333,17 @@ function Html(props) {
 		var optionDataX = { ...optionData, isspammy: options };
 		setoptionData(optionDataX);
 	}
+
 	function onChangeMagicLogin(options) {
 		var optionDataX = { ...optionData, magicLogin: options };
 		setoptionData(optionDataX);
 	}
+	function onChangeEmailValidation(options) {
+		var optionDataX = { ...optionData, emailValidation: options };
+		setoptionData(optionDataX);
+	}
+
+
 
 
 	function onChangeEmailOTP(options) {
@@ -609,11 +617,17 @@ function Html(props) {
 					</PGtab>
 					<PGtab name="emailValidation">
 						<div className="flex mb-5  justify-start gap-2 items-center ">
-							<div className="text-2xl font-bold mb-2">
-								{__("Email Validation", "user-verification")}
 
-								<span className="text-orange-500"> (Coming Soon)</span>
-							</div>
+
+							<EmailValidation
+								options={optionData.emailValidation}
+								onChange={onChangeEmailValidation}
+								pageList={pageList}
+								roles={roles}
+
+							/>
+
+
 						</div>
 					</PGtab>
 
