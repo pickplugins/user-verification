@@ -115,15 +115,15 @@ function Html(props) {
 			isPro: false,
 		},
 
-		{
-			name: "emailValidation",
-			title: "Email Validation",
-			icon: settings,
-			className: "tab-emailValidation",
-			hidden: false,
-			isPro: false,
-			isNew: true,
-		},
+		// {
+		// 	name: "emailValidation",
+		// 	title: "Email Validation",
+		// 	icon: settings,
+		// 	className: "tab-emailValidation",
+		// 	hidden: false,
+		// 	isPro: false,
+		// 	isNew: true,
+		// },
 
 		{
 			name: "tabHelp",
@@ -306,19 +306,19 @@ function Html(props) {
 			)
 				.toString()
 				.padStart(2, "0")}-${currentDate
-				.getDate()
-				.toString()
-				.padStart(2, "0")}`;
+					.getDate()
+					.toString()
+					.padStart(2, "0")}`;
 			const formattedTime = `${currentDate
 				.getHours()
 				.toString()
 				.padStart(2, "0")}${currentDate
-				.getMinutes()
-				.toString()
-				.padStart(2, "0")}${currentDate
-				.getSeconds()
-				.toString()
-				.padStart(2, "0")}`;
+					.getMinutes()
+					.toString()
+					.padStart(2, "0")}${currentDate
+						.getSeconds()
+						.toString()
+						.padStart(2, "0")}`;
 			const filename = `combo-blocks-setting-${formattedDate}-${formattedTime}.json`;
 			download(filename, JSON.stringify(optionDataX, null, 2));
 		};
@@ -461,46 +461,187 @@ function Html(props) {
 					navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500 "
 					navItemSelectedClass="bg-white "
 					activeClass="active-tab"
-					onSelect={(tabName) => {}}
+					onSelect={(tabName) => { }}
 					tabs={dashboardTabs}>
 					<PGtab name="overview">
 						<div className="">
-							<div className="grid grid-cols-4 gap-5 text-white">
-								<div className="bg-blue-800	 p-5 text-center space-y-3">
-									<div className="text-xl">Verify Emaill Sent</div>
-									<div className="text-2xl">1236</div>
+
+
+							<div className="text-2xl mb-3">Email Verification</div>
+
+							<div className="grid grid-cols-3 gap-5 text-white  my-5">
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-send-mail icofont-3x"></i>
+									</div>
+									<div>
+										<div className="text-lg">Email Verification Sent</div>
+										<div className="text-2xl">1236</div>
+									</div>
 								</div>
-								<div className="bg-blue-800	 p-5 text-center space-y-3">
-									<div className="text-xl">Emaill Verified</div>
-									<div className="text-2xl">1236</div>
-								</div>
-								<div className="bg-blue-800	 p-5 text-center space-y-3">
-									<div className="text-xl">Email OTP Sent</div>
-									<div className="text-2xl">1236</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-verification-check icofont-3x"></i>
+
+									</div>
+									<div>
+										<div className="text-lg">Verification Confirmed</div>
+										<div className="text-2xl">1236</div>
+									</div>
 								</div>
 
-								<div className="bg-blue-800	 p-5 text-center space-y-3">
-									<div className="text-xl">Total Spam Blocked</div>
-									<div className="text-2xl">1236</div>
-								</div>
-								<div className="bg-indigo-800 p-5 text-center space-y-3">
-									<div className="text-xl">Comment Spam</div>
-									<div className="text-2xl">1236</div>
-								</div>
-								<div className="bg-violet-800 p-5 text-center space-y-3">
-									<div className="text-xl">Login Spam</div>
-									<div className="text-2xl">1236</div>
-								</div>
-								<div className="bg-fuchsia-800 p-5 text-center space-y-3">
-									<div className="text-xl">Registration Spam</div>
-									<div className="text-2xl">1236</div>
-								</div>
-
-								<div className="bg-fuchsia-800 p-5 text-center space-y-3">
-									<div className="text-xl">Cooment Spam Report</div>
-									<div className="text-2xl">1236</div>
-								</div>
 							</div>
+							<div className="text-2xl mb-3">Magic Login</div>
+
+							<div className="grid grid-cols-3 gap-5 text-white  my-5">
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-send-mail icofont-3x"></i>
+									</div>
+									<div>
+										<div className="text-lg">Magic Login Sent</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-verification-check icofont-3x"></i>
+
+									</div>
+									<div>
+										<div className="text-lg">Magic Login Used</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+
+							</div>
+
+
+
+							<div className="text-2xl mb-3">Email OTP</div>
+
+
+							<div className="grid grid-cols-3 gap-5 text-white  my-5">
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-send-mail icofont-3x"></i>
+									</div>
+									<div>
+										<div className="text-lg">Email OTP Sent</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-verification-check icofont-3x"></i>
+
+									</div>
+									<div>
+										<div className="text-lg">Email OTP Used</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+
+							</div>
+
+							<div className="text-2xl mb-3">Email Validation</div>
+
+
+							<div className="grid grid-cols-3 gap-5 text-white  my-5">
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-send-mail icofont-3x"></i>
+									</div>
+									<div>
+										<div className="text-lg">Request Sent</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-verification-check icofont-3x"></i>
+
+									</div>
+									<div>
+										<div className="text-lg">Validation Success</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-verification-check icofont-3x"></i>
+									</div>
+									<div>
+										<div className="text-lg">Validation Failed</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+
+							</div>
+
+
+
+
+
+							<div className="text-2xl mb-3">Spam Protection</div>
+
+
+							<div className="grid grid-cols-2 gap-5 text-white  my-5">
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-bug icofont-3x"></i>
+									</div>
+									<div>
+										<div className="text-lg">Spam Login Blocked </div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-bug icofont-3x"></i>
+
+									</div>
+									<div>
+										<div className="text-lg">Spam Registration Blocked</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-bug icofont-3x"></i>
+
+									</div>
+									<div>
+										<div className="text-lg">Spam Comment Blocked</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
+									<div>
+										<i class="icofont-bug icofont-3x"></i>
+
+									</div>
+									<div>
+										<div className="text-lg">Spam Comment Report</div>
+										<div className="text-2xl">1236</div>
+									</div>
+								</div>
+
+
+
+
+							</div>
+
+
+
+
+
+
+
+
+
+
+
 						</div>
 					</PGtab>
 					<PGtab name="tabHelp">

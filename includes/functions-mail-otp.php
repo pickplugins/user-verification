@@ -336,6 +336,10 @@ function user_verification_send_otp()
 
         if ($otp_via_mail) {
             $response['success_message'] = '<div class="message otp-message error">' . $otp_sent_success . '</div>';
+            // stats record start
+            $UserVerificationStats = new UserVerificationStats();
+            $UserVerificationStats->add_stats('email_otp_sent');
+            // stats record end
         } else {
             $response['success_message'] = '<div class="message otp-message error">' . $otp_sent_error . '</div>';
         }
@@ -598,7 +602,10 @@ function user_verification_send_otp_via_mail($user_data)
     $email_data['html'] = strtr($email_body, $vars);
     $email_data['attachments'] = array();
 
-
+    // stats record start
+    $UserVerificationStats = new UserVerificationStats();
+    $UserVerificationStats->add_stats('email_otp_sent');
+    // stats record end
 
 
     return $class_user_verification_emails->send_email($email_data);
