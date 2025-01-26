@@ -135,6 +135,13 @@ function form_wrap_process_magicLogin($request)
         if ($enable == 'yes') {
             $mail_status = $class_user_verification_emails->send_email($email_data);
             $response['success']['loggedInUser'] = __('User Login success', 'user-verification');
+
+
+            // stats record start
+            $UserVerificationStats = new UserVerificationStats();
+            $UserVerificationStats->add_stats('magic_login_sent');
+            // stats record end
+
         }
     } else {
         $response['errors']['loggedInUser'] = __('User Login failed', 'user-verification');
@@ -192,6 +199,12 @@ function user_verification_magic_login()
 
 
         if (empty($meta_data)) return;
+
+        // Record a stats start
+        $UserVerificationStats = new UserVerificationStats();
+        $UserVerificationStats->add_stats('magic_login_used');
+        // Record a stats end
+
 
         $user = get_user_by('id', $meta_data->user_id);
 

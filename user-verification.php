@@ -94,6 +94,27 @@ class UserVerification
             wp_schedule_event(time(), 'daily', 'user_verification_validated_users_email');
         }
 
+        global $wpdb;
+        $charset_collate = $wpdb->get_charset_collate();
+        $prefix = $wpdb->prefix;
+        $table = $prefix . 'user_verification_stats';
+
+        $sql = "CREATE TABLE IF NOT EXISTS $table (
+
+                    id int(100) NOT NULL AUTO_INCREMENT,
+        			type	VARCHAR( 50 )	NOT NULL,
+        			datetime  DATETIME NOT NULL,
+
+                    UNIQUE KEY id (id)
+                ) $charset_collate;";
+
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+
+
+        // $user_verification_info = array();
+        // $user_verification_info['db_version'] = 0;
+
 
 
         do_action('user_verification_activation');
@@ -132,6 +153,7 @@ class UserVerification
 
         require_once(user_verification_plugin_dir . 'includes/functions-user-profile.php');
         require_once(user_verification_plugin_dir . 'includes/functions-rest.php');
+        require_once(user_verification_plugin_dir . 'includes/functions-counter.php');
 
         require_once(user_verification_plugin_dir . 'templates/magic-login-form/index.php');
         require_once(user_verification_plugin_dir . 'templates/magic-login-form/hook.php');
@@ -159,6 +181,7 @@ class UserVerification
         require_once(user_verification_plugin_dir . 'includes/classes/class-admin-notices.php');
         require_once(user_verification_plugin_dir . 'includes/classes/class-email-verifier.php');
         require_once(user_verification_plugin_dir . 'includes/classes/class-shortcodes.php');
+        require_once(user_verification_plugin_dir . 'includes/classes/class-stats.php');
     }
 
     public function _define_constants()
@@ -288,6 +311,9 @@ class UserVerification
 
         wp_register_style('font-awesome-4', user_verification_plugin_url . 'assets/global/css/font-awesome-4.css');
         wp_register_style('font-awesome-5', user_verification_plugin_url . 'assets/global/css/font-awesome-5.css');
+        wp_register_style('icofont', user_verification_plugin_url . 'assets/css/icofont/icofont.min.css');
+
+
 
         wp_register_style('settings-tabs', user_verification_plugin_url . 'assets/settings-tabs/settings-tabs.css');
         wp_register_script('settings-tabs', user_verification_plugin_url . 'assets/settings-tabs/settings-tabs.js', array('jquery'));

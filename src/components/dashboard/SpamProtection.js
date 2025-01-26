@@ -67,8 +67,23 @@ function Html(props) {
 						<label className="w-[400px]" htmlFor="">
 							{__("Blocked domains", "user-verification")}
 						</label>
+
+
+
+
 						<div className="min-w-[400px] space-y-4">
-							<button
+							<textarea
+								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px] min-h-32"
+								value={typeof options?.blocked_domain == 'object' ? options?.blocked_domain.join("\n") : options?.blocked_domain}
+								onChange={(newVal) => {
+									var optionsX = { ...options, blocked_domain: newVal.target.value };
+									setoptions(optionsX);
+								}}
+							/>
+
+							<div className="text-sm !mt-0">Each domain per line</div>
+
+							{/* <button
 								className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
 								onClick={() => {
 									handleAddItem("blocked_domain");
@@ -113,7 +128,7 @@ function Html(props) {
 										<Icon fill="#fff" icon={close} />
 									</div>
 								</div>
-							))}
+							))} */}
 						</div>
 					</div>
 					<div className="flex my-7 items-start ">
@@ -121,7 +136,18 @@ function Html(props) {
 							{__("Allowed domains", "user-verification")}
 						</label>
 						<div className="min-w-[400px] space-y-4">
-							<button
+							<textarea
+								className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px] min-h-32"
+								value={typeof options?.allowed_domain == 'object' ? options?.allowed_domain.join("\n") : options?.allowed_domain}
+								onChange={(newVal) => {
+									var optionsX = { ...options, allowed_domain: newVal.target.value };
+									setoptions(optionsX);
+								}}
+							/>
+							<div className="text-sm !mt-0">Each domain per line</div>
+
+
+							{/* <button
 								className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
 								onClick={() => {
 									handleAddItem("allowed_domain");
@@ -162,7 +188,7 @@ function Html(props) {
 										<Icon fill="#fff" icon={close} />
 									</div>
 								</div>
-							))}
+							))} */}
 						</div>
 					</div>
 				</>
@@ -194,7 +220,19 @@ function Html(props) {
 						{__("Blocked username", "user-verification")}
 					</label>
 					<div className="min-w-[400px] space-y-4">
-						<button
+
+						<textarea
+							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px] min-h-32"
+							value={typeof options?.blocked_username == 'object' ? options?.blocked_username.join("\n") : options?.blocked_username}
+							onChange={(newVal) => {
+								var optionsX = { ...options, blocked_username: newVal.target.value };
+								setoptions(optionsX);
+							}}
+						/>
+						<div className="text-sm !mt-0">Each username per line</div>
+
+
+						{/* <button
 							className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
 							onClick={() => {
 								handleAddItem("blocked_username");
@@ -236,7 +274,7 @@ function Html(props) {
 									</div>
 								</div>
 							);
-						})}
+						})} */}
 					</div>
 				</div>
 			)}
@@ -267,7 +305,18 @@ function Html(props) {
 						{__("Blocked generic mail", "user-verification")}
 					</label>
 					<div className="min-w-[400px] space-y-4">
-						<button
+
+						<textarea
+							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px] min-h-32"
+							value={typeof options?.blocked_generic_mail == 'object' ? options?.blocked_generic_mail.join("\n") : options?.blocked_generic_mail}
+							onChange={(newVal) => {
+								var optionsX = { ...options, blocked_generic_mail: newVal.target.value };
+								setoptions(optionsX);
+							}}
+						/>
+						<div className="text-sm !mt-0">Each item per line</div>
+
+						{/* <button
 							className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
 							onClick={() => {
 								handleAddItem("blocked_generic_mail");
@@ -315,7 +364,7 @@ function Html(props) {
 									</div>
 								</div>
 							);
-						})}
+						})} */}
 					</div>
 				</div>
 			)}

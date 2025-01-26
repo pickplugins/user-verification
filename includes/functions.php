@@ -53,6 +53,10 @@ function registration_errors_block_spammer($errors, $sanitized_user_login, $user
 
         if ($spammer_found == 'yes') {
             $errors->add('blocked_spammer', __("Spammers are not allowed to register.", 'user-verification'));
+            // stats record start
+            $UserVerificationStats = new UserVerificationStats();
+            $UserVerificationStats->add_stats('spam_registration_blocked');
+            // stats record end
         }
     }
 
@@ -120,6 +124,11 @@ function user_verification_trash_comment($comment_id, $comment)
         // License data.
         $spammer_data = json_decode(wp_remote_retrieve_body($response));
 
+        // stats record start
+        $UserVerificationStats = new UserVerificationStats();
+        $UserVerificationStats->add_stats('spam_comment_report');
+        // stats record end
+
         //$license_key = isset($license_data->license_key) ? sanitize_text_field($license_data->license_key) : '';
 
     }
@@ -159,6 +168,11 @@ function user_verification_spam_comment($comment_id, $comment)
 
         // License data.
         $spammer_data = json_decode(wp_remote_retrieve_body($response));
+
+        // stats record start
+        $UserVerificationStats = new UserVerificationStats();
+        $UserVerificationStats->add_stats('spam_comment_report');
+        // stats record end
 
         //$license_key = isset($license_data->license_key) ? sanitize_text_field($license_data->license_key) : '';
 
@@ -209,7 +223,10 @@ function user_verification_pre_comment_approved($approved, $commentdata)
         $spammer_found = isset($spammer_data->spammer_found) ? sanitize_text_field($spammer_data->spammer_found) : 'no';
 
         if ($spammer_found == 'yes') {
-
+            // stats record start
+            $UserVerificationStats = new UserVerificationStats();
+            $UserVerificationStats->add_stats('spam_comment_blocked');
+            // stats record end
             $approved = 'trash';
         }
     }
@@ -467,6 +484,8 @@ function user_verification_is_username_blocked($username)
                 break;
             endif;
         }
+
+
     endif;
 
     return $response;
@@ -482,6 +501,13 @@ function uv_registration_protect_username($errors, $sanitized_user_login, $user_
 
     if ($username_blocked) {
         $errors->add('blocked_username', __("<strong>{" . esc_html($sanitized_user_login) . "}</strong> username is not allowed!", 'user-verification'));
+
+        // stats record start
+        $UserVerificationStats = new UserVerificationStats();
+        $UserVerificationStats->add_stats('spam_registration_blocked');
+        // stats record end
+
+
     }
 
     return $errors;
@@ -498,6 +524,11 @@ function uv_registration_protect_generic_mail($errors, $sanitized_user_login, $u
 
     if ($username_blocked) {
         $errors->add('blocked_generic_mail', __("<strong>{" . esc_html($user_email) . "}</strong> generic mail addresses is not allowed!", 'user-verification'));
+
+        // stats record start
+        $UserVerificationStats = new UserVerificationStats();
+        $UserVerificationStats->add_stats('generic_mail_registration_blocked');
+        // stats record end
     }
 
     return $errors;
@@ -646,6 +677,11 @@ function uv_registration_protect_blocked_domain($errors, $sanitized_user_login, 
 
     if ($is_blocked) {
         $errors->add('blocked_domain', sprintf(__("This <strong>%s</strong> domain is blocked!", 'user-verification'), esc_url_raw($email_domain)));
+
+        // stats record start
+        $UserVerificationStats = new UserVerificationStats();
+        $UserVerificationStats->add_stats('spam_registration_blocked');
+        // stats record end
     }
 
     return $errors;
@@ -666,6 +702,11 @@ function uv_registration_protect_allowed_domain($errors, $sanitized_user_login, 
 
     if (!$is_allowed) {
         $errors->add('allowed_domain', sprintf(__("This <strong>%s</strong> domain is not allowed!", 'user-verification'), esc_url_raw($email_domain)));
+
+        // stats record start
+        $UserVerificationStats = new UserVerificationStats();
+        $UserVerificationStats->add_stats('spam_registration_blocked');
+        // stats record end
     }
 
     return $errors;
@@ -1148,6 +1189,11 @@ if (!function_exists('user_verification_user_registered')) {
 
         if ($enable == 'yes') {
             $mail_status = $class_user_verification_emails->send_email($email_data);
+
+            // stats record start
+            $UserVerificationStats = new UserVerificationStats();
+            $UserVerificationStats->add_stats('email_verification_sent');
+            // stats record end
         }
     }
 }
@@ -1302,6 +1348,11 @@ function user_verification_profile_update($user_id, $old_user_data)
 
             if ($enable == 'yes') {
                 $mail_status = $class_user_verification_emails->send_email($email_data);
+
+                // stats record start
+                $UserVerificationStats = new UserVerificationStats();
+                $UserVerificationStats->add_stats('email_verification_sent');
+                // stats record end
             }
         }
     }
