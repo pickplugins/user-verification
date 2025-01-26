@@ -33,7 +33,7 @@ function Html(props) {
 	var btnClass = props.btnClass;
 
 	var options = props.options;
-	console.log(options);
+	// console.log(options);
 	var buttonTitle = props.buttonTitle;
 	var value = props.value == undefined ? "" : props.value;
 	var onChange = props.onChange;

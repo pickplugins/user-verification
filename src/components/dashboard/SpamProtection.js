@@ -203,7 +203,7 @@ function Html(props) {
 						</button>
 
 						{options?.blocked_username.map((domain, i) => {
-							console.log(domain);
+							// console.log(domain);
 							return (
 								<div key={i} className="flex items-center gap-4">
 									<PGinputText

@@ -19,14 +19,14 @@ function Html(props) {
 
   const onMouseClickDrag = (e) => {
 
-    console.log('onMouseClickDrag');
+    // console.log('onMouseClickDrag');
 
 
   }
 
   const onMouseDownDrag = (e) => {
 
-    console.log('onMouseDownDrag');
+    // console.log('onMouseDownDrag');
 
     setisResizing(true);
     setlastDownX(e.clientY);
@@ -38,7 +38,7 @@ function Html(props) {
 
   const onMouseUpDrag = (e) => {
 
-    console.log('onMouseUpDrag');
+    // console.log('onMouseUpDrag');
 
     setisResizing(false);
 
@@ -54,7 +54,7 @@ function Html(props) {
   document.addEventListener("mousemove", (e) => {
 
     // console.log('####mousemove#####');
-    console.log(isResizing);
+    // console.log(isResizing);
 
 
     if (!isResizing)

@@ -77,7 +77,7 @@ class PGDatePicker extends Component {
 				.toString()
 				.padStart(2, "0")} ${inputDate.getHours() >= 12 ? "PM" : "AM"}`;
 
-			console.log(formattedDate);
+			// console.log(formattedDate);
 			return formattedDate;
 		}
 

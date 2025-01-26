@@ -5,6 +5,8 @@ import { __ } from "@wordpress/i18n";
 import apiFetch from "@wordpress/api-fetch";
 import { Spinner } from "@wordpress/components";
 import { useEffect, useState } from "@wordpress/element";
+import { MediaUpload } from "@wordpress/block-editor";
+import { useSelect } from "@wordpress/data";
 import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
@@ -19,6 +21,7 @@ import ReCaptcha from "./reCaptcha";
 import SpamProtection from "./SpamProtection";
 import ThirdParty from "./ThirdParty";
 import Tools from "./Tools";
+import PGinputSelect from "../input-select";
 
 function Html(props) {
 	if (!props.warn) {
@@ -35,8 +38,9 @@ function Html(props) {
 	};
 	var [optionData, setoptionData] = useState({}); // Using the hook.
 	var [optionDataSaved, setoptionDataSaved] = useState({}); // Using the hook.
-	var [dashboardTabs, setdashboardTabs] = useState([
 
+	// console.log(optionData, optionDataSaved);
+	var [dashboardTabs, setdashboardTabs] = useState([
 		{
 			name: "overview",
 			title: "Overview",
@@ -77,7 +81,6 @@ function Html(props) {
 			className: "tab-tabIsSpammy",
 			hidden: false,
 			isPro: false,
-
 		},
 		{
 			name: "tabSpam",
@@ -122,7 +125,6 @@ function Html(props) {
 			isNew: true,
 		},
 
-
 		{
 			name: "tabHelp",
 			title: "Help & support",
@@ -144,29 +146,50 @@ function Html(props) {
 	function resetOptionData() {
 		setoptionData(optionDataDefault);
 	}
+	// 	useEffect(() => {
+	// 		setisLoading(true);
+	// 		apiFetch({
+	// 			path: "/user-verification/v2/get_options",
+	// 			method: "POST",
+	// 			data: { option: "user_verification_settings" },
+	// 		}).then((res) => {
+
+	// 			if (res.length != 0) {
+	// 				var resX = { ...res };
+	// console.log("fetched");
+
+	// 				setoptionDataSaved(resX);
+	// 				setoptionData(resX);
+	// 			}
+	// 			setisLoading(false);
+	// 		});
+	// 	}, []);
+
 	useEffect(() => {
-		setisLoading(true);
-		apiFetch({
-			path: "/user-verification/v2/get_options",
-			method: "POST",
-			data: { option: "user_verification_settings" },
-		}).then((res) => {
+		const fetchData = async () => {
+			setisLoading(true);
+			try {
+				const res = await apiFetch({
+					path: "/user-verification/v2/get_options",
+					method: "POST",
+					data: { option: "user_verification_settings" },
+				});
 
+				if (res.length !== 0) {
+					const resX = { ...res };
 
-
-			if (res.length != 0) {
-				var resX = { ...res };
-
-
-				setoptionDataSaved(resX);
-				setoptionData(resX);
+					setoptionDataSaved(resX);
+					setoptionData(resX);
+				}
+			} catch (error) {
+				console.error("Error fetching options:", error);
+			} finally {
+				setisLoading(false);
 			}
-			setisLoading(false);
-		});
+		};
+
+		fetchData();
 	}, []);
-
-
-
 
 
 	useEffect(() => {
@@ -175,47 +198,30 @@ function Html(props) {
 			method: "POST",
 			data: {},
 		}).then((res) => {
-
-
 			var rolesX = [];
 			Object.entries(res).map((role) => {
 				var index = role[0];
 				var val = role[1];
-				rolesX.push({ label: val, value: index })
+				rolesX.push({ label: val, value: index });
 			});
 			setroles(rolesX);
-
 		});
 		apiFetch({
 			path: "/user-verification/v2/page_list",
 			method: "POST",
 			data: {},
 		}).then((res) => {
-
-			console.log(res);
-
+			// console.log(res);
 
 			var pageListX = [];
 			Object.entries(res).map((page) => {
 				var index = page[0];
 				var val = page[1];
-				pageListX.push({ label: val, value: index })
+				pageListX.push({ label: val, value: index });
 			});
 			setpageList(pageListX);
-
 		});
-
 	}, []);
-
-
-
-
-
-
-
-
-
-
 
 	useEffect(() => {
 		if (JSON.stringify(optionData) === JSON.stringify(optionDataSaved)) {
@@ -300,19 +306,19 @@ function Html(props) {
 			)
 				.toString()
 				.padStart(2, "0")}-${currentDate
-					.getDate()
-					.toString()
-					.padStart(2, "0")}`;
+				.getDate()
+				.toString()
+				.padStart(2, "0")}`;
 			const formattedTime = `${currentDate
 				.getHours()
 				.toString()
 				.padStart(2, "0")}${currentDate
-					.getMinutes()
-					.toString()
-					.padStart(2, "0")}${currentDate
-						.getSeconds()
-						.toString()
-						.padStart(2, "0")}`;
+				.getMinutes()
+				.toString()
+				.padStart(2, "0")}${currentDate
+				.getSeconds()
+				.toString()
+				.padStart(2, "0")}`;
 			const filename = `combo-blocks-setting-${formattedDate}-${formattedTime}.json`;
 			download(filename, JSON.stringify(optionDataX, null, 2));
 		};
@@ -343,9 +349,6 @@ function Html(props) {
 		setoptionData(optionDataX);
 	}
 
-
-
-
 	function onChangeEmailOTP(options) {
 		var optionDataX = { ...optionData, email_otp: options };
 		setoptionData(optionDataX);
@@ -355,12 +358,12 @@ function Html(props) {
 		setoptionData(optionDataX);
 	}
 	function onChangeTools(options) {
-		var optionDataX = { options };
+		var optionDataX = { ...optionData, tools: options };
 		setoptionData(optionDataX);
 	}
 	function onChangeEmailTemplates(options) {
-		var optionDataX = { options };
-		setoptionData(optionDataX);
+		// var optionDataX = { options };
+		setoptionData(options);
 	}
 	function onChangeSpamProtection(options) {
 		var optionDataX = { ...optionData, spam_protection: options };
@@ -375,13 +378,18 @@ function Html(props) {
 		setoptionData(optionDataX);
 	}
 
+	const imageUrl = useSelect(
+		(select) => {
+			if (!optionData?.logo_id) return null;
+			const media = select("core").getMedia(optionData?.logo_id);
+			return media?.source_url || null;
+		},
+		[optionData?.logo_id]
+	);
+	const ALLOWED_MEDIA_TYPES = ["image"];
+
 	return (
 		<div className="pg-setting-input-text pg-dashboard">
-
-
-
-
-
 			<div className="bg-gray-300 text-white py-5 p-3">
 				<div className="flex gap-3 justify-center items-center flex-wrap lg:justify-between">
 					<div className="flex justify-center flex-wrap  md:justify-between  ">
@@ -404,8 +412,6 @@ function Html(props) {
 					</div>
 					<div className=" flex w-full lg:w-auto">
 						<div className="flex gap-2 items-center flex-wrap ">
-
-
 							<a
 								href="https://pickplugins.com/create-support-ticket/"
 								target="_blank"
@@ -438,24 +444,24 @@ function Html(props) {
 									</span>
 								)}
 							</div>
-
-
 						</div>
 					</div>
 				</div>
 			</div>
 
-
-			<div id="" className={`pg-setting-input-text ${isLoading ? "opacity-25" : ""}`} disabled={isLoading ? "disabled" : ""} >
+			<div
+				id=""
+				className={`pg-setting-input-text ${isLoading ? "opacity-25" : ""}`}
+				disabled={isLoading ? "disabled" : ""}>
 				<PGtabs
-					activeTab="tabEmailVerification"
+					activeTab="overview"
 					orientation="vertical"
 					contentClass=" p-5 bg-white w-full"
 					navItemsWrapClass="block w-[300px]"
 					navItemClass="bg-gray-500 px-5 py-3 gap-2 border-0 border-b border-solid border-gray-500 "
 					navItemSelectedClass="bg-white "
 					activeClass="active-tab"
-					onSelect={(tabName) => { }}
+					onSelect={(tabName) => {}}
 					tabs={dashboardTabs}>
 					<PGtab name="overview">
 						<div className="">
@@ -512,8 +518,8 @@ function Html(props) {
 								<div className="mb-4">
 									<div className="text-[14px]">Ask question</div>
 									<p>
-										Ask question for free on our forum and get quick reply
-										from our expert team members.
+										Ask question for free on our forum and get quick reply from
+										our expert team members.
 									</p>
 									<a
 										className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white "
@@ -541,8 +547,7 @@ function Html(props) {
 							<div className="text-[14px]">Submit reviews</div>
 							<p>
 								We wish your 2 minutes to write your feedback about the Post
-								Grid plugin.
-								give us{" "}
+								Grid plugin. give us{" "}
 								<span className="text-[#ffae19]">
 									<i class="fas fa-star"></i>
 									<i class="fas fa-star"></i>
@@ -617,17 +622,12 @@ function Html(props) {
 					</PGtab>
 					<PGtab name="emailValidation">
 						<div className="flex mb-5  justify-start gap-2 items-center ">
-
-
 							<EmailValidation
 								options={optionData.emailValidation}
 								onChange={onChangeEmailValidation}
 								pageList={pageList}
 								roles={roles}
-
 							/>
-
-
 						</div>
 					</PGtab>
 
@@ -681,8 +681,7 @@ function Html(props) {
 												onChange={handleFileChange}
 											/>
 											<p className="text-[#ec942c] text-xs ">
-												{__("Supported file type", "user-verification")}:
-												.json
+												{__("Supported file type", "user-verification")}: .json
 											</p>
 										</div>
 										<div>
@@ -715,8 +714,6 @@ function Html(props) {
 					</PGtab>
 				</PGtabs>
 			</div>
-
-
 		</div>
 	);
 }

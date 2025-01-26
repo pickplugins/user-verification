@@ -13,7 +13,7 @@ function Html(props) {
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
 
-	console.log(options)
+	// console.log(options)
 
 	useEffect(() => {
 		onChange(options);
