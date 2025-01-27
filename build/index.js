@@ -6558,6 +6558,154 @@ class Tools extends Component {
 
 /***/ }),
 
+/***/ "./src/components/dashboard/defaultData.js":
+/*!*************************************************!*\
+  !*** ./src/components/dashboard/defaultData.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   defaultData: () => (/* binding */ defaultData)
+/* harmony export */ });
+const defaultData = {
+  email_verification: {
+    enable: "yes",
+    verification_page_id: "none",
+    redirect_after_verification: "none",
+    login_after_verification: "yes",
+    email_update_reverify: "no",
+    exclude_user_roles: ["administrator"]
+  },
+  messages: {
+    invalid_key: "Sorry, activation key is not valid.",
+    activation_sent: "Verification mail has been sent.",
+    verify_email: "Verify your email first!",
+    registration_success: 'Registration complete. Please verify the mail first, then visit the <a href="%s">login page</a>.',
+    verification_success: "Thanks for Verifying.",
+    verification_fail: "Sorry! Verification failed.",
+    please_wait: "Please wait.",
+    mail_instruction: "Please check your mail inbox and follow the instruction. don\\'t forget to check spam or trash folder.",
+    redirect_after_verify: "You will redirect after verification",
+    not_redirect: "Click if not redirect automatically",
+    title_checking_verification: "Checking Verification",
+    title_sending_verification: "Sending verification mail",
+    captcha_error: "Captcha not resolved.",
+    otp_sent_success: "OTP has been sent successfully.",
+    otp_sent_error: "OTP generated, but unable to send mail."
+  },
+  email_otp: {
+    enable_default_login: "no",
+    required_email_verified: "no",
+    allow_password: "yes",
+    length: "6",
+    character_source: ["uppercase", "lowercase"]
+  },
+  isspammy: {
+    report_comment_spam: "no",
+    report_comment_trash: "no",
+    block_comment: "no",
+    comment_form_notice: "no",
+    comment_form_notice_text: "",
+    block_register: "no",
+    block_login: "no"
+  },
+  spam_protection: {
+    enable_domain_block: "no",
+    blocked_domain: [""],
+    allowed_domain: [""],
+    enable_username_block: "no",
+    blocked_username: [""],
+    generic_mail_block: "no",
+    blocked_generic_mail: [""]
+  },
+  logo_id: "69",
+  mail_wpautop: "yes",
+  email_templates_data: {
+    user_registered: {
+      name: "New User Registration",
+      enable: "yes",
+      email_bcc: "",
+      email_from_name: "Wordpress",
+      email_from: "",
+      reply_to_name: "",
+      reply_to: "",
+      subject: "New user submitted - {site_url}",
+      html: '<div style="background: #f5f5f5;color: #333;font-size: 14px;line-height: 20px;font-family: Arial, sans-serif">\r\n<div style="width: 600px;margin: 0 auto">\r\n<div class="header" style="border-bottom: 1px solid #ddd;padding: 20px 0;text-align: center"><strong style="font-size: 20px">{site_name}</strong></div>\r\n<div class="content" style="padding: 10px 0 40px">\r\n<p style="font-size: 14px;line-height: 20px;color: #333;font-family: Arial, sans-serif">Hello {user_name}, Did you forget to verify your account.</p>\r\n\r\n<h4 style="font-size: 14px;line-height: 20px;color: #333;font-family: Arial, sans-serif"><em><span style="color: #333333;font-family: Arial, sans-serif">Please verify your account by clicking the link below</span></em></h4>\r\n<p style="font-size: 14px;line-height: 20px;color: #333;font-family: Arial, sans-serif"><a class="btn" style="color: #fff;border-radius: 3px;text-decoration: none;background-color: #51b3ff;padding: 10px 20px;font-size: 14px;font-family: Arial, sans-serif" href="{ac_activaton_url}">Activate account</a></p>\r\n\r\n</div>\r\n<div class="footer" style="border-top: 1px solid #ddd;padding: 20px 0;clear: both;text-align: center"><small style="font-size: 11px">{site_name} - {site_description}</small></div>\r\n</div>\r\n</div>'
+    },
+    email_confirmed: {
+      name: "Email Verification Confirmed",
+      enable: "yes",
+      email_bcc: "",
+      email_from_name: "Wordpress",
+      email_from: "",
+      reply_to_name: "",
+      reply_to: "",
+      subject: "New user confirmed - {site_url}",
+      html: '&nbsp;\r\n<div style="background: #f5f5f5;color: #333;font-size: 14px;line-height: 20px;font-family: Arial, sans-serif">\r\n<div style="width: 600px;margin: 0 auto">\r\n<div class="header" style="border-bottom: 1px solid #ddd;padding: 20px 0;text-align: center">\r\n\r\n<strong style="font-size: 20px">{site_name}</strong>\r\n\r\n</div>\r\n<div class="content" style="padding: 10px 0 40px">\r\n<p style="font-size: 14px;line-height: 20px;color: #333;font-family: Arial, sans-serif">{user_name} has successfully joined to {site_name}</p>\r\n\r\n</div>\r\n<div class="footer" style="border-top: 1px solid #ddd;padding: 20px 0;clear: both;text-align: center"><small style="font-size: 11px">{site_name} - {site_description}</small></div>\r\n</div>\r\n</div>'
+    },
+    email_resend_key: {
+      name: "Resend Activation Key",
+      enable: "yes",
+      email_bcc: "",
+      email_from_name: "Wordpress",
+      email_from: "",
+      reply_to_name: "",
+      reply_to: "",
+      subject: "Please verify account - {site_url}",
+      html: 'Hi {user_name},\r\n\r\nThank you for signing up! Please verify your email address by clicking the link below:\r\n\r\n<a class="btn" href="{ac_activaton_url}">Verify My Email</a>\r\n\r\nThis link will expire in 24 hours. If you didn’t create this account, please ignore this email.\r\n\r\nWelcome aboard,\r\n\r\n{site_name} - {site_description}'
+    },
+    send_mail_otp: {
+      name: "Send Mail OTP",
+      enable: "yes",
+      email_bcc: "",
+      email_from_name: "Wordpress",
+      email_from: "",
+      reply_to_name: "",
+      reply_to: "",
+      subject: "OTP - {site_url}",
+      html: "Hi {user_name},\r\n\r\nYour one-time password (OTP) is: <strong>{otp_code}</strong>\r\n\r\nThis code is valid for the next 10 minutes. Please use it to complete your verification.\r\n\r\nIf you didn\\'t request this, please ignore this email.\r\n\r\nThank you,\r\n\r\n{site_name} - {site_description}"
+    },
+    send_magic_login_url: {
+      name: "Send Magic Login URL",
+      enable: "yes",
+      email_bcc: "",
+      email_from_name: "Wordpress",
+      email_from: "",
+      reply_to_name: "",
+      reply_to: "",
+      subject: "Magic Login - {site_url}",
+      html: 'Hi <strong>{user_name}</strong>,\r\n\r\nClick the link below to securely log in to your account—no password needed!\r\n\r\n<strong><a href="{magic_login_url}">Magic Login</a></strong>\r\n\r\nThis link is valid for the next 15 minutes. If you didn\\\'t request this, please ignore this email.\r\n\r\nThanks,\r\n\r\n{site_name} - {site_description}'
+    }
+  },
+  recaptcha: {
+    version: "v2_checkbox",
+    sitekey: "",
+    secretkey: "",
+    default_login_page: "no",
+    default_registration_page: "no",
+    default_lostpassword_page: "no",
+    comment_form: "no"
+  },
+  unverified: {
+    delete_user: "no",
+    delete_max_number: "20",
+    delay: "720",
+    delete_user_interval: "daily",
+    existing_user_verified: "no",
+    existing_user_verified_interval: "daily"
+  },
+  disable: {
+    new_user_notification_email: "no"
+  },
+  tools: {
+    mail_from: "",
+    mail_from_name: ""
+  }
+};
+
+/***/ }),
+
 /***/ "./src/components/dashboard/index.js":
 /*!*******************************************!*\
   !*** ./src/components/dashboard/index.js ***!
@@ -6578,15 +6726,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
-/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
-/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
-/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @wordpress/icons */ "./node_modules/@wordpress/icons/build-module/library/settings.js");
+/* harmony import */ var _components_tab__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/tab */ "./src/components/tab/index.js");
+/* harmony import */ var _components_tabs__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/tabs */ "./src/components/tabs/index.js");
+/* harmony import */ var _defaultData__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./defaultData */ "./src/components/dashboard/defaultData.js");
 /* harmony import */ var _EmailOtp__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./EmailOtp */ "./src/components/dashboard/EmailOtp.js");
 /* harmony import */ var _EmailTemplates__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./EmailTemplates */ "./src/components/dashboard/EmailTemplates.js");
 /* harmony import */ var _EmailValidation__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./EmailValidation */ "./src/components/dashboard/EmailValidation.js");
@@ -6598,7 +6745,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SpamProtection__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./SpamProtection */ "./src/components/dashboard/SpamProtection.js");
 /* harmony import */ var _ThirdParty__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./ThirdParty */ "./src/components/dashboard/ThirdParty.js");
 /* harmony import */ var _Tools__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./Tools */ "./src/components/dashboard/Tools.js");
-/* harmony import */ var _input_select__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../input-select */ "./src/components/input-select/index.js");
 
 const {
   Component
@@ -6624,42 +6770,41 @@ const {
 
 
 
-
 function Html(props) {
   if (!props.warn) {
     return null;
   }
-  var [isLoading, setisLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false); // Using the hook.
-  var [needSave, setneedSave] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false); // Using the hook.
-  var [pageList, setpageList] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]); // Using the hook.
-  var [roles, setroles] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]); // Using the hook.
+  var [isLoading, setisLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false); // Using the hook.
+  var [needSave, setneedSave] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false); // Using the hook.
+  var [pageList, setpageList] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]); // Using the hook.
+  var [roles, setroles] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]); // Using the hook.
 
   var isProFeature = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.applyFilters)("isProFeature", true);
   var optionDataDefault = {
     apiKeys: {}
   };
-  var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
-  var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({}); // Using the hook.
+  var [optionData, setoptionData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}); // Using the hook.
+  var [optionDataSaved, setoptionDataSaved] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({}); // Using the hook.
 
   // console.log(optionData, optionDataSaved);
-  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([{
+  var [dashboardTabs, setdashboardTabs] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([{
     name: "overview",
     title: "Overview",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-overview",
     hidden: false,
     isPro: false
   }, {
     name: "tabEmailVerification",
     title: "Email Verification",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabEmailVerification",
     hidden: false,
     isPro: false
   }, {
     name: "magicLogin",
     title: "Magic Login",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-magicLogin",
     hidden: false,
     isPro: false,
@@ -6667,49 +6812,49 @@ function Html(props) {
   }, {
     name: "tabEmailOTP",
     title: "Email OTP",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabEmailOTP",
     hidden: false,
     isPro: false
   }, {
     name: "tabIsSpammy",
     title: "IsSpammy",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabIsSpammy",
     hidden: false,
     isPro: false
   }, {
     name: "tabSpam",
     title: "Spam Protection",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabSpam",
     hidden: false,
     isPro: false
   }, {
     name: "tabEmailTemplates",
     title: "Email Templates",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabEmailTemplates",
     hidden: false,
     isPro: false
   }, {
     name: "tabreCAPTCHA",
     title: "reCAPTCHA",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabreCAPTCHA",
     hidden: false,
     isPro: false
   }, {
     name: "tabTools",
     title: "Tools",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabTools",
     hidden: false,
     isPro: false
   }, {
     name: "emailValidation",
     title: "Email Validation",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-emailValidation",
     hidden: false,
     isPro: false,
@@ -6717,7 +6862,7 @@ function Html(props) {
   }, {
     name: "tabHelp",
     title: "Help & support",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_22__["default"],
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
     className: "tab-tabHelp",
     hidden: false,
     isPro: false
@@ -6753,7 +6898,7 @@ function Html(props) {
   // 		});
   // 	}, []);
 
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     const fetchData = async () => {
       setisLoading(true);
       try {
@@ -6768,8 +6913,14 @@ function Html(props) {
           const resX = {
             ...res
           };
-          setoptionDataSaved(resX);
-          setoptionData(resX);
+          // console.log(resX);
+          if (Object.keys(resX).length === 0) {
+            setoptionDataSaved(_defaultData__WEBPACK_IMPORTED_MODULE_9__.defaultData);
+            setoptionData(_defaultData__WEBPACK_IMPORTED_MODULE_9__.defaultData);
+          } else {
+            setoptionDataSaved(resX);
+            setoptionData(resX);
+          }
         }
       } catch (error) {
         console.error("Error fetching options:", error);
@@ -6779,7 +6930,10 @@ function Html(props) {
     };
     fetchData();
   }, []);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
+
+  // console.log(optionData);
+
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
       path: "/user-verification/v2/user_roles_list",
       method: "POST",
@@ -6815,7 +6969,7 @@ function Html(props) {
       setpageList(pageListX);
     });
   }, []);
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useEffect)(() => {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
     if (JSON.stringify(optionData) === JSON.stringify(optionDataSaved)) {
       setneedSave(false);
     } else {
@@ -6842,8 +6996,8 @@ function Html(props) {
   }
 
   //////////////////////////import setting
-  const [fileContent, setFileContent] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(null);
-  const [importStatus, setimportStatus] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)("wait");
+  const [fileContent, setFileContent] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(null);
+  const [importStatus, setimportStatus] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)("wait");
   const handleFileChange = event => {
     const file = event.target.files[0];
     if (!file) return; // No file selected
@@ -6979,7 +7133,7 @@ function Html(props) {
     };
     setoptionData(optionDataX);
   }
-  const imageUrl = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_7__.useSelect)(select => {
+  const imageUrl = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_5__.useSelect)(select => {
     if (!optionData?.logo_id) return null;
     const media = select("core").getMedia(optionData?.logo_id);
     return media?.source_url || null;
@@ -7036,7 +7190,7 @@ function Html(props) {
     id: "",
     className: `pg-setting-input-text ${isLoading ? "opacity-25" : ""}`,
     disabled: isLoading ? "disabled" : ""
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_8__["default"], {
     activeTab: "overview",
     orientation: "vertical",
     contentClass: " p-5 bg-white w-full",
@@ -7046,7 +7200,7 @@ function Html(props) {
     activeClass: "active-tab",
     onSelect: tabName => {},
     tabs: dashboardTabs
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "overview"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
@@ -7100,7 +7254,7 @@ function Html(props) {
     className: "text-xl"
   }, "Cooment Spam Report"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, "1236"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabHelp"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
@@ -7146,49 +7300,49 @@ function Html(props) {
     href: "https://wordpress.org/support/plugin/user-verification/reviews/#new-post"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     className: "fab fa-wordpress"
-  }), "Write a review"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), "Write a review"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabEmailTemplates"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EmailTemplates__WEBPACK_IMPORTED_MODULE_11__["default"], {
     options: optionData,
     onChange: onChangeEmailTemplates
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabTools"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_Tools__WEBPACK_IMPORTED_MODULE_20__["default"], {
     options: optionData,
     onChange: onChangeTools
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabreCAPTCHA"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_reCaptcha__WEBPACK_IMPORTED_MODULE_17__["default"], {
     options: optionData.recaptcha,
     onChange: onChangeReCaptcha
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabEmailOTP"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_EmailOtp__WEBPACK_IMPORTED_MODULE_10__["default"], {
     options: optionData.email_otp,
     onChange: onChangeEmailOTP
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabSpam"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
   }, optionData?.spam_protection && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_SpamProtection__WEBPACK_IMPORTED_MODULE_18__["default"], {
     options: optionData.spam_protection,
     onChange: onChangeSpamProtection
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabIsSpammy"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_IsSpammy__WEBPACK_IMPORTED_MODULE_15__["default"], {
     options: optionData.isspammy,
     onChange: onChangeIsSpammy
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "magicLogin"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
@@ -7196,7 +7350,7 @@ function Html(props) {
     options: optionData.magicLogin,
     onChange: onChangeMagicLogin,
     pageList: pageList
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "emailValidation"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
@@ -7205,7 +7359,7 @@ function Html(props) {
     onChange: onChangeEmailValidation,
     pageList: pageList,
     roles: roles
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabEmailVerification"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex mb-5  justify-start gap-2 items-center "
@@ -7224,7 +7378,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_ThirdParty__WEBPACK_IMPORTED_MODULE_19__["default"], {
     options: optionData?.user_verification_settings,
     onChange: onChangeUserVerificationSettings
-  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "export/import"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl font-bold mb-7"
