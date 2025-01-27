@@ -6818,17 +6818,6 @@ function Html(props) {
     className: "tab-tabTools",
     hidden: false,
     isPro: false
-<<<<<<< HEAD
-  }, {
-    name: "emailValidation",
-    title: "Email Validation",
-    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
-    className: "tab-emailValidation",
-    hidden: false,
-    isPro: false,
-    isNew: true
-  }, {
-=======
   },
   // {
   // 	name: "emailValidation",
@@ -6841,7 +6830,6 @@ function Html(props) {
   // },
 
   {
->>>>>>> master
     name: "tabHelp",
     title: "Help & support",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
@@ -7302,9 +7290,6 @@ function Html(props) {
     className: "text-lg"
   }, "Spam Comment Blocked"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-<<<<<<< HEAD
-  }, "1236"))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
-=======
   }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
@@ -7313,8 +7298,7 @@ function Html(props) {
     className: "text-lg"
   }, "Spam Comment Report"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
->>>>>>> master
+  }, "1236")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabHelp"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""
