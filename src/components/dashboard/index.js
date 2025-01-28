@@ -177,7 +177,7 @@ function Html(props) {
 
 				if (res.length !== 0) {
 					const resX = { ...res };
-
+					console.log(resX)
 					setoptionDataSaved(resX);
 					setoptionData(resX);
 				}

@@ -4859,6 +4859,7 @@ const {
 
 
 function Html(props) {
+  var _options$invalid_key, _options$activation_s;
   if (!props.warn) {
     return null;
   }
@@ -4883,7 +4884,7 @@ function Html(props) {
     className: "font-medium  mb-2"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Invalid activation key", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
-    value: options?.invalid_key,
+    value: (_options$invalid_key = options?.invalid_key) !== null && _options$invalid_key !== void 0 ? _options$invalid_key : "Verification mail has been sent.",
     onChange: newVal => {
       var optionsX = {
         ...options,
@@ -4898,7 +4899,7 @@ function Html(props) {
     className: "font-medium  mb-2"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Activation key has sent", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
-    value: options?.activation_sent,
+    value: (_options$activation_s = options?.activation_sent) !== null && _options$activation_s !== void 0 ? _options$activation_s : "sdfsdf sdf",
     onChange: newVal => {
       var optionsX = {
         ...options,
@@ -6738,6 +6739,7 @@ function Html(props) {
           const resX = {
             ...res
           };
+          console.log(resX);
           setoptionDataSaved(resX);
           setoptionData(resX);
         }
