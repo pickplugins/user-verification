@@ -4,12 +4,12 @@ import { __ } from "@wordpress/i18n";
 
 import apiFetch from "@wordpress/api-fetch";
 import { Spinner } from "@wordpress/components";
-import { useEffect, useState } from "@wordpress/element";
-import { MediaUpload } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
+import { useEffect, useState } from "@wordpress/element";
 import { settings } from "@wordpress/icons";
 import PGtab from "../../components/tab";
 import PGtabs from "../../components/tabs";
+import { defaultData } from "./defaultData";
 import EmailOtp from "./EmailOtp";
 import EmailTemplates from "./EmailTemplates";
 import EmailValidation from "./EmailValidation";
@@ -21,7 +21,6 @@ import ReCaptcha from "./reCaptcha";
 import SpamProtection from "./SpamProtection";
 import ThirdParty from "./ThirdParty";
 import Tools from "./Tools";
-import PGinputSelect from "../input-select";
 
 function Html(props) {
 	if (!props.warn) {
@@ -177,9 +176,14 @@ function Html(props) {
 
 				if (res.length !== 0) {
 					const resX = { ...res };
-					console.log(resX)
-					setoptionDataSaved(resX);
-					setoptionData(resX);
+					// console.log(resX);
+					if (Object.keys(resX).length === 0) {
+						setoptionDataSaved(defaultData);
+						setoptionData(defaultData);
+					} else {
+						setoptionDataSaved(resX);
+						setoptionData(resX);
+					}
 				}
 			} catch (error) {
 				console.error("Error fetching options:", error);
@@ -191,6 +195,7 @@ function Html(props) {
 		fetchData();
 	}, []);
 
+	// console.log(optionData);
 
 	useEffect(() => {
 		apiFetch({
