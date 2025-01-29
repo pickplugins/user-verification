@@ -1,8 +1,8 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access
 
-add_filter('form_wrap_process_magicLogin', 'form_wrap_process_magicLogin', 99,);
-function form_wrap_process_magicLogin($request)
+add_filter('user_verification_form_wrap_process_magicLogin', 'user_verification_form_wrap_process_magicLogin', 99,);
+function user_verification_form_wrap_process_magicLogin($request)
 {
     $response = [];
 
@@ -162,8 +162,8 @@ add_action('wp_print_footer_scripts', function () {
     <script>
         <?php
 
-        $post_grid_blocks_vars =  wp_json_encode($postGridBlocksVars);
-        echo "var post_grid_blocks_vars=" . $post_grid_blocks_vars;
+        $user_verification_scripts_vars =  wp_json_encode($postGridBlocksVars);
+        echo "var user_verification_scripts_vars=" . $user_verification_scripts_vars;
         ?>
     </script>
 <?php

@@ -29,6 +29,7 @@ function Html(props) {
 	var [isLoading, setisLoading] = useState(false); // Using the hook.
 	var [needSave, setneedSave] = useState(false); // Using the hook.
 	var [pageList, setpageList] = useState([]); // Using the hook.
+	var [statsCounter, setstatsCounter] = useState([]); // Using the hook.
 	var [roles, setroles] = useState([]); // Using the hook.
 
 	var isProFeature = applyFilters("isProFeature", true);
@@ -114,15 +115,15 @@ function Html(props) {
 			isPro: false,
 		},
 
-		// {
-		// 	name: "emailValidation",
-		// 	title: "Email Validation",
-		// 	icon: settings,
-		// 	className: "tab-emailValidation",
-		// 	hidden: false,
-		// 	isPro: false,
-		// 	isNew: true,
-		// },
+		{
+			name: "emailValidation",
+			title: "Email Validation",
+			icon: settings,
+			className: "tab-emailValidation",
+			hidden: false,
+			isPro: false,
+			isNew: true,
+		},
 
 		{
 			name: "tabHelp",
@@ -226,6 +227,24 @@ function Html(props) {
 			});
 			setpageList(pageListX);
 		});
+		apiFetch({
+			path: "/user-verification/v2/stats_counter",
+			method: "POST",
+			data: {},
+		}).then((res) => {
+			console.log(res);
+
+			setstatsCounter(res);
+
+		});
+
+
+
+
+
+
+
+
 	}, []);
 
 	useEffect(() => {
@@ -480,8 +499,8 @@ function Html(props) {
 										<i class="icofont-send-mail icofont-3x"></i>
 									</div>
 									<div>
-										<div className="text-lg">Email Verification Sent</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Email Verification Sent</div>
+										<div className="text-2xl">{statsCounter?.email_verification_sent ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -490,8 +509,8 @@ function Html(props) {
 
 									</div>
 									<div>
-										<div className="text-lg">Verification Confirmed</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Verification Confirmed</div>
+										<div className="text-2xl">{statsCounter?.email_verification_confirmed ?? 0}</div>
 									</div>
 								</div>
 
@@ -504,8 +523,8 @@ function Html(props) {
 										<i class="icofont-send-mail icofont-3x"></i>
 									</div>
 									<div>
-										<div className="text-lg">Magic Login Sent</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Magic Login Sent</div>
+										<div className="text-2xl">{statsCounter?.magic_login_sent ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -514,8 +533,8 @@ function Html(props) {
 
 									</div>
 									<div>
-										<div className="text-lg">Magic Login Used</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Magic Login Used</div>
+										<div className="text-2xl">{statsCounter?.magic_login_used ?? 0}</div>
 									</div>
 								</div>
 
@@ -532,8 +551,8 @@ function Html(props) {
 										<i class="icofont-send-mail icofont-3x"></i>
 									</div>
 									<div>
-										<div className="text-lg">Email OTP Sent</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Email OTP Sent</div>
+										<div className="text-2xl">{statsCounter?.email_otp_sent ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -542,8 +561,8 @@ function Html(props) {
 
 									</div>
 									<div>
-										<div className="text-lg">Email OTP Used</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Email OTP Used</div>
+										<div className="text-2xl">{statsCounter?.email_otp_used ?? 0}</div>
 									</div>
 								</div>
 
@@ -558,8 +577,8 @@ function Html(props) {
 										<i class="icofont-send-mail icofont-3x"></i>
 									</div>
 									<div>
-										<div className="text-lg">Request Sent</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Request Sent</div>
+										<div className="text-2xl">{statsCounter?.email_verification_confirmed ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -568,8 +587,8 @@ function Html(props) {
 
 									</div>
 									<div>
-										<div className="text-lg">Validation Success</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Validation Success</div>
+										<div className="text-2xl">{statsCounter?.email_verification_confirmed ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -577,8 +596,8 @@ function Html(props) {
 										<i class="icofont-verification-check icofont-3x"></i>
 									</div>
 									<div>
-										<div className="text-lg">Validation Failed</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Validation Failed</div>
+										<div className="text-2xl">{statsCounter?.email_verification_confirmed ?? 0}</div>
 									</div>
 								</div>
 
@@ -597,8 +616,8 @@ function Html(props) {
 										<i class="icofont-bug icofont-3x"></i>
 									</div>
 									<div>
-										<div className="text-lg">Spam Login Blocked </div>
-										<div className="text-2xl">1236</div>
+										<div className="">Spam Login Blocked </div>
+										<div className="text-2xl">{statsCounter?.spam_login_blocked ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -607,8 +626,8 @@ function Html(props) {
 
 									</div>
 									<div>
-										<div className="text-lg">Spam Registration Blocked</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Spam Registration Blocked</div>
+										<div className="text-2xl">{statsCounter?.spam_registration_blocked ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -617,8 +636,8 @@ function Html(props) {
 
 									</div>
 									<div>
-										<div className="text-lg">Spam Comment Blocked</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Spam Comment Blocked</div>
+										<div className="text-2xl">{statsCounter?.spam_comment_blocked ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -627,8 +646,8 @@ function Html(props) {
 
 									</div>
 									<div>
-										<div className="text-lg">Spam Comment Report</div>
-										<div className="text-2xl">1236</div>
+										<div className="">Spam Comment Report</div>
+										<div className="text-2xl">{statsCounter?.spam_comment_report ?? 0}</div>
 									</div>
 								</div>
 

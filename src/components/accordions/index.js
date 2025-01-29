@@ -119,7 +119,7 @@ function Html(props) {
 			method: "POST",
 			data: {
 				queryArgs: queryArgs,
-				_wpnonce: post_grid_editor_js._wpnonce,
+				_wpnonce: user_verification_editor_js._wpnonce,
 
 			},
 		}).then((res) => {

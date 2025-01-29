@@ -32,7 +32,7 @@ wp_enqueue_script(
 );
 
 
-wp_localize_script('post-grid-blocks', 'post_grid_editor_js', array('post_grid_ajaxurl' => admin_url('admin-ajax.php'), '_wpnonce' => wp_create_nonce('wp_rest')));
+wp_localize_script('post-grid-blocks', 'user_verification_editor_js', array('post_grid_ajaxurl' => admin_url('admin-ajax.php'), '_wpnonce' => wp_create_nonce('wp_rest')));
 
 
 $user_verification_settings = get_option("user_verification_settings");

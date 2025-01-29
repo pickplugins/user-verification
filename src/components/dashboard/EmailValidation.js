@@ -102,7 +102,8 @@ function Html(props) {
 		};
 		postData = JSON.stringify(postData);
 		fetch(
-			"http://localhost/wordpress/wp-json/app/v2/check_email",
+			// "http://localhost/wordpress/wp-json/app/v2/check_email",
+			"https://isspammy.com/wp-json/app/v2/check_email",
 			{
 				method: "POST",
 				headers: {
@@ -142,7 +143,7 @@ function Html(props) {
 				{__("Email Validation By IsSpammy", "user-verification")}
 			</div>
 			<PGtabs
-				activeTab="settings"
+				activeTab="singleValidation"
 				orientation="horizontal"
 				contentClass=" p-5 bg-white w-full"
 				navItemsWrapClass="flex "
@@ -151,17 +152,17 @@ function Html(props) {
 				activeClass="active-tab"
 				onSelect={(tabName) => { }}
 				tabs={[
-					{
-						name: "settings",
-						title: "Settings",
-						icon: settings,
-						className: "tab-settings",
-						hidden: false,
-						isPro: false,
-					},
+					// {
+					// 	name: "settings",
+					// 	title: "Settings",
+					// 	icon: settings,
+					// 	className: "tab-settings",
+					// 	hidden: false,
+					// 	isPro: false,
+					// },
 					{
 						name: "singleValidation",
-						title: "singleValidation",
+						title: "Single Validation",
 						icon: settings,
 						className: "tab-singleValidation",
 						hidden: false,
@@ -257,8 +258,6 @@ function Html(props) {
 				</PGtab>
 				<PGtab name="singleValidation">
 
-					{JSON.stringify(checkEmail)}
-
 
 					<div className="flex  my-5 gap-2  items-center">
 
@@ -278,25 +277,17 @@ function Html(props) {
 							}}
 						/>
 
-						<div className=" no-underline px-4 py-3 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white " onClick={ev => {
+						<div className=" no-underline px-4 py-3 cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white " onClick={ev => {
 							// console.log("Helo")
 							checkMail();
-						}}>
-							{checkEmail.loading && (
-								<><Spinner /> Loading...</>
-							)}
-							{!checkEmail.loading && (
-								<>Check</>
-							)}
-
-
-						</div>
+						}}>Check</div>
 					</div>
 
 					<div className="my-5">
 
-						<code>{JSON.stringify(checkEmail.result)}
-						</code>
+						{checkEmail.loading && (
+							<><Spinner /> Loading...</>
+						)}
 
 
 						{checkEmail.result != null && (
