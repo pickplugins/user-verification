@@ -4409,7 +4409,9 @@ function Html(props) {
       email: checkEmail.email
     };
     postData = JSON.stringify(postData);
-    fetch("http://localhost/wordpress/wp-json/app/v2/check_email", {
+    fetch(
+    // "http://localhost/wordpress/wp-json/app/v2/check_email",
+    "https://isspammy.com/wp-json/app/v2/check_email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8"
@@ -4437,7 +4439,7 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl font-bold mb-2"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)("Email Validation By IsSpammy", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tabs__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    activeTab: "settings",
+    activeTab: "singleValidation",
     orientation: "horizontal",
     contentClass: " p-5 bg-white w-full",
     navItemsWrapClass: "flex ",
@@ -4445,16 +4447,18 @@ function Html(props) {
     navItemSelectedClass: "bg-gray-400 ",
     activeClass: "active-tab",
     onSelect: tabName => {},
-    tabs: [{
-      name: "settings",
-      title: "Settings",
-      icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
-      className: "tab-settings",
-      hidden: false,
-      isPro: false
-    }, {
+    tabs: [
+    // {
+    // 	name: "settings",
+    // 	title: "Settings",
+    // 	icon: settings,
+    // 	className: "tab-settings",
+    // 	hidden: false,
+    // 	isPro: false,
+    // },
+    {
       name: "singleValidation",
-      title: "singleValidation",
+      title: "Single Validation",
       icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_8__["default"],
       className: "tab-singleValidation",
       hidden: false,
@@ -4537,7 +4541,7 @@ function Html(props) {
     multiple: false
   }))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_4__["default"], {
     name: "singleValidation"
-  }, JSON.stringify(checkEmail), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "flex  my-5 gap-2  items-center"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_input_text__WEBPACK_IMPORTED_MODULE_7__["default"], {
     placeholder: "yourmail@domain.com",
@@ -4555,14 +4559,14 @@ function Html(props) {
       });
     }
   }), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: " no-underline px-4 py-3 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ",
+    className: " no-underline px-4 py-3 cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ",
     onClick: ev => {
       // console.log("Helo")
       checkMail();
     }
-  }, checkEmail.loading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null), " Loading..."), !checkEmail.loading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, "Check"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, "Check")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "my-5"
-  }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("code", null, JSON.stringify(checkEmail.result)), checkEmail.result != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
+  }, checkEmail.loading && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, null), " Loading..."), checkEmail.result != null && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("table", {
     className: "table-fixed border-collapse"
   }, Object.entries(checkEmail.result).map(args => {
     var id = args[0];
@@ -4859,6 +4863,7 @@ const {
 
 
 function Html(props) {
+  var _options$invalid_key, _options$activation_s;
   if (!props.warn) {
     return null;
   }
@@ -4883,7 +4888,7 @@ function Html(props) {
     className: "font-medium  mb-2"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Invalid activation key", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
-    value: options?.invalid_key,
+    value: (_options$invalid_key = options?.invalid_key) !== null && _options$invalid_key !== void 0 ? _options$invalid_key : "Verification mail has been sent.",
     onChange: newVal => {
       var optionsX = {
         ...options,
@@ -4898,7 +4903,7 @@ function Html(props) {
     className: "font-medium  mb-2"
   }, (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)("Activation key has sent", "user-verification")), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("textarea", {
     className: "!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]",
-    value: options?.activation_sent,
+    value: (_options$activation_s = options?.activation_sent) !== null && _options$activation_s !== void 0 ? _options$activation_s : "sdfsdf sdf",
     onChange: newVal => {
       var optionsX = {
         ...options,
@@ -6738,12 +6743,14 @@ const {
 
 
 function Html(props) {
+  var _statsCounter$email_v, _statsCounter$email_v2, _statsCounter$magic_l, _statsCounter$magic_l2, _statsCounter$email_o, _statsCounter$email_o2, _statsCounter$email_v3, _statsCounter$email_v4, _statsCounter$email_v5, _statsCounter$spam_lo, _statsCounter$spam_re, _statsCounter$spam_co, _statsCounter$spam_co2;
   if (!props.warn) {
     return null;
   }
   var [isLoading, setisLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false); // Using the hook.
   var [needSave, setneedSave] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false); // Using the hook.
   var [pageList, setpageList] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]); // Using the hook.
+  var [statsCounter, setstatsCounter] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]); // Using the hook.
   var [roles, setroles] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]); // Using the hook.
 
   var isProFeature = (0,_wordpress_hooks__WEBPACK_IMPORTED_MODULE_1__.applyFilters)("isProFeature", true);
@@ -6818,18 +6825,15 @@ function Html(props) {
     className: "tab-tabTools",
     hidden: false,
     isPro: false
-  },
-  // {
-  // 	name: "emailValidation",
-  // 	title: "Email Validation",
-  // 	icon: settings,
-  // 	className: "tab-emailValidation",
-  // 	hidden: false,
-  // 	isPro: false,
-  // 	isNew: true,
-  // },
-
-  {
+  }, {
+    name: "emailValidation",
+    title: "Email Validation",
+    icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
+    className: "tab-emailValidation",
+    hidden: false,
+    isPro: false,
+    isNew: true
+  }, {
     name: "tabHelp",
     title: "Help & support",
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_21__["default"],
@@ -6937,6 +6941,14 @@ function Html(props) {
         });
       });
       setpageList(pageListX);
+    });
+    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
+      path: "/user-verification/v2/stats_counter",
+      method: "POST",
+      data: {}
+    }).then(res => {
+      console.log(res);
+      setstatsCounter(res);
     });
   }, []);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
@@ -7183,18 +7195,18 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-send-mail icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Email Verification Sent"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$email_v = statsCounter?.email_verification_sent) !== null && _statsCounter$email_v !== void 0 ? _statsCounter$email_v : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-verification-check icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Verification Confirmed"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$email_v2 = statsCounter?.email_verification_confirmed) !== null && _statsCounter$email_v2 !== void 0 ? _statsCounter$email_v2 : 0)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl mb-3"
   }, "Magic Login"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-3 gap-5 text-white  my-5"
@@ -7203,18 +7215,18 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-send-mail icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Magic Login Sent"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$magic_l = statsCounter?.magic_login_sent) !== null && _statsCounter$magic_l !== void 0 ? _statsCounter$magic_l : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-verification-check icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Magic Login Used"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$magic_l2 = statsCounter?.magic_login_used) !== null && _statsCounter$magic_l2 !== void 0 ? _statsCounter$magic_l2 : 0)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl mb-3"
   }, "Email OTP"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-3 gap-5 text-white  my-5"
@@ -7223,18 +7235,18 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-send-mail icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Email OTP Sent"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$email_o = statsCounter?.email_otp_sent) !== null && _statsCounter$email_o !== void 0 ? _statsCounter$email_o : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-verification-check icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Email OTP Used"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$email_o2 = statsCounter?.email_otp_used) !== null && _statsCounter$email_o2 !== void 0 ? _statsCounter$email_o2 : 0)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl mb-3"
   }, "Email Validation"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-3 gap-5 text-white  my-5"
@@ -7243,26 +7255,26 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-send-mail icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Request Sent"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$email_v3 = statsCounter?.email_verification_confirmed) !== null && _statsCounter$email_v3 !== void 0 ? _statsCounter$email_v3 : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-verification-check icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Validation Success"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$email_v4 = statsCounter?.email_verification_confirmed) !== null && _statsCounter$email_v4 !== void 0 ? _statsCounter$email_v4 : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-verification-check icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Validation Failed"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236")))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$email_v5 = statsCounter?.email_verification_confirmed) !== null && _statsCounter$email_v5 !== void 0 ? _statsCounter$email_v5 : 0)))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl mb-3"
   }, "Spam Protection"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "grid grid-cols-2 gap-5 text-white  my-5"
@@ -7271,34 +7283,34 @@ function Html(props) {
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-bug icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Spam Login Blocked "), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$spam_lo = statsCounter?.spam_login_blocked) !== null && _statsCounter$spam_lo !== void 0 ? _statsCounter$spam_lo : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-bug icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Spam Registration Blocked"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$spam_re = statsCounter?.spam_registration_blocked) !== null && _statsCounter$spam_re !== void 0 ? _statsCounter$spam_re : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-bug icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Spam Comment Blocked"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236"))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (_statsCounter$spam_co = statsCounter?.spam_comment_blocked) !== null && _statsCounter$spam_co !== void 0 ? _statsCounter$spam_co : 0))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-blue-800\t p-3  space-y-3 flex items-center gap-3 rounded-sm"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
     class: "icofont-bug icofont-3x"
   })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "text-lg"
+    className: ""
   }, "Spam Comment Report"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-2xl"
-  }, "1236")))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, (_statsCounter$spam_co2 = statsCounter?.spam_comment_report) !== null && _statsCounter$spam_co2 !== void 0 ? _statsCounter$spam_co2 : 0)))))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_components_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
     name: "tabHelp"
   }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: ""

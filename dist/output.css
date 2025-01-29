@@ -470,10 +470,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -736,11 +732,6 @@
   background-color: rgb(30 64 175 / var(--tw-bg-opacity, 1));
 }
 
-.bg-fuchsia-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(134 25 143 / var(--tw-bg-opacity, 1));
-}
-
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
@@ -778,11 +769,6 @@
 .bg-green-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));
-}
-
-.bg-indigo-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 48 163 / var(--tw-bg-opacity, 1));
 }
 
 .bg-lime-600 {
@@ -823,11 +809,6 @@
 .bg-slate-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(100 116 139 / var(--tw-bg-opacity, 1));
-}
-
-.bg-violet-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(91 33 182 / var(--tw-bg-opacity, 1));
 }
 
 .bg-white {
@@ -994,11 +975,6 @@
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .text-xs {
@@ -1257,7 +1233,7 @@
 
 /* custom CSS  */
 
-.pg-dashboard input[type="text"]:focus{
+.pg-dashboard input[type="text"]:focus {
   box-shadow: none !important;
 }
 
@@ -1325,7 +1301,6 @@
   resize: vertical;
   border-radius: 6px !important;
   padding: 4px;
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
@@ -1335,7 +1310,6 @@
   resize: vertical;
   border-radius: 6px !important;
   padding: 4px;
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
@@ -1360,13 +1334,11 @@
 
 .pg-setting-input-text .components-input-control__input {
   padding: 1px;
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-select-control__input {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
   border: 1px solid #1f2937 !important;
@@ -1384,29 +1356,24 @@
 }
 
 .pg-font {
-  font-family: "Poppins" !important;
 }
 
 .pg-setting-input-text .components-panel__body {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-panel__body-title {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-base-control__field label {
-  font-family: "Poppins" !important;
   font-weight: 500;
   font-size: 13px;
 }
 
 .pg-setting-input-text .components-base-control__help {
-  font-family: "Poppins" !important;
   /* font-weight: 500; */
   /* font-size: 13px; */
 }
@@ -1498,7 +1465,6 @@
 /* gradient picker edit  */
 
 /* .pg-setting-css-components .components-button {
-	font-family: "Poppins" !important;
 	
 	display: flex;
 	padding-top: 0.5rem;
@@ -1557,9 +1523,6 @@
 /* dashnoard */
 
 .pg-dashboard {
-  font-family: "Poppins" !important;
-  font-weight: 500;
-  font-size: 13px;
 }
 
 .pg-dashboard h2 {

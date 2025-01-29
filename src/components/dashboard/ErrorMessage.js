@@ -35,7 +35,7 @@ function Html(props) {
 				</label>
 				<textarea
 					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					value={options?.invalid_key}
+					value={options?.invalid_key ?? "Verification mail has been sent."}
 					onChange={(newVal) => {
 						var optionsX = { ...options, invalid_key: newVal.target.value };
 						setoptions(optionsX);
@@ -49,7 +49,7 @@ function Html(props) {
 				</label>
 				<textarea
 					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					value={options?.activation_sent}
+					value={options?.activation_sent ?? "sdfsdf sdf"}
 					onChange={(newVal) => {
 						var optionsX = {
 							...options,

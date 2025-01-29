@@ -17,6 +17,17 @@ class UserVerificationRest
 
 		register_rest_route(
 			'user-verification/v2',
+			'/stats_counter',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'stats_counter'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
+		register_rest_route(
+			'user-verification/v2',
 			'/process_form_data',
 			array(
 				'methods' => 'POST',
@@ -93,6 +104,34 @@ class UserVerificationRest
 	}
 
 	/**
+	 * Return stats_counter
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $request Post data.
+	 */
+	public function stats_counter($request)
+	{
+		$response = [];
+		$data = $request->get_body();
+		$_wpnonce = $request->get_param('_wpnonce');
+		$_wp_http_referer = $request->get_param('_wp_http_referer');
+		$formType = $request->get_param('formType');
+
+		global $wpdb;
+		$table = $wpdb->prefix . 'user_verification_stats';
+
+		$query = "SELECT type, COUNT(*) AS count FROM $table GROUP BY type ORDER BY count DESC";
+		$results = $wpdb->get_results($query, ARRAY_A);
+
+		$types = [];
+		foreach ($results as $row) {
+			$types[$row['type']] = (int) $row['count'];
+		}
+
+
+		die(wp_json_encode($types));
+	}
+	/**
 	 * Return process_form_data
 	 *
 	 * @since 1.0.0
@@ -114,7 +153,7 @@ class UserVerificationRest
 
 
 		if (empty($errors)) {
-			$process_form = apply_filters('form_wrap_process_' . $formType,  $request);
+			$process_form = apply_filters('user_verification_form_wrap_process_' . $formType,  $request);
 			$response = $process_form;
 		}
 		die(wp_json_encode($response));

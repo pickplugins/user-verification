@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 		fetch(
-			post_grid_blocks_vars["siteUrl"] + "/wp-json/user-verification/v2/process_form_data",
+			user_verification_scripts_vars["siteUrl"] + "/wp-json/user-verification/v2/process_form_data",
 			{
 				method: "POST",
 				body: formData,

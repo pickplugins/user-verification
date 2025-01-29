@@ -154,7 +154,7 @@ function Html(props) {
 			method: "POST",
 			data: {
 				postId: id,
-				_wpnonce: post_grid_editor_js._wpnonce,
+				_wpnonce: user_verification_editor_js._wpnonce,
 			},
 		}).then((res) => {
 			setisLoading(false);

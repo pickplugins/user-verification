@@ -20,12 +20,15 @@ function user_verification_stats_count($type)
     $magic_login_used = 0;
 
     $email_otp_sent = 0;
+    $email_otp_used = 0;
+
     $email_verification_sent = 0;
     $email_verification_confirmed = 0;
     $spam_login_blocked = 0;
     $spam_registration_blocked = 0;
     $spam_comment_blocked = 0;
     $spam_comment_report = 0;
+
     $email_validation_request = 0;
     $email_validation_success = 0;
     $email_validation_failed = 0;
