@@ -157,6 +157,9 @@ class UserVerification
 
         require_once(user_verification_plugin_dir . 'templates/magic-login-form/index.php');
         require_once(user_verification_plugin_dir . 'templates/magic-login-form/hook.php');
+
+        require_once(user_verification_plugin_dir . 'templates/email-otp-login-form/index.php');
+        require_once(user_verification_plugin_dir . 'templates/email-otp-login-form/hook.php');
     }
 
 
@@ -265,8 +268,10 @@ class UserVerification
 
 
         wp_register_script('uv_front_js', plugins_url('/assets/front/js/scripts.js', __FILE__), array('jquery'));
-        wp_register_script('user_verification_magic_login_form', plugins_url('/templates/magic-login-form/index.js', __FILE__), array('jquery'));
+        wp_register_script('user_verification_magic_login_form', plugins_url('/templates/magic-login-form/index.js', __FILE__), array());
         wp_register_style('user_verification_magic_login_form', user_verification_plugin_url . 'templates/magic-login-form/index.css');
+        wp_register_script('user_verification_otp_login_form', plugins_url('/templates/email-otp-login-form/index.js', __FILE__), array());
+        wp_register_style('user_verification_otp_login_form', user_verification_plugin_url . 'templates/email-otp-login-form/index.css');
 
         //wp_localize_script( 'uv_front_js', 'uv_ajax', array( 'uv_ajaxurl' => admin_url( 'admin-ajax.php')));
 

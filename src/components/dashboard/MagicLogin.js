@@ -45,8 +45,6 @@ function Html(props) {
 
 			<div className="text-2xl font-bold mb-2">
 				{__("Magic Login", "user-verification")}
-
-				<span className="text-orange-500"> (Coming Soon)</span>
 			</div>
 			<p className="text-base mb-7">
 				{__("Enable passwordless login on your site, user will received login url to their mail inbox.", "user-verification")}{" "}
@@ -152,7 +150,7 @@ function Html(props) {
 					{__("Key Length", "user-verification")}
 				</label>
 				<PGinputText
-					value={options?.length}
+					value={options?.length ?? 6}
 					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					onChange={(newVal) => {
 						var optionsX = { ...options, length: newVal.target.value };
@@ -165,7 +163,7 @@ function Html(props) {
 					{__("Attempt Max Limit", "user-verification")}
 				</label>
 				<PGinputText
-					value={options?.attemptMaxLimit}
+					value={options?.attemptMaxLimit ?? 3}
 					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					onChange={(newVal) => {
 						var optionsX = { ...options, attemptMaxLimit: newVal.target.value };
@@ -174,9 +172,9 @@ function Html(props) {
 				/>
 			</div>
 
-
-
-
+			<h3>How to display magic login form?</h3>
+			<p>Please use following shortcode to display magic login form </p>
+			<code>[user_verification_magic_login_form]</code>
 
 		</div>
 	);
