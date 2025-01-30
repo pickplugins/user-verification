@@ -87,6 +87,17 @@ class UserVerificationRest
 				},
 			)
 		);
+		register_rest_route(
+			'user-verification/v2',
+			'/validated_email',
+			array(
+				'methods' => 'POST',
+				'callback' => array($this, 'validated_email'),
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
+			)
+		);
 
 
 
@@ -103,6 +114,23 @@ class UserVerificationRest
 		);
 	}
 
+	/**
+	 * Return validated_email
+	 *
+	 * @since 1.0.0
+	 * @param WP_REST_Request $request Post data.
+	 */
+	public function validated_email($request)
+	{
+		$response = [];
+		$data = $request->get_body();
+		$_wpnonce = $request->get_param('_wpnonce');
+		$_wp_http_referer = $request->get_param('_wp_http_referer');
+
+
+
+		die(wp_json_encode($response));
+	}
 	/**
 	 * Return stats_counter
 	 *

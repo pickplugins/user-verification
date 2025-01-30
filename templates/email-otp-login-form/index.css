@@ -1,0 +1,16 @@
+.otp-login-form {}
+
+.otp-login-form .input-wrap {
+  display: block;
+  margin-bottom: 1.5em;
+}
+
+.input-wrap input {}
+
+.otp-login-form .form-fields {
+
+  /* display: flex;
+  align-items: end;
+  gap: 1em; */
+
+}

@@ -24,6 +24,7 @@ function Html(props) {
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
 	var [checkEmail, setcheckEmail] = useState({ email: "public.nurhasan@gmail.com", prams: {}, result: null, loading: false }); // Using the hook.
+	var [getApiKeyPrams, setgetApiKeyPrams] = useState({ email: "public.nurhasan@gmail.com", domain: "", result: null, loading: false }); // Using the hook.
 
 	useEffect(() => {
 		onChange(options);
@@ -40,6 +41,17 @@ function Html(props) {
 
 
 	var validationPrams = {
+
+
+		status: {
+			"label": "Status",
+			"value": "status"
+		},
+
+		safeToSend: {
+			"label": "Safe To Send",
+			"value": "safeToSend"
+		},
 		isFreeEmailProvider: {
 			"label": "Free Email Provider",
 			"value": "isFreeEmailProvider"
@@ -94,16 +106,27 @@ function Html(props) {
 
 
 	function checkMail() {
-		setcheckEmail({ ...checkEmail, loading: true })
+
+
+		if (options.isSpammyApiKey.length == 0) {
+
+			setcheckEmail({ ...checkEmail, error: true, errorMgs: "API key missing." })
+			return;
+		}
+
+
+
+		setcheckEmail({ ...checkEmail, loading: true, error: false, errorMgs: "" })
 
 		var postData = {
 			email: checkEmail.email,
+			apikey: options.isSpammyApiKey,
 
 		};
 		postData = JSON.stringify(postData);
 		fetch(
-			// "http://localhost/wordpress/wp-json/app/v2/check_email",
-			"https://isspammy.com/wp-json/app/v2/check_email",
+			"http://localhost/wordpress/wp-json/app/v2/check_email",
+			// "https://isspammy.com/wp-json/app/v2/check_email",
 			{
 				method: "POST",
 				headers: {
@@ -116,11 +139,69 @@ function Html(props) {
 				if (response.ok && response.status < 400) {
 					response.json().then((data) => {
 
-						// console.log(data);
+						console.log(data);
 
 
 						setcheckEmail({ ...checkEmail, result: data, loading: false })
 
+
+					});
+				}
+			})
+			.catch((_error) => {
+				//this.saveAsStatus = 'error';
+				// handle the error
+			});
+
+
+	}
+
+	function createApKey() {
+
+		if (getApiKeyPrams.email.length == 0) {
+
+			setgetApiKeyPrams({ ...getApiKeyPrams, error: true, errorMgs: "Email Should not empty" })
+			return;
+		} else {
+			setgetApiKeyPrams({ ...getApiKeyPrams, error: false, errorMgs: "" })
+
+		}
+
+
+		setgetApiKeyPrams({ ...getApiKeyPrams, loading: true })
+
+
+		var postData = {
+			email: getApiKeyPrams.email,
+
+		};
+		postData = JSON.stringify(postData);
+		fetch(
+			"http://localhost/wordpress/wp-json/app/v2/create_api_key",
+			// "https://isspammy.com/wp-json/app/v2/create_api_key",
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json;charset=utf-8",
+				},
+				body: postData,
+			}
+		)
+			.then((response) => {
+				if (response.ok && response.status < 400) {
+					response.json().then((data) => {
+
+						console.log(data);
+
+
+						setgetApiKeyPrams({ ...getApiKeyPrams, loading: false })
+
+
+						var optionsX = {
+							...options,
+							isSpammyApiKey: data.apikey,
+						};
+						setoptions(optionsX);
 
 					});
 				}
@@ -152,14 +233,7 @@ function Html(props) {
 				activeClass="active-tab"
 				onSelect={(tabName) => { }}
 				tabs={[
-					// {
-					// 	name: "settings",
-					// 	title: "Settings",
-					// 	icon: settings,
-					// 	className: "tab-settings",
-					// 	hidden: false,
-					// 	isPro: false,
-					// },
+
 					{
 						name: "singleValidation",
 						title: "Single Validation",
@@ -168,6 +242,22 @@ function Html(props) {
 						hidden: false,
 						isPro: false,
 					},
+					{
+						name: "settings",
+						title: "Settings",
+						icon: settings,
+						className: "tab-settings",
+						hidden: false,
+						isPro: false,
+					},
+					// {
+					// 	name: "getApiKey",
+					// 	title: "Get Api Key",
+					// 	icon: settings,
+					// 	className: "tab-getApiKey",
+					// 	hidden: false,
+					// 	isPro: false,
+					// },
 				]}>
 				<PGtab name="settings">
 
@@ -185,11 +275,49 @@ function Html(props) {
 								};
 								setoptions(optionsX);
 
-								setcheckEmail({ ...checkEmail, email: newVal.target.value })
+								//setcheckEmail({ ...checkEmail, email: newVal.target.value })
 							}}
 						/>
 					</div>
 
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Email Address", "user-verification")}
+						</label>
+						<PGinputText
+							value={getApiKeyPrams?.email}
+							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+							onChange={(newVal) => {
+								var getApiKeyPramsX = {
+									...getApiKeyPrams,
+									email: newVal.target.value,
+								};
+								setgetApiKeyPrams(getApiKeyPramsX);
+
+							}}
+						/>
+					</div>
+
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+
+						</label>
+						<div onClick={ev => {
+							createApKey()
+						}} className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ">Get API Key</div>
+					</div>
+
+
+
+					{getApiKeyPrams.loading && (
+						<div className="flex items-center"><Spinner /> Loading...</div>
+					)}
+					{getApiKeyPrams.error && (
+						<div className="text-red-500">{getApiKeyPrams.errorMgs}</div>
+					)}
+
+
+					{/* 
 					<div className="flex my-5 justify-between items-center ">
 						<label className="w-[400px]" htmlFor="emailVerification">
 							{__("Valided Existing User Emails", "user-verification")}
@@ -250,12 +378,13 @@ function Html(props) {
 
 
 						</>
-					)}
+					)} */}
 
 
 
 
 				</PGtab>
+
 				<PGtab name="singleValidation">
 
 
@@ -263,14 +392,11 @@ function Html(props) {
 
 						<PGinputText
 							placeholder="yourmail@domain.com"
+							type="email"
 							value={checkEmail?.email}
 							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 							onChange={(newVal) => {
-								var optionsX = {
-									...options,
-									isSpammyApiKey: newVal.target.value,
-								};
-								setoptions(optionsX);
+
 
 								setcheckEmail({ ...checkEmail, email: newVal.target.value })
 
@@ -283,10 +409,19 @@ function Html(props) {
 						}}>Check</div>
 					</div>
 
+
+					{checkEmail.error && (
+						<div className="text-red-500">{checkEmail.errorMgs}</div>
+					)}
+
+
 					<div className="my-5">
 
 						{checkEmail.loading && (
-							<><Spinner /> Loading...</>
+							<div className="flex items-center"><Spinner /> Loading...</div>
+						)}
+						{checkEmail?.result?.errors && (
+							<div className="text-red-500">{checkEmail.result.errors}</div>
 						)}
 
 
@@ -310,6 +445,27 @@ function Html(props) {
 															<td className="w-[250px] py-4  border-0 border-b border-solid border-gray-400">
 
 																<div className="flex items-center">
+
+
+
+																	{id == "status" && (
+																		<>
+																			{JSON.stringify(value)}
+
+																		</>
+																	)}
+																	{id == "safeToSend" && (
+																		<>
+																			{value != 'yes' && (
+																				<><Icon fill="#f00" icon={close} /> No</>
+																			)}
+																			{value == 'yes' && (
+																				<><Icon fill="#19561f" icon={check} /> Yes</>
+																			)}
+																		</>
+																	)}
+
+
 
 																	{id == "isGibberishEmail" && (
 																		<>
@@ -379,6 +535,14 @@ function Html(props) {
 						)}
 
 					</div>
+
+				</PGtab>
+				<PGtab name="getApiKey">
+
+
+
+
+
 
 				</PGtab>
 

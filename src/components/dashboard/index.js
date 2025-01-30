@@ -124,6 +124,15 @@ function Html(props) {
 			isPro: false,
 			isNew: true,
 		},
+		// {
+		// 	name: "customLogin",
+		// 	title: "Custom Login",
+		// 	icon: settings,
+		// 	className: "tab-customLogin",
+		// 	hidden: false,
+		// 	isPro: false,
+		// 	isNew: true,
+		// },
 
 		{
 			name: "tabHelp",
