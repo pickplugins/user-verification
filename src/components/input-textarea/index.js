@@ -7,10 +7,9 @@ function Html(props) {
 		return null;
 	}
 
-	const [content, setContent] = useState('');
+	const [content, setContent] = useState("");
 
-	// console.log(props.id);
-
+	console.log(props.id);
 
 	useEffect(() => {
 		//tinymce.execCommand('mceAddEditor', true, props.id);
@@ -29,13 +28,11 @@ function Html(props) {
 		//   mediaButtons: true,
 		// });
 
-
 		// Function to capture content change
 		// const updateContent = () => {
 		//   const newContent = wp.editor.getContent(props.id);
 
 		//   console.log(newContent);
-
 
 		//   setContent(newContent);
 		// };
@@ -48,21 +45,20 @@ function Html(props) {
 		//   document.getElementById(props.id).removeEventListener('input', updateContent);
 		// };
 
-
 		tinymce.init({
-			selector: "#" + props.id, toolbar:
-				"undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat", height: "500px", setup: (editor) => {
-					editor.on("change", (e) => {
-						const newContent = editor.getContent(); // Get the updated content
-						// console.log(newContent); props.onChange(newContent);
-					});
-				},
+			selector: "#" + props.id,
+			toolbar:
+				"undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat",
+			height: "500px",
+			setup: (editor) => {
+				editor.on("change", (e) => {
+					const newContent = editor.getContent(); // Get the updated content
+					console.log(newContent);
+					props.onChange(newContent);
+				});
+			},
 		});
 	}, []);
-
-
-
-
 
 	return (
 		<textarea
@@ -102,7 +98,17 @@ class PGinputTextarea extends Component {
 
 	render() {
 		var {
-			value, placeholder, className, id, name, size, minlength, maxlength, required, disabled, onChange,
+			value,
+			placeholder,
+			className,
+			id,
+			name,
+			size,
+			minlength,
+			maxlength,
+			required,
+			disabled,
+			onChange,
 		} = this.props;
 
 		return (
