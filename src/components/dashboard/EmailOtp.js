@@ -179,9 +179,9 @@ function Html(props) {
 				</div>
 			</div>
 
-			<h3>How to display OTP login form?</h3>
+			{/* <h3>How to display OTP login form?</h3>
 			<p>Please use following shortcode to display OTP login form </p>
-			<code>[user_verification_otp_login_form]</code>
+			<code>[user_verification_otp_login_form]</code> */}
 
 		</div>
 	);

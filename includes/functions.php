@@ -794,7 +794,7 @@ function user_verification_reset_email_templates()
 }
 
 add_action('wp_ajax_user_verification_reset_email_templates', 'user_verification_reset_email_templates');
-add_action('wp_ajax_nopriv_user_verification_reset_email_templates', 'user_verification_reset_email_templates');
+//add_action('wp_ajax_nopriv_user_verification_reset_email_templates', 'user_verification_reset_email_templates');
 
 function uv_filter_check_activation()
 {
@@ -1222,6 +1222,12 @@ add_action('profile_update', 'user_verification_profile_update', 10, 2);
 
 function user_verification_profile_update($user_id, $old_user_data)
 {
+
+    // $user_activation_status = get_user_meta($user_id, 'user_activation_status', true);
+
+    // if ($user_activation_status) return;
+
+
     $userData = get_user_by('ID', $user_id);
 
     $old_email = isset($old_user_data->user_email) ? $old_user_data->user_email : '';
@@ -1504,7 +1510,7 @@ function user_verification_recursive_sanitize_arr($array)
             if ($key == 'url') {
                 $value = esc_url_raw($value);
             } else {
-                $value = wp_kses_post($value);
+                $value = sanitize_text_field($value);
             }
         }
     }

@@ -14,8 +14,8 @@ class class_user_verification_settings
 	public function _menu_init()
 	{
 
-		add_submenu_page('users.php', __('User Verification', 'user-verification'), __('User Verification(Old)', 'user-verification'), 'manage_options', 'user_verification', array($this, 'settings'));
-		add_submenu_page('users.php', __('User Verification dashboard', 'user-verification'), __('User Verification(New)', 'user-verification'), 'manage_options', 'user_verification_dashboard', array($this, 'dashboard'));
+		// add_submenu_page('users.php', __('User Verification', 'user-verification'), __('User Verification(Old)', 'user-verification'), 'manage_options', 'user_verification', array($this, 'settings'));
+		add_submenu_page('users.php', __('User Verification dashboard', 'user-verification'), __('User Verification', 'user-verification'), 'manage_options', 'user_verification_dashboard', array($this, 'dashboard'));
 	}
 
 	public function settings()

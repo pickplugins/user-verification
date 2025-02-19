@@ -2,6 +2,7 @@ import { useEffect, useState } from "@wordpress/element";
 import { Icon, settings, check, cancelCircleFilled, published, close } from "@wordpress/icons";
 const { Component } = wp.element;
 import { Spinner } from "@wordpress/components";
+import apiFetch from "@wordpress/api-fetch";
 
 import { __ } from "@wordpress/i18n";
 import React from "react";
@@ -23,8 +24,7 @@ function Html(props) {
 
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
-	var [checkEmail, setcheckEmail] = useState({ email: "public.nurhasan@gmail.com", prams: {}, result: null, loading: false }); // Using the hook.
-	var [getApiKeyPrams, setgetApiKeyPrams] = useState({ email: "public.nurhasan@gmail.com", domain: "", result: null, loading: false }); // Using the hook.
+	var [checkEmail, setcheckEmail] = useState({ email: "public@0wnd.net", prams: {}, result: null, loading: false }); // Using the hook.
 
 	useEffect(() => {
 		onChange(options);
@@ -121,12 +121,13 @@ function Html(props) {
 		var postData = {
 			email: checkEmail.email,
 			apikey: options.isSpammyApiKey,
-
 		};
 		postData = JSON.stringify(postData);
+
+		console.log(postData);
+
 		fetch(
-			"http://localhost/wordpress/wp-json/app/v2/check_email",
-			// "https://isspammy.com/wp-json/app/v2/check_email",
+			"https://isspammy.com/wp-json/email-validation/v2/validate_email",
 			{
 				method: "POST",
 				headers: {
@@ -138,13 +139,7 @@ function Html(props) {
 			.then((response) => {
 				if (response.ok && response.status < 400) {
 					response.json().then((data) => {
-
-						console.log(data);
-
-
 						setcheckEmail({ ...checkEmail, result: data, loading: false })
-
-
 					});
 				}
 			})
@@ -153,56 +148,61 @@ function Html(props) {
 				// handle the error
 			});
 
+		console.log(options.isSpammyApiKey);
+
+
 
 	}
 
-	function createApKey() {
 
-		if (getApiKeyPrams.email.length == 0) {
 
-			setgetApiKeyPrams({ ...getApiKeyPrams, error: true, errorMgs: "Email Should not empty" })
+	function validateEmail() {
+		const token = options.isSpammyApiKey;
+
+		// if (!token) {
+		// 	throw new Error("No token found");
+		// }
+
+		if (options.isSpammyApiKey.length == 0) {
+
+			setcheckEmail({ ...checkEmail, error: true, errorMgs: "API key missing." })
 			return;
-		} else {
-			setgetApiKeyPrams({ ...getApiKeyPrams, error: false, errorMgs: "" })
-
 		}
 
-
-		setgetApiKeyPrams({ ...getApiKeyPrams, loading: true })
+		setcheckEmail({ ...checkEmail, loading: true, error: false, errorMgs: "" })
 
 
 		var postData = {
-			email: getApiKeyPrams.email,
-
+			email: checkEmail.email,
+			apiKey: options.isSpammyApiKey,
 		};
 		postData = JSON.stringify(postData);
-		fetch(
-			"http://localhost/wordpress/wp-json/app/v2/create_api_key",
-			// "https://isspammy.com/wp-json/app/v2/create_api_key",
-			{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json;charset=utf-8",
-				},
-				body: postData,
-			}
-		)
+
+		fetch("https://isspammy.com/wp-json/email-validation/v2/validate_email", {
+			method: "POST",
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: postData,
+		})
 			.then((response) => {
+
+				if (!response.ok) {
+					throw new Error('Token validation failed');
+				}
+
 				if (response.ok && response.status < 400) {
-					response.json().then((data) => {
+					response.json().then((res) => {
 
-						console.log(data);
-
-
-						setgetApiKeyPrams({ ...getApiKeyPrams, loading: false })
+						//var result = JSON.parse(res);
+						//setvalidateMailPrams({ ...validateMailPrams, result: res })
 
 
-						var optionsX = {
-							...options,
-							isSpammyApiKey: data.apikey,
-						};
-						setoptions(optionsX);
+						setcheckEmail({ ...checkEmail, result: res, loading: false })
 
+
+						setTimeout(() => {
+						}, 500);
 					});
 				}
 			})
@@ -211,8 +211,8 @@ function Html(props) {
 				// handle the error
 			});
 
-
 	}
+
 
 
 
@@ -280,44 +280,80 @@ function Html(props) {
 						/>
 					</div>
 
-					<div className="flex  my-5  justify-between items-center">
-						<label className="w-[400px]" htmlFor="emailVerification">
-							{__("Email Address", "user-verification")}
-						</label>
-						<PGinputText
-							value={getApiKeyPrams?.email}
-							className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-							onChange={(newVal) => {
-								var getApiKeyPramsX = {
-									...getApiKeyPrams,
-									email: newVal.target.value,
-								};
-								setgetApiKeyPrams(getApiKeyPramsX);
 
+
+					<div className="flex  my-5 items-center ">
+						<label className="w-[400px]" htmlFor="emailVerification">
+
+						</label>
+
+						<a href="https://app.isspammy.com/?utm_source=wpplugin&utm_medium=TabEmailValidation&utm_campaign=EmailValidation&utm_id=getAPIkey" target="_blank" className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ">Get API Key</a>
+
+						<span className="ml-4 text-base">Its Free! Daily upto 50 validation.</span>
+
+					</div>
+
+
+
+
+
+					<div className="flex my-5 justify-between items-center ">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Valided Emails On Register", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.validedOnRegister}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, validedOnRegister: newVal };
+								setoptions(optionsX);
 							}}
+							multiple={false}
+						/>
+					</div>
+					{/* <div className="flex my-5 justify-between items-center ">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Valided Emails On Login", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.validedOnLogin}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, validedOnLogin: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+					<div className="flex my-5 justify-between items-center ">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Valided Emails On Post Comment", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.validedOnComment}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, validedOnComment: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
 						/>
 					</div>
 
-					<div className="flex  my-5  justify-between items-center">
-						<label className="w-[400px]" htmlFor="emailVerification">
-
-						</label>
-						<div onClick={ev => {
-							createApKey()
-						}} className=" no-underline px-4 py-2 rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white ">Get API Key</div>
-					</div>
 
 
-
-					{getApiKeyPrams.loading && (
-						<div className="flex items-center"><Spinner /> Loading...</div>
-					)}
-					{getApiKeyPrams.error && (
-						<div className="text-red-500">{getApiKeyPrams.errorMgs}</div>
-					)}
-
-
-					{/* 
 					<div className="flex my-5 justify-between items-center ">
 						<label className="w-[400px]" htmlFor="emailVerification">
 							{__("Valided Existing User Emails", "user-verification")}
@@ -335,7 +371,7 @@ function Html(props) {
 							}}
 							multiple={false}
 						/>
-					</div>
+					</div> */}
 
 					{options?.validedExistingUser == 'yes' && (
 						<>
@@ -378,7 +414,7 @@ function Html(props) {
 
 
 						</>
-					)} */}
+					)}
 
 
 
@@ -405,8 +441,8 @@ function Html(props) {
 
 						<div className=" no-underline px-4 py-3 cursor-pointer rounded-sm bg-gray-700 hover:bg-gray-700 text-white  whitespace-nowrap  hover:text-white " onClick={ev => {
 							// console.log("Helo")
-							checkMail();
-						}}>Check</div>
+							validateEmail();
+						}}>Validate Email</div>
 					</div>
 
 

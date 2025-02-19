@@ -15,6 +15,9 @@ class UserVerificationRest
 	public function register_routes()
 	{
 
+
+
+
 		register_rest_route(
 			'user-verification/v2',
 			'/stats_counter',
@@ -108,11 +111,14 @@ class UserVerificationRest
 			array(
 				'methods' => 'POST',
 				'callback' => array($this, 'get_posts'),
-				'permission_callback' => '__return_true',
+				'permission_callback' => function () {
+					return current_user_can('manage_options');
+				},
 
 			)
 		);
 	}
+
 
 	/**
 	 * Return validated_email
@@ -123,14 +129,60 @@ class UserVerificationRest
 	public function validated_email($request)
 	{
 		$response = [];
-		$data = $request->get_body();
-		$_wpnonce = $request->get_param('_wpnonce');
-		$_wp_http_referer = $request->get_param('_wp_http_referer');
 
+		$email = isset($request['email']) ? sanitize_text_field($request['email']) : '';
+		$apikey = isset($request['apikey']) ? sanitize_text_field($request['apikey']) : '';
+		$testType = isset($request['testType']) ? sanitize_text_field($request['testType']) : 'full';
+
+		$UserVerificationStats = new UserVerificationStats();
+		$UserVerificationStats->add_stats('email_validation_request');
+
+		$url = 'https://isspammy.com/wp-json/email-validation/v2/validate_email';
+
+		// Request Arguments
+		$args = array(
+			'body'    => json_encode(array(
+				'email'  => $email,
+				'apikey' => $apikey,
+				'testType' => $testType,
+			)),
+			'headers' => array(
+				'Content-Type' => 'application/json',
+			),
+			'method'  => 'POST',
+			'timeout' => 60,
+		);
+
+		// Sending the request
+		$response = wp_remote_post($url, $args);
+
+		// Check for errors
+		if (is_wp_error($response)) {
+			$UserVerificationStats = new UserVerificationStats();
+			$UserVerificationStats->add_stats('email_validation_failed');
+
+			return array(
+				'error'   => true,
+				'message' => $response->get_error_message(),
+			);
+		}
+
+		// Get response body
+		$body = wp_remote_retrieve_body($response);
+
+		error_log(serialize($body));
+		$UserVerificationStats = new UserVerificationStats();
+		$UserVerificationStats->add_stats('email_validation_success');
+
+		return json_decode($body, true);
 
 
 		die(wp_json_encode($response));
 	}
+
+
+
+
 	/**
 	 * Return stats_counter
 	 *
@@ -270,6 +322,12 @@ class UserVerificationRest
 
 		$name = isset($request['name']) ? sanitize_text_field($request['name']) : '';
 		$value = isset($request['value']) ? user_verification_recursive_sanitize_arr($request['value']) : '';
+
+
+		error_log(serialize($value));
+
+
+
 		$message = "";
 		if (!empty($value)) {
 			$status = update_option($name, $value);
