@@ -9,7 +9,6 @@ function Html(props) {
 
 	const [content, setContent] = useState("");
 
-
 	useEffect(() => {
 		//tinymce.execCommand('mceAddEditor', true, props.id);
 
@@ -32,7 +31,6 @@ function Html(props) {
 			},
 			quicktags: true,
 			mediaButtons: true,
-
 		});
 
 		// Function to capture content change
@@ -82,8 +80,6 @@ function Html(props) {
 			disabled={props.disabled}
 			onChange={(e) => {
 				props.onChange(e.target.value);
-
-
 			}}>
 			{props.value}
 		</textarea>
