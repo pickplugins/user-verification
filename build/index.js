@@ -2963,6 +2963,31 @@ function Html(props) {
   function generate3Digit() {
     return Math.floor(100 + Math.random() * 900);
   }
+  console.log(options);
+  function escapeHTML(str) {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+    return str.replace(/[&<>"']/g, function (match) {
+      return map[match];
+    });
+  }
+  function unescapeHTML(str) {
+    const map = {
+      "&amp;": "&",
+      "&lt;": "<",
+      "&gt;": ">",
+      "&quot;": '"',
+      "&#039;": "'"
+    };
+    return str.replace(/&amp;|&lt;|&gt;|&quot;|&#039;/g, function (match) {
+      return map[match];
+    });
+  }
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     onChange(options);
   }, [options]);
@@ -3231,16 +3256,18 @@ function Html(props) {
     value: options?.email_templates_data?.user_registered?.html,
     className: "!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full ",
     onChange: newVal => {
+      console.log(newVal);
       var optionsX = {
         ...options,
         email_templates_data: {
           ...options.email_templates_data,
           user_registered: {
             ...options.email_templates_data.user_registered,
-            html: newVal.target.value
+            html: newVal
           }
         }
       };
+      console.log(optionsX);
       setoptions(optionsX);
     }
   }))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("label", {
@@ -8012,10 +8039,8 @@ function Html(props) {
   if (!props.warn) {
     return null;
   }
-  const [content, setContent] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)('');
-
-  // console.log(props.id);
-
+  const [content, setContent] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useState)("");
+  console.log(props.id);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     //tinymce.execCommand('mceAddEditor', true, props.id);
 
@@ -8057,7 +8082,8 @@ function Html(props) {
       setup: editor => {
         editor.on("change", e => {
           const newContent = editor.getContent(); // Get the updated content
-          // console.log(newContent); props.onChange(newContent);
+          console.log(newContent);
+          props.onChange(newContent);
         });
       }
     });
