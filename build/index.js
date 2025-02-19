@@ -2963,6 +2963,7 @@ function Html(props) {
   function generate3Digit() {
     return Math.floor(100 + Math.random() * 900);
   }
+  console.log(options);
   function escapeHTML(str) {
     const map = {
       "&": "&amp;",
