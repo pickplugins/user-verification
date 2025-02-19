@@ -663,7 +663,7 @@ function Html(props) {
 														...options.email_templates_data,
 														email_confirmed: {
 															...options.email_templates_data.email_confirmed,
-															html: newVal.target.value,
+															html: newVal,
 														},
 													},
 												};
@@ -956,7 +956,7 @@ function Html(props) {
 														...options.email_templates_data,
 														email_resend_key: {
 															...options.email_templates_data.email_resend_key,
-															html: newVal.target.value,
+															html: newVal,
 														},
 													},
 												};
@@ -1248,7 +1248,7 @@ function Html(props) {
 													...options.email_templates_data,
 													send_mail_otp: {
 														...options.email_templates_data.send_mail_otp,
-														html: newVal.target.value,
+														html: newVal,
 													},
 												},
 											};
@@ -1561,7 +1561,7 @@ function Html(props) {
 											...options.email_templates_data,
 											send_magic_login_url: {
 												...options.email_templates_data.send_magic_login_url,
-												html: newVal.target.value,
+												html: newVal,
 											},
 										},
 									};
