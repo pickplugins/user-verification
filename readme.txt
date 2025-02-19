@@ -4,7 +4,7 @@
 	Tags:  User Verification, Email OTP, Block Spam Email, Passwordless login, Email Verification
 	Requires at least: 4.1
 	Tested up to: 6.7
-	Stable tag: 2.0.29
+	Stable tag: 2.0.30
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -136,6 +136,9 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 == Changelog ==
 
+= 2.0.29 =
+* 2024-02-17 update - Update React Based Dashboard
+* 2024-02-17 update - Add email validation by isspammy.com on register
 
 = 2.0.29 =
 * 2024-01-14 fix - Email sending issue on register user.

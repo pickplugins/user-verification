@@ -57,15 +57,15 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
-		{
-			name: "magicLogin",
-			title: "Magic Login",
-			icon: settings,
-			className: "tab-magicLogin",
-			hidden: false,
-			isPro: false,
-			isNew: true,
-		},
+		// {
+		// 	name: "magicLogin",
+		// 	title: "Magic Login",
+		// 	icon: settings,
+		// 	className: "tab-magicLogin",
+		// 	hidden: false,
+		// 	isPro: false,
+		// 	isNew: true,
+		// },
 		{
 			name: "tabEmailOTP",
 			title: "Email OTP",
@@ -265,6 +265,10 @@ function Html(props) {
 		//setisProFeature(optionData?.license?.activated ? false : true);
 	}, [optionData]);
 	function updateOption() {
+
+		console.log(optionData);
+
+
 		setisLoading(true);
 		apiFetch({
 			path: "/user-verification/v2/update_options",
@@ -587,7 +591,7 @@ function Html(props) {
 									</div>
 									<div>
 										<div className="">Request Sent</div>
-										<div className="text-2xl">{statsCounter?.email_verification_confirmed ?? 0}</div>
+										<div className="text-2xl">{statsCounter?.email_validation_request ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -597,7 +601,7 @@ function Html(props) {
 									</div>
 									<div>
 										<div className="">Validation Success</div>
-										<div className="text-2xl">{statsCounter?.email_verification_confirmed ?? 0}</div>
+										<div className="text-2xl">{statsCounter?.email_validation_success ?? 0}</div>
 									</div>
 								</div>
 								<div className="bg-blue-800	 p-3  space-y-3 flex items-center gap-3 rounded-sm">
@@ -606,7 +610,7 @@ function Html(props) {
 									</div>
 									<div>
 										<div className="">Validation Failed</div>
-										<div className="text-2xl">{statsCounter?.email_verification_confirmed ?? 0}</div>
+										<div className="text-2xl">{statsCounter?.email_validation_failed ?? 0}</div>
 									</div>
 								</div>
 
