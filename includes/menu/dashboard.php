@@ -37,7 +37,7 @@ wp_localize_script('post-grid-blocks', 'user_verification_editor_js', array('pos
 
 $user_verification_settings = get_option("user_verification_settings");
 
-//var_dump($user_verification_settings);
+// var_dump($user_verification_settings['email_templates_data']['user_registered']);
 
 
 ?>

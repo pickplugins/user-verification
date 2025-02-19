@@ -266,7 +266,7 @@ function Html(props) {
 	}, [optionData]);
 	function updateOption() {
 
-		console.log(optionData);
+		console.log(optionData.email_templates_data);
 
 
 		setisLoading(true);
