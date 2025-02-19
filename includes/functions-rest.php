@@ -324,7 +324,7 @@ class UserVerificationRest
 		$value = isset($request['value']) ? user_verification_recursive_sanitize_arr($request['value']) : '';
 
 
-		error_log(serialize($value));
+		error_log(serialize($value['email_templates_data']['user_registered']));
 
 
 

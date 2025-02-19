@@ -1510,7 +1510,7 @@ function user_verification_recursive_sanitize_arr($array)
             if ($key == 'url') {
                 $value = esc_url_raw($value);
             } else {
-                $value = sanitize_text_field($value);
+                $value = wp_kses_post($value);
             }
         }
     }
