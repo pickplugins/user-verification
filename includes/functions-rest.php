@@ -170,7 +170,6 @@ class UserVerificationRest
 		// Get response body
 		$body = wp_remote_retrieve_body($response);
 
-		error_log(serialize($body));
 		$UserVerificationStats = new UserVerificationStats();
 		$UserVerificationStats->add_stats('email_validation_success');
 
@@ -324,7 +323,6 @@ class UserVerificationRest
 		$value = isset($request['value']) ? user_verification_recursive_sanitize_arr($request['value']) : '';
 
 
-		error_log(serialize($value['email_templates_data']['user_registered']));
 
 
 
@@ -359,13 +357,18 @@ class UserVerificationRest
 		$response = [];
 
 
-		$option = isset($request['option']) ? $request['option'] : '';
+		$option = isset($request['option']) ? sanitize_text_field($request['option']) : '';
+
+		$option_value = get_option($option);
 
 		//delete_option($option);
 
+		if (empty($option_value)) {
+			$option_value = user_verification_settings_default();
+		}
 
-		$response = get_option($option);
 
+		$response = stripslashes_deep($option_value);
 
 		die(wp_json_encode($response));
 	}

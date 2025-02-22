@@ -83,14 +83,11 @@ function MyFunction(props) {
 							}}>
 							<div
 								className={`flex ${orientation == "vertical" ? "" : "flex-col"
-									} justify-center items-center`}>
-								<Icon
-									fill="#404040"
-									icon={tab.icon}
-									size={24}
-									// className="mr-2 w-[20px] text-green-500"
-									className=" text-green-500"
-								/>
+									} justify-center items-center gap-2`}>
+
+
+								<span>{tab.icon}</span>
+
 								<span className="text-sm">{tab.title}</span>
 							</div>
 

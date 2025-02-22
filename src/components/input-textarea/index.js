@@ -7,33 +7,50 @@ function Html(props) {
 		return null;
 	}
 
-	const [content, setContent] = useState("");
 
+	var value = props.value;
+
+	console.log(value);
+
+	const [content, setContent] = useState("");
 
 	useEffect(() => {
 		//tinymce.execCommand('mceAddEditor', true, props.id);
 
 		// console.log(props.id);
 
-		wp.editor.initialize(props.id, {
-			tinymce: {
-				wpautop: true,
-				toolbar1:
-					"bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv",
-				toolbar2:
-					"formatselect alignjustify forecolor | pastetext removeformat charmap | outdent indent | undo redo | wp_help",
-				setup: (editor) => {
-					editor.on("change", (e) => {
-						const newContent = editor.getContent(); // Get the updated content
-						// console.log(newContent);
-						props.onChange(newContent);
-					});
-				},
-			},
-			quicktags: true,
-			mediaButtons: true,
+		// wp.editor.initialize(props.id, {
+		// 	tinymce: {
+		// 		wpautop: true,
+		// 		toolbar1:
+		// 			"bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv",
+		// 		toolbar2:
+		// 			"formatselect alignjustify forecolor | pastetext removeformat charmap | outdent indent | undo redo | wp_help",
+		// 		setup: (editor) => {
+		// 			editor.on("change", (e) => {
+		// 				const newContent = editor.getContent(); // Get the updated content
+		// 				// console.log(newContent);
+		// 				props.onChange(newContent);
+		// 			});
+		// 			editor.on("init", () => {
+		// 				editor.setContent(value);
+		// 			});
+		// 		},
+		// 	},
+		// 	quicktags: true,
+		// 	mediaButtons: true,
+		// });
 
-		});
+
+
+
+
+
+
+
+
+
+
 
 		// Function to capture content change
 		// const updateContent = () => {
@@ -82,8 +99,6 @@ function Html(props) {
 			disabled={props.disabled}
 			onChange={(e) => {
 				props.onChange(e.target.value);
-
-
 			}}>
 			{props.value}
 		</textarea>

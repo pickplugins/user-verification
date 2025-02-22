@@ -22,6 +22,9 @@ import SpamProtection from "./SpamProtection";
 import ThirdParty from "./ThirdParty";
 import Tools from "./Tools";
 
+import { IconDashboard, IconMailQuestion, IconWand, IconMailCode, IconShieldCheck, IconMessageShare, IconRobot, IconSettingsPlus, IconMailStar, IconLifebuoy, IconMailBolt } from '@tabler/icons-react';
+
+
 function Html(props) {
 	if (!props.warn) {
 		return null;
@@ -39,12 +42,11 @@ function Html(props) {
 	var [optionData, setoptionData] = useState({}); // Using the hook.
 	var [optionDataSaved, setoptionDataSaved] = useState({}); // Using the hook.
 
-	// console.log(optionData, optionDataSaved);
 	var [dashboardTabs, setdashboardTabs] = useState([
 		{
 			name: "overview",
 			title: "Overview",
-			icon: settings,
+			icon: <IconDashboard />,
 			className: "tab-overview",
 			hidden: false,
 			isPro: false,
@@ -52,7 +54,7 @@ function Html(props) {
 		{
 			name: "tabEmailVerification",
 			title: "Email Verification",
-			icon: settings,
+			icon: <IconMailQuestion />,
 			className: "tab-tabEmailVerification",
 			hidden: false,
 			isPro: false,
@@ -60,7 +62,7 @@ function Html(props) {
 		// {
 		// 	name: "magicLogin",
 		// 	title: "Magic Login",
-		// 	icon: settings,
+		// 	icon: <IconWand/>,
 		// 	className: "tab-magicLogin",
 		// 	hidden: false,
 		// 	isPro: false,
@@ -69,7 +71,7 @@ function Html(props) {
 		{
 			name: "tabEmailOTP",
 			title: "Email OTP",
-			icon: settings,
+			icon: <IconMailCode />,
 			className: "tab-tabEmailOTP",
 			hidden: false,
 			isPro: false,
@@ -77,7 +79,7 @@ function Html(props) {
 		{
 			name: "tabIsSpammy",
 			title: "IsSpammy",
-			icon: settings,
+			icon: <IconMailBolt />,
 			className: "tab-tabIsSpammy",
 			hidden: false,
 			isPro: false,
@@ -85,7 +87,7 @@ function Html(props) {
 		{
 			name: "tabSpam",
 			title: "Spam Protection",
-			icon: settings,
+			icon: <IconShieldCheck />,
 			className: "tab-tabSpam",
 			hidden: false,
 			isPro: false,
@@ -93,7 +95,7 @@ function Html(props) {
 		{
 			name: "tabEmailTemplates",
 			title: "Email Templates",
-			icon: settings,
+			icon: <IconMessageShare />,
 			className: "tab-tabEmailTemplates",
 			hidden: false,
 			isPro: false,
@@ -101,7 +103,7 @@ function Html(props) {
 		{
 			name: "tabreCAPTCHA",
 			title: "reCAPTCHA",
-			icon: settings,
+			icon: <IconRobot />,
 			className: "tab-tabreCAPTCHA",
 			hidden: false,
 			isPro: false,
@@ -109,7 +111,7 @@ function Html(props) {
 		{
 			name: "tabTools",
 			title: "Tools",
-			icon: settings,
+			icon: <IconSettingsPlus />,
 			className: "tab-tabTools",
 			hidden: false,
 			isPro: false,
@@ -118,7 +120,7 @@ function Html(props) {
 		{
 			name: "emailValidation",
 			title: "Email Validation",
-			icon: settings,
+			icon: <IconMailStar />,
 			className: "tab-emailValidation",
 			hidden: false,
 			isPro: false,
@@ -137,7 +139,7 @@ function Html(props) {
 		{
 			name: "tabHelp",
 			title: "Help & support",
-			icon: settings,
+			icon: <IconLifebuoy />,
 			className: "tab-tabHelp",
 			hidden: false,
 			isPro: false,
@@ -165,7 +167,6 @@ function Html(props) {
 
 	// 			if (res.length != 0) {
 	// 				var resX = { ...res };
-	// console.log("fetched");
 
 	// 				setoptionDataSaved(resX);
 	// 				setoptionData(resX);
@@ -186,7 +187,7 @@ function Html(props) {
 
 				if (res.length !== 0) {
 					const resX = { ...res };
-					// console.log(resX);
+					console.log(resX);
 					if (Object.keys(resX).length === 0) {
 						setoptionDataSaved(defaultData);
 						setoptionData(defaultData);
@@ -196,7 +197,6 @@ function Html(props) {
 					}
 				}
 			} catch (error) {
-				console.error("Error fetching options:", error);
 			} finally {
 				setisLoading(false);
 			}
@@ -205,7 +205,6 @@ function Html(props) {
 		fetchData();
 	}, []);
 
-	// console.log(optionData);
 
 	useEffect(() => {
 		apiFetch({
@@ -226,7 +225,6 @@ function Html(props) {
 			method: "POST",
 			data: {},
 		}).then((res) => {
-			// console.log(res);
 
 			var pageListX = [];
 			Object.entries(res).map((page) => {
@@ -241,7 +239,6 @@ function Html(props) {
 			method: "POST",
 			data: {},
 		}).then((res) => {
-			console.log(res);
 
 			setstatsCounter(res);
 
@@ -257,6 +254,8 @@ function Html(props) {
 	}, []);
 
 	useEffect(() => {
+
+
 		if (JSON.stringify(optionData) === JSON.stringify(optionDataSaved)) {
 			setneedSave(false);
 		} else {
@@ -266,7 +265,6 @@ function Html(props) {
 	}, [optionData]);
 	function updateOption() {
 
-		console.log(optionData.email_templates_data);
 
 
 		setisLoading(true);
@@ -400,6 +398,8 @@ function Html(props) {
 	}
 	function onChangeEmailTemplates(options) {
 		// var optionDataX = { options };
+
+
 		setoptionData(options);
 	}
 	function onChangeSpamProtection(options) {

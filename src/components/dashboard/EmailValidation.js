@@ -224,7 +224,7 @@ function Html(props) {
 				{__("Email Validation By IsSpammy", "user-verification")}
 			</div>
 			<PGtabs
-				activeTab="singleValidation"
+				activeTab="settings"
 				orientation="horizontal"
 				contentClass=" p-5 bg-white w-full"
 				navItemsWrapClass="flex "

@@ -1,6 +1,171 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access 
 
+
+
+
+function user_verification_settings_default()
+{
+
+    include user_verification_plugin_dir . 'templates/emails/user_registered.php';
+    include user_verification_plugin_dir . 'templates/emails/email_confirmed.php';
+    include user_verification_plugin_dir . 'templates/emails/email_resend_key.php';
+    include user_verification_plugin_dir . 'templates/emails/send_mail_otp.php';
+    include user_verification_plugin_dir . 'templates/emails/email_reminder.php';
+    include user_verification_plugin_dir . 'templates/emails/send_magic_login_url.php';
+
+    $admin_email = get_option('admin_email');
+    $website_name = get_bloginfo('name');
+
+
+    $settings = array(
+        'email_verification' => array(
+            'enable' => 'yes',
+            'verification_page_id' => 'none',
+            'redirect_after_verification' => 'none',
+            'login_after_verification' => 'yes',
+            'email_update_reverify' => 'no',
+            'exclude_user_roles' => array('administrator')
+        ),
+        'messages' => array(
+            'invalid_key' => 'Sorry, activation key is not valid.',
+            'activation_sent' => 'Verification mail has been sent.',
+            'verify_email' => 'Verify your email first!',
+            'registration_success' => 'Registration complete. Please verify the mail first, then visit the <a href="%s">login page</a>.',
+            'verification_success' => 'Thanks for Verifying.',
+            'verification_fail' => 'Sorry! Verification failed.',
+            'please_wait' => 'Please wait.',
+            'mail_instruction' => 'Please check your mail inbox and follow the instruction. don\'t forget to check spam or trash folder.',
+            'redirect_after_verify' => 'You will redirect after verification',
+            'not_redirect' => 'Click if not redirect automatically',
+            'title_checking_verification' => 'Checking Verification',
+            'title_sending_verification' => 'Sending verification mail',
+            'captcha_error' => 'Captcha not resolved.',
+            'otp_sent_success' => 'OTP has been sent successfully.',
+            'otp_sent_error' => 'OTP generated, but unable to send mail.'
+        ),
+        'email_otp' => array(
+            'enable_default_login' => 'no',
+            'required_email_verified' => 'no',
+            'allow_password' => 'yes',
+            'length' => '6',
+            'character_source' => array(
+                'uppercase',
+                'lowercase'
+            )
+        ),
+        'isspammy' => array(
+            'report_comment_spam' => 'no',
+            'report_comment_trash' => 'no',
+            'block_comment' => 'no',
+            'comment_form_notice' => 'no',
+            'comment_form_notice_text' => '',
+            'block_register' => 'no',
+            'block_login' => 'no'
+        ),
+        'spam_protection' => array(
+            'enable_domain_block' => 'no',
+            'blocked_domain' => array(''),
+            'allowed_domain' => array(''),
+            'enable_username_block' => 'no',
+            'blocked_username' => array(''),
+            'generic_mail_block' => 'no',
+            'blocked_generic_mail' => array('')
+        ),
+        'logo_id' => '',
+        'mail_wpautop' => 'yes',
+        'email_templates_data' => array(
+            'user_registered' => array(
+                'name' => 'New User Registration',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'New user submitted - {site_url}',
+                'html' => $templates_data_html['user_registered']
+            ),
+            'email_confirmed' => array(
+                'name' => 'Email Verification Confirmed',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'New user confirmed - {site_url}',
+                'html' => $templates_data_html['email_confirmed']
+            ),
+            'email_resend_key' => array(
+                'name' => 'Resend Activation Key',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'Please verify account - {site_url}',
+                'html' => $templates_data_html['email_resend_key']
+            ),
+            'send_mail_otp' => array(
+                'name' => 'Send Mail OTP',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'OTP - {site_url}',
+                'html' => $templates_data_html['send_mail_otp']
+            ),
+            'send_magic_login_url' => array(
+                'name' => 'Send Magic Login URL',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'Magic Login - {site_url}',
+                'html' => $templates_data_html['send_magic_login_url']
+            )
+        ),
+
+        'recaptcha' => array(
+            'version' => 'v2_checkbox',
+            'sitekey' => '',
+            'secretkey' => '',
+            'default_login_page' => 'no',
+            'default_registration_page' => 'no',
+            'default_lostpassword_page' => 'no',
+            'comment_form' => 'no'
+        ),
+
+        'unverified' => array(
+            'delete_user' => 'no',
+            'delete_max_number' => '20',
+            'delay' => '720',
+            'delete_user_interval' => 'daily',
+            'existing_user_verified' => 'no',
+            'existing_user_verified_interval' => 'daily'
+        ),
+
+        'disable' => array('new_user_notification_email' => 'no'),
+        'tools' => array(
+            'mail_from' => $admin_email,
+            'mail_from_name' => $website_name
+        )
+    );
+
+    return $settings;
+}
+
+
+
+
+
+
 add_action('comment_form_after',  'user_verification_comment_form_privacy_notice');
 
 function user_verification_comment_form_privacy_notice()
@@ -1510,7 +1675,7 @@ function user_verification_recursive_sanitize_arr($array)
             if ($key == 'url') {
                 $value = esc_url_raw($value);
             } else {
-                $value = wp_kses_post($value);
+                $value = wp_kses_post(stripslashes($value));
             }
         }
     }
