@@ -7,7 +7,7 @@ class class_user_verification_notices
     public function __construct()
     {
 
-        add_action('admin_notices', array($this, 'get_free_credits'));
+        // add_action('admin_notices', array($this, 'get_free_credits'));
         add_action('admin_notices', array($this, 'new_dashboard'));
         add_action('admin_notices', array($this, 'mark_as_verified'));
         add_action('admin_notices', array($this, 'mark_as_unverified'));

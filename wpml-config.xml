@@ -1,37 +1,21 @@
 <wpml-config>
 	<admin-texts>
-
-
 		<key name="user_verification_settings">
-
 				<key name="logo_id"/>
-
 			<key name="recaptcha">
 				<key name="default_login_page"/>
 				<key name="default_registration_page"/>
 				<key name="default_lostpassword_page"/>
 				<key name="comment_form"/>
 			</key>
-
-
-
-
-
 			<key name="temp_login">
 				<key name="enable"/>
 				<key name="duration"/>
 				<key name="require_verification"/>
-
 			</key>
-			
 			<key name="unverified">
 				<key name="delete_user"/>
-
-
 			</key>
-
-			
-
 			<key name="spam_protection">
 				<key name="enable_domain_block"/>
 				<key name="blocked_domain"/>

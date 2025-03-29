@@ -31,11 +31,11 @@ function Html(props) {
 	}, [options]);
 
 	const toggleCheckbox = (value) => {
-		const updatedSource = options.validedPrams.includes(value)
-			? options.validedPrams.filter((item) => item !== value) // Remove if already selected
-			: [...options.validedPrams, value]; // Add if not selected
+		const updatedSource = options.validatedPrams.includes(value)
+			? options.validatedPrams.filter((item) => item !== value) // Remove if already selected
+			: [...options.validatedPrams, value]; // Add if not selected
 
-		setoptions({ ...options, validedPrams: updatedSource });
+		setoptions({ ...options, validatedPrams: updatedSource });
 	};
 
 
@@ -299,35 +299,103 @@ function Html(props) {
 
 					<div className="flex my-5 justify-between items-center ">
 						<label className="w-[400px]" htmlFor="emailVerification">
-							{__("Valided Emails On Register", "user-verification")}
+							{__("Validated Emails On Register", "user-verification")}
 						</label>
 						<PGinputSelect
 							inputClass="!py-1 px-2  border-2 border-solid"
-							val={options?.validedOnRegister}
+							val={options?.validatedOnRegister}
 							options={[
 								{ label: "No", value: "no" },
 								{ label: "Yes", value: "yes" },
 							]}
 							onChange={(newVal) => {
-								var optionsX = { ...options, validedOnRegister: newVal };
+								var optionsX = { ...options, validatedOnRegister: newVal };
 								setoptions(optionsX);
 							}}
 							multiple={false}
 						/>
 					</div>
+					<div className="flex my-5 justify-between items-center ">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Validated Emails On Login", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.validatedOnLogin}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, validatedOnLogin: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+					<div className="flex my-5 justify-between items-center ">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("Validated Emails On Post Comment", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.validatedOnPostComment}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, validatedOnPostComment: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+
+
+					{options?.validatedOnPostComment == 'yes' && (
+
+						<>
+							<div className="flex my-5 justify-between items-center ">
+								<label className="w-[400px]" htmlFor="emailVerification">
+									{__("Comment form Notice", "user-verification")}
+								</label>
+								<PGinputText
+									placeholder="Your email address will be validated by isspammy.com"
+									type="text"
+									value={options?.validatedCommentNotice}
+									className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+									onChange={(newVal) => {
+
+
+										var optionsX = { ...options, validatedCommentNotice: newVal };
+										setoptions(optionsX);
+									}}
+								/>
+
+							</div>
+						</>
+
+					)}
+
+
+
+
+
+
 					{/* <div className="flex my-5 justify-between items-center ">
 						<label className="w-[400px]" htmlFor="emailVerification">
-							{__("Valided Emails On Login", "user-verification")}
+							{__("Validated Emails On Login", "user-verification")}
 						</label>
 						<PGinputSelect
 							inputClass="!py-1 px-2  border-2 border-solid"
-							val={options?.validedOnLogin}
+							val={options?.validatedOnLogin}
 							options={[
 								{ label: "No", value: "no" },
 								{ label: "Yes", value: "yes" },
 							]}
 							onChange={(newVal) => {
-								var optionsX = { ...options, validedOnLogin: newVal };
+								var optionsX = { ...options, validatedOnLogin: newVal };
 								setoptions(optionsX);
 							}}
 							multiple={false}
@@ -335,17 +403,17 @@ function Html(props) {
 					</div>
 					<div className="flex my-5 justify-between items-center ">
 						<label className="w-[400px]" htmlFor="emailVerification">
-							{__("Valided Emails On Post Comment", "user-verification")}
+							{__("Validated Emails On Post Comment", "user-verification")}
 						</label>
 						<PGinputSelect
 							inputClass="!py-1 px-2  border-2 border-solid"
-							val={options?.validedOnComment}
+							val={options?.validatedOnComment}
 							options={[
 								{ label: "No", value: "no" },
 								{ label: "Yes", value: "yes" },
 							]}
 							onChange={(newVal) => {
-								var optionsX = { ...options, validedOnComment: newVal };
+								var optionsX = { ...options, validatedOnComment: newVal };
 								setoptions(optionsX);
 							}}
 							multiple={false}
@@ -356,24 +424,24 @@ function Html(props) {
 
 					<div className="flex my-5 justify-between items-center ">
 						<label className="w-[400px]" htmlFor="emailVerification">
-							{__("Valided Existing User Emails", "user-verification")}
+							{__("Validated Existing User Emails", "user-verification")}
 						</label>
 						<PGinputSelect
 							inputClass="!py-1 px-2  border-2 border-solid"
-							val={options?.validedExistingUser}
+							val={options?.validatedExistingUser}
 							options={[
 								{ label: "No", value: "no" },
 								{ label: "Yes", value: "yes" },
 							]}
 							onChange={(newVal) => {
-								var optionsX = { ...options, validedExistingUser: newVal };
+								var optionsX = { ...options, validatedExistingUser: newVal };
 								setoptions(optionsX);
 							}}
 							multiple={false}
 						/>
 					</div> */}
 
-					{options?.validedExistingUser == 'yes' && (
+					{options?.validatedExistingUser == 'yes' && (
 						<>
 
 

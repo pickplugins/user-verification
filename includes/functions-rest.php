@@ -325,7 +325,6 @@ class UserVerificationRest
 
 
 
-
 		$message = "";
 		if (!empty($value)) {
 			$status = update_option($name, $value);

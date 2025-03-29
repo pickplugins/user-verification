@@ -16,6 +16,10 @@ function Html(props) {
 	var [options, setoptions] = useState(props.options); // Using the hook.
 
 	useEffect(() => {
+
+		//console.log(options);
+
+
 		onChange(options);
 	}, [options]);
 
@@ -141,12 +145,18 @@ function Html(props) {
 				<textarea
 					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
 					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.woocommerce?.message_after_registration}
+					value={options?.woocommerce?.message_after_registration}
 					options={[
 						{ label: "No", value: "no" },
 						{ label: "Yes", value: "yes" },
 					]}
-					onChange={(newVal) => {
+					onChange={(event) => {
+
+						var newVal = event.target.value
+
+						console.log(newVal);
+
+
 						var optionsX = {
 							...options,
 							woocommerce: {

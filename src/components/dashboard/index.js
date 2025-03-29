@@ -393,7 +393,7 @@ function Html(props) {
 		setoptionData(optionDataX);
 	}
 	function onChangeTools(options) {
-		var optionDataX = { ...optionData, tools: options };
+		var optionDataX = { ...optionData, ...options };
 		setoptionData(optionDataX);
 	}
 	function onChangeEmailTemplates(options) {
@@ -411,7 +411,11 @@ function Html(props) {
 		setoptionData(optionDataX);
 	}
 	function onChangeUserVerificationSettings(options) {
-		var optionDataX = { ...optionData, user_verification_settings: options };
+
+		console.log(options);
+
+
+		var optionDataX = { ...optionData, ...options };
 		setoptionData(optionDataX);
 	}
 
@@ -824,9 +828,10 @@ function Html(props) {
 								onChange={onChangeErrorMessages}
 							/>
 						</div>
+
 						<div className="flex mb-5  justify-start gap-2 items-center ">
 							<ThirdParty
-								options={optionData?.user_verification_settings}
+								options={optionData}
 								onChange={onChangeUserVerificationSettings}
 							/>
 						</div>

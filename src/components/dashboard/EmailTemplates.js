@@ -4,12 +4,22 @@ const { Component } = wp.element;
 import { MediaUpload } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
 import { __ } from "@wordpress/i18n";
+import {
+	InspectorControls,
+	RichText,
+	RichTextToolbarButton,
+	useBlockProps,
+} from "@wordpress/block-editor";
+import { registerFormatType } from '@wordpress/rich-text';
+
 import { Icon, brush, columns, chevronDown, chevronUp, check, close } from "@wordpress/icons";
 
 import React from "react";
+
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
 import PGinputTextarea from "../input-textarea";
+import PGinputWPEditor from "../input-wp-editor";
 
 function Html(props) {
 	if (!props.warn) {
@@ -366,7 +376,9 @@ function Html(props) {
 													{__("Email body", "user-verification")}
 												</label>
 
-												<PGinputTextarea
+
+
+												<PGinputWPEditor
 													id={`user_registered`}
 													value={options?.email_templates_data?.user_registered?.html}
 													className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
@@ -385,20 +397,33 @@ function Html(props) {
 														};
 														setoptions(optionsX);
 
-														// var optionsX = {
-														// 	...options,
-														// 	email_templates_data: {
-														// 		...options.email_templates_data,
-														// 		user_registered: {
-														// 			...options.email_templates_data.user_registered,
-														// 			html: newVal,
-														// 		},
-														// 	},
-														// };
-														// console.log(optionsX);
-														// setoptions(optionsX);
+
 													}}
 												/>
+
+
+
+												{/* <PGinputTextarea
+													id={`user_registered`}
+													value={options?.email_templates_data?.user_registered?.html}
+													className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
+													onChange={(newVal) => {
+														console.log(options);
+
+														var optionsX = {
+															...options,
+															email_templates_data: {
+																...options.email_templates_data,
+																user_registered: {
+																	...options.email_templates_data.user_registered,
+																	html: newVal,
+																},
+															},
+														};
+														setoptions(optionsX);
+
+													}}
+												/> */}
 
 											</div>
 										</>
@@ -682,7 +707,7 @@ function Html(props) {
 													{__("Email body", "user-verification")}
 												</label>
 
-												<PGinputTextarea
+												<PGinputWPEditor
 													id={`email_confirmed`}
 													value={options?.email_templates_data?.email_confirmed?.html}
 													className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
@@ -973,7 +998,7 @@ function Html(props) {
 													{__("Email body", "user-verification")}
 												</label>
 
-												<PGinputTextarea
+												<PGinputWPEditor
 													id={`email_resend_key`}
 													value={
 														options?.email_templates_data?.email_resend_key?.html
@@ -1267,7 +1292,7 @@ function Html(props) {
 												{__("Email body", "user-verification")}
 											</label>
 
-											<PGinputTextarea
+											<PGinputWPEditor
 												id={`send_mail_otp`}
 												value={options?.email_templates_data?.send_mail_otp?.html}
 												className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
@@ -1578,7 +1603,7 @@ function Html(props) {
 										{__("Email body", "user-verification")}
 									</label>
 
-									<PGinputTextarea
+									<PGinputWPEditor
 										id={`send_magic_login_url`}
 										value={
 											options?.email_templates_data?.send_magic_login_url?.html

@@ -11,6 +11,7 @@ wp_enqueue_style('pg-admin-g-fonts');
 wp_enqueue_style('wp-components');
 wp_enqueue_editor();
 
+wp_enqueue_script('wp-tinymce');
 
 
 wp_enqueue_script(

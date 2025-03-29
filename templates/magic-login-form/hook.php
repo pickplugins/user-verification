@@ -8,9 +8,6 @@ function user_verification_form_wrap_process_magicLogin($request)
 
     $email = $request->get_param('email');
 
-    error_log($email);
-
-
     $email_data = [];
     $user = get_user_by('email', $email);
     if (empty($user)) {
@@ -182,8 +179,6 @@ function user_verification_magic_login()
     if (!wp_verify_nonce($_wpnonce, 'nonce_magic_login')) {
         return;
     }
-
-    error_log($_wpnonce);
 
     if (isset($_REQUEST['user_verification_magic_login'])) {
 
