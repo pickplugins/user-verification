@@ -712,6 +712,8 @@ function Html(props) {
 													value={options?.email_templates_data?.email_confirmed?.html}
 													className="!py-1 h-[300px] px-2 !border-2 !border-[#8c8f94] !border-solid w-full "
 													onChange={(newVal) => {
+														console.log(options);
+
 														var optionsX = {
 															...options,
 															email_templates_data: {
@@ -1696,8 +1698,10 @@ function Html(props) {
 								</div>
 							</div>
 						</div>
-					</div></div>
+					</div>
+				</div>
 
+				<div>Hello</div>
 
 			</div>
 		</div>
