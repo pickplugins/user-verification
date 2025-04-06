@@ -1,350 +1,165 @@
 <?php
 if (!defined('ABSPATH')) exit;  // if direct access 
 
-add_action('comment_form_after',  'user_verification_comment_form_privacy_notice');
 
-function user_verification_comment_form_privacy_notice()
+
+
+function user_verification_settings_default()
 {
 
-    $user_verification_settings = get_option('user_verification_settings');
-    $isspammy = isset($user_verification_settings['isspammy']) ? $user_verification_settings['isspammy'] : array();
+    include user_verification_plugin_dir . 'templates/emails/user_registered.php';
+    include user_verification_plugin_dir . 'templates/emails/email_confirmed.php';
+    include user_verification_plugin_dir . 'templates/emails/email_resend_key.php';
+    include user_verification_plugin_dir . 'templates/emails/send_mail_otp.php';
+    include user_verification_plugin_dir . 'templates/emails/email_reminder.php';
+    include user_verification_plugin_dir . 'templates/emails/send_magic_login_url.php';
 
-    $comment_form_notice = isset($isspammy['comment_form_notice']) ? $isspammy['comment_form_notice'] : 'no';
-    $comment_form_notice_text = !empty($isspammy['comment_form_notice_text']) ? sprintf($isspammy['comment_form_notice_text'], 'https://isspammy.com/privacy-policy/') :
-        sprintf(__('This site uses User Verification plugin to reduce spam. <a href="%s" target="_blank" rel="nofollow noopener">See how your comment data is processed</a>.', 'user-verification'), 'https://isspammy.com/privacy-policy/');
-
-    if ($comment_form_notice != 'yes') return;
-
-    echo apply_filters('user_verification_comment_form_notice_text', wp_kses_post($comment_form_notice_text));
-}
-
-add_filter('registration_errors', 'registration_errors_block_spammer', 10, 3);
-function registration_errors_block_spammer($errors, $sanitized_user_login, $user_email)
-{
+    $admin_email = get_option('admin_email');
+    $website_name = get_bloginfo('name');
 
 
-    $user_verification_settings = get_option('user_verification_settings');
+    $settings = array(
+        'email_verification' => array(
+            'enable' => 'yes',
+            'verification_page_id' => 'none',
+            'redirect_after_verification' => 'none',
+            'login_after_verification' => 'yes',
+            'email_update_reverify' => 'no',
+            'exclude_user_roles' => array('administrator')
+        ),
+        'messages' => array(
+            'invalid_key' => 'Sorry, activation key is not valid.',
+            'activation_sent' => 'Verification mail has been sent.',
+            'verify_email' => 'Verify your email first!',
+            'registration_success' => 'Registration complete. Please verify the mail first, then visit the <a href="%s">login page</a>.',
+            'verification_success' => 'Thanks for Verifying.',
+            'verification_fail' => 'Sorry! Verification failed.',
+            'please_wait' => 'Please wait.',
+            'mail_instruction' => 'Please check your mail inbox and follow the instruction. don\'t forget to check spam or trash folder.',
+            'redirect_after_verify' => 'You will redirect after verification',
+            'not_redirect' => 'Click if not redirect automatically',
+            'title_checking_verification' => 'Checking Verification',
+            'title_sending_verification' => 'Sending verification mail',
+            'captcha_error' => 'Captcha not resolved.',
+            'otp_sent_success' => 'OTP has been sent successfully.',
+            'otp_sent_error' => 'OTP generated, but unable to send mail.'
+        ),
+        'email_otp' => array(
+            'enable_default_login' => 'no',
+            'required_email_verified' => 'no',
+            'allow_password' => 'yes',
+            'length' => '6',
+            'character_source' => array(
+                'uppercase',
+                'lowercase'
+            )
+        ),
+        'isspammy' => array(
+            'report_comment_spam' => 'no',
+            'report_comment_trash' => 'no',
+            'block_comment' => 'no',
+            'comment_form_notice' => 'no',
+            'comment_form_notice_text' => '',
+            'block_register' => 'no',
+            'block_login' => 'no'
+        ),
+        'spam_protection' => array(
+            'enable_domain_block' => 'no',
+            'blocked_domain' => array(''),
+            'allowed_domain' => array(''),
+            'enable_username_block' => 'no',
+            'blocked_username' => array(''),
+            'generic_mail_block' => 'no',
+            'blocked_generic_mail' => array('')
+        ),
+        'logo_id' => '',
+        'mail_wpautop' => 'yes',
+        'email_templates_data' => array(
+            'user_registered' => array(
+                'name' => 'New User Registration',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'New user submitted - {site_url}',
+                'html' => $templates_data_html['user_registered']
+            ),
+            'email_confirmed' => array(
+                'name' => 'Email Verification Confirmed',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'New user confirmed - {site_url}',
+                'html' => $templates_data_html['email_confirmed']
+            ),
+            'email_resend_key' => array(
+                'name' => 'Resend Activation Key',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'Please verify account - {site_url}',
+                'html' => $templates_data_html['email_resend_key']
+            ),
+            'send_mail_otp' => array(
+                'name' => 'Send Mail OTP',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'OTP - {site_url}',
+                'html' => $templates_data_html['send_mail_otp']
+            ),
+            'send_magic_login_url' => array(
+                'name' => 'Send Magic Login URL',
+                'enable' => 'yes',
+                'email_bcc' => '',
+                'email_from_name' => $website_name,
+                'email_from' => $admin_email,
+                'reply_to_name' => $website_name,
+                'reply_to' => $admin_email,
+                'subject' => 'Magic Login - {site_url}',
+                'html' => $templates_data_html['send_magic_login_url']
+            )
+        ),
 
-    $block_register = isset($user_verification_settings['isspammy']['block_register']) ? $user_verification_settings['isspammy']['block_register'] : 'no';
+        'recaptcha' => array(
+            'version' => 'v2_checkbox',
+            'sitekey' => '',
+            'secretkey' => '',
+            'default_login_page' => 'no',
+            'default_registration_page' => 'no',
+            'default_lostpassword_page' => 'no',
+            'comment_form' => 'no'
+        ),
 
-    if ($block_register != 'yes') return $errors;
+        'unverified' => array(
+            'delete_user' => 'no',
+            'delete_max_number' => '20',
+            'delay' => '720',
+            'delete_user_interval' => 'daily',
+            'existing_user_verified' => 'no',
+            'existing_user_verified_interval' => 'daily'
+        ),
 
-    // do the code here
-    //$domain = get_bloginfo('url');
-
-
-    // API query parameters
-    $api_params = array(
-        'check' => $user_email,
+        'disable' => array('new_user_notification_email' => 'no'),
+        'tools' => array(
+            'mail_from' => $admin_email,
+            'mail_from_name' => $website_name
+        )
     );
 
-    // Send query to the license manager server
-    $response = wp_remote_get(add_query_arg($api_params, 'https://isspammy.com/'), array('timeout' => 20, 'sslverify' => false));
-
-    // Check for error in the response
-    if (is_wp_error($response)) {
-        echo __("Unexpected Error! The query returned with an error.", 'user-verification');
-    } else {
-        //var_dump($response);//uncomment it if you want to look at the full response
-
-        // License data.
-        $spammer_data = json_decode(wp_remote_retrieve_body($response));
-        $spammer_found = isset($spammer_data->spammer_found) ? sanitize_text_field($spammer_data->spammer_found) : 'no';
-
-        if ($spammer_found == 'yes') {
-            $errors->add('blocked_spammer', __("Spammers are not allowed to register.", 'user-verification'));
-            // stats record start
-            $UserVerificationStats = new UserVerificationStats();
-            $UserVerificationStats->add_stats('spam_registration_blocked');
-            // stats record end
-        }
-    }
-
-
-    return $errors;
+    return $settings;
 }
-
-
-//add_filter( 'wp_login_errors', 'user_verification_wp_login_errors_block_spammers', 10, 2 );
-
-function user_verification_wp_login_errors_block_spammers($errors, $redirect_to)
-{
-
-
-    $user_verification_settings = get_option('user_verification_settings');
-    $email_verification_enable = isset($user_verification_settings['email_verification']['enable']) ? $user_verification_settings['email_verification']['enable'] : 'yes';
-    $block_login = isset($user_verification_settings['isspammy']['block_login']) ? $user_verification_settings['isspammy']['block_login'] : 'yes';
-
-    $errors->add('blocked_spammer', __("Spammers are not allowed to login.", 'user-verification'));
-
-
-
-
-    return $errors;
-}
-
-
-
-
-
-
-
-
-
-
-
-function user_verification_trash_comment($comment_id, $comment)
-{
-
-    $user_verification_settings = get_option('user_verification_settings');
-
-    $report_comment_trash = isset($user_verification_settings['isspammy']['report_comment_trash']) ? $user_verification_settings['isspammy']['report_comment_trash'] : 'no';
-
-    if ($report_comment_trash != 'yes') return;
-
-    // do the code here
-    $domain = get_bloginfo('url');
-
-
-    // API query parameters
-    $api_params = array(
-        'report_spam' => $comment->comment_author_email,
-        'ref_domain' => $domain,
-    );
-
-    // Send query to the license manager server
-    $response = wp_remote_get(add_query_arg($api_params, 'https://isspammy.com/'), array('timeout' => 20, 'sslverify' => false));
-
-    // Check for error in the response
-    if (is_wp_error($response)) {
-        echo __("Unexpected Error! The query returned with an error.", 'user-verification');
-    } else {
-        //var_dump($response);//uncomment it if you want to look at the full response
-
-        // License data.
-        $spammer_data = json_decode(wp_remote_retrieve_body($response));
-
-        // stats record start
-        $UserVerificationStats = new UserVerificationStats();
-        $UserVerificationStats->add_stats('spam_comment_report');
-        // stats record end
-
-        //$license_key = isset($license_data->license_key) ? sanitize_text_field($license_data->license_key) : '';
-
-    }
-}
-
-add_action('trash_comment', 'user_verification_trash_comment', 10, 2);
-
-
-
-function user_verification_spam_comment($comment_id, $comment)
-{
-
-    $user_verification_settings = get_option('user_verification_settings');
-
-    $report_comment_spam = isset($user_verification_settings['isspammy']['report_comment_spam']) ? $user_verification_settings['isspammy']['report_comment_spam'] : 'no';
-
-    if ($report_comment_spam != 'yes') return;
-
-    // do the code here
-    $domain = get_bloginfo('url');
-
-
-    // API query parameters
-    $api_params = array(
-        'report_spam' => $comment->comment_author_email,
-        'ref_domain' => $domain,
-    );
-
-    // Send query to the license manager server
-    $response = wp_remote_get(add_query_arg($api_params, 'https://isspammy.com/'), array('timeout' => 20, 'sslverify' => false));
-
-    // Check for error in the response
-    if (is_wp_error($response)) {
-        echo __("Unexpected Error! The query returned with an error.", 'user-verification');
-    } else {
-        //var_dump($response);//uncomment it if you want to look at the full response
-
-        // License data.
-        $spammer_data = json_decode(wp_remote_retrieve_body($response));
-
-        // stats record start
-        $UserVerificationStats = new UserVerificationStats();
-        $UserVerificationStats->add_stats('spam_comment_report');
-        // stats record end
-
-        //$license_key = isset($license_data->license_key) ? sanitize_text_field($license_data->license_key) : '';
-
-    }
-}
-
-add_action('spam_comment', 'user_verification_spam_comment', 10, 2);
-
-
-
-
-
-
-
-
-add_filter('pre_comment_approved', 'user_verification_pre_comment_approved', 10, 2);
-function user_verification_pre_comment_approved($approved, $commentdata)
-{
-
-
-    $user_verification_settings = get_option('user_verification_settings');
-    $block_comment = isset($user_verification_settings['isspammy']['block_comment']) ? $user_verification_settings['isspammy']['block_comment'] : 'no';
-
-    if ($block_comment != 'yes') return $approved;
-    // do the code here
-    //$domain = get_bloginfo('url');
-
-
-    // API query parameters
-    $api_params = array(
-        'check' => $commentdata['comment_author_email'],
-    );
-
-    // Send query to the license manager server
-    $response = wp_remote_get(add_query_arg($api_params, 'https://isspammy.com/'), array('timeout' => 20, 'sslverify' => false));
-
-    // Check for error in the response
-    if (is_wp_error($response)) {
-        echo __("Unexpected Error! The query returned with an error.", 'user-verification');
-    } else {
-        //var_dump($response);//uncomment it if you want to look at the full response
-
-        // License data.
-        $spammer_data = json_decode(wp_remote_retrieve_body($response));
-        //var_dump($license_data);
-        //echo $license_data->message;
-
-        $spammer_found = isset($spammer_data->spammer_found) ? sanitize_text_field($spammer_data->spammer_found) : 'no';
-
-        if ($spammer_found == 'yes') {
-            // stats record start
-            $UserVerificationStats = new UserVerificationStats();
-            $UserVerificationStats->add_stats('spam_comment_blocked');
-            // stats record end
-            $approved = 'trash';
-        }
-    }
-
-
-
-    return $approved;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function user_verification_preprocess_comment($commentdata)
-{
-
-    $user_verification_settings = get_option('user_verification_settings');
-
-    $block_comment = isset($user_verification_settings['isspammy']['block_comment']) ? $user_verification_settings['isspammy']['block_comment'] : 'no';
-
-    if ($block_comment != 'yes') return $commentdata;
-
-    // do the code here
-    $domain = get_bloginfo('url');
-
-
-    // API query parameters
-    $api_params = array(
-        'check' => $commentdata['comment_author_email'],
-    );
-
-    // Send query to the license manager server
-    $response = wp_remote_get(add_query_arg($api_params, 'https://isspammy.com/'), array('timeout' => 20, 'sslverify' => false));
-
-    // Check for error in the response
-    if (is_wp_error($response)) {
-        echo __("Unexpected Error! The query returned with an error.", 'user-verification');
-    } else {
-        //var_dump($response);//uncomment it if you want to look at the full response
-
-        // License data.
-        $spammer_data = json_decode(wp_remote_retrieve_body($response));
-
-        $spammer_found = isset($spammer_data->spammer_found) ? sanitize_text_field($spammer_data->spammer_found) : 'no';
-
-        if ($spammer_found == 'yes') {
-            $commentdata = array();
-        }
-    }
-
-    return $commentdata;
-}
-
-//add_action( 'preprocess_comment', 'user_verification_preprocess_comment', 90 );
-
-
-
-function user_verification_duplicate_comment_id($dupe_id, $commentdata)
-{
-
-    $user_verification_settings = get_option('user_verification_settings');
-
-    $block_comment = isset($user_verification_settings['isspammy']['block_comment']) ? $user_verification_settings['isspammy']['block_comment'] : 'no';
-
-    if ($block_comment != 'yes') return $dupe_id;
-
-    // do the code here
-
-
-    // API query parameters
-    $api_params = array(
-        'check' => $commentdata['comment_author_email'],
-    );
-
-    // Send query to the license manager server
-    $response = wp_remote_get(add_query_arg($api_params, 'https://isspammy.com/'), array('timeout' => 20, 'sslverify' => false));
-
-    // Check for error in the response
-    if (is_wp_error($response)) {
-        echo __("Unexpected Error! The query returned with an error.", 'user-verification');
-    } else {
-        //var_dump($response);//uncomment it if you want to look at the full response
-
-        // License data.
-        $spammer_data = json_decode(wp_remote_retrieve_body($response));
-
-        $spammer_found = isset($spammer_data->spammer_found) ? sanitize_text_field($spammer_data->spammer_found) : 'no';
-
-
-        if ($spammer_found == 'yes') {
-            //$commentdata = array();
-
-            $dupe_id = true;
-        }
-    }
-
-    return $dupe_id;
-}
-
-//add_action( 'duplicate_comment_id', 'user_verification_duplicate_comment_id', 90, 2 );
-
-
-
-
-
-
-
-
-
 
 
 
@@ -475,6 +290,10 @@ function user_verification_is_username_blocked($username)
     $blocked_username = isset($user_verification_settings['spam_protection']['blocked_username']) ? $user_verification_settings['spam_protection']['blocked_username'] : array();
 
 
+    $blocked_username = is_array($blocked_username) ? $blocked_username : preg_split("/\r\n|\n|\r/", $blocked_username);
+
+
+
     if ($enable_username_block == "yes" && !empty($blocked_username)) :
 
         foreach ($blocked_username as $blocked) {
@@ -546,9 +365,12 @@ function user_verification_is_emaildomain_blocked($user_email)
     $blocked_domain = isset($user_verification_settings['spam_protection']['blocked_domain']) ? $user_verification_settings['spam_protection']['blocked_domain'] : array();
 
 
+
     $response = false;
 
-    $blocked_domain                 = array_filter($blocked_domain);
+    $blocked_domain = is_array($blocked_domain) ? $blocked_domain : preg_split("/\r\n|\n|\r/", $blocked_domain);
+    $blocked_domain                 =  array_filter($blocked_domain);
+    //$blocked_domain                 = !empty($blocked_domain) ? array_filter($blocked_domain) : [];
 
 
     if ($enable_domain_block == "yes") {
@@ -585,8 +407,7 @@ function user_verification_is_emaildomain_allowed($user_email)
     $enable_domain_block = isset($user_verification_settings['spam_protection']['enable_domain_block']) ? $user_verification_settings['spam_protection']['enable_domain_block'] : 'yes';
     $allowed_domain = isset($user_verification_settings['spam_protection']['allowed_domain']) ? $user_verification_settings['spam_protection']['allowed_domain'] : array();
 
-
-
+    $allowed_domain = is_array($allowed_domain) ? $allowed_domain : preg_split("/\r\n|\n|\r/", $allowed_domain);
 
     $allowed_domain                 = array_filter($allowed_domain);
 
@@ -630,10 +451,8 @@ function user_verification_is_generic_email($user_email)
 
     $response = false;
 
+    $blocked_generic_mail = is_array($blocked_generic_mail) ? $blocked_generic_mail : preg_split("/\r\n|\n|\r/", $blocked_generic_mail);
     $blocked_generic_mail                 = array_filter($blocked_generic_mail);
-
-
-
 
     if ($generic_mail_block == "yes" && !empty($blocked_generic_mail)) :
 
@@ -1510,7 +1329,7 @@ function user_verification_recursive_sanitize_arr($array)
             if ($key == 'url') {
                 $value = esc_url_raw($value);
             } else {
-                $value = wp_kses_post($value);
+                $value = wp_kses_post(stripslashes($value));
             }
         }
     }

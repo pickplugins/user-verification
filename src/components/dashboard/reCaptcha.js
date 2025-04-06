@@ -164,6 +164,73 @@ function Html(props) {
 							multiple={false}
 						/>
 					</div>
+
+					<h3>WooCommerce</h3>
+
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("WooCommerce login form", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.wc_login_form}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, wc_login_form: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("WooCommerce register form", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.wc_register_form}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, wc_register_form: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+					<div className="flex  my-5  justify-between items-center">
+						<label className="w-[400px]" htmlFor="emailVerification">
+							{__("WooCommerce lost password form", "user-verification")}
+						</label>
+						<PGinputSelect
+							inputClass="!py-1 px-2  border-2 border-solid"
+							val={options?.wc_lostpassword_form}
+							options={[
+								{ label: "No", value: "no" },
+								{ label: "Yes", value: "yes" },
+							]}
+							onChange={(newVal) => {
+								var optionsX = { ...options, wc_lostpassword_form: newVal };
+								setoptions(optionsX);
+							}}
+							multiple={false}
+						/>
+					</div>
+
+
+
+
+
+
+
+
+
+
 				</>
 			)}
 		</div>

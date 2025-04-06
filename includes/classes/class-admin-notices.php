@@ -7,9 +7,86 @@ class class_user_verification_notices
     public function __construct()
     {
 
+        // add_action('admin_notices', array($this, 'get_free_credits'));
+        add_action('admin_notices', array($this, 'new_dashboard'));
         add_action('admin_notices', array($this, 'mark_as_verified'));
         add_action('admin_notices', array($this, 'mark_as_unverified'));
         add_action('admin_notices', array($this, 'resend_verification'));
+    }
+
+
+    public function get_free_credits()
+    {
+        //delete_option("user_verification_notices");
+
+
+        $screen = get_current_screen();
+        $user_verification_notices = get_option('user_verification_notices', []);
+
+        $hide_notice_new_dashboard = isset($user_verification_notices['hide_notice_new_dashboard']) ? $user_verification_notices['hide_notice_new_dashboard'] : 'no';
+
+
+        if ($hide_notice_new_dashboard != 'hidden') return;
+
+
+        //var_dump($hide_notice_new_dashboard);
+
+        $is_hidden = isset($user_verification_notices['hide_notice_free_credits']) ? $user_verification_notices['hide_notice_free_credits'] : 'no';
+
+
+        $actionurl = admin_url() . '?hide_notice_free_credits=yes';
+        $actionurl = wp_nonce_url($actionurl,  'hide_notice_free_credits');
+        $nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '';
+        $hide_notice_free_credits = isset($_REQUEST['hide_notice_free_credits']) ? sanitize_text_field($_REQUEST['hide_notice_free_credits']) : '';
+        if (wp_verify_nonce($nonce, 'hide_notice_free_credits') && $hide_notice_free_credits == 'yes') {
+            $user_verification_notices['hide_notice_free_credits'] = 'hidden';
+            update_option('user_verification_notices', $user_verification_notices);
+            return;
+        }
+        ob_start();
+        if ($is_hidden == 'no') :
+?>
+            <div class="notice">
+
+                <h3>⚡ Block Spam, Temporary, Invalid Emials on registration, <strong><a target="_blank" href="<?php echo admin_url(); ?>users.php?page=user_verification_dashboard">Try Now</a></strong></h3>
+
+                <p> <a style="margin: 0 20px;" class="" href="<?php echo esc_url_raw($actionurl) ?>">❌ Hide Notice</a></p>
+            </div>
+        <?php
+        endif;
+        echo (ob_get_clean());
+    }
+
+
+    public function new_dashboard()
+    {
+        //delete_option("user_verification_notices");
+
+
+        $screen = get_current_screen();
+        $user_verification_notices = get_option('user_verification_notices', []);
+        $is_hidden = isset($user_verification_notices['hide_notice_new_dashboard']) ? $user_verification_notices['hide_notice_new_dashboard'] : 'no';
+        $actionurl = admin_url() . '?hide_notice_new_dashboard=yes';
+        $actionurl = wp_nonce_url($actionurl,  'hide_notice_new_dashboard');
+        $nonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '';
+        $hide_notice_new_dashboard = isset($_REQUEST['hide_notice_new_dashboard']) ? sanitize_text_field($_REQUEST['hide_notice_new_dashboard']) : '';
+        if (wp_verify_nonce($nonce, 'hide_notice_new_dashboard') && $hide_notice_new_dashboard == 'yes') {
+            $user_verification_notices['hide_notice_new_dashboard'] = 'hidden';
+            update_option('user_verification_notices', $user_verification_notices);
+            return;
+        }
+        ob_start();
+        if ($is_hidden == 'no') :
+        ?>
+            <div class="notice">
+
+                <h3>⚡ Intorducing React Based Modern Dasboard for User Verification, <strong><a target="_blank" href="<?php echo admin_url(); ?>users.php?page=user_verification_dashboard">Try Now</a></strong></h3>
+
+                <p> <a style="margin: 0 20px;" class="" href="<?php echo esc_url_raw($actionurl) ?>">❌ Hide Notice</a></p>
+            </div>
+        <?php
+        endif;
+        echo (ob_get_clean());
     }
 
 
@@ -44,7 +121,7 @@ class class_user_verification_notices
 
             ob_start();
 
-?>
+        ?>
             <div class="updated notice is-dismissible">
                 <p>
                     <?php

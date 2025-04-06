@@ -15,6 +15,7 @@ add_action('login_form', 'user_verification_login_form_recaptcha');
 function user_verification_login_form_recaptcha()
 {
 
+
     $user_verification_settings = get_option('user_verification_settings');
     $default_login_page = isset($user_verification_settings['recaptcha']['default_login_page']) ? $user_verification_settings['recaptcha']['default_login_page'] : '';
     $sitekey = isset($user_verification_settings['recaptcha']['sitekey']) ? $user_verification_settings['recaptcha']['sitekey'] : '';
@@ -65,9 +66,13 @@ callback: user_verification_login_recaptcha_validate
 
 */
 
-//add_filter('wp_authenticate_user', 'user_verification_login_recaptcha_validate', 10, 2);
+add_filter('wp_authenticate_user', 'user_verification_login_recaptcha_validate', 10, 2);
 function user_verification_login_recaptcha_validate($user, $password)
 {
+
+
+
+
     $return_value = $user;
 
 

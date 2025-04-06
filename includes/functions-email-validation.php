@@ -10,12 +10,12 @@ function isSpammy_registration_errors_block_spammer($errors, $sanitized_user_log
     $user_verification_settings = get_option('user_verification_settings');
 
     $isSpammyApiKey = isset($user_verification_settings['emailValidation']['isSpammyApiKey']) ? $user_verification_settings['emailValidation']['isSpammyApiKey'] : '';
-    $validedOnRegister = isset($user_verification_settings['emailValidation']['validedOnRegister']) ? $user_verification_settings['emailValidation']['validedOnRegister'] : 'no';
+    $validatedOnRegister = isset($user_verification_settings['emailValidation']['validatedOnRegister']) ? $user_verification_settings['emailValidation']['validatedOnRegister'] : 'no';
 
-    //error_log("isSpammyApiKey: $isSpammyApiKey");
+    ////error_log("isSpammyApiKey: $isSpammyApiKey");
 
     if (empty($isSpammyApiKey)) return $errors;
-    if ($validedOnRegister != 'yes') return $errors;
+    if ($validatedOnRegister != 'yes') return $errors;
 
     $UserVerificationStats = new UserVerificationStats();
 
@@ -51,12 +51,14 @@ function isSpammy_registration_errors_block_spammer($errors, $sanitized_user_log
         $errors->add('email_validation_failed', __("email validation failed. $error_message", 'user-verification'));
 
         // Handle error
-        //error_log("Error validating email: " . $error_message);
+        ////error_log("Error validating email: " . $error_message);
     } else {
         $response_code = wp_remote_retrieve_response_code($response);
         if ($response_code >= 200 && $response_code < 400) {
             $body = wp_remote_retrieve_body($response);
             $result = json_decode($body, true);
+
+            //error_log(serialize($result));
 
             $status = isset($result['status']) ? $result['status'] : '';
             $UserVerificationStats->add_stats('email_validation_success');
@@ -64,19 +66,13 @@ function isSpammy_registration_errors_block_spammer($errors, $sanitized_user_log
             if ($status == 'valid') {
             } else {
                 $errors->add('invalid_email', __("Sorry your email address is not valid.", 'user-verification'));
-                // stats record start
-                // stats record end
             }
-            //error_log(serialize($result));
-
-            // Process result
-            // Example: store or return response
         } else {
             // Handle error response
             $UserVerificationStats->add_stats('email_validation_failed');
             $errors->add('invalid_email', __("Sorry your email address is not valid.", 'user-verification'));
 
-            //error_log("Email validation failed. Response code: " . $response_code);
+            ////error_log("Email validation failed. Response code: " . $response_code);
         }
     }
 
@@ -115,8 +111,8 @@ function isSpammy_registration_errors_block_spammer($errors, $sanitized_user_log
 }
 
 
-add_filter('authenticate', 'isSpammy_validedOnLogin', 10, 3);
-function isSpammy_validedOnLogin($errors, $username, $passwords)
+add_filter('authenticate', 'isSpammy_validatedOnLogin', 10, 3);
+function isSpammy_validatedOnLogin($errors, $username, $passwords)
 {
     $error = new WP_Error();
 
@@ -132,18 +128,18 @@ function isSpammy_validedOnLogin($errors, $username, $passwords)
     $user_verification_settings = get_option('user_verification_settings');
 
     $isSpammyApiKey = isset($user_verification_settings['emailValidation']['isSpammyApiKey']) ? $user_verification_settings['emailValidation']['isSpammyApiKey'] : '';
-    $validedOnLogin = isset($user_verification_settings['emailValidation']['validedOnLogin']) ? $user_verification_settings['emailValidation']['validedOnLogin'] : 'no';
+    $validatedOnLogin = isset($user_verification_settings['emailValidation']['validatedOnLogin']) ? $user_verification_settings['emailValidation']['validatedOnLogin'] : 'no';
 
-    error_log("isSpammyApiKey 2: $isSpammyApiKey");
+    //error_log("isSpammyApiKey 2: $isSpammyApiKey");
 
     if (empty($isSpammyApiKey)) return $errors;
-    if ($validedOnLogin != 'yes') return $errors;
+    if ($validatedOnLogin != 'yes') return $errors;
 
     $UserVerificationStats = new UserVerificationStats();
 
     // do the code here
     //$domain = get_bloginfo('url');
-    error_log("user_email: " . $user_email);
+    //error_log("user_email: " . $user_email);
 
     $api_url = "https://isspammy.com/wp-json/email-validation/v2/validate_email";
 
@@ -152,7 +148,7 @@ function isSpammy_validedOnLogin($errors, $username, $passwords)
         'apiKey' => $isSpammyApiKey,
     );
 
-    error_log(wp_json_encode($post_data));
+    //error_log(wp_json_encode($post_data));
     $UserVerificationStats->add_stats('email_validation_request');
 
     $response = wp_remote_post($api_url, array(
@@ -171,19 +167,19 @@ function isSpammy_validedOnLogin($errors, $username, $passwords)
 
         $error_message = $response->get_error_message();
         // Handle error
-        error_log("Error validating email: " . $error_message);
+        //error_log("Error validating email: " . $error_message);
     } else {
         $response_code = wp_remote_retrieve_response_code($response);
         if ($response_code >= 200 && $response_code < 400) {
             $body = wp_remote_retrieve_body($response);
             $result = json_decode($body, true);
 
-            error_log(serialize($result));
+            //error_log(serialize($result));
             $status = isset($result['status']) ? $result['status'] : '';
             $UserVerificationStats->add_stats('email_validation_success');
-            // error_log($status);
+            // //error_log($status);
             if ($status == 'valid') {
-                error_log($status);
+                //error_log($status);
             } else {
                 $errors = __("Sorry your email address is not valid.", 'user-verification');
             }
@@ -194,7 +190,7 @@ function isSpammy_validedOnLogin($errors, $username, $passwords)
             $UserVerificationStats->add_stats('email_validation_failed');
 
             // Handle error response
-            error_log("Email validation failed. Response code: " . $response_code);
+            //error_log("Email validation failed. Response code: " . $response_code);
         }
     }
 
