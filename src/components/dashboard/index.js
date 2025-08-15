@@ -59,18 +59,18 @@ function Html(props) {
 			hidden: false,
 			isPro: false,
 		},
-		// {
-		// 	name: "magicLogin",
-		// 	title: "Magic Login",
-		// 	icon: <IconWand/>,
-		// 	className: "tab-magicLogin",
-		// 	hidden: false,
-		// 	isPro: false,
-		// 	isNew: true,
-		// },
+		{
+			name: "magicLogin",
+			title: "Magic Login",
+			icon: <IconWand />,
+			className: "tab-magicLogin",
+			hidden: false,
+			isPro: false,
+			isNew: true,
+		},
 		{
 			name: "tabEmailOTP",
-			title: "Email OTP",
+			title: "OTP Login",
 			icon: <IconMailCode />,
 			className: "tab-tabEmailOTP",
 			hidden: false,
@@ -157,23 +157,7 @@ function Html(props) {
 	function resetOptionData() {
 		setoptionData(optionDataDefault);
 	}
-	// 	useEffect(() => {
-	// 		setisLoading(true);
-	// 		apiFetch({
-	// 			path: "/user-verification/v2/get_options",
-	// 			method: "POST",
-	// 			data: { option: "user_verification_settings" },
-	// 		}).then((res) => {
 
-	// 			if (res.length != 0) {
-	// 				var resX = { ...res };
-
-	// 				setoptionDataSaved(resX);
-	// 				setoptionData(resX);
-	// 			}
-	// 			setisLoading(false);
-	// 		});
-	// 	}, []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -559,7 +543,7 @@ function Html(props) {
 
 
 
-							<div className="text-2xl mb-3">Email OTP</div>
+							<div className="text-2xl mb-3">OTP Login</div>
 
 
 							<div className="grid grid-cols-3 gap-5 text-white  my-5">
@@ -772,6 +756,8 @@ function Html(props) {
 							<EmailOtp
 								options={optionData.email_otp}
 								onChange={onChangeEmailOTP}
+								pageList={pageList}
+
 							/>
 						</div>
 					</PGtab>

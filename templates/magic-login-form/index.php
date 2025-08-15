@@ -8,6 +8,7 @@ function user_verification_magic_login_form()
 
     $formType = 'magicLogin';
     $onSubmit = [];
+    $afterSubmit = [0 => ["id" => "showResponse"]];
     $formArgs = [];
     $blockId = "123";
     //$formArgs['isLogged'] = !empty($user_id) ? true : false;
@@ -20,7 +21,7 @@ function user_verification_magic_login_form()
     $formArgs['refererr'] = isset($_SERVER['HTTP_REFERER']) ? parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST) : '';
 ?>
     <div class="magic-login-form">
-        <form action="" data-formId="pg-123" data-onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' data-formargs='<?php echo esc_attr(json_encode($formArgs)); ?>'>
+        <form action="" data-formId="pg-123" data-onsubmitprams='<?php echo esc_attr(json_encode($onSubmit)); ?>' data-aftersubmitargs='<?php echo esc_attr(json_encode($afterSubmit)); ?>' data-formargs='<?php echo esc_attr(json_encode($formArgs)); ?>'>
 
             <div class="form-fields">
                 <div class="input-wrap">

@@ -1,15 +1,6 @@
 const { Component } = wp.element;
 import { Button, Dropdown } from "@wordpress/components";
-import {
-	Icon,
-	styles,
-	settings,
-	link,
-	linkOff,
-	close,
-	edit,
-	pen,
-} from "@wordpress/icons";
+
 import {
 	createElement,
 	useCallback,
@@ -20,7 +11,7 @@ import {
 } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
 import { useSelect } from "@wordpress/data";
-
+import { IconSquareX } from '@tabler/icons-react';
 import {
 	__experimentalInputControl as InputControl,
 	Popover,
@@ -56,7 +47,7 @@ const PGCustomScript = (props) => {
 						updatedCustomScript.splice(index, 1);
 						setCustomScript(updatedCustomScript);
 					}}>
-					<Icon icon={close} />
+					<IconSquareX />
 				</span>
 				<span>{customScript[index].title.length > 0 ? <>{customScript[index].title}</> : <>{index}</>}</span>
 			</>

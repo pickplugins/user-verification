@@ -3,8 +3,8 @@
 	Donate link: http://pickplugins.com
 	Tags:  Email Verification, User Verification, Email OTP, Email Validation, Passwordless login
 	Requires at least: 4.1
-	Tested up to: 6.7
-	Stable tag: 2.0.36
+	Tested up to: 6.8
+	Stable tag: 2.0.38
 	License: GPLv2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,9 @@
 
 == Description ==
 
-Protect your website from spam user and stop instant access by using spam email address, by this plugin user will need to verify their email before login to your website.
+
+
+# User Verification - Complete WordPress User Authentication & Security Plugin
 
 ### User Verification by [http://www.pickplugins.com](http://www.pickplugins.com)
 
@@ -20,68 +22,106 @@ Protect your website from spam user and stop instant access by using spam email 
 * [Support](https://www.pickplugins.com/support/?ref=wordpress.org)
 * [Documentation](https://pickplugins.com/documentation/user-verification/?ref=wordpress.org)
 
-### 3rd Party Plugins
 
-* WooCommerce
-* Ultimate Member
-* Paid Memberships Pro
-* MemberPress
-* WP User Manager
-* Buddypress
-* ARMember
-* Youzify
-* AJAX Login and Registration modal popup DEV + inline form
-* Forminator
-* Login/Signup Popup
-* N-Media WP Member Registration
-* Paid Member Subscriptions
-* Pie Register - Basic
-* Profile Builder
-* ProfileGrid
-* ProfilePress
-* RegistrationMagic
-* User Meta Lite
-* User Registration
+## Secure Your WordPress Site with Advanced User Verification & Authentication
 
+**User Verification** is a comprehensive WordPress security plugin that provides multiple layers of user authentication and spam protection to safeguard your website from unauthorized access and malicious registrations.
 
-### Plugin Features
+### 🔐 Key Features
 
-**OTP for WordPress default Login**
-Every time user try to login on your WordPress site will require a OTP send via mail, where user can still using their account password from 3rd party login form,
+#### **Email Verification System**
+- **Mandatory Email Verification**: Ensure all new users verify their email addresses before accessing your site
+- **Customizable Verification Pages**: Choose custom redirect pages for successful and failed verifications  
+- **Automatic Login**: Seamlessly log users in after successful email verification
+- **Role-Based Control**: Exclude specific user roles (like Administrators) from verification requirements
+- **Flexible Configuration**: Enable/disable email verification with simple toggle controls
 
-**Block user name**
-Default WordPress registration will create user name from email, in most case some user name will look like admin1 or admin2 or some critical username may confused other users. sometime bad people may take advantages from this case, you can protect user name to register. you can use pattern to block user name that start by specific string or contain or end with.
+#### **Magic Login (Passwordless Authentication)**
+- **🆕 NEW Feature**: Enable secure passwordless login for enhanced user experience
+- **Email-Based Authentication**: Users receive login links directly in their inbox
+- **Customizable Key Length**: Set secure authentication key length (default: 6 characters)
+- **Attempt Limits**: Configure maximum login attempts for security (default: 3 attempts)
+- **Custom Redirect Pages**: Set specific pages for successful logins, failures, and magic login forms
+- **Email Verification Integration**: Require verified emails for magic login access
+- **Easy Implementation**: Simple shortcode `[user_verification_magic_login_form]` for frontend display
 
-**Block email domain**
-You can block any email domain for registration, so kicked out spammy or temporary email provider domains and enjoy the spam free user. you can also set allowed domain so user will not able to register account without using allowed domain.
+#### **OTP (One-Time Password) Login**
+- **SMS/Email OTP**: Secure one-time password authentication system
+- **Configurable OTP Length**: Customize OTP length (default: 6 digits)
+- **Character Flexibility**: Support for numbers, uppercase, lowercase, and special characters
+- **Custom Success/Error Messages**: Personalized user feedback for OTP processes
+- **Post-Login Redirects**: Direct users to specific pages after successful authentication
+- **Easy Integration**: Simple shortcode `[user_verification_otp_login_form]` implementation
 
-**Customizable email template**
-You can customize email templates as you want, there is some tags provide for making dynamic email templates.
+#### **Advanced Spam Protection**
+- **Domain Blocking**: Block registrations from specific email domains
+- **Domain Allowlist**: Allow only approved email domains for registration
+- **Username Protection**: Block specific usernames from registration
+- **Flexible Domain Management**: Easy-to-use interface for managing blocked/allowed domains
 
-**Automatically login**
-You can set to user login their account automatically after completed email verification.
+#### **reCAPTCHA Integration**
+- **Google reCAPTCHA v2**: Complete bot protection with checkbox verification
+- **Multiple Implementation Points**: Add reCAPTCHA to login, registration, password reset, and comment forms
+- **WooCommerce Ready**: Full integration with WooCommerce forms
+- **Easy Configuration**: Simple setup with site key and secret key
 
-**Google reCAPTCHA**
-Protect various form by using Google recaptcha default login form, default register form, default password reset form, default comment form and WooCommerce login form, register form, lost password form.
+#### **User Management Tools**
+- **Unverified User Cleanup**: Automatically delete unverified user accounts
+- **Existing User Verification**: Mark existing users as verified with customizable intervals
+- **User Status Monitoring**: Track verification status across your user base
 
-**WooCommerce Support**
-User verification has full support to work with WooCommerce, you can disable autologin after registration via WooCommerce register form and checkout form. user will not able to login via WooCommerce login form until get verified their account.
+#### **Email Customization**
+- **Custom Email Templates**: Personalize verification and notification emails
+- **WPAutoP Support**: Enable/disable automatic paragraph formatting in emails
+- **Branded Communications**: Add your logo and customize email appearance
+- **Multiple Email Types**: Templates for registration, verification, OTP, magic login, and activation
 
-**Paid Membership Pro Support**
-user verification provide support for Paid Membership Pro plugin
+#### **WooCommerce Compatibility**
+- **E-commerce Ready**: Full integration with WooCommerce login, registration, and password reset forms
+- **Customer Protection**: Prevent fake customer registrations and protect customer data
+- **Seamless Experience**: Maintain smooth checkout process while ensuring security
 
-**MemberPress Support**
-User verification plugin also work with MemberPress plugin and added required support for MemberPress plugin, there is no settings is required.
+### 🎯 Perfect For:
+- **Membership Sites**: Protect exclusive content with verified users only
+- **E-commerce Stores**: Prevent fake customer accounts and fraudulent orders  
+- **Corporate Websites**: Ensure legitimate user registrations for business platforms
+- **Community Forums**: Maintain quality user base with verified members
+- **Educational Platforms**: Secure student and instructor account creation
+- **Any WordPress Site**: Enhance security for blogs, portfolios, and business websites
 
-**Buddypress Support**
-We provide support for buddypress plugin, and it works like a charm.
+### ⚡ Easy Setup & Management
+- **User-Friendly Interface**: Intuitive admin dashboard for all configurations
+- **Shortcode Ready**: Simple shortcodes for frontend form implementation
+- **One-Click Configuration**: Enable/disable features with simple toggle switches
+- **Comprehensive Documentation**: Detailed setup guides and troubleshooting support
 
-**Ultimate Member**
-Ultimate Member is one of the best plugin for making profile and membership site, and we added support for this plugin.
+### 🔧 Technical Specifications
+- **WordPress Compatibility**: Works with latest WordPress versions
+- **PHP 7.4+ Support**: Modern PHP compatibility for optimal performance
+- **Mobile Responsive**: All forms and interfaces work perfectly on mobile devices
+- **Translation Ready**: Multi-language support for global websites
+- **Developer Friendly**: Clean code structure with hooks and filters for customization
 
-* Custom message for various action.
-* Resend verification key form via shortcode `[uv_resend_verification_form]`.
-* Translation Ready
+### 📧 Default Email Configuration
+- **Professional Setup**: Comes with pre-configured professional email settings
+- **Custom From Address**: Set your preferred sender email (e.g., public.nurhasan@gmail.com)
+- **Branded Sender Name**: Customize sender name (default: wordpress)
+- **Template Variety**: Multiple email templates for different verification scenarios
+
+### 🚀 Why Choose User Verification?
+
+1. **Complete Security Solution**: Multiple authentication methods in one plugin
+2. **Zero Spam Guarantee**: Advanced filtering eliminates fake registrations
+3. **User Experience Focused**: Smooth verification process that doesn't frustrate legitimate users
+4. **Highly Customizable**: Adapt every aspect to match your site's needs
+5. **Regular Updates**: Continuously updated with new features and security improvements
+6. **Professional Support**: Dedicated support for setup and troubleshooting
+
+### Installation & Usage
+Simply install the plugin, configure your preferred verification methods, and add the provided shortcodes to your pages. The plugin integrates seamlessly with WordPress default forms and popular plugins like WooCommerce.
+
+**Transform your WordPress site security today with User Verification - the most comprehensive user authentication plugin available.**
+
 
 ## Spam Protection by [https://isspammy.com](http://isspammy.com)
 
@@ -89,29 +129,6 @@ isspammy.com is owned by PickPlugins and it's used to protect spam users from lo
 
 * [isspammy.com/privacy-policy/](http://isspammy.com/privacy-policy/)
 * [isspammy.com/About Us/](http://isspammy.com/privacy-policy/)
-
-
-
-### Protect spam email
-Some user are try temporary email service for registration, by this plugin you can list of spammy domain so user will not able to use these domain email for registration.
-
-
-
-### Automatically login after verification
-Your site user will automatically logged to account just after verified account and you can also set custom page link where to redirect.
-
-
-### Translation
-
-Plugin is translation ready , please find the 'en.po' for default translation file under 'languages' folder and add your own translation. you can also contribute in translation, please contact us http://www.pickplugins.com/contact/
-
-
-
-
-== Installation ==
-
-1. Install as regular WordPress plugin.<br />
-2. Go your plugin setting via WordPress Dashboard and find "User Verification" activate it.<br />
 
 
 == Screenshots ==
@@ -130,6 +147,13 @@ Plugin is translation ready , please find the 'en.po' for default translation fi
 
 
 == Changelog ==
+
+= 2.0.38 =
+* 2025-08-14 add - OTP Login added with custom shortcodes.
+
+= 2.0.37 =
+* 2025-07-05 fix - Magic Login added
+* 2025-07-05 fix - OTP login feature down for security issue.
 
 = 2.0.36 =
 * 2024-03-29 fix - reCAPTCHA for WooCommerce issue fixed.

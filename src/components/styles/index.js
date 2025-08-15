@@ -23,8 +23,7 @@ import { applyFilters } from "@wordpress/hooks";
 import { __experimentalInputControl as InputControl } from "@wordpress/components";
 import { link, linkOff } from "@wordpress/icons";
 import apiFetch from "@wordpress/api-fetch";
-import { Icon, close, arrowRight, settings, copy, check } from "@wordpress/icons";
-
+import { IconSquareX, IconArrowNarrowRight } from '@tabler/icons-react';
 import PGDropdown from "../../components/dropdown";
 import PGDropdownSudoSelector from "../../components/dropdown-sudo-selector";
 
@@ -579,7 +578,7 @@ function Html(props) {
 					onClick={(ev) => {
 						props.onRemove(sudoScource, keyX, props.obj, props.extra);
 					}}>
-					<Icon icon={close} />
+					<IconSquareX />
 				</span>
 				<span className="mx-2">{title}</span>
 			</>
@@ -777,7 +776,7 @@ function Html(props) {
 						values=""></PGDropdownSudoSelector>
 
 					<div>
-						<Icon icon={arrowRight} />
+						<IconArrowNarrowRight />
 					</div>
 
 					<PGDropdown

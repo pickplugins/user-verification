@@ -229,7 +229,7 @@ class UserVerificationRest
 			return $response;
 		}
 
-
+		error_log($formType);
 
 		if (empty($errors)) {
 			$process_form = apply_filters('user_verification_form_wrap_process_' . $formType,  $request);
@@ -362,9 +362,6 @@ class UserVerificationRest
 
 		//delete_option($option);
 
-		if (empty($option_value)) {
-			$option_value = user_verification_settings_default();
-		}
 
 
 		$response = stripslashes_deep($option_value);

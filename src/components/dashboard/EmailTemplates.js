@@ -13,6 +13,7 @@ import {
 import { registerFormatType } from '@wordpress/rich-text';
 
 import { Icon, brush, columns, chevronDown, chevronUp, check, close } from "@wordpress/icons";
+import { IconSquareX, IconChevronDown, IconChevronUp, IconCheck } from '@tabler/icons-react';
 
 import React from "react";
 
@@ -172,16 +173,16 @@ function Html(props) {
 									setregistration(!registration);
 								}}>
 								{registration ? (
-									<Icon icon={chevronUp} />
+									<IconChevronUp />
 								) : (
-									<Icon icon={chevronDown} />
+									<IconChevronDown />
 								)}
 
 								<span>
 									{options?.email_templates_data?.user_registered?.enable ==
-										"yes" && <Icon icon={check} />}
+										"yes" && <IconCheck />}
 									{options?.email_templates_data?.user_registered?.enable ==
-										"no" && <Icon icon={close} size="20" />}
+										"no" && <IconSquareX />}
 								</span>
 								<span>{__("New User Registration", "user-verification")}</span>
 							</div>
@@ -508,16 +509,16 @@ function Html(props) {
 									setverification(!verification);
 								}}>
 								{verification ? (
-									<Icon icon={chevronUp} />
+									<IconChevronUp />
 								) : (
-									<Icon icon={chevronDown} />
+									<IconChevronDown />
 								)}
 
 								<span>
 									{options?.email_templates_data?.email_confirmed?.enable ==
-										"yes" && <Icon icon={check} />}
+										"yes" && <IconCheck />}
 									{options?.email_templates_data?.email_confirmed?.enable ==
-										"no" && <Icon icon={close} size="20" />}
+										"no" && <IconSquareX />}
 								</span>
 
 								<span>
@@ -804,16 +805,16 @@ function Html(props) {
 									setactivation(!activation);
 								}}>
 								{activation ? (
-									<Icon icon={chevronUp} />
+									<IconChevronUp />
 								) : (
-									<Icon icon={chevronDown} />
+									<IconChevronDown />
 								)}
 
 								<span>
 									{options?.email_templates_data?.email_resend_key?.enable ==
-										"yes" && <Icon icon={check} />}
+										"yes" && <IconCheck />}
 									{options?.email_templates_data?.email_resend_key?.enable ==
-										"no" && <Icon icon={close} size="20" />}
+										"no" && <IconSquareX />}
 								</span>
 								<span>{__("Resend Activation Key", "user-verification")}</span>
 							</div>
@@ -1102,13 +1103,13 @@ function Html(props) {
 								onClick={() => {
 									setotp(!otp);
 								}}>
-								{otp ? <Icon icon={chevronUp} /> : <Icon icon={chevronDown} />}
+								{otp ? <IconChevronUp /> : <IconChevronDown />}
 
 								<span>
 									{options?.email_templates_data?.send_mail_otp?.enable ==
-										"yes" && <Icon icon={check} />}
+										"yes" && <IconCheck />}
 									{options?.email_templates_data?.send_mail_otp?.enable == "no" && (
-										<Icon icon={close} size="20" />
+										<IconSquareX />
 									)}
 								</span>
 								<span>{__("Send Mail OTP", "user-verification")}</span>
@@ -1395,16 +1396,16 @@ function Html(props) {
 									setmagicLogin(!magicLogin);
 								}}>
 								{magicLogin ? (
-									<Icon icon={chevronUp} />
+									<IconChevronUp />
 								) : (
-									<Icon icon={chevronDown} />
+									<IconChevronDown />
 								)}
 
 								<span>
 									{options?.email_templates_data?.send_magic_login_url?.enable ==
-										"yes" && <Icon icon={check} />}
+										"yes" && <IconCheck />}
 									{options?.email_templates_data?.send_magic_login_url?.enable ==
-										"no" && <Icon icon={close} size="20" />}
+										"no" && <IconSquareX />}
 								</span>
 								<span>{__("Send Magic Login", "user-verification")}</span>
 							</div>
@@ -1701,7 +1702,6 @@ function Html(props) {
 					</div>
 				</div>
 
-				<div>Hello</div>
 
 			</div>
 		</div>

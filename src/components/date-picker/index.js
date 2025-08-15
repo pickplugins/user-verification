@@ -68,14 +68,14 @@ class PGDatePicker extends Component {
 				.getDate()
 				.toString()
 				.padStart(2, "0")}/${(inputDate.getMonth() + 1)
-				.toString()
-				.padStart(2, "0")}/${inputDate.getFullYear()} - ${inputDate
-				.getHours()
-				.toString()
-				.padStart(2, "0")}:${inputDate
-				.getMinutes()
-				.toString()
-				.padStart(2, "0")} ${inputDate.getHours() >= 12 ? "PM" : "AM"}`;
+					.toString()
+					.padStart(2, "0")}/${inputDate.getFullYear()} - ${inputDate
+						.getHours()
+						.toString()
+						.padStart(2, "0")}:${inputDate
+							.getMinutes()
+							.toString()
+							.padStart(2, "0")} ${inputDate.getHours() >= 12 ? "PM" : "AM"}`;
 
 			// console.log(formattedDate);
 			return formattedDate;
@@ -86,10 +86,7 @@ class PGDatePicker extends Component {
 				<div
 					className="my-4 pg-font flex border border-solid border-slate-300 rounded-md overflow-hidden cursor-pointer  "
 					onClick={this.handleToggleClick}>
-					<span className="flex justify-center items-center p-2 text-base bg-slate-500">
-						📅
-						{/* <Icon icon={calendar} /> */}
-					</span>
+
 					<span className="p-2 text-base flex justify-start items-center text-gray-800">
 						{date.length > 0 ? convertedDate() : label}
 					</span>

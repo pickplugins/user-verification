@@ -50,17 +50,17 @@ function user_verification_form_wrap_process_magicLogin($request)
         $magic_login_page = isset($user_verification_settings['magicLogin']['magic_login_page']) ? $user_verification_settings['magicLogin']['magic_login_page'] : '';
 
 
-        $email_templates_data =  $email_templates_data['send_magic_login_url'];
+        $email_template =  isset($email_templates_data['send_magic_login_url']) ? $email_templates_data['send_magic_login_url'] : [];
 
-        $enable = isset($email_templates_data['enable']) ? $email_templates_data['enable'] : 'yes';
+        $enable = isset($email_template['enable']) ? $email_template['enable'] : 'yes';
 
-        $email_bcc = isset($email_templates_data['email_bcc']) ? $email_templates_data['email_bcc'] : '';
-        $email_from = isset($email_templates_data['email_from']) ? $email_templates_data['email_from'] : '';
-        $email_from_name = isset($email_templates_data['email_from_name']) ? $email_templates_data['email_from_name'] : '';
-        $reply_to = isset($email_templates_data['reply_to']) ? $email_templates_data['reply_to'] : '';
-        $reply_to_name = isset($email_templates_data['reply_to_name']) ? $email_templates_data['reply_to_name'] : '';
-        $email_subject = isset($email_templates_data['subject']) ? $email_templates_data['subject'] : '';
-        $email_body = isset($email_templates_data['html']) ? $email_templates_data['html'] : '';
+        $email_bcc = isset($email_template['email_bcc']) ? $email_template['email_bcc'] : '';
+        $email_from = isset($email_template['email_from']) ? $email_template['email_from'] : '';
+        $email_from_name = isset($email_template['email_from_name']) ? $email_template['email_from_name'] : '';
+        $reply_to = isset($email_template['reply_to']) ? $email_template['reply_to'] : '';
+        $reply_to_name = isset($email_template['reply_to_name']) ? $email_template['reply_to_name'] : '';
+        $email_subject = isset($email_template['subject']) ? $email_template['subject'] : '';
+        $email_body = isset($email_template['html']) ? $email_template['html'] : '';
 
         $email_body = do_shortcode($email_body);
         if ($mail_wpautop == 'yes') {
@@ -131,7 +131,7 @@ function user_verification_form_wrap_process_magicLogin($request)
 
         if ($enable == 'yes') {
             $mail_status = $class_user_verification_emails->send_email($email_data);
-            $response['success']['loggedInUser'] = __('User Login success', 'user-verification');
+            $response['success']['loggedInUser'] = __('Mail sent', 'user-verification');
 
 
             // stats record start
@@ -141,7 +141,7 @@ function user_verification_form_wrap_process_magicLogin($request)
 
         }
     } else {
-        $response['errors']['loggedInUser'] = __('User Login failed', 'user-verification');
+        $response['errors']['loggedInUser'] = __('There is an error.', 'user-verification');
     }
 
 
@@ -169,43 +169,54 @@ add_action('wp_print_footer_scripts', function () {
 
 
 
-add_action('init', 'user_verification_magic_login');
-function user_verification_magic_login()
+
+add_action('init', 'user_verification_do_magic_login');
+function user_verification_do_magic_login()
 {
 
     $_wpnonce = isset($_REQUEST['_wpnonce']) ? sanitize_text_field($_REQUEST['_wpnonce']) : '';
 
 
-    if (!wp_verify_nonce($_wpnonce, 'nonce_magic_login')) {
-        return;
-    }
+    if (!empty($_wpnonce)) {
 
-    if (isset($_REQUEST['user_verification_magic_login'])) {
-
-        $activation_key = isset($_REQUEST['user_verification_magic_login']) ? sanitize_text_field($_REQUEST['user_verification_magic_login']) : '';
+        if (!wp_verify_nonce($_wpnonce, 'nonce_magic_login')) {
+            return;
+        }
 
 
+        if (isset($_REQUEST['user_verification_magic_login'])) {
 
-        global $wpdb;
-        $table = $wpdb->prefix . "usermeta";
-
-
-        $meta_data    = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE meta_value = %s AND meta_key = 'magic_login_key'", $activation_key));
+            $activation_key = isset($_REQUEST['user_verification_magic_login']) ? sanitize_text_field($_REQUEST['user_verification_magic_login']) : '';
 
 
-        if (empty($meta_data)) return;
-
-        // Record a stats start
-        $UserVerificationStats = new UserVerificationStats();
-        $UserVerificationStats->add_stats('magic_login_used');
-        // Record a stats end
+            global $wpdb;
+            $table = $wpdb->prefix . "usermeta";
 
 
-        $user = get_user_by('id', $meta_data->user_id);
+            $meta_data    = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE meta_value = %s AND meta_key = 'magic_login_key'", $activation_key));
 
 
-        wp_set_current_user($meta_data->user_id, $user->user_login);
-        wp_set_auth_cookie($meta_data->user_id);
-        do_action('wp_login', $user->user_login, $user);
+            if (empty($meta_data)) return;
+
+            // Record a stats start
+            $UserVerificationStats = new UserVerificationStats();
+            $UserVerificationStats->add_stats('magic_login_used');
+            // Record a stats end
+
+
+            $user = get_user_by('id', $meta_data->user_id);
+
+
+            wp_set_current_user($meta_data->user_id, $user->user_login);
+            wp_set_auth_cookie($meta_data->user_id);
+            do_action('wp_login', $user->user_login, $user);
+            $user_verification_settings = get_option('user_verification_settings');
+            $redirect_after_login = isset($user_verification_settings['magicLogin']['redirect_after_login']) ? $user_verification_settings['magicLogin']['redirect_after_login'] : '';
+            $redirect_after_login_url = get_permalink($redirect_after_login);
+            $redirect_after_login_url = !empty($redirect_after_login_url) ? $redirect_after_login_url : get_bloginfo('url');
+
+
+            wp_safe_redirect($redirect_after_login_url);
+        }
     }
 }

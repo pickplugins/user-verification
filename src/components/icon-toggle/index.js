@@ -1,5 +1,6 @@
 const { Component, RawHTML } = wp.element;
 import { Button, Dropdown } from "@wordpress/components";
+import { IconSquareX } from '@tabler/icons-react';
 
 class IconToggle extends Component {
 	render() {
@@ -40,7 +41,7 @@ class IconToggle extends Component {
 										}}>
 										{!x.value && (
 											<div>
-												<span className="icon-close"></span>
+												<IconSquareX />
 											</div>
 										)}
 

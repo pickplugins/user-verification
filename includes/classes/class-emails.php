@@ -71,7 +71,6 @@ class class_user_verification_emails
 
 
 
-
         return $status;
     }
 

@@ -75,7 +75,7 @@ function Html(props) {
 					</div>
 					<div className="flex  my-5  justify-between items-center">
 						<label className="w-[400px]" htmlFor="emailVerification">
-							{__("Delay", "user-verification")}
+							{__("Delay(seconds)", "user-verification")}
 						</label>
 						<PGinputText
 							value={options?.unverified?.delay}
