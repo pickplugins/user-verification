@@ -3,7 +3,7 @@
 Plugin Name: User Verification by PickPlugins
 Plugin URI: http://pickplugins.com
 Description: Verify user before access on your website.
-Version: 2.0.36
+Version: 2.0.38
 Text Domain: user-verification
 Domain Path: /languages
 Author: PickPlugins
@@ -32,7 +32,7 @@ class UserVerification
         $postGridBlocksVars['siteUrl'] = get_bloginfo('url');
 
 
-        add_action('init', array($this, '_textdomain'));
+        add_action('plugins_loaded', array($this, '_textdomain'));
         register_activation_hook(__FILE__, array($this, '_activation'));
         register_deactivation_hook(__FILE__, array($this, '_deactivation'));
         add_filter('cron_schedules', array($this, '_cron_schedules'));
@@ -145,7 +145,7 @@ class UserVerification
         require_once(user_verification_plugin_dir . 'includes/functions-ajax.php');
 
         require_once(user_verification_plugin_dir . 'includes/functions-recaptcha.php');
-        require_once(user_verification_plugin_dir . 'includes/functions-mail-otp.php');
+        // require_once(user_verification_plugin_dir . 'includes/functions-mail-otp.php');
         require_once(user_verification_plugin_dir . 'includes/functions-isspammy.php');
         //require_once( user_verification_plugin_dir . 'includes/functions-temp-login.php');
 
@@ -182,7 +182,6 @@ class UserVerification
         require_once(user_verification_plugin_dir . 'includes/classes/class-settings.php');
         require_once(user_verification_plugin_dir . 'includes/classes/class-column-users.php');
         require_once(user_verification_plugin_dir . 'includes/classes/class-settings-tabs.php');
-        require_once(user_verification_plugin_dir . 'includes/settings-hook.php');
         require_once(user_verification_plugin_dir . 'includes/classes/class-admin-notices.php');
         require_once(user_verification_plugin_dir . 'includes/classes/class-email-verifier.php');
         require_once(user_verification_plugin_dir . 'includes/classes/class-shortcodes.php');
@@ -192,7 +191,7 @@ class UserVerification
     public function _define_constants()
     {
 
-        $this->_define('user_verification_plugin_name', __('User Verification', 'user-verification'));
+        $this->_define('user_verification_plugin_name', 'User Verification');
         $this->_define('user_verification_plugin_url', plugins_url('/', __FILE__));
         $this->_define('user_verification_plugin_dir', plugin_dir_path(__FILE__));
     }

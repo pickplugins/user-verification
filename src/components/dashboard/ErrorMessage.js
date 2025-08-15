@@ -234,35 +234,8 @@ function Html(props) {
 					}}
 				/>
 			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium  mb-2">
-					{__("OTP sent success message", "user-verification")}
-				</label>
-				<textarea
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					value={options?.otp_sent_success}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							otp_sent_success: newVal.target.value,
-						};
-						setoptions(optionsX);
-					}}
-				/>
-			</div>
-			<div className="flex  my-5  justify-between items-center">
-				<label htmlFor="" className="font-medium  mb-2">
-					{__("OTP error message", "user-verification")}
-				</label>
-				<textarea
-					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
-					value={options?.otp_sent_error}
-					onChange={(newVal) => {
-						var optionsX = { ...options, otp_sent_error: newVal.target.value };
-						setoptions(optionsX);
-					}}
-				/>
-			</div>
+
+
 		</div>
 	);
 }

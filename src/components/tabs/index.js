@@ -118,21 +118,7 @@ function MyFunction(props) {
 				})}
 			</div>
 
-			{orientation != "vertical" && (
-				<></>
-				// <div className="navs absolute w-full top-1/2 -translate-y-1/2 ">
-				// 	<div
-				// 		className="navPrev cursor-pointer absolute top-[50%] left-0 -translate-y-2/4  bg-[#ffffff6b]"
-				// 		onClick={scrollPrev}>
-				// 		<Icon fill="#333" icon={chevronLeft} />
-				// 	</div>
-				// 	<div
-				// 		className="navNext cursor-pointer absolute top-[50%] -translate-y-2/4 right-[-4px]  bg-[#ffffff6b]"
-				// 		onClick={scrollNext}>
-				// 		<Icon fill="#333" icon={chevronRight} />
-				// 	</div>
-				// </div>
-			)}
+
 
 
 

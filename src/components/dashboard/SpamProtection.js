@@ -1,12 +1,11 @@
 import { useEffect, useState } from "@wordpress/element";
-import { Icon, close } from "@wordpress/icons";
 const { Component } = wp.element;
 
 import { __ } from "@wordpress/i18n";
 import React from "react";
 import PGinputSelect from "../input-select";
 import PGinputText from "../input-text";
-
+import { IconSquareX } from '@tabler/icons-react';
 function Html(props) {
 	if (!props.warn) {
 		return null;
@@ -125,7 +124,7 @@ function Html(props) {
 											setoptions(optionsX);
 
 										}}>
-										<Icon fill="#fff" icon={close} />
+										<IconSquareX />
 									</div>
 								</div>
 							))} */}
@@ -185,7 +184,7 @@ function Html(props) {
 											setoptions(optionsX);
 
 										}}>
-										<Icon fill="#fff" icon={close} />
+										<IconSquareX />
 									</div>
 								</div>
 							))} */}
@@ -270,7 +269,7 @@ function Html(props) {
 											var optionsX = { ...options, blocked_username: blockedUsernameX };
 											setoptions(optionsX);
 										}}>
-										<Icon fill="#fff" icon={close} />
+										<IconSquareX />
 									</div>
 								</div>
 							);
@@ -360,7 +359,7 @@ function Html(props) {
 											var optionsX = { ...options, blocked_generic_mail: blockedGenericMailX };
 											setoptions(optionsX);
 										}}>
-										<Icon fill="#fff" icon={close} />
+										<IconSquareX />
 									</div>
 								</div>
 							);

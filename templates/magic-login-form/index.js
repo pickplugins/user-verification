@@ -169,6 +169,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		var aftersubmitargs = formByID.getAttribute("data-aftersubmitargs");
 		var aftersubmitargsObj = JSON.parse(aftersubmitargs);
 
+		console.log(aftersubmitargsObj);
+
 
 		fetch(
 			user_verification_scripts_vars["siteUrl"] + "/wp-json/user-verification/v2/process_form_data",
@@ -181,6 +183,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				if (response.ok && response.status < 400) {
 					response.json().then((data) => {
 
+						console.log(data);
+
 
 						var successArgs = data.success == undefined ? {} : data.success;
 						var errorsArgs = data.errors == undefined ? {} : data.errors;
@@ -188,6 +192,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 						for (var i = 0; i < aftersubmitargsObj.length; i++) {
 							var action = aftersubmitargsObj[i];
 							var actionId = action.id;
+
+							console.log(actionId);
+
+
 							if (actionId == "showResponse") {
 								responsesWrap.style.display = "block";
 								var responseHtml = "";

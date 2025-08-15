@@ -2,6 +2,7 @@
 
 const { Component, RawHTML } = wp.element;
 import { Button, Dropdown } from '@wordpress/components'
+import { IconSquareX } from '@tabler/icons-react';
 
 
 class breakpointSwitch extends Component {
@@ -55,7 +56,7 @@ class breakpointSwitch extends Component {
 
                   {!x.value && (
 
-                    <div><span className="icon-close"></span></div>
+                    <IconSquareX />
 
                   )}
 

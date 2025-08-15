@@ -1,5 +1,7 @@
 import { useEffect, useState } from "@wordpress/element";
 import { Icon, settings, check, cancelCircleFilled, published, close } from "@wordpress/icons";
+import { IconSquareX, IconMailQuestion, IconWand, IconMailCode, IconShieldCheck, IconMessageShare, IconRobot, IconSettingsPlus, IconMailStar, IconLifebuoy, IconMailBolt } from '@tabler/icons-react';
+
 const { Component } = wp.element;
 import { Spinner } from "@wordpress/components";
 import apiFetch from "@wordpress/api-fetch";
@@ -178,6 +180,9 @@ function Html(props) {
 		};
 		postData = JSON.stringify(postData);
 
+		console.log(postData);
+
+
 		fetch("https://isspammy.com/wp-json/email-validation/v2/validate_email", {
 			method: "POST",
 			headers: {
@@ -209,6 +214,9 @@ function Html(props) {
 			.catch((_error) => {
 				//this.saveAsStatus = 'error';
 				// handle the error
+
+				setcheckEmail({ ...checkEmail, loading: false })
+
 			});
 
 	}
@@ -561,10 +569,10 @@ function Html(props) {
 																	{id == "safeToSend" && (
 																		<>
 																			{value != 'yes' && (
-																				<><Icon fill="#f00" icon={close} /> No</>
+																				<><IconSquareX /> No</>
 																			)}
 																			{value == 'yes' && (
-																				<><Icon fill="#19561f" icon={check} /> Yes</>
+																				<><IconCheck /> Yes</>
 																			)}
 																		</>
 																	)}
@@ -574,20 +582,20 @@ function Html(props) {
 																	{id == "isGibberishEmail" && (
 																		<>
 																			{!value && (
-																				<><Icon fill="#f00" icon={close} /> No</>
+																				<><IconSquareX /> No</>
 																			)}
 																			{value && (
-																				<><Icon fill="#19561f" icon={check} /> Yes</>
+																				<><IconCheck /> Yes</>
 																			)}
 																		</>
 																	)}
 																	{id == "isSMTPBlacklisted" && (
 																		<>
 																			{!value && (
-																				<><Icon fill="#f00" icon={close} /> No</>
+																				<><IconSquareX /> No</>
 																			)}
 																			{value && (
-																				<><Icon fill="#19561f" icon={check} /> Yes</>
+																				<><IconCheck /> Yes</>
 																			)}
 																		</>
 																	)}
@@ -609,10 +617,10 @@ function Html(props) {
 																		&& (
 																			<>
 																				{value && (
-																					<><Icon fill="#19561f" icon={check} /> Yes</>
+																					<><IconCheck /> Yes</>
 																				)}
 																				{!value && (
-																					<><Icon fill="#f00" icon={close} /> No</>
+																					<><IconSquareX /> No</>
 																				)}
 																			</>
 																		)}

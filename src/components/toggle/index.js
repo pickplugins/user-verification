@@ -53,8 +53,8 @@ class PGtoggle extends Component {
             </div>
 
 
-            <div>{isOpen ? <Icon icon={chevronDown} />
-              : <Icon icon={chevronUp} />
+            <div>{isOpen ? <IconChevronDown />
+              : <IconChevronUp />
             }</div>
 
           </div>

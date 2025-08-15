@@ -80,7 +80,7 @@ class class_user_verification_notices
         ?>
             <div class="notice">
 
-                <h3>⚡ Intorducing React Based Modern Dasboard for User Verification, <strong><a target="_blank" href="<?php echo admin_url(); ?>users.php?page=user_verification_dashboard">Try Now</a></strong></h3>
+                <h3>⚡ Introducing a React-Based Modern Dashboard for User Verification, <strong><a target="_blank" href="<?php echo admin_url(); ?>users.php?page=user_verification_dashboard">Try Now</a></strong></h3>
 
                 <p> <a style="margin: 0 20px;" class="" href="<?php echo esc_url_raw($actionurl) ?>">❌ Hide Notice</a></p>
             </div>

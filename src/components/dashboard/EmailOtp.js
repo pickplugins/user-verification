@@ -12,6 +12,7 @@ function Html(props) {
 	}
 
 	var onChange = props.onChange;
+	var pageList = props.pageList;
 
 	var [options, setoptions] = useState(props.options); // Using the hook.
 
@@ -29,29 +30,12 @@ function Html(props) {
 	return (
 		<div className="w-[800px]">
 			<div className="text-2xl font-bold mb-2">
-				{__("Email OTP", "user-verification")}
+				{__("OTP Login", "user-verification")}
 			</div>
 			<p className="text-base mb-7">
-				{__("Customize options for email OTP.", "user-verification")}
+				{__("Customize options for OTP Login.", "user-verification")}
 			</p>
-			<div className="flex my-5 justify-between items-center ">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Enable on default login", "user-verification")}
-				</label>
-				<PGinputSelect
-					inputClass="!py-1 px-2  border-2 border-solid"
-					val={options?.enable_default_login}
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = { ...options, enable_default_login: newVal };
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
+
 			<div className="flex  my-5  justify-between items-center">
 				<label className="w-[400px]" htmlFor="emailVerification">
 					{__("Required email verified", "user-verification")}
@@ -70,52 +54,6 @@ function Html(props) {
 					multiple={false}
 				/>
 			</div>
-
-			<div className="flex  my-5  justify-between items-center">
-				<label className="w-[400px]" htmlFor="emailVerification">
-					{__("Allow Password", "user-verification")}
-				</label>
-				<PGinputSelect
-					val={options?.allow_password}
-					inputClass="!py-1 px-2 border-2 border-solid"
-					options={[
-						{ label: "No", value: "no" },
-						{ label: "Yes", value: "yes" },
-					]}
-					onChange={(newVal) => {
-						var optionsX = {
-							...options,
-							allow_password: newVal,
-						};
-						setoptions(optionsX);
-					}}
-					multiple={false}
-				/>
-			</div>
-
-
-			{options?.enable_default_login == 'yes' && (
-
-				<div className="flex  my-5  justify-between items-center">
-					<label className="w-[400px]" htmlFor="emailVerification">
-						{__("Enable on WooCommerce login", "user-verification")}
-					</label>
-					<PGinputSelect
-						val={options?.enable_wc_login}
-						inputClass="!py-1 px-2  border-2 border-solid"
-						options={[
-							{ label: "No", value: "no" },
-							{ label: "Yes", value: "yes" },
-						]}
-						onChange={(newVal) => {
-							var optionsX = { ...options, enable_wc_login: newVal };
-							setoptions(optionsX);
-
-						}}
-						multiple={false}
-					/>
-				</div>
-			)}
 
 
 			<div className="flex  my-5  justify-between items-center">
@@ -179,9 +117,64 @@ function Html(props) {
 				</div>
 			</div>
 
+			<div className="flex  my-5  justify-between items-center">
+				<label htmlFor="" className="font-medium  mb-2">
+					{__("OTP sent success message", "user-verification")}
+				</label>
+				<textarea
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+					value={options?.otp_sent_success}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							otp_sent_success: newVal.target.value,
+						};
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+			<div className="flex  my-5  justify-between items-center">
+				<label htmlFor="" className="font-medium  mb-2">
+					{__("OTP sent error message", "user-verification")}
+				</label>
+				<textarea
+					className="!py-1 px-2 !border-2 !border-[#8c8f94] !border-solid w-full max-w-[400px]"
+					value={options?.otp_sent_error}
+					onChange={(newVal) => {
+						var optionsX = { ...options, otp_sent_error: newVal.target.value };
+						setoptions(optionsX);
+					}}
+				/>
+			</div>
+
+			<div className="flex  my-5  justify-between items-center">
+				<label className="w-[400px]" htmlFor="emailVerification">
+					{__("Redirect after loggedin", "user-verification")}
+				</label>
+				<PGinputSelect
+					val={options?.redirect_after_login}
+					inputClass="!py-1 px-2 border-2 border-solid"
+					options={pageList}
+					onChange={(newVal) => {
+						var optionsX = {
+							...options,
+							redirect_after_login: newVal,
+						};
+						setoptions(optionsX);
+					}}
+					multiple={false}
+				/>
+			</div>
+
 			{/* <h3>How to display OTP login form?</h3>
 			<p>Please use following shortcode to display OTP login form </p>
 			<code>[user_verification_otp_login_form]</code> */}
+
+
+			<h3>How to display OTP login form?</h3>
+			<p>Please use following shortcode to display OTP login form </p>
+			<code>[user_verification_otp_login_form]</code>
+
 
 		</div>
 	);
@@ -199,11 +192,12 @@ class EmailOtp extends Component {
 		}));
 	}
 	render() {
-		var { onChange, options } = this.props;
+		var { onChange, options, pageList } = this.props;
 		return (
 			<Html
 				onChange={onChange}
 				options={options}
+				pageList={pageList}
 				warn={this.state.showWarning}
 			/>
 		);

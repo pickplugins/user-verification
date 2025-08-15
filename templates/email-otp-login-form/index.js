@@ -3,9 +3,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	// To assign event
 	const pgFormSubmitted = new Event("pgFormSubmitted");
 
-	var pgForms = document.querySelectorAll(".magic-login-form form");
+	var pgForms = document.querySelectorAll(".otp-login-form form");
 
-	console.log(pgForms);
 
 
 	var pgFormFields = document.querySelectorAll(".pg-form-field");
@@ -32,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				var formId = form.getAttribute("data-formId");
 
 				form.addEventListener("submit", (event) => {
+
+
 					event.preventDefault();
 					var formByID = document.querySelector(`[data-formid="${formId}"]`);
 					const formData = new FormData(event.target);
@@ -159,13 +160,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	}
 	function processSubmit(formId, formData) {
 
-		console.log(formData);
 
 
 		var formByID = document.querySelector(`[data-formid="${formId}"]`);
 		var responsesWrap = document.querySelector("." + formId + "-responses");
 		var loadingWrap = document.querySelector("." + formId + "-loading");
+		var stepsInput = document.querySelector("#" + formId + "-steps");
+		var submitInput = document.querySelector("#" + formId + "-submit");
+		var otpWrap = document.querySelector("#" + formId + "-otp");
+
+
+
+
 		responsesWrap.style.display = "none";
+		var redirect_url = formByID.getAttribute("data-redirect");
 		var aftersubmitargs = formByID.getAttribute("data-aftersubmitargs");
 		var aftersubmitargsObj = JSON.parse(aftersubmitargs);
 
@@ -181,9 +189,35 @@ document.addEventListener("DOMContentLoaded", function (event) {
 				if (response.ok && response.status < 400) {
 					response.json().then((data) => {
 
+						console.log(data);
 
 						var successArgs = data.success == undefined ? {} : data.success;
 						var errorsArgs = data.errors == undefined ? {} : data.errors;
+						var steps = data.steps == undefined ? 0 : data.steps;
+						var otp_sent = data.otp_sent == undefined ? false : data.otp_sent;
+
+
+
+
+
+						if (otp_sent && steps == 1) {
+							stepsInput.value = 2;
+							submitInput.value = "Login";
+							otpWrap.style.display = "block";
+
+						}
+						if (steps == 2) {
+							stepsInput.value = 2;
+
+							if (redirect_url.length > 0 && successArgs) {
+								location.href = redirect_url;
+							}
+
+						}
+
+
+
+
 						if (aftersubmitargsObj == null) return;
 						for (var i = 0; i < aftersubmitargsObj.length; i++) {
 							var action = aftersubmitargsObj[i];
@@ -232,9 +266,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								formByID.reset();
 							}
 						};
+
+
 						loadingWrap.style.display = "none";
 						setTimeout(() => {
 						}, 2000);
+
+
 					});
 				}
 			})

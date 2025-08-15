@@ -37,7 +37,8 @@ import {
 
 	////
 } from "@wordpress/element";
-import { Icon, close } from "@wordpress/icons";
+
+import { IconSquareX } from '@tabler/icons-react';
 import PGDropdown from "../../components/dropdown";
 
 function Html(props) {
@@ -688,7 +689,8 @@ function Html(props) {
 						rulesX.splice(index, 1);
 						setrules(rulesX);
 					}}>
-					<Icon icon={close} />
+
+					<IconSquareX />
 				</span>
 				<span>{title}</span>
 			</>
@@ -706,7 +708,7 @@ function Html(props) {
 
 						setrules(rulesX);
 					}}>
-					<Icon icon={close} />
+					<IconSquareX />
 				</span>
 
 				<span>{title}</span>
@@ -889,7 +891,7 @@ function Html(props) {
 																				].roles.splice(k, 1);
 																				setrules(rulesX);
 																			}}>
-																			<Icon fill="#fff" icon={close} />
+																			<IconSquareX />
 																		</span>
 																	</PanelRow>
 																);
@@ -1283,7 +1285,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -1347,7 +1349,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -1540,7 +1542,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -1618,7 +1620,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -1739,7 +1741,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -1789,7 +1791,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -1854,7 +1856,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -1974,7 +1976,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -2024,7 +2026,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -2089,7 +2091,7 @@ function Html(props) {
 																						] = item.values;
 																						setrules(rulesX);
 																					}}>
-																					<Icon fill="#fff" icon={close} />
+																					<IconSquareX />
 																				</span>
 																			</div>
 																		);
@@ -2264,7 +2266,7 @@ function Html(props) {
 																				] = item.values;
 																				setrules(rulesX);
 																			}}>
-																			<Icon fill="#fff" icon={close} />
+																			<IconSquareX />
 																		</span>
 																	</div>
 																);
@@ -2345,7 +2347,7 @@ function Html(props) {
 																				] = item.values;
 																				setrules(rulesX);
 																			}}>
-																			<Icon fill="#fff" icon={close} />
+																			<IconSquareX />
 																		</span>
 																	</div>
 																);
@@ -2465,7 +2467,7 @@ function Html(props) {
 																							] = item.values;
 																							setrules(rulesX);
 																						}}>
-																						<Icon fill="#fff" icon={close} />
+																						<IconSquareX />
 																					</span>
 																				</div>
 																			);
@@ -2586,7 +2588,7 @@ function Html(props) {
 																							] = item.values;
 																							setrules(rulesX);
 																						}}>
-																						<Icon fill="#fff" icon={close} />
+																						<IconSquareX />
 																					</span>
 																				</div>
 																			);
@@ -2783,7 +2785,7 @@ function Html(props) {
 																				] = item.values;
 																				setrules(rulesX);
 																			}}>
-																			<Icon fill="#fff" icon={close} />
+																			<IconSquareX />
 																		</span>
 																	</div>
 																);
@@ -2861,7 +2863,7 @@ function Html(props) {
 																				] = item.values;
 																				setrules(rulesX);
 																			}}>
-																			<Icon fill="#fff" icon={close} />
+																			<IconSquareX />
 																		</span>
 																	</div>
 																);
