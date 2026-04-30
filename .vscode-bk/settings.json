@@ -1,0 +1,7 @@
+{
+	"compile-hero.disable-compile-files-on-did-save-code": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "explicit"
+	}
+}

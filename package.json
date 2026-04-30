@@ -1,0 +1,49 @@
+{
+  "name": "user-verification",
+  "version": "2.0.27",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build",
+    "watch": "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "assets",
+    "dist",
+    "build",
+    "includes",
+    "languages",
+    "sample-data",
+    "templates",
+    "readme.txt",
+    "user-verification.php",
+    "wpml-config.xml"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@wordpress/babel-preset-default": "^7.12.0",
+    "@wordpress/scripts": "^27.0.0",
+    "tailwindcss": "^3.0.24"
+  },
+  "dependencies": {
+    "@tabler/icons": "^3.30.0",
+    "@tabler/icons-react": "^3.30.0",
+    "@wordpress/api-fetch": "^6.6.0",
+    "@wordpress/core-data": "^6.7.0",
+    "@wordpress/element": "^5.5.0",
+    "@wordpress/hooks": "^3.23.0",
+    "@wordpress/icons": "^9.19.0",
+    "@wordpress/keycodes": "^3.24.0",
+    "classnames": "^2.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-select": "^5.8.3"
+  }
+}

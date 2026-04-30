@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+#user-verification-resend {}
+
+#user-verification-resend .form-area {
+    width: 100%;
+    margin: 20px 0;
+}
+
+
+
+#user-verification-resend input {
+    width: 100%;
+    padding: 6px 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
